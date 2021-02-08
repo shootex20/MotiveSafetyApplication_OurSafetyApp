@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>account JSP</title>
+        <title>companyManagement JSP</title>
         <link href="CSS-MEDIA/Index.css" rel="stylesheet" type="text/css">
     </head>
     <body>

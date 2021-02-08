@@ -9,6 +9,7 @@
         <link href="CSS-MEDIA/Index.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <h1></h1>
+        <h1>MotiveSafety OurSafety Application</h1>
+        
     </body>
 </html>

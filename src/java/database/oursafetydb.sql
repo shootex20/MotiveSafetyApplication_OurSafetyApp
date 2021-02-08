@@ -79,30 +79,30 @@ ENGINE = InnoDB;
 
 /*Can use either person_id OR companyPerson_ID, this will need to be decided upon.*/
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`logins` (
-`user_id` int AUTO_INCREMENT,
+`user_id` int AUTO_INCREMENT, 
 `dateAdded` date, 
 `dateRemoved` date, 
 `userAdded` int, 
-`userRemoved` int,
-`username` varchar(30),
-`password` varchar(30),
-`company_ID` int,
-`person_ID` int,
-`isActive` CHAR,
-`isAdmin` CHAR,
+`userRemoved` int, 
+`username` varchar(30), 
+`password` varchar(30), 
+`company_ID` int, 
+`person_ID` int, 
+`isActive` CHAR, 
+`isAdmin` CHAR, 
 PRIMARY KEY (`user_ID`), 
-INDEX `logins_company_id_fk_idx` (`company_ID` ASC),
-INDEX `logins_person_id_fk_idx` (`person_ID` ASC),
-CONSTRAINT `logins_company_id_fk`
-    FOREIGN KEY (`company_ID`)
-    REFERENCES `oursafetydb`.`company` (`company_ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-CONSTRAINT `logins_person_id_fk`
-    FOREIGN KEY (`person_ID`)
-    REFERENCES `oursafetydb`.`person` (`person_ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+INDEX `logins_company_id_fk_idx` (`company_ID` ASC), 
+INDEX `logins_person_id_fk_idx` (`person_ID` ASC), 
+CONSTRAINT `logins_company_id_fk` 
+    FOREIGN KEY (`company_ID`) 
+    REFERENCES `oursafetydb`.`company` (`company_ID`) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION, 
+CONSTRAINT `logins_person_id_fk` 
+    FOREIGN KEY (`person_ID`) 
+    REFERENCES `oursafetydb`.`person` (`person_ID`) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION) 
 ENGINE = InnoDB;
 
 
@@ -320,6 +320,7 @@ CONSTRAINT `companyRelationship_company_ID_fk`
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB; 
+
 
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`emergencyContact` ( 
 `emergencyContact_ID` int AUTO_INCREMENT, /*PK*/ 
