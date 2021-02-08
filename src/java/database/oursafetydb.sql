@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`typeLibrary` (
 `type` varchar(30), 
 `description` varchar(55), 
 `isCategory` CHAR, /*  T being true, F being false.*/ 
-PRIMARY KEY (`typeLibrary_ID`))
+PRIMARY KEY (`typeLibrary_ID`)) 
 ENGINE = InnoDB;
 
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`company` (
 `saltHash` VARCHAR(255), 
 `account` VARCHAR(100), 
 `industry` VARCHAR(30),  
-PRIMARY KEY (`company_ID`))
+PRIMARY KEY (`company_ID`)) 
 ENGINE = InnoDB; 
 
 
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`url` (
 `userRemoved` int, 
 `typeLibrary_ID`  int, 
 `URL` VARCHAR(255), 
-PRIMARY KEY (`url_ID`),
+PRIMARY KEY (`url_ID`), 
 INDEX `fk_url_typelibrary_idx` (`typeLibrary_ID` ASC),
 CONSTRAINT `fk_url_typelibrary`
     FOREIGN KEY (`typeLibrary_ID`)
@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`manual` (
 `intention` VARCHAR(30), 
 `overview` VARCHAR(30), 
 `content` VARCHAR(30), 
-PRIMARY KEY (`manual_ID`),
+PRIMARY KEY (`manual_ID`), 
 INDEX `fk_manual_typelibrary_idx` (`typeLibrary_ID` ASC),
 CONSTRAINT `fk_manual_typelibrary`
     FOREIGN KEY (`typeLibrary_ID`)
@@ -156,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`manualUse` (
 `company_ID` int, 
 `companyRole` int, 
 `job` int, 
-PRIMARY KEY (`manualUse_ID`),
+PRIMARY KEY (`manualUse_ID`), 
 INDEX `fk_manualUse_manual_idx` (`manual_ID` ASC),
 CONSTRAINT `fk_manualUse_manual`
     FOREIGN KEY (`manual_ID`)
@@ -175,7 +175,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`itemClassFields` (
 `typeLibrary_ID`  int, 
 `fieldDescr`  VARCHAR(30), 
 `fieldDescrType` VARCHAR(30),
-PRIMARY KEY(`itemClassFields_ID`),
+PRIMARY KEY(`itemClassFields_ID`), 
 INDEX `fk_itemClassFields_typelibrary_idx` (`typeLibrary_ID` ASC),
 CONSTRAINT `fk_itemClassFields_typelibrary`
     FOREIGN KEY (`typeLibrary_ID`)
@@ -196,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`itemClass` (
 `chargeableType` VARCHAR(30), 
 `depletingType` VARCHAR(30), 
 `depreactiationType` VARCHAR(30), 
-PRIMARY KEY (ItemClass_ID), 
+PRIMARY KEY (`ItemClass_ID`), 
 INDEX `fk_itemClass_itemClassFields_idx` (`itemClassFields_ID` ASC), 
 CONSTRAINT `fk_itemClass_itemClassFields_ID` 
     FOREIGN KEY(`itemClassFields_ID`) 
@@ -239,7 +239,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.` itemClassFields` (
 `typeLibrary_ID` int, /*FK*/ 
 `fieldDescr` VARCHAR(30), 
 `fieldDescrType` VARCHAR(30), 
-PRIMARY KEY(`itemClassFields_ID`),
+PRIMARY KEY(`itemClassFields_ID`), 
 INDEX `fk_itemClassFields_typeLibrary_ID`(`typeLibrary_ID` ASC),
 CONSTRAINT `fk_typeLibrary_typeLibrary_ID`
     FOREIGN KEY(`typeLibrary_ID`)
@@ -257,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`companyPersonPhone` (
 `userRemoved` int, 
 `companyPerson_ID` int, 
 `phone_ID` int, 
- PRIMARY KEY (CompanyPersonPhone_ID),
+ PRIMARY KEY (`CompanyPersonPhone_ID`), 
  INDEX `fk_companyPersonPhone_CompanyPerson_idx` (`companyPerson_ID` ASC),
  INDEX `fk_companyPersonPhone_Phone_idx` (`phone_ID` ASC),
 CONSTRAINT `fk_companypersonphone_companypersonid`
@@ -284,7 +284,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`item` (
 `company_ID` int, /*FK*/ 
 `serialNumber` VARCHAR(55), 
 `purchaseDate` date,
-PRIMARY KEY (`item_ID`),
+PRIMARY KEY (`item_ID`), 
 INDEX `fk_item_companyID` (`company_ID` ASC),
 CONSTRAINT `fk_company_companyID`
     FOREIGN KEY (`company_ID`)
@@ -305,7 +305,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`phone` (
 `areaCode` VARCHAR(10), 
 `localNumber` VARCHAR(10), 
 `extension` VARCHAR(10), 
- PRIMARY KEY (`phone_ID`),
+ PRIMARY KEY (`phone_ID`), 
 INDEX `fk_phone_typelibrary_id_idx` (`typeLibrary_ID`),
 CONSTRAINT `phone_typeLibrary_id_fk` 
     FOREIGN KEY (`typeLibrary_ID`) 
@@ -374,7 +374,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`addressRegion` (
 `parentType` int, /*  for)*/ 
 `parentID` int, /*  for)*/ 
 `spaceCode` VARCHAR(10), 
-PRIMARY KEY (`addressRegion_ID`))
+PRIMARY KEY (`addressRegion_ID`)) 
 ENGINE = InnoDB;
 
  
@@ -389,7 +389,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`address` (
 `addressLine2`  VARCHAR(200), 
 `addressRegion_ID` int, 
 `postalCode`  VARCHAR(6), 
-PRIMARY KEY(`address_ID`),
+PRIMARY KEY(`address_ID`), 
 INDEX `fk_address_typelibrary_idx` (`typeLibrary_ID` ASC), 
 INDEX `fk_address_addressRegion_idx` (`addressRegion_ID` ASC), 
 CONSTRAINT `fk_address_typelibrary_ID` 
@@ -413,7 +413,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`companyPersonAddress` (
 `userRemoved` int, 
 `companyPerson_ID` int, 
 `address_ID` int, 
- PRIMARY KEY (`companyPersonAddress_ID`),
+PRIMARY KEY (`companyPersonAddress_ID`), 
 INDEX `fk_companyPersonAddress_companyPerson_idx` (`companyPerson_ID` ASC), 
 INDEX `fk_companyPersonAddress_address_ID_idx` (`address_ID` ASC),
 CONSTRAINT `fk_companyPersonAddress_companyPerson` 
@@ -422,8 +422,8 @@ CONSTRAINT `fk_companyPersonAddress_companyPerson`
     ON DELETE NO ACTION 
     ON UPDATE NO ACTION,
 CONSTRAINT `fk_companyPersonAddress_address_ID`
- FOREIGN KEY (`address_ID`)
-REFERENCES `oursafetydb`.`address` (`address_ID`) 
+    FOREIGN KEY (`address_ID`)
+    REFERENCES `oursafetydb`.`address` (`address_ID`) 
     ON DELETE NO ACTION 
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -439,7 +439,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`companyNotes` (
 `noteDate` date, 
 `noteIndex` int, 
 `note` VARCHAR(255), 
- PRIMARY KEY (companyNotes_ID),
+PRIMARY KEY (`companyNotes_ID`), 
 INDEX `fk_companyNotes_companyPerson_idx` (`companyPerson_ID` ASC),
 CONSTRAINT `fk_companyNotes_companyPerson`
     FOREIGN KEY (`companyPerson_ID`)
@@ -457,7 +457,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`companyType` (
 `userRemoved` int, 
 `company_ID` int, /*FK*/ 
 `typeLibrary_ID` int,   /*FK*/ 
-PRIMARY KEY (companyType_ID),
+PRIMARY KEY (`companyType_ID`), 
 INDEX `fk_companyType_company_ID_idx` (`company_ID` ASC),
 INDEX `fk_companyType_typeLibrary_ID_idx` (`typeLibrary_ID` ASC),
 CONSTRAINT `fk_companyType_company_ID`
@@ -481,7 +481,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`companyPositions` (
 `userRemoved` int, 
 `company_ID` int, 
 `position_ID` int,  
-PRIMARY KEY (`companyPositions_ID`),
+PRIMARY KEY (`companyPositions_ID`), 
 INDEX `fk_companyPositions_company_ID_idx` (`company_id` ASC),
 INDEX `fk_companyPositions_position_id_idx` (`position_id` ASC),
 CONSTRAINT `fk_companyPositions_company_ID` 
@@ -523,7 +523,7 @@ ENGINE = InnoDB;
 `userRemoved` int, 
 `companyPerson_ID` int, 
 `role` int, 
-PRIMARY KEY (`companyPersonRole_ID`),
+PRIMARY KEY (`companyPersonRole_ID`), 
 INDEX `fk_companypersonrole_companyperson_idx`(`companyPerson_ID` ASC),
 CONSTRAINT `fk_companypersonrole_companyperson` 
     FOREIGN KEY (`companyPerson_ID`) 
