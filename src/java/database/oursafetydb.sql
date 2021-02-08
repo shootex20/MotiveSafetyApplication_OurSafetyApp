@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`typeLibrary` (
 `dateRemoved` date, 
 `userAdded` int, 
 `userRemoved` int, 
-/*  Come back to this.*/ 
+/* Come back to this */ 
 `type` varchar(30), 
 `description` varchar(55), 
 `isCategory` CHAR, /*  T being true, F being false.*/ 
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`person` (
 `dateOfBirth` date, 
 `gender` CHAR(1),  
 PRIMARY KEY (`person_ID`)) 
- ENGINE = InnoDB;
+ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`companyPerson` ( 
@@ -77,6 +77,35 @@ CONSTRAINT `companyPerson_person_id_fk`
 ENGINE = InnoDB;
 
 
+/*Can use either person_id OR companyPerson_ID, this will need to be decided upon.*/
+CREATE TABLE IF NOT EXISTS `oursafetydb`.`logins` (
+`user_id` int AUTO_INCREMENT,
+`dateAdded` date, 
+`dateRemoved` date, 
+`userAdded` int, 
+`userRemoved` int,
+`username` varchar(30),
+`password` varchar(30),
+`company_ID` int,
+`person_ID` int,
+`isActive` CHAR,
+`isAdmin` CHAR,
+PRIMARY KEY (`user_ID`), 
+INDEX `logins_company_id_fk_idx` (`company_ID` ASC),
+INDEX `logins_person_id_fk_idx` (`person_ID` ASC),
+CONSTRAINT `logins_company_id_fk`
+    FOREIGN KEY (`company_ID`)
+    REFERENCES `oursafetydb`.`company` (`company_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+CONSTRAINT `logins_person_id_fk`
+    FOREIGN KEY (`person_ID`)
+    REFERENCES `oursafetydb`.`person` (`person_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`url` ( 
 `url_ID` int AUTO_INCREMENT,
 `dateAdded` date, 
@@ -93,6 +122,7 @@ CONSTRAINT `fk_url_typelibrary`
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
 
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`manual` ( 
 `manual_ID` int AUTO_INCREMENT,
@@ -135,6 +165,7 @@ CONSTRAINT `fk_manualUse_manual`
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`itemClassFields` (
 `itemClassFields_ID` int AUTO_INCREMENT,
 `dateAdded`  date, 
@@ -153,6 +184,7 @@ CONSTRAINT `fk_itemClassFields_typelibrary`
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`itemClass` ( 
 `itemClass_ID` int AUTO_INCREMENT, 
 `DateAdded` date, 
@@ -167,14 +199,14 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`itemClass` (
 PRIMARY KEY (ItemClass_ID), 
 INDEX `fk_itemClass_itemClassFields_idx` (`itemClassFields_ID` ASC), 
 CONSTRAINT `fk_itemClass_itemClassFields_ID` 
-FOREIGN KEY(`itemClassFields_ID`) 
-REFERENCES `oursafetydb`.`itemClassFields` (`itemClassFields_ID`) 
-ON DELETE NO ACTION 
-ON UPDATE NO ACTION)
+    FOREIGN KEY(`itemClassFields_ID`) 
+    REFERENCES `oursafetydb`.`itemClassFields` (`itemClassFields_ID`) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
-CREATE TABLE IF NOT EXISTS `oursafetydb`.`Inventory`  ( 
+CREATE TABLE IF NOT EXISTS `oursafetydb`.`Inventory` ( 
 `inventory_ID` int, 
 `dateAdded` date, 
 `dateRemoved` date, 
@@ -186,15 +218,15 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`Inventory`  (
  INDEX `fk_inventory_item_id_idx` (`item_ID` ASC),
 INDEX `fk_inventory_company_id_idx` (`company_ID` ASC),
 CONSTRAINT `inventory_item_ID_fk` 
-FOREIGN KEY (`item_ID`) 
- REFERENCES `oursafetydb`.`item` (item_ID) 
-ON DELETE NO ACTION
-ON UPDATE NO ACTION,
+    FOREIGN KEY (`item_ID`) 
+    REFERENCES `oursafetydb`.`item` (item_ID) 
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
 CONSTRAINT `inventory_company_ID_fk` 
-FOREIGN KEY (`company_ID`)  
-REFERENCES `oursafetydb`.`company` (`company_ID`)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION)
+    FOREIGN KEY (`company_ID`)  
+    REFERENCES `oursafetydb`.`company` (`company_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -210,11 +242,12 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.` itemClassFields` (
 PRIMARY KEY(`itemClassFields_ID`),
 INDEX `fk_itemClassFields_typeLibrary_ID`(`typeLibrary_ID` ASC),
 CONSTRAINT `fk_typeLibrary_typeLibrary_ID`
-FOREIGN KEY(`typeLibrary_ID`)
-REFERENCES `oursafetydb`.`typeLibrary` (`typeLibrary_ID`)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION)
+    FOREIGN KEY(`typeLibrary_ID`)
+    REFERENCES `oursafetydb`.`typeLibrary` (`typeLibrary_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
 
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`companyPersonPhone` ( 
 `companyPersonPhone_ID` int AUTO_INCREMENT, 
@@ -228,20 +261,19 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`companyPersonPhone` (
  INDEX `fk_companyPersonPhone_CompanyPerson_idx` (`companyPerson_ID` ASC),
  INDEX `fk_companyPersonPhone_Phone_idx` (`phone_ID` ASC),
 CONSTRAINT `fk_companypersonphone_companypersonid`
-FOREIGN KEY(`companyPerson_ID`)
-REFERENCES `oursafetydb`.`companyPerson` (`companyPerson_ID`)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION,
+    FOREIGN KEY(`companyPerson_ID`)
+    REFERENCES `oursafetydb`.`companyPerson` (`companyPerson_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
 CONSTRAINT `fk_companypersonphone_phone`
-FOREIGN KEY(`phone_ID`)
-REFERENCES `oursafetydb`.`companyPhone` (`phone_ID`)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION)
+    FOREIGN KEY(`phone_ID`)
+    REFERENCES `oursafetydb`.`companyPhone` (`phone_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
-CREATE TABLE IF NOT EXISTS `oursafetydb`.`item`
-( 
+CREATE TABLE IF NOT EXISTS `oursafetydb`.`item` ( 
 `item_ID` int AUTO_INCREMENT, /*PK*/ 
 `dateAdded` date, 
 `DateRemoved` date, 
@@ -255,11 +287,10 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`item`
 PRIMARY KEY (`item_ID`),
 INDEX `fk_item_companyID` (`company_ID` ASC),
 CONSTRAINT `fk_company_companyID`
-FOREIGN KEY (`company_ID`)
-REFERENCES `oursafetydb`.`company`  
-  (`company_ID`)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION)
+    FOREIGN KEY (`company_ID`)
+    REFERENCES `oursafetydb`.`company` (`company_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -277,10 +308,10 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`phone` (
  PRIMARY KEY (`phone_ID`),
 INDEX `fk_phone_typelibrary_id_idx` (`typeLibrary_ID`),
 CONSTRAINT `phone_typeLibrary_id_fk` 
-FOREIGN KEY (`typeLibrary_ID`) 
-REFERENCES `oursafetydb`.`typeLibrary` (`typeLibrary_ID`)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION)
+    FOREIGN KEY (`typeLibrary_ID`) 
+    REFERENCES `oursafetydb`.`typeLibrary` (`typeLibrary_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -333,9 +364,9 @@ CONSTRAINT `fk_emergencyContact_personID`
     ON UPDATE NO ACTION) 
 ENGINE = InnoDB;
 
- CREATE TABLE IF NOT EXISTS `oursafetydb`.`addressRegion` ( 
- 
-`addressRegion_ID` int AUTO_INCREMENT, /*PK*/ 
+
+CREATE TABLE IF NOT EXISTS `oursafetydb`.`addressRegion` ( 
+ `addressRegion_ID` int AUTO_INCREMENT, /*PK*/ 
 `dateAdded` date, 
 `dateRemoved` date, 
 `userAdded` int, 
@@ -374,7 +405,6 @@ CONSTRAINT `fk_address_addressRegion_ID`
 ENGINE = InnoDB;
 
 
-
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`companyPersonAddress` ( 
 `companyPersonAddress_ID` int AUTO_INCREMENT,  
 `dateAdded` date, 
@@ -411,10 +441,11 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`companyNotes` (
 `note` VARCHAR(255), 
  PRIMARY KEY (companyNotes_ID),
 INDEX `fk_companyNotes_companyPerson_idx` (`companyPerson_ID` ASC),
-FOREIGN KEY (`companyPerson_ID`)
-REFERENCES `oursafetydb`.`companyPerson` (`companyPerson_ID`)
- ON DELETE NO ACTION
-  ON UPDATE NO ACTION)
+CONSTRAINT `fk_companyNotes_companyPerson`
+    FOREIGN KEY (`companyPerson_ID`)
+    REFERENCES `oursafetydb`.`companyPerson` (`companyPerson_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
  
  
@@ -430,17 +461,16 @@ PRIMARY KEY (companyType_ID),
 INDEX `fk_companyType_company_ID_idx` (`company_ID` ASC),
 INDEX `fk_companyType_typeLibrary_ID_idx` (`typeLibrary_ID` ASC),
 CONSTRAINT `fk_companyType_company_ID`
- FOREIGN KEY (`company_ID`)
-REFERENCES `oursafetydb`.`company` (`company_ID`) 
+    FOREIGN KEY (`company_ID`)
+    REFERENCES `oursafetydb`.`company` (`company_ID`) 
     ON DELETE NO ACTION 
     ON UPDATE NO ACTION, 
 CONSTRAINT `fk_companyType_typeLibrary_ID`
- FOREIGN KEY (`typeLibrary_ID`)
-REFERENCES `oursafetydb`.`_typeLibrary` (`typeLibrary_ID`) 
+    FOREIGN KEY (`typeLibrary_ID`)
+    REFERENCES `oursafetydb`.`_typeLibrary` (`typeLibrary_ID`) 
     ON DELETE NO ACTION 
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
  
  
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`companyPositions` ( 
@@ -455,15 +485,15 @@ PRIMARY KEY (`companyPositions_ID`),
 INDEX `fk_companyPositions_company_ID_idx` (`company_id` ASC),
 INDEX `fk_companyPositions_position_id_idx` (`position_id` ASC),
 CONSTRAINT `fk_companyPositions_company_ID` 
-FOREIGN KEY (`company_ID`) 
-REFERENCES `oursafetyapp`.`company` (`company_ID`) 
-ON DELETE NO ACTION
-ON UPDATE NO ACTION, 
+    FOREIGN KEY (`company_ID`) 
+    REFERENCES `oursafetyapp`.`company` (`company_ID`) 
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION, 
 CONSTRAINT `fk_companyPositions_position_id`
-FOREIGN KEY (`position_id`) 
-REFERENCES `oursafetyapp`.`positions` (`position_id`) 
-ON DELETE NO ACTION 
-ON UPDATE NO ACTION) 
+    FOREIGN KEY (`position_id`) 
+    REFERENCES `oursafetyapp`.`positions` (`position_id`) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION) 
 ENGINE = InnoDB;
 
 
