@@ -28,6 +28,30 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>CompanyServlet</servlet-name>
+        <servlet-class>servlets.CompanyServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CompanyServlet</servlet-name>
+        <url-pattern>/company</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ManualServlet</servlet-name>
+        <servlet-class>servlets.ManualServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ManualServlet</servlet-name>
+        <url-pattern>/manual</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>servlets.AdminServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
