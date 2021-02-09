@@ -3,31 +3,29 @@
   <persistence-unit name="OurSafetyPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <non-jta-data-source>java:/comp/env/jdbc/oursafetydb</non-jta-data-source>
-    <class>domain.Phone</class>
-    <class>domain.Logins</class>
-    <class>domain.Company</class>
-    <class>domain.Person</class>
-    <class>domain.Itemclassfields_1</class>
-    <class>domain.Item</class>
-    <class>domain.Address</class>
-    <class>domain.Companypersonaddress</class>
-    <class>domain.Companypositions</class>
-    <class>domain.Addressregion</class>
-    <class>domain.Inventory</class>
-    <class>domain.Manualuse</class>
-    <class>domain.Itemclassfields</class>
-    <class>domain.Manual</class>
     <class>domain.Positions</class>
-    <class>domain.Companynotes</class>
-    <class>domain.Companytype</class>
-    <class>domain.Companyperson</class>
-    <class>domain.Typelibrary</class>
-    <class>domain.Url</class>
-    <class>domain.Companypersonrole</class>
-    <class>domain.Companypersonphone</class>
-    <class>domain.Companyrelationship</class>
+    <class>domain.Company</class>
     <class>domain.Emergencycontact</class>
+    <class>domain.Typelibrary</class>
+    <class>domain.Phone</class>
+    <class>domain.Item</class>
+    <class>domain.Companytype</class>
+    <class>domain.Itemclassfields</class>
+    <class>domain.Companyperson</class>
+    <class>domain.Manual</class>
+    <class>domain.Companynotes</class>
     <class>domain.Itemclass</class>
+    <class>domain.Companypersonaddress</class>
+    <class>domain.Person</class>
+    <class>domain.Inventory</class>
+    <class>domain.Logins</class>
+    <class>domain.Url</class>
+    <class>domain.Companyrelationship</class>
+    <class>domain.Companypersonrole</class>
+    <class>domain.Companypositions</class>
+    <class>domain.Companypersonphone</class>
+    <class>domain.Manualuse</class>
+    <class>domain.Address</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
   </persistence-unit>
 </persistence>

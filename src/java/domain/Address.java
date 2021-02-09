@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Daniel Quach
+ * @author Chels
  */
 @Entity
 @Table(name = "address")
@@ -51,11 +51,14 @@ public class Address implements Serializable {
     private String addressLine1;
     @Column(name = "addressLine2")
     private String addressLine2;
+    @Column(name = "city")
+    private String city;
+    @Column(name = "province")
+    private String province;
+    @Column(name = "country")
+    private String country;
     @Column(name = "postalCode")
     private String postalCode;
-    @JoinColumn(name = "addressRegion_ID", referencedColumnName = "addressRegion_ID")
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Addressregion addressRegionID;
     @JoinColumn(name = "typeLibrary_ID", referencedColumnName = "typeLibrary_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Typelibrary typeLibraryID;
@@ -125,20 +128,36 @@ public class Address implements Serializable {
         this.addressLine2 = addressLine2;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     public String getPostalCode() {
         return postalCode;
     }
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
-    }
-
-    public Addressregion getAddressRegionID() {
-        return addressRegionID;
-    }
-
-    public void setAddressRegionID(Addressregion addressRegionID) {
-        this.addressRegionID = addressRegionID;
     }
 
     public Typelibrary getTypeLibraryID() {

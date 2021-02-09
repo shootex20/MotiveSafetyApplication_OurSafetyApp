@@ -13,6 +13,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -22,7 +24,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Daniel Quach
+ * @author Chels
  */
 @Entity
 @Table(name = "person")
@@ -56,10 +58,11 @@ public class Person implements Serializable {
     private Character gender;
     @OneToMany(mappedBy = "personID", fetch = FetchType.EAGER)
     private List<Companyperson> companypersonList;
+    @JoinColumn(name = "emergencyContact_ID", referencedColumnName = "emergencyContact_ID")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Emergencycontact emergencyContactID;
     @OneToMany(mappedBy = "personID", fetch = FetchType.EAGER)
     private List<Logins> loginsList;
-    @OneToMany(mappedBy = "personID", fetch = FetchType.EAGER)
-    private List<Emergencycontact> emergencycontactList;
 
     public Person() {
     }
@@ -148,20 +151,20 @@ public class Person implements Serializable {
         this.companypersonList = companypersonList;
     }
 
+    public Emergencycontact getEmergencyContactID() {
+        return emergencyContactID;
+    }
+
+    public void setEmergencyContactID(Emergencycontact emergencyContactID) {
+        this.emergencyContactID = emergencyContactID;
+    }
+
     public List<Logins> getLoginsList() {
         return loginsList;
     }
 
     public void setLoginsList(List<Logins> loginsList) {
         this.loginsList = loginsList;
-    }
-
-    public List<Emergencycontact> getEmergencycontactList() {
-        return emergencycontactList;
-    }
-
-    public void setEmergencycontactList(List<Emergencycontact> emergencycontactList) {
-        this.emergencycontactList = emergencycontactList;
     }
 
     @Override

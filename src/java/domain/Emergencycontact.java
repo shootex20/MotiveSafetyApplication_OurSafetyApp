@@ -7,6 +7,7 @@ package domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,17 +15,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
  *
- * @author Daniel Quach
+ * @author Chels
  */
 @Entity
 @Table(name = "emergencycontact")
@@ -48,14 +48,16 @@ public class Emergencycontact implements Serializable {
     private Integer userAdded;
     @Column(name = "userRemoved")
     private Integer userRemoved;
-    @Column(name = "emergencyContact")
-    private Integer emergencyContact;
-    @JoinColumn(name = "person_ID", referencedColumnName = "person_ID")
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Person personID;
-    @JoinColumn(name = "typeLibrary_ID", referencedColumnName = "typeLibrary_ID")
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Typelibrary typeLibraryID;
+    @Column(name = "emergencyContactFirstName")
+    private String emergencyContactFirstName;
+    @Column(name = "emergencyContactLastName")
+    private String emergencyContactLastName;
+    @Column(name = "emergencyContactNumber")
+    private String emergencyContactNumber;
+    @Column(name = "emergencyContactRelationship")
+    private String emergencyContactRelationship;
+    @OneToMany(mappedBy = "emergencyContactID", fetch = FetchType.EAGER)
+    private List<Person> personList;
 
     public Emergencycontact() {
     }
@@ -104,28 +106,44 @@ public class Emergencycontact implements Serializable {
         this.userRemoved = userRemoved;
     }
 
-    public Integer getEmergencyContact() {
-        return emergencyContact;
+    public String getEmergencyContactFirstName() {
+        return emergencyContactFirstName;
     }
 
-    public void setEmergencyContact(Integer emergencyContact) {
-        this.emergencyContact = emergencyContact;
+    public void setEmergencyContactFirstName(String emergencyContactFirstName) {
+        this.emergencyContactFirstName = emergencyContactFirstName;
     }
 
-    public Person getPersonID() {
-        return personID;
+    public String getEmergencyContactLastName() {
+        return emergencyContactLastName;
     }
 
-    public void setPersonID(Person personID) {
-        this.personID = personID;
+    public void setEmergencyContactLastName(String emergencyContactLastName) {
+        this.emergencyContactLastName = emergencyContactLastName;
     }
 
-    public Typelibrary getTypeLibraryID() {
-        return typeLibraryID;
+    public String getEmergencyContactNumber() {
+        return emergencyContactNumber;
     }
 
-    public void setTypeLibraryID(Typelibrary typeLibraryID) {
-        this.typeLibraryID = typeLibraryID;
+    public void setEmergencyContactNumber(String emergencyContactNumber) {
+        this.emergencyContactNumber = emergencyContactNumber;
+    }
+
+    public String getEmergencyContactRelationship() {
+        return emergencyContactRelationship;
+    }
+
+    public void setEmergencyContactRelationship(String emergencyContactRelationship) {
+        this.emergencyContactRelationship = emergencyContactRelationship;
+    }
+
+    public List<Person> getPersonList() {
+        return personList;
+    }
+
+    public void setPersonList(List<Person> personList) {
+        this.personList = personList;
     }
 
     @Override

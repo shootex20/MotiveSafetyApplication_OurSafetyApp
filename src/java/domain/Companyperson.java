@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Daniel Quach
+ * @author Chels
  */
 @Entity
 @Table(name = "companyperson")
@@ -47,6 +47,8 @@ public class Companyperson implements Serializable {
     private Integer userAdded;
     @Column(name = "userRemoved")
     private Integer userRemoved;
+    @Column(name = "email")
+    private String email;
     @OneToMany(mappedBy = "companyPersonID", fetch = FetchType.EAGER)
     private List<Companynotes> companynotesList;
     @JoinColumn(name = "company_ID", referencedColumnName = "company_ID")
@@ -107,6 +109,14 @@ public class Companyperson implements Serializable {
 
     public void setUserRemoved(Integer userRemoved) {
         this.userRemoved = userRemoved;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public List<Companynotes> getCompanynotesList() {

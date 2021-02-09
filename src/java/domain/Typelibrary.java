@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Daniel Quach
+ * @author Chels
  */
 @Entity
 @Table(name = "typelibrary")
@@ -65,8 +65,6 @@ public class Typelibrary implements Serializable {
     private List<Itemclassfields> itemclassfieldsList;
     @OneToMany(mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Companyrelationship> companyrelationshipList;
-    @OneToMany(mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
-    private List<Emergencycontact> emergencycontactList;
 
     public Typelibrary() {
     }
@@ -193,14 +191,6 @@ public class Typelibrary implements Serializable {
 
     public void setCompanyrelationshipList(List<Companyrelationship> companyrelationshipList) {
         this.companyrelationshipList = companyrelationshipList;
-    }
-
-    public List<Emergencycontact> getEmergencycontactList() {
-        return emergencycontactList;
-    }
-
-    public void setEmergencycontactList(List<Emergencycontact> emergencycontactList) {
-        this.emergencycontactList = emergencycontactList;
     }
 
     @Override

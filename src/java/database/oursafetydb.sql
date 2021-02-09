@@ -48,8 +48,15 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`person` (
 `firstName` VARCHAR(255), 
 `lastName` VARCHAR(255), 
 `dateOfBirth` date, 
-`gender` CHAR(1),  
-PRIMARY KEY (`person_ID`)) 
+`gender` CHAR(1),
+`emergencyContact_ID` int,  
+PRIMARY KEY (`person_ID`), 
+INDEX `person_emergencyContact_id_fk_idx` (`emergencyContact_ID` ASC),
+CONSTRAINT `fk_person_emergencyContact_id`
+    FOREIGN KEY (`emergencyContact_ID`)
+    REFERENCES `oursafetydb`.`emergencyContact` (`emergencyContact_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -61,6 +68,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`companyPerson` (
 `userRemoved` int, 
 `company_ID` int, /*FK*/ 
 `person_ID` int, /*FK*/ 
+`email` VARCHAR(60),
 PRIMARY KEY (`companyPerson_ID`), 
 INDEX `companyPerson_company_id_fk_idx` (`company_ID` ASC),
 INDEX `companyPerson_person_id_fk_idx` (`person_ID` ASC),
@@ -327,38 +335,27 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`emergencyContact` (
 `dateAdded` date, 
 `dateRemoved` date, 
 `userAdded` int, 
-`userRemoved` int, 
-`person_ID` int,  /*FK*/ 
-`emergencyContact` int, 
-`typeLibrary_ID` int, /*FK*/ 
-PRIMARY KEY(`emergencyContact_ID`), 
-INDEX `fk_emergencyContact_typelibrary_idx` (`typeLibrary_ID` ASC), 
-INDEX `fk_emergencyContact_personID_idx` (`person_ID` ASC),
-CONSTRAINT `fk_emergencyContact_typelibrary` 
-    FOREIGN KEY (`typeLibrary_ID`) 
-    REFERENCES `oursafetydb`.`typeLibrary` (`typeLibrary_ID`) 
-    ON DELETE NO ACTION 
-    ON UPDATE NO ACTION,
-CONSTRAINT `fk_emergencyContact_personID` 
-    FOREIGN KEY (`person_ID`) 
-    REFERENCES `oursafetydb`.`person` (`person_ID`) 
-    ON DELETE NO ACTION 
-    ON UPDATE NO ACTION) 
+`userRemoved` int,
+`emergencyContactFirstName` VARCHAR(30),
+`emergencyContactLastName` VARCHAR(30),
+`emergencyContactNumber` VARCHAR(30),
+`emergencyContactRelationship` VARCHAR(20),
+PRIMARY KEY(`emergencyContact_ID`))
 ENGINE = InnoDB;
 
-
+/*
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`addressRegion` ( 
- `addressRegion_ID` int AUTO_INCREMENT, /*PK*/ 
+ `addressRegion_ID` int AUTO_INCREMENT, /*PK
 `dateAdded` date, 
 `dateRemoved` date, 
 `userAdded` int, 
 `userRemoved` int, 
 `parentType` int, /*  for)*/ 
-`parentID` int, /*  for)*/ 
+/*`parentID` int, /*  for)
 `spaceCode` VARCHAR(10), 
 PRIMARY KEY (`addressRegion_ID`)) 
 ENGINE = InnoDB;
-
+*/
  
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`address` ( 
 `address_ID`  int, 
@@ -368,20 +365,16 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`address` (
 `userRemoved`  int, 
 `typeLibrary_ID`  int, 
 `addressLine1`  VARCHAR(200), 
-`addressLine2`  VARCHAR(200), 
-`addressRegion_ID` int, 
+`addressLine2`  VARCHAR(200),
+`city` VARCHAR(100),
+`province` VARCHAR(20),
+`country` VARCHAR(100),
 `postalCode`  VARCHAR(6), 
 PRIMARY KEY(`address_ID`), 
 INDEX `fk_address_typelibrary_idx` (`typeLibrary_ID` ASC), 
-INDEX `fk_address_addressRegion_idx` (`addressRegion_ID` ASC), 
 CONSTRAINT `fk_address_typelibrary_ID` 
     FOREIGN KEY (`typeLibrary_ID`) 
     REFERENCES `oursafetydb`.`typeLibrary` (`typeLibrary_ID`) 
-    ON DELETE NO ACTION 
-    ON UPDATE NO ACTION, 
-CONSTRAINT `fk_address_addressRegion_ID` 
-    FOREIGN KEY (`addressRegion_ID`) 
-    REFERENCES `oursafetydb`.`addressRegion` (`addressRegion_ID`) 
     ON DELETE NO ACTION 
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
