@@ -551,9 +551,9 @@ INSERT INTO `item` (`item_ID`, `dateAdded`, `DateRemoved`, `userAdded`, `userRem
 -- Dumping data for table oursafetydb.itemclass: ~2 rows (approximately)
 DELETE FROM `itemclass`;
 /*!40000 ALTER TABLE `itemclass` DISABLE KEYS */;
-INSERT INTO `itemclass` (`itemClass_ID`, `DateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `itemType`, `itemClassFields_ID`, `chargeableType`, `depletingType`, `depreactiationType`) VALUES
-	(0, '2021-02-09', NULL, 1, NULL, NULL, 0, 'carName', 'carSerialNumber', 'carPrice', NULL),
-	(1, '2021-02-09', NULL, 1, NULL, NULL, 1, 'screwdriverName', 'screwdriverType', 'screwdriverPrice', NULL);
+INSERT INTO `itemclass` (`itemClass_ID`, `DateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `itemType`, `itemClassFields_ID`, `isChargeableType`, `isDepletingType`, `isDepreactiationType`, `itemClassInformation`) VALUES
+	(0, '2021-02-09', NULL, 1, NULL, NULL, 0, TRUE, TRUE, TRUE, NULL),
+	(1, '2021-02-09', NULL, 1, NULL, NULL, 1, TRUE, TRUE, TRUE, NULL);
 /*!40000 ALTER TABLE `itemclass` ENABLE KEYS */;
 
 -- Dumping data for table oursafetydb.itemclassfields: ~2 rows (approximately)
