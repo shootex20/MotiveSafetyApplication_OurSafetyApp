@@ -31,11 +31,11 @@ public class ItemDB {
         }
     }
    
-    public Item get(int id) throws Exception {
+    public Item get(int item_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
-            Item item = em.find(Item.class, id);
+            Item item = em.find(Item.class, item_ID);
             return item;
         } finally { 
             em.close();
