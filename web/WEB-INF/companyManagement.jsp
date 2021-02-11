@@ -9,7 +9,16 @@
         <link href="CSS-MEDIA/Index.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <div class="companyHeader">
+        <header class="companyHeader">
+            <ul>
+                <li><a href=" <c:url value='/company'/> ">${companyName} Company Page</a></li>
+                <li><a href=" <c:url value='/equipment'/> ">Equipment Page</a></li>
+                <li><a href=" <c:url value='/manual'/> ">Safety Page</a></li>
+                <li><a href=" <c:url value='/admin'/>" >Administrator Page</a></li>
+                <li><a href="login?action=logout">Logout</a></li>
+            </ul>
+        </header>
+        <div class="companyEmployees">
             <h1>${companyName} & OurSafety</h1>
             <h3>Employee List</h3>
             <table>
@@ -23,6 +32,8 @@
                     <th>Address</th>
                     <th>Position</th>
                     <th>Role</th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 <c:forEach items="employeeList" var="emp">
                     <tr>
@@ -35,25 +46,39 @@
                         <th>${emp.address}</th>
                         <th>${emp.position}</th>
                         <th>${emp.role}</th>
+                        <td>
+                            <form action="company" method="post">
+                                <input type="hidden" name="hidden_comp_emp_edit" value="hiddenEdit">
+                                <input type="hidden" name="hidden_ed" value="${emp.id}">
+                                <input type="submit" value="Edit">
+                            </form>
+                        </td>
+                        <td>
+                            <form action="company" method="post">
+                                <input type="hidden" name="hidden_comp_emp_del" value="hiddenDelete">
+                                <input type="hidden" name="hidden_del" value="${emp.id}">
+                                <input type="submit" value="Remove">
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>
 
         </div>
-        <form action="company" method="post" class="companyForm">
-            <h1>Add a new employee</h1>
-            <input type="hidden" name="hidden_company" value="hiddenCompany">
-            <label>First Name</label><input type="text" name="" value="">
-            <label>Last Name</label><input type="text" name="" value="">
-            <label>Birthdate</label><input type="text" name="" value="">
-            <label>Gender</label><input type="text" name="" value="">
-            <label>Phone Number</label><input type="text" name="" value="">
-            <label>Email</label><input type="text" name="" value="">
-            <label>Address</label><input type="text" name="" value="">
-            <label>Position</label><input type="text" name="" value="">
-            <label>Role</label><input type="text" name="" value="">
+        <form action="company" method="post" class="companyAddForm">
+            <h3>Add a new employee</h3>
+            <input type="hidden" name="hidden_comp_emp_add" value="hiddenCompany">
+            <label>First Name</label><input type="text" name="comp_firstname">
+            <label>Last Name</label><input type="text" name="comp_lastname">
+            <label>Birthdate</label><input type="date" name="comp_birthday">
+            <label>Gender</label><input type="text" name="comp_gender">
+            <label>Phone Number</label><input type="tel" name="comp_phone" placeholder="1234567890">
+            <label>Email</label><input type="email" name="comp_email" placeholder="Ex: address@service.com">
+            <label>Address</label><input type="text" name="comp_address">
+            <label>Position</label><input type="text" name="comp_phone">
+            <label>Role</label><input type="text" name="comp_role">
             <input type="submit" value="Add To Company">
-
+            ${compAddMsg}
         </form>
     </body>
 </html>

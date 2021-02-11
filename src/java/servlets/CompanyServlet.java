@@ -14,12 +14,30 @@ public class CompanyServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        getServletContext().getRequestDispatcher("/WEB-INF/companyManagement.jsp").forward(request, response);
+        String linkAction = request.getParameter("action");
+
+        if (linkAction != null && linkAction.equals("logout")) {
+            session.invalidate();
+            session = request.getSession();
+            request.setAttribute("loginMsg", "You have successfully logged out.");
+            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+            return;
+        }
+
+        if (session.getAttribute("userName") == null) {
+            response.sendRedirect("login");
+            return;
+
+        } else if (session.getAttribute("userName") != null) {
+            getServletContext().getRequestDispatcher("/WEB-INF/companyManagement.jsp").forward(request, response);
+        }
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        getServletContext().getRequestDispatcher("/WEB-INF/companyManagement.jsp").forward(request, response);
 
     }
 

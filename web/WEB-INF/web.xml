@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-<error-page>
-    <error-code>404</error-code>
-    <location>/WEB-INF/error.jsp</location>
-</error-page>
-        <servlet>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/error.jsp</location>
+    </error-page>
+    <servlet>
         <servlet-name>ErrorServlet</servlet-name>
         <servlet-class>servlets.ErrorServlet</servlet-class>
     </servlet>
@@ -20,7 +20,7 @@
         <servlet-name>EquipmentManagerServlet</servlet-name>
         <url-pattern>/equipmentmanager</url-pattern>
     </servlet-mapping>
-        <servlet>
+    <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>servlets.LoginServlet</servlet-class>
     </servlet>
