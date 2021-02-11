@@ -122,13 +122,21 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`url` (
 `userRemoved` int, 
 `typeLibrary_ID`  int, 
 `URL` VARCHAR(255), 
+`company_ID` int, 
 PRIMARY KEY (`url_ID`), 
 INDEX `fk_url_typelibrary_idx` (`typeLibrary_ID` ASC),
+INDEX `fk_url_company_idx` (`company_ID` ASC),
 CONSTRAINT `fk_url_typelibrary`
     FOREIGN KEY (`typeLibrary_ID`)
     REFERENCES `oursafetydb`.`typeLibrary` (`typeLibrary_ID`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION
+CONSTRAINT `fk_url_company`
+    FOREIGN KEY (`company_id`)
+    REFERENCES `oursafetydb`.`typeLibrary` (`company_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+)
 ENGINE = InnoDB;
 
 
@@ -201,9 +209,10 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`itemClass` (
 `userRemoved` int, 
 `itemType` VARCHAR (50), 
 `itemClassFields_ID` int, /*FK*/ 
-`chargeableType` VARCHAR(30), 
-`depletingType` VARCHAR(30), 
-`depreactiationType` VARCHAR(30), 
+`isChargeableType` BOOLEAN, 
+`isDepletingType` BOOLEAN, 
+`isDepreactiationType` BOOLEAN, 
+`itemClassInformation` VARCHAR(30),
 PRIMARY KEY (`ItemClass_ID`), 
 INDEX `fk_itemClass_itemClassFields_idx` (`itemClassFields_ID` ASC), 
 CONSTRAINT `fk_itemClass_itemClassFields_ID` 
@@ -214,28 +223,6 @@ CONSTRAINT `fk_itemClass_itemClassFields_ID`
 ENGINE = InnoDB;
 
 
-CREATE TABLE IF NOT EXISTS `oursafetydb`.`Inventory` ( 
-`inventory_ID` int, 
-`dateAdded` date, 
-`dateRemoved` date, 
-`userAdded` int, 
-`userRemoved` int, 
-`item_ID` int, /*FK*/  
-`company_ID` int, 
- PRIMARY KEY (`inventory_ID`), 
- INDEX `fk_inventory_item_id_idx` (`item_ID` ASC),
-INDEX `fk_inventory_company_id_idx` (`company_ID` ASC),
-CONSTRAINT `inventory_item_ID_fk` 
-    FOREIGN KEY (`item_ID`) 
-    REFERENCES `oursafetydb`.`item` (item_ID) 
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-CONSTRAINT `inventory_company_ID_fk` 
-    FOREIGN KEY (`company_ID`)  
-    REFERENCES `oursafetydb`.`company` (`company_ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`companyPersonPhone` ( 
@@ -271,6 +258,10 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`item` (
 `itemClass_ID` int, /*FK*/ 
 `model` VARCHAR(30), 
 `company_ID` int, /*FK*/ 
+`isChargeableType` BOOLEAN, 
+`isDepletingType` BOOLEAN, 
+`isDepreactiationType` BOOLEAN, 
+`itemClassInformation` VARCHAR(30),
 `serialNumber` VARCHAR(55), 
 `purchaseDate` date,
 PRIMARY KEY (`item_ID`), 
@@ -455,54 +446,88 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`companyPositions` (
 `userAdded` int, 
 `userRemoved` int, 
 `company_ID` int, 
-`position_ID` int,  
+`companyPerson_ID` int, 
+`positionTitle` VARCHAR(100), 
 PRIMARY KEY (`companyPositions_ID`), 
 INDEX `fk_companyPositions_company_ID_idx` (`company_id` ASC),
-INDEX `fk_companyPositions_position_id_idx` (`position_id` ASC),
+INDEX `fk_companyPositions_companyPerson_idx` (`companyPerson_ID` ASC),
 CONSTRAINT `fk_companyPositions_company_ID` 
     FOREIGN KEY (`company_ID`) 
     REFERENCES `oursafetyapp`.`company` (`company_ID`) 
     ON DELETE NO ACTION
     ON UPDATE NO ACTION, 
-CONSTRAINT `fk_companyPositions_position_id`
-    FOREIGN KEY (`position_id`) 
-    REFERENCES `oursafetyapp`.`positions` (`position_id`) 
+CONSTRAINT `fk_companyPositions_companyPerson_ID`
+    FOREIGN KEY (`companyPerson_ID`) 
+    REFERENCES `oursafetyapp`.`companyPerson` (`companyPerson_ID`)
     ON DELETE NO ACTION 
     ON UPDATE NO ACTION) 
 ENGINE = InnoDB;
 
-
-CREATE TABLE IF NOT EXISTS `oursafetydb`.`positions` ( 
-`positions_ID` int, 
-`dateAdded` date, 
-`dateRemoved` date, 
-`userAdded` int, 
-`userRemoved` int, 
-`positionTitle` VARCHAR(100), 
-`companyPersonRole_ID` int, 
-PRIMARY KEY (`positions_ID`), 
-INDEX `fk_positions_companypersonrole_idx` (`companyPersonRole_ID` ASC),
-CONSTRAINT `fk_companypersonrole_companypersonrole`
-    FOREIGN KEY (`companyPersonRole_ID`) 
-    REFERENCES `oursafetydb`.`companyPersonRole` (`companyPersonRole_ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION) 
-ENGINE = InnoDB;  
-
  
- CREATE TABLE IF NOT EXISTS `oursafetydb`.`companyPersonRole`( 
-`companyPersonRole_ID` int, 
-`dateAdded` date, 
-`dateRemoved` date, 
-`userAdded` int, 
-`userRemoved` int, 
-`companyPerson_ID` int, 
-`role` int, 
-PRIMARY KEY (`companyPersonRole_ID`), 
-INDEX `fk_companypersonrole_companyperson_idx`(`companyPerson_ID` ASC),
-CONSTRAINT `fk_companypersonrole_companyperson` 
-    FOREIGN KEY (`companyPerson_ID`) 
-    REFERENCES `oursafetydb`.`companyperson` (`companyPerson_ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+
+
+
+-- Dumping data for table oursafetydb.company: ~1 rows (approximately)
+DELETE FROM `company`;
+/*!40000 ALTER TABLE `company` DISABLE KEYS */;
+INSERT INTO `company` (`company_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `shortname`, `name`, `description`, `saltHash`, `account`, `industry`) VALUES
+	(0, '2021-02-09', NULL, 1, NULL, 'ABC_company', 'ABC_Company', 'ABC company', NULL, NULL, NULL);
+/*!40000 ALTER TABLE `company` ENABLE KEYS */;
+
+-- Dumping data for table oursafetydb.companyperson: ~1 rows (approximately)
+DELETE FROM `companyperson`;
+/*!40000 ALTER TABLE `companyperson` DISABLE KEYS */;
+INSERT INTO `companyperson` (`companyPerson_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `company_ID`, `person_ID`) VALUES
+	(0, '2021-02-09', NULL, 2, NULL, 0, 0);
+/*!40000 ALTER TABLE `companyperson` ENABLE KEYS */;
+
+-- Dumping data for table oursafetydb.companypersonphone: ~3 rows (approximately)
+DELETE FROM `companypersonphone`;
+/*!40000 ALTER TABLE `companypersonphone` DISABLE KEYS */;
+INSERT INTO `companypersonphone` (`companyPersonPhone_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `companyPerson_ID`, `phone_ID`) VALUES
+	(0, '2021-02-09', NULL, 2, NULL, NULL, 1),
+	(1, '2021-02-09', NULL, 2, NULL, NULL, 2),
+	(2, '2021-02-09', NULL, 2, NULL, NULL, 0);
+/*!40000 ALTER TABLE `companypersonphone` ENABLE KEYS */;
+
+-- Dumping data for table oursafetydb.person: ~1 rows (approximately)
+DELETE FROM `person`;
+/*!40000 ALTER TABLE `person` DISABLE KEYS */;
+INSERT INTO `person` (`person_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `firstName`, `lastName`, `dateOfBirth`, `gender`) VALUES
+	(0, '2021-02-09', NULL, 2, NULL, 'Alice', 'Lee', '2000-01-01', 'M');
+/*!40000 ALTER TABLE `person` ENABLE KEYS */;
+
+-- Dumping data for table oursafetydb.phone: ~3 rows (approximately)
+DELETE FROM `phone`;
+/*!40000 ALTER TABLE `phone` DISABLE KEYS */;
+INSERT INTO `phone` (`phone_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `typeLibrary_ID`, `countryCode`, `areaCode`, `localNumber`, `extension`) VALUES
+	(0, '2021-02-09', NULL, 2, NULL, 1, '1', '403', '333', '3333'),
+	(1, '2021-02-09', NULL, 2, NULL, 2, '1', '403', '222', '2222'),
+	(2, '2021-02-09', NULL, 2, NULL, 3, '1', '403', '111', '1111');
+/*!40000 ALTER TABLE `phone` ENABLE KEYS */;
+
+-- Dumping data for table oursafetydb.typelibrary: ~21 rows (approximately)
+DELETE FROM `typelibrary`;
+/*!40000 ALTER TABLE `typelibrary` DISABLE KEYS */;
+INSERT INTO `typelibrary` (`typeLibrary_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `type`, `description`, `isCategory`) VALUES
+	(0, '2021-02-09', NULL, 1, NULL, 'phone', 'phone', 'T'),
+	(1, '2021-02-09', NULL, 1, NULL, 'phone', 'company phone', 'F'),
+	(2, '2021-02-09', NULL, 1, NULL, 'phone', 'fax', 'F'),
+	(3, '2021-02-09', NULL, 1, NULL, 'phone', 'personal phone', 'F'),
+	(100, '2021-02-09', NULL, 1, NULL, 'manual', 'manual', 'T'),
+	(101, '2021-02-09', NULL, 1, NULL, 'manual', 'safety manual', 'F'),
+	(102, '2021-02-09', NULL, 1, NULL, 'manual', 'equipment manual', 'F'),
+	(103, '2021-02-09', NULL, 1, NULL, 'manual', 'construction manual', 'F'),
+	(200, '2021-02-09', NULL, 1, NULL, 'equipment', 'equipment', 'T'),
+	(201, '2021-02-09', NULL, 1, NULL, 'equipment', 'car', 'F'),
+	(202, '2021-02-09', NULL, 1, NULL, 'equipment', 'screwdriver', 'F'),
+	(300, '2021-02-09', NULL, 1, NULL, 'companyRelationship', 'company relationship', 'T'),
+	(301, '2021-02-09', NULL, 1, NULL, 'companyRelationship', 'cooperate', 'F'),
+	(302, '2021-02-09', NULL, 1, NULL, 'companyRelationship', 'sponsor', 'F'),
+	(310, '2021-02-09', NULL, 1, NULL, 'address', 'address', 'T'),
+	(311, '2021-02-09', NULL, 1, NULL, 'address', 'company address', 'F'),
+	(312, '2021-02-09', NULL, 1, NULL, 'address', 'personal address', 'F'),
+	(320, '2021-02-09', NULL, 1, NULL, 'companyType', 'company type', 'T'),
+	(321, '2021-02-09', NULL, 1, NULL, 'companyType', 'construction company', 'F'),
+	(350, '2021-02-09', NULL, 1, NULL, 'url', 'url', 'T'),
+	(351, '2021-02-09', NULL, 1, NULL, 'url', 'official website', 'F');
