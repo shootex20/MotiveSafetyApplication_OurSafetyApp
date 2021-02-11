@@ -5,7 +5,6 @@
  */
 package servlets;
 
-import dataaccess.InventoryDB;
 import dataaccess.ItemDB;
 import domain.Company;
 import domain.Item;
@@ -42,7 +41,7 @@ public class EquipmentManagerServlet extends HttpServlet {
         /** Not used right now **/
         //String username = (String) session.getAttribute("username");
         
-        InventoryDB invDB = new InventoryDB();
+        //InventoryDB invDB = new InventoryDB();
         
        /* List<Inventory> inventory = new ArrayList<Inventory>();
         try {
@@ -55,6 +54,12 @@ public class EquipmentManagerServlet extends HttpServlet {
         
         List<Item> itemsList = new ArrayList<Item>();
         
+        
+        try {
+            itemsList = (List<Item>) itemDB.getAll(curr);
+        } catch (Exception ex) {
+            Logger.getLogger(EquipmentManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
        /* for(int i = 0; i < inventory.size(); i++)
         {
             try {

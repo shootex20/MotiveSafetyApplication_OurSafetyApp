@@ -18,19 +18,24 @@ import domain.Company;
  *
  * @author 813017
  */
-public class ItemDB {
+public class ItemClassFieldsDB {
     
-    /*WORK IN PROGRESS*/
-        public List<Item> getAll(Company companyID) throws Exception {
+    /** NOT FINISHED NEEDS WORK **/
+    /*
+    public List<Item> getAll(String itemID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        List<Item> itemList = null;
         try {
-            Company company = em.find(Company.class, companyID.getCompanyID());
-            return company.getItemList();
+            Item items = em.find(Item.class, itemID);
+            itemList.add(items);
+            return items.;
         } finally {
             em.close();
         }
     }
-   
+    */
+
+ 
     public Item get(int id) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
