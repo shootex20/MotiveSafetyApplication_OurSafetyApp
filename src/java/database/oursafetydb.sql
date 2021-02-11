@@ -467,34 +467,131 @@ ENGINE = InnoDB;
 
 
 
--- Dumping data for table oursafetydb.company: ~1 rows (approximately)
+-- Dumping data for table oursafetydb.address: ~2 rows (approximately)
+DELETE FROM `address`;
+/*!40000 ALTER TABLE `address` DISABLE KEYS */;
+INSERT INTO `address` (`address_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `typeLibrary_ID`, `addressLine1`, `addressLine2`, `city`, `province`, `country`, `postalCode`) VALUES
+	(0, '2021-02-09', NULL, 1, NULL, 311, '112Street', 'ABC SW', 'Edmonton', 'Alberta', 'Canada', 'T2A1W2'),
+	(1, '2021-02-09', NULL, 1, NULL, 312, '13Street', 'AC NW', 'Calgary', 'Alberta', 'Canada', 'T3C1Q4');
+/*!40000 ALTER TABLE `address` ENABLE KEYS */;
+
+-- Dumping data for table oursafetydb.company: ~2 rows (approximately)
 DELETE FROM `company`;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
 INSERT INTO `company` (`company_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `shortname`, `name`, `description`, `saltHash`, `account`, `industry`) VALUES
-	(0, '2021-02-09', NULL, 1, NULL, 'ABC_company', 'ABC_Company', 'ABC company', NULL, NULL, NULL);
+	(0, '2021-02-09', NULL, 1, NULL, 'ABC_company', 'ABC_company', 'ABC company', NULL, NULL, NULL),
+	(1, '2021-02-09', NULL, 1, NULL, 'BBC_company', 'BBC_company', 'BBC company', NULL, NULL, NULL);
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 
--- Dumping data for table oursafetydb.companyperson: ~1 rows (approximately)
+-- Dumping data for table oursafetydb.companynotes: ~1 rows (approximately)
+DELETE FROM `companynotes`;
+/*!40000 ALTER TABLE `companynotes` DISABLE KEYS */;
+INSERT INTO `companynotes` (`companyNotes_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `companyPerson_ID`, `noteDate`, `noteIndex`, `note`) VALUES
+	(1, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL);
+/*!40000 ALTER TABLE `companynotes` ENABLE KEYS */;
+
+-- Dumping data for table oursafetydb.companyperson: ~2 rows (approximately)
 DELETE FROM `companyperson`;
 /*!40000 ALTER TABLE `companyperson` DISABLE KEYS */;
-INSERT INTO `companyperson` (`companyPerson_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `company_ID`, `person_ID`) VALUES
-	(0, '2021-02-09', NULL, 2, NULL, 0, 0);
+INSERT INTO `companyperson` (`companyPerson_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `company_ID`, `person_ID`, `email`) VALUES
+	(0, '2021-02-09', NULL, 2, NULL, 0, 0, NULL),
+	(1, '2021-02-09', NULL, 2, NULL, 0, 2, 'abc@gmail.com');
 /*!40000 ALTER TABLE `companyperson` ENABLE KEYS */;
 
--- Dumping data for table oursafetydb.companypersonphone: ~3 rows (approximately)
+-- Dumping data for table oursafetydb.companypersonaddress: ~2 rows (approximately)
+DELETE FROM `companypersonaddress`;
+/*!40000 ALTER TABLE `companypersonaddress` DISABLE KEYS */;
+INSERT INTO `companypersonaddress` (`companyPersonAddress_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `companyPerson_ID`, `address_ID`) VALUES
+	(0, '2021-02-09', NULL, 1, NULL, 0, 0),
+	(1, '2021-02-09', NULL, 1, NULL, 1, 1);
+/*!40000 ALTER TABLE `companypersonaddress` ENABLE KEYS */;
+
+-- Dumping data for table oursafetydb.companypersonphone: ~1 rows (approximately)
 DELETE FROM `companypersonphone`;
 /*!40000 ALTER TABLE `companypersonphone` DISABLE KEYS */;
 INSERT INTO `companypersonphone` (`companyPersonPhone_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `companyPerson_ID`, `phone_ID`) VALUES
-	(0, '2021-02-09', NULL, 2, NULL, NULL, 1),
-	(1, '2021-02-09', NULL, 2, NULL, NULL, 2),
-	(2, '2021-02-09', NULL, 2, NULL, NULL, 0);
+	(4, NULL, NULL, 2, NULL, 0, 0);
 /*!40000 ALTER TABLE `companypersonphone` ENABLE KEYS */;
 
--- Dumping data for table oursafetydb.person: ~1 rows (approximately)
+-- Dumping data for table oursafetydb.companypositions: ~0 rows (approximately)
+DELETE FROM `companypositions`;
+/*!40000 ALTER TABLE `companypositions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `companypositions` ENABLE KEYS */;
+
+-- Dumping data for table oursafetydb.companyrelationship: ~0 rows (approximately)
+DELETE FROM `companyrelationship`;
+/*!40000 ALTER TABLE `companyrelationship` DISABLE KEYS */;
+INSERT INTO `companyrelationship` (`companyRelationship_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `parent`, `child`, `typeLibrary_ID`, `company_ID`) VALUES
+	(0, NULL, NULL, NULL, NULL, NULL, NULL, 301, 0);
+/*!40000 ALTER TABLE `companyrelationship` ENABLE KEYS */;
+
+-- Dumping data for table oursafetydb.companytype: ~2 rows (approximately)
+DELETE FROM `companytype`;
+/*!40000 ALTER TABLE `companytype` DISABLE KEYS */;
+INSERT INTO `companytype` (`companyType_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `company_ID`, `typeLibrary_ID`) VALUES
+	(0, '2021-02-09', NULL, 2, NULL, 0, 321),
+	(1, '2021-02-09', NULL, 2, NULL, 1, 321);
+/*!40000 ALTER TABLE `companytype` ENABLE KEYS */;
+
+-- Dumping data for table oursafetydb.emergencycontact: ~3 rows (approximately)
+DELETE FROM `emergencycontact`;
+/*!40000 ALTER TABLE `emergencycontact` DISABLE KEYS */;
+INSERT INTO `emergencycontact` (`emergencyContact_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `emergencyContactFirstName`, `emergencyContactLastName`, `emergencyContactNumber`, `emergencyContactRelationship`) VALUES
+	(0, '2021-02-09', NULL, 2, NULL, NULL, NULL, NULL, NULL),
+	(1, '2021-02-09', NULL, 2, NULL, 'Wenhao', 'Liu', '1231231234', 'father'),
+	(2, '2021-02-09', NULL, 2, NULL, 'Boxuan', 'Lu', '2332332333', 'friend');
+/*!40000 ALTER TABLE `emergencycontact` ENABLE KEYS */;
+
+-- Dumping data for table oursafetydb.item: ~1 rows (approximately)
+DELETE FROM `item`;
+/*!40000 ALTER TABLE `item` DISABLE KEYS */;
+INSERT INTO `item` (`item_ID`, `dateAdded`, `DateRemoved`, `userAdded`, `userRemoved`, `itemClass_ID`, `model`, `company_ID`, `serialNumber`, `purchaseDate`) VALUES
+	(1, '2021-02-09', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL);
+/*!40000 ALTER TABLE `item` ENABLE KEYS */;
+
+-- Dumping data for table oursafetydb.itemclass: ~2 rows (approximately)
+DELETE FROM `itemclass`;
+/*!40000 ALTER TABLE `itemclass` DISABLE KEYS */;
+INSERT INTO `itemclass` (`itemClass_ID`, `DateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `itemType`, `itemClassFields_ID`, `chargeableType`, `depletingType`, `depreactiationType`) VALUES
+	(0, '2021-02-09', NULL, 1, NULL, NULL, 0, 'carName', 'carSerialNumber', 'carPrice'),
+	(1, '2021-02-09', NULL, 1, NULL, NULL, 1, 'screwdriverName', 'screwdriverType', 'screwdriverPrice');
+/*!40000 ALTER TABLE `itemclass` ENABLE KEYS */;
+
+-- Dumping data for table oursafetydb.itemclassfields: ~2 rows (approximately)
+DELETE FROM `itemclassfields`;
+/*!40000 ALTER TABLE `itemclassfields` DISABLE KEYS */;
+INSERT INTO `itemclassfields` (`itemClassFields_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `typeLibrary_ID`, `fieldDescr`, `fieldDescrType`) VALUES
+	(0, '2021-02-09', NULL, 1, NULL, 201, 'car', 'car'),
+	(1, '2021-02-09', NULL, 1, NULL, 202, 'screwdriver', 'screwdriver');
+/*!40000 ALTER TABLE `itemclassfields` ENABLE KEYS */;
+
+-- Dumping data for table oursafetydb.logins: ~2 rows (approximately)
+DELETE FROM `logins`;
+/*!40000 ALTER TABLE `logins` DISABLE KEYS */;
+INSERT INTO `logins` (`user_id`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `username`, `password`, `company_ID`, `person_ID`, `isActive`, `isAdmin`) VALUES
+	(0, '2021-02-09', NULL, 0, NULL, 'admin', 'password', NULL, NULL, 'T', 'T'),
+	(1, '2021-02-09', NULL, 1, NULL, 'manager1', NULL, 0, 1, NULL, NULL);
+/*!40000 ALTER TABLE `logins` ENABLE KEYS */;
+
+-- Dumping data for table oursafetydb.manual: ~1 rows (approximately)
+DELETE FROM `manual`;
+/*!40000 ALTER TABLE `manual` DISABLE KEYS */;
+INSERT INTO `manual` (`manual_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `typeLibrary_ID`, `parent`, `title`, `intention`, `overview`, `content`) VALUES
+	(1, '2021-02-09', NULL, 2, NULL, 101, NULL, NULL, NULL, NULL, NULL);
+/*!40000 ALTER TABLE `manual` ENABLE KEYS */;
+
+-- Dumping data for table oursafetydb.manualuse: ~0 rows (approximately)
+DELETE FROM `manualuse`;
+/*!40000 ALTER TABLE `manualuse` DISABLE KEYS */;
+/*!40000 ALTER TABLE `manualuse` ENABLE KEYS */;
+
+-- Dumping data for table oursafetydb.person: ~3 rows (approximately)
 DELETE FROM `person`;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` (`person_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `firstName`, `lastName`, `dateOfBirth`, `gender`) VALUES
-	(0, '2021-02-09', NULL, 2, NULL, 'Alice', 'Lee', '2000-01-01', 'M');
+INSERT INTO `person` (`person_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `firstName`, `lastName`, `dateOfBirth`, `gender`, `emergencyContact_ID`) VALUES
+	(0, '2021-02-09', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0),
+	(1, '2021-02-09', NULL, 2, NULL, 'Jason', 'Bourn', '2001-02-09', 'M', 2),
+	(2, '2021-02-09', NULL, 2, NULL, 'charly', 'Bob', '2021-02-09', 'F', 1);
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 
 -- Dumping data for table oursafetydb.phone: ~3 rows (approximately)
@@ -531,3 +628,17 @@ INSERT INTO `typelibrary` (`typeLibrary_ID`, `dateAdded`, `dateRemoved`, `userAd
 	(321, '2021-02-09', NULL, 1, NULL, 'companyType', 'construction company', 'F'),
 	(350, '2021-02-09', NULL, 1, NULL, 'url', 'url', 'T'),
 	(351, '2021-02-09', NULL, 1, NULL, 'url', 'official website', 'F');
+/*!40000 ALTER TABLE `typelibrary` ENABLE KEYS */;
+
+-- Dumping data for table oursafetydb.url: ~2 rows (approximately)
+DELETE FROM `url`;
+/*!40000 ALTER TABLE `url` DISABLE KEYS */;
+INSERT INTO `url` (`url_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `typeLibrary_ID`, `URL`) VALUES
+	(1, '2021-02-09', NULL, 2, NULL, 351, '123.ca'),
+	(2, '2021-02-09', NULL, 2, NULL, 351, '223.ca');
+/*!40000 ALTER TABLE `url` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
