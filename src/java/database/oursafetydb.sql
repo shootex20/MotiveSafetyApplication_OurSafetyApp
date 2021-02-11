@@ -87,7 +87,7 @@ ENGINE = InnoDB;
 
 /*Can use either person_id OR companyPerson_ID, this will need to be decided upon.*/
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`logins` (
-`user_id` int AUTO_INCREMENT, 
+`user_id` int, 
 `dateAdded` date, 
 `dateRemoved` date, 
 `userAdded` int, 
@@ -130,13 +130,12 @@ CONSTRAINT `fk_url_typelibrary`
     FOREIGN KEY (`typeLibrary_ID`)
     REFERENCES `oursafetydb`.`typeLibrary` (`typeLibrary_ID`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION
+    ON UPDATE NO ACTION,
 CONSTRAINT `fk_url_company`
-    FOREIGN KEY (`company_id`)
-    REFERENCES `oursafetydb`.`typeLibrary` (`company_ID`)
+    FOREIGN KEY (`company_ID`)
+    REFERENCES `oursafetydb`.`company` (`company_ID`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION
-)
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -183,7 +182,7 @@ ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`itemClassFields` (
-`itemClassFields_ID` int AUTO_INCREMENT,
+`itemClassFields_ID` int,
 `dateAdded`  date, 
 `dateRemoved` date, 
 `userAdded` int, 
@@ -202,7 +201,7 @@ ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`itemClass` ( 
-`itemClass_ID` int AUTO_INCREMENT, 
+`itemClass_ID` int, 
 `DateAdded` date, 
 `dateRemoved` date, 
 `userAdded` int, 
@@ -322,7 +321,7 @@ ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`emergencyContact` ( 
-`emergencyContact_ID` int AUTO_INCREMENT, /*PK*/ 
+`emergencyContact_ID` int, /*PK*/ 
 `dateAdded` date, 
 `dateRemoved` date, 
 `userAdded` int, 
@@ -372,7 +371,7 @@ ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`companyPersonAddress` ( 
-`companyPersonAddress_ID` int AUTO_INCREMENT,  
+`companyPersonAddress_ID` int,  
 `dateAdded` date, 
 `dateRemoved` date, 
 `userAdded` int, 
@@ -416,7 +415,7 @@ ENGINE = InnoDB;
  
  
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`companyType` ( 
-`companyType_ID` int AUTO_INCREMENT, 
+`companyType_ID` int, 
 `dateAdded` date, 
 `dateRemoved` date, 
 `userAdded` int, 
@@ -553,8 +552,8 @@ INSERT INTO `item` (`item_ID`, `dateAdded`, `DateRemoved`, `userAdded`, `userRem
 DELETE FROM `itemclass`;
 /*!40000 ALTER TABLE `itemclass` DISABLE KEYS */;
 INSERT INTO `itemclass` (`itemClass_ID`, `DateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `itemType`, `itemClassFields_ID`, `chargeableType`, `depletingType`, `depreactiationType`) VALUES
-	(0, '2021-02-09', NULL, 1, NULL, NULL, 0, 'carName', 'carSerialNumber', 'carPrice'),
-	(1, '2021-02-09', NULL, 1, NULL, NULL, 1, 'screwdriverName', 'screwdriverType', 'screwdriverPrice');
+	(0, '2021-02-09', NULL, 1, NULL, NULL, 0, 'carName', 'carSerialNumber', 'carPrice', NULL),
+	(1, '2021-02-09', NULL, 1, NULL, NULL, 1, 'screwdriverName', 'screwdriverType', 'screwdriverPrice', NULL);
 /*!40000 ALTER TABLE `itemclass` ENABLE KEYS */;
 
 -- Dumping data for table oursafetydb.itemclassfields: ~2 rows (approximately)
