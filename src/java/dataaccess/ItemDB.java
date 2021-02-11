@@ -12,7 +12,6 @@ import domain.Item;
 import domain.Itemclass;
 import domain.Itemclassfields;
 import domain.Company;
-import domain.Inventory;
 
 
 /**

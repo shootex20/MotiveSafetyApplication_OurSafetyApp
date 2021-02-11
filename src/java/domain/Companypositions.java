@@ -47,8 +47,10 @@ public class Companypositions implements Serializable {
     private Integer userRemoved;
     @Column(name = "company_ID")
     private Integer companyID;
-    @Column(name = "position_ID")
-    private Integer positionID;
+    @Column(name = "companyPerson_ID")
+    private Integer companyPersonID;
+    @Column(name = "positionTitle")
+    private String positionTitle;
 
     public Companypositions() {
     }
@@ -105,12 +107,20 @@ public class Companypositions implements Serializable {
         this.companyID = companyID;
     }
 
-    public Integer getPositionID() {
-        return positionID;
+    public Integer getCompanyPersonID() {
+        return companyPersonID;
     }
 
-    public void setPositionID(Integer positionID) {
-        this.positionID = positionID;
+    public void setCompanyPersonID(Integer companyPersonID) {
+        this.companyPersonID = companyPersonID;
+    }
+
+    public String getPositionTitle() {
+        return positionTitle;
+    }
+
+    public void setPositionTitle(String positionTitle) {
+        this.positionTitle = positionTitle;
     }
 
     @Override

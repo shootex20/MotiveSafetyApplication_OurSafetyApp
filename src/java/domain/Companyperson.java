@@ -60,8 +60,6 @@ public class Companyperson implements Serializable {
     @OneToMany(mappedBy = "companyPersonID", fetch = FetchType.EAGER)
     private List<Companypersonaddress> companypersonaddressList;
     @OneToMany(mappedBy = "companyPersonID", fetch = FetchType.EAGER)
-    private List<Companypersonrole> companypersonroleList;
-    @OneToMany(mappedBy = "companyPersonID", fetch = FetchType.EAGER)
     private List<Companypersonphone> companypersonphoneList;
 
     public Companyperson() {
@@ -149,14 +147,6 @@ public class Companyperson implements Serializable {
 
     public void setCompanypersonaddressList(List<Companypersonaddress> companypersonaddressList) {
         this.companypersonaddressList = companypersonaddressList;
-    }
-
-    public List<Companypersonrole> getCompanypersonroleList() {
-        return companypersonroleList;
-    }
-
-    public void setCompanypersonroleList(List<Companypersonrole> companypersonroleList) {
-        this.companypersonroleList = companypersonroleList;
     }
 
     public List<Companypersonphone> getCompanypersonphoneList() {

@@ -7,7 +7,6 @@ package domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +18,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -54,6 +52,14 @@ public class Item implements Serializable {
     private Integer itemClassID;
     @Column(name = "model")
     private String model;
+    @Column(name = "isChargeableType")
+    private Boolean isChargeableType;
+    @Column(name = "isDepletingType")
+    private Boolean isDepletingType;
+    @Column(name = "isDepreactiationType")
+    private Boolean isDepreactiationType;
+    @Column(name = "itemClassInformation")
+    private String itemClassInformation;
     @Column(name = "serialNumber")
     private String serialNumber;
     @Column(name = "purchaseDate")
@@ -62,8 +68,6 @@ public class Item implements Serializable {
     @JoinColumn(name = "company_ID", referencedColumnName = "company_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Company companyID;
-    @OneToMany(mappedBy = "itemID", fetch = FetchType.EAGER)
-    private List<Inventory> inventoryList;
 
     public Item() {
     }
@@ -128,6 +132,38 @@ public class Item implements Serializable {
         this.model = model;
     }
 
+    public Boolean getIsChargeableType() {
+        return isChargeableType;
+    }
+
+    public void setIsChargeableType(Boolean isChargeableType) {
+        this.isChargeableType = isChargeableType;
+    }
+
+    public Boolean getIsDepletingType() {
+        return isDepletingType;
+    }
+
+    public void setIsDepletingType(Boolean isDepletingType) {
+        this.isDepletingType = isDepletingType;
+    }
+
+    public Boolean getIsDepreactiationType() {
+        return isDepreactiationType;
+    }
+
+    public void setIsDepreactiationType(Boolean isDepreactiationType) {
+        this.isDepreactiationType = isDepreactiationType;
+    }
+
+    public String getItemClassInformation() {
+        return itemClassInformation;
+    }
+
+    public void setItemClassInformation(String itemClassInformation) {
+        this.itemClassInformation = itemClassInformation;
+    }
+
     public String getSerialNumber() {
         return serialNumber;
     }
@@ -150,14 +186,6 @@ public class Item implements Serializable {
 
     public void setCompanyID(Company companyID) {
         this.companyID = companyID;
-    }
-
-    public List<Inventory> getInventoryList() {
-        return inventoryList;
-    }
-
-    public void setInventoryList(List<Inventory> inventoryList) {
-        this.inventoryList = inventoryList;
     }
 
     @Override

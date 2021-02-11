@@ -12,15 +12,13 @@ import domain.Item;
 import domain.Itemclass;
 import domain.Itemclassfields;
 import domain.Company;
-import domain.Inventory;
-
 
 /**
  *
  * @author 813017
  */
 public class InventoryDB {
-    
+    /*
     
     public List<Inventory> getAll(Company companyID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
