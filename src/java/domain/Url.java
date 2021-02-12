@@ -50,6 +50,9 @@ public class Url implements Serializable {
     private Integer userRemoved;
     @Column(name = "URL")
     private String url;
+    @JoinColumn(name = "company_ID", referencedColumnName = "company_ID")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Company companyID;
     @JoinColumn(name = "typeLibrary_ID", referencedColumnName = "typeLibrary_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Typelibrary typeLibraryID;
@@ -107,6 +110,14 @@ public class Url implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Company getCompanyID() {
+        return companyID;
+    }
+
+    public void setCompanyID(Company companyID) {
+        this.companyID = companyID;
     }
 
     public Typelibrary getTypeLibraryID() {

@@ -11,8 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -34,7 +32,6 @@ public class Itemclass implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "itemClass_ID")
     private Integer itemClassID;
@@ -50,12 +47,14 @@ public class Itemclass implements Serializable {
     private Integer userRemoved;
     @Column(name = "itemType")
     private String itemType;
-    @Column(name = "chargeableType")
-    private String chargeableType;
-    @Column(name = "depletingType")
-    private String depletingType;
-    @Column(name = "depreactiationType")
-    private String depreactiationType;
+    @Column(name = "isChargeableType")
+    private Boolean isChargeableType;
+    @Column(name = "isDepletingType")
+    private Boolean isDepletingType;
+    @Column(name = "isDepreactiationType")
+    private Boolean isDepreactiationType;
+    @Column(name = "itemClassInformation")
+    private String itemClassInformation;
     @JoinColumn(name = "itemClassFields_ID", referencedColumnName = "itemClassFields_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Itemclassfields itemClassFieldsID;
@@ -115,28 +114,36 @@ public class Itemclass implements Serializable {
         this.itemType = itemType;
     }
 
-    public String getChargeableType() {
-        return chargeableType;
+    public Boolean getIsChargeableType() {
+        return isChargeableType;
     }
 
-    public void setChargeableType(String chargeableType) {
-        this.chargeableType = chargeableType;
+    public void setIsChargeableType(Boolean isChargeableType) {
+        this.isChargeableType = isChargeableType;
     }
 
-    public String getDepletingType() {
-        return depletingType;
+    public Boolean getIsDepletingType() {
+        return isDepletingType;
     }
 
-    public void setDepletingType(String depletingType) {
-        this.depletingType = depletingType;
+    public void setIsDepletingType(Boolean isDepletingType) {
+        this.isDepletingType = isDepletingType;
     }
 
-    public String getDepreactiationType() {
-        return depreactiationType;
+    public Boolean getIsDepreactiationType() {
+        return isDepreactiationType;
     }
 
-    public void setDepreactiationType(String depreactiationType) {
-        this.depreactiationType = depreactiationType;
+    public void setIsDepreactiationType(Boolean isDepreactiationType) {
+        this.isDepreactiationType = isDepreactiationType;
+    }
+
+    public String getItemClassInformation() {
+        return itemClassInformation;
+    }
+
+    public void setItemClassInformation(String itemClassInformation) {
+        this.itemClassInformation = itemClassInformation;
     }
 
     public Itemclassfields getItemClassFieldsID() {
