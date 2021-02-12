@@ -208,9 +208,6 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`itemClass` (
 `userRemoved` int, 
 `itemType` VARCHAR (50), 
 `itemClassFields_ID` int, /*FK*/ 
-`isChargeableType` BOOLEAN, 
-`isDepletingType` BOOLEAN, 
-`isDepreactiationType` BOOLEAN, 
 `itemClassInformation` VARCHAR(30),
 PRIMARY KEY (`ItemClass_ID`), 
 INDEX `fk_itemClass_itemClassFields_idx` (`itemClassFields_ID` ASC), 
@@ -249,7 +246,7 @@ ENGINE = InnoDB;
 
 
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`item` ( 
-`item_ID` int AUTO_INCREMENT, /*PK*/ 
+`item_ID` int, /*PK*/ 
 `dateAdded` date, 
 `DateRemoved` date, 
 `userAdded` int, 
@@ -265,11 +262,18 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`item` (
 `purchaseDate` date,
 PRIMARY KEY (`item_ID`), 
 INDEX `fk_item_companyID` (`company_ID` ASC),
+INDEX `fk_item_itemClass` (`itemClass_ID` ASC),
 CONSTRAINT `fk_company_companyID`
     FOREIGN KEY (`company_ID`)
     REFERENCES `oursafetydb`.`company` (`company_ID`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION,
+CONSTRAINT `fk_itemClass_itemClass_ID`
+    FOREIGN KEY (`itemClass_ID`)
+    REFERENCES `oursafetydb`.`itemClass` (`itemClass_ID`)
+    on DELETE NO ACTION
+    ON UPDATE NO ACTION
+)
 ENGINE = InnoDB;
 
 
@@ -466,6 +470,20 @@ ENGINE = InnoDB;
 
 
 
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Server version:               10.3.23-MariaDB - mariadb.org binary distribution
+-- Server OS:                    Win64
+-- HeidiSQL Version:             11.2.0.6213
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
 -- Dumping data for table oursafetydb.address: ~2 rows (approximately)
 DELETE FROM `address`;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
@@ -517,7 +535,7 @@ DELETE FROM `companypositions`;
 /*!40000 ALTER TABLE `companypositions` DISABLE KEYS */;
 /*!40000 ALTER TABLE `companypositions` ENABLE KEYS */;
 
--- Dumping data for table oursafetydb.companyrelationship: ~0 rows (approximately)
+-- Dumping data for table oursafetydb.companyrelationship: ~1 rows (approximately)
 DELETE FROM `companyrelationship`;
 /*!40000 ALTER TABLE `companyrelationship` DISABLE KEYS */;
 INSERT INTO `companyrelationship` (`companyRelationship_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `parent`, `child`, `typeLibrary_ID`, `company_ID`) VALUES
@@ -541,19 +559,20 @@ INSERT INTO `emergencycontact` (`emergencyContact_ID`, `dateAdded`, `dateRemoved
 	(2, '2021-02-09', NULL, 2, NULL, 'Boxuan', 'Lu', '2332332333', 'friend');
 /*!40000 ALTER TABLE `emergencycontact` ENABLE KEYS */;
 
--- Dumping data for table oursafetydb.item: ~1 rows (approximately)
+-- Dumping data for table oursafetydb.item: ~2 rows (approximately)
 DELETE FROM `item`;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` (`item_ID`, `dateAdded`, `DateRemoved`, `userAdded`, `userRemoved`, `itemClass_ID`, `model`, `company_ID`, `serialNumber`, `purchaseDate`) VALUES
-	(1, '2021-02-09', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `item` (`item_ID`, `dateAdded`, `DateRemoved`, `userAdded`, `userRemoved`, `itemClass_ID`, `model`, `company_ID`, `isChargeableType`, `isDepletingType`, `isDepreactiationType`, `itemClassInformation`, `serialNumber`, `purchaseDate`) VALUES
+	(0, '2021-02-09', NULL, 1, NULL, 0, NULL, 0, TRUE, TRUE, TRUE, 'car infor', '123456', '2021-02-12'),
+	(1, '2021-02-12', NULL, 1, NULL, 1, NULL, 1, TRUE, TRUE, TRUE, 'screwdriver infor', '123457', '2021-02-12');
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 
 -- Dumping data for table oursafetydb.itemclass: ~2 rows (approximately)
 DELETE FROM `itemclass`;
 /*!40000 ALTER TABLE `itemclass` DISABLE KEYS */;
-INSERT INTO `itemclass` (`itemClass_ID`, `DateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `itemType`, `itemClassFields_ID`, `isChargeableType`, `isDepletingType`, `isDepreactiationType`, `itemClassInformation`) VALUES
-	(0, '2021-02-09', NULL, 1, NULL, NULL, 0, TRUE, TRUE, TRUE, NULL),
-	(1, '2021-02-09', NULL, 1, NULL, NULL, 1, TRUE, TRUE, TRUE, NULL);
+INSERT INTO `itemclass` (`itemClass_ID`, `DateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `itemType`, `itemClassFields_ID`,`itemClassInformation`) VALUES
+	(0, '2021-02-09', NULL, 1, NULL, NULL, 0, NULL),
+	(1, '2021-02-09', NULL, 1, NULL, NULL, 1, NULL);
 /*!40000 ALTER TABLE `itemclass` ENABLE KEYS */;
 
 -- Dumping data for table oursafetydb.itemclassfields: ~2 rows (approximately)
@@ -632,9 +651,9 @@ INSERT INTO `typelibrary` (`typeLibrary_ID`, `dateAdded`, `dateRemoved`, `userAd
 -- Dumping data for table oursafetydb.url: ~2 rows (approximately)
 DELETE FROM `url`;
 /*!40000 ALTER TABLE `url` DISABLE KEYS */;
-INSERT INTO `url` (`url_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `typeLibrary_ID`, `URL`) VALUES
-	(1, '2021-02-09', NULL, 2, NULL, 351, '123.ca'),
-	(2, '2021-02-09', NULL, 2, NULL, 351, '223.ca');
+INSERT INTO `url` (`url_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `typeLibrary_ID`, `URL`, `company_ID`) VALUES
+	(1, '2021-02-09', NULL, 2, NULL, 351, '123.ca', NULL),
+	(2, '2021-02-09', NULL, 2, NULL, 351, '223.ca', NULL);
 /*!40000 ALTER TABLE `url` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
