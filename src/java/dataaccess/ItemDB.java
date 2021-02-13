@@ -23,7 +23,7 @@ public class ItemDB {
         public List<Item> getAll(Company companyID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
-            Company company = em.find(Company.class, companyID);
+            Company company = em.find(Company.class, companyID.getCompanyID());
             return company.getItemList();
         } finally {
             em.close();

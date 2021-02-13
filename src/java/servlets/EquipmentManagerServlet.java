@@ -46,8 +46,7 @@ public class EquipmentManagerServlet extends HttpServlet {
         
         
         try {
-            newItem = itemDB.get(1);
-            itemsList.add(newItem);
+            itemsList = (List<Item>) itemDB.getAll(curr);
         } catch (Exception ex) {
             Logger.getLogger(EquipmentManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
