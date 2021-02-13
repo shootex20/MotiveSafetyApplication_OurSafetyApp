@@ -16,7 +16,7 @@ import domain.Company;
 
 /**
  *
- * @author 813017
+ * @author Chelsey Coughlin
  */
 public class ItemDB {
     
