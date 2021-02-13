@@ -20,30 +20,67 @@ import domain.Company;
  */
 public class ItemClassFieldsDB {
     
-    /** NOT FINISHED NEEDS WORK **/
-    /*
-    public List<Item> getAll(String itemID) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        List<Item> itemList = null;
-        try {
-            Item items = em.find(Item.class, itemID);
-            itemList.add(items);
-            return items.;
-        } finally {
-            em.close();
-        }
-    }
-    */
-
- 
-    public Item get(int id) throws Exception {
+    public Itemclassfields get(int id) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
-            Item item = em.find(Item.class, id);
+            Itemclassfields item = em.find(Itemclassfields.class, id);
             return item;
         } finally { 
             em.close();
         }
     }
+    
+    /*
+        public void insert(Itemclassfields item) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        
+        try {
+            Item theItem = item.getCompanyID();
+            theItem.getItemClassID().add(item);
+            trans.begin();
+            em.persist(item);
+            em.merge(theItem);
+            trans.commit();
+        } catch (Exception ex) {
+            trans.rollback();
+        } finally {
+            em.close();
+        }
+    }
+
+    public void update(Item item) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        
+        try {
+            trans.begin();
+            em.merge(item);
+            trans.commit();
+        } catch (Exception ex) {
+            trans.rollback();
+        } finally {
+            em.close();
+        }
+    }
+
+    public void delete(Item item) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        
+        try {
+            Company user = item.getCompanyID();
+            user.getItemList().remove(item);
+            trans.begin();
+            em.remove(em.merge(item));
+            em.merge(user);
+            trans.commit();
+        } catch (Exception ex) {
+            trans.rollback();
+        } finally {
+            em.close();
+        }
+    }
+*/
 }

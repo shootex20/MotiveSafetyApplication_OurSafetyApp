@@ -38,37 +38,20 @@ public class EquipmentManagerServlet extends HttpServlet {
         
         Company curr = new Company(1);
         
-        /** Not used right now **/
-        //String username = (String) session.getAttribute("username");
-        
-        //InventoryDB invDB = new InventoryDB();
-        
-       /* List<Inventory> inventory = new ArrayList<Inventory>();
-        try {
-            inventory = (List<Inventory>) invDB.getAll(curr);
-        } catch (Exception ex) {
-            Logger.getLogger(EquipmentManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        */
         ItemDB itemDB = new ItemDB();
+        
+        Item newItem = null;
         
         List<Item> itemsList = new ArrayList<Item>();
         
         
         try {
-            itemsList = (List<Item>) itemDB.get(1);
+            newItem = itemDB.get(1);
+            itemsList.add(newItem);
         } catch (Exception ex) {
             Logger.getLogger(EquipmentManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-       /* for(int i = 0; i < inventory.size(); i++)
-        {
-            try {
-                itemsList.add(itemDB.get(1));
-            } catch (Exception ex) {
-                Logger.getLogger(EquipmentManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        */
+        
         request.setAttribute("equipment", itemsList);
         
         getServletContext().getRequestDispatcher("/WEB-INF/equipmentmanager.jsp").forward(request, response);
