@@ -41,12 +41,12 @@ public class Item implements Serializable {
     @Column(name = "dateAdded")
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
-    @Column(name = "DateRemoved")
+    @Column(name = "DateRemoved", insertable=false)
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
     @Column(name = "userAdded")
     private Integer userAdded;
-    @Column(name = "userRemoved")
+    @Column(name = "userRemoved", insertable=false)
     private Integer userRemoved;
     @Column(name = "itemClass_ID")
     private Integer itemClassID;
@@ -74,6 +74,21 @@ public class Item implements Serializable {
 
     public Item(Integer itemID) {
         this.itemID = itemID;
+    }
+    
+    public Item(Integer itemID, String model, boolean isChargeableType, 
+    boolean isDepletingType, boolean isDepreactiationType, 
+    String itemClassInformation, String serialNumber, Date purchaseDate, Company companyID) {
+        
+        this.itemID = itemID;
+        this.purchaseDate = purchaseDate;
+        this.itemClassInformation = itemClassInformation;
+        this.model = model;
+        this.isChargeableType = isChargeableType;
+        this.isDepletingType = isDepletingType;
+        this.isDepreactiationType = isDepreactiationType;
+        this.serialNumber = serialNumber;
+        this.companyID = companyID;
     }
 
     public Integer getItemID() {

@@ -40,12 +40,12 @@ public class Itemclassfields implements Serializable {
     @Column(name = "dateAdded")
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
-    @Column(name = "dateRemoved")
+    @Column(name = "dateRemoved", insertable=false)
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
     @Column(name = "userAdded")
     private Integer userAdded;
-    @Column(name = "userRemoved")
+    @Column(name = "userRemoved", insertable=false)
     private Integer userRemoved;
     @Column(name = "fieldDescr")
     private String fieldDescr;
@@ -56,12 +56,25 @@ public class Itemclassfields implements Serializable {
     @JoinColumn(name = "typeLibrary_ID", referencedColumnName = "typeLibrary_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Typelibrary typeLibraryID;
+    
+    private java.sql.Timestamp createdAt;
 
     public Itemclassfields() {
     }
 
     public Itemclassfields(Integer itemClassFieldsID) {
         this.itemClassFieldsID = itemClassFieldsID;
+    }
+    
+    public Itemclassfields(Integer itemClassFieldsID, Integer userAdded, 
+            String fieldDescr, String fieldDescrType, Typelibrary typeLibraryID) {
+        this.itemClassFieldsID = itemClassFieldsID;
+        this.dateAdded = createdAt;
+        this.userAdded = userAdded;
+        this.fieldDescr = fieldDescr;
+        this.fieldDescrType = fieldDescrType;
+        this.typeLibraryID = typeLibraryID;
+       
     }
 
     public Integer getItemClassFieldsID() {

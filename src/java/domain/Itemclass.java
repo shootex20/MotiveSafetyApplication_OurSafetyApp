@@ -38,26 +38,23 @@ public class Itemclass implements Serializable {
     @Column(name = "DateAdded")
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
-    @Column(name = "dateRemoved")
+    @Column(name = "dateRemoved", insertable=false)
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
     @Column(name = "userAdded")
     private Integer userAdded;
-    @Column(name = "userRemoved")
+    @Column(name = "userRemoved", insertable=false)
     private Integer userRemoved;
     @Column(name = "itemType")
     private String itemType;
-    @Column(name = "isChargeableType")
-    private Boolean isChargeableType;
-    @Column(name = "isDepletingType")
-    private Boolean isDepletingType;
-    @Column(name = "isDepreactiationType")
-    private Boolean isDepreactiationType;
     @Column(name = "itemClassInformation")
     private String itemClassInformation;
     @JoinColumn(name = "itemClassFields_ID", referencedColumnName = "itemClassFields_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Itemclassfields itemClassFieldsID;
+            
+            
+    private java.sql.Timestamp createdAt;
 
     public Itemclass() {
     }
@@ -65,7 +62,16 @@ public class Itemclass implements Serializable {
     public Itemclass(Integer itemClassID) {
         this.itemClassID = itemClassID;
     }
-
+    public Itemclass(Integer itemClassID, Date dateAdded, Integer userAdded, 
+            String itemType, String itemClassInformation, Itemclassfields itemClassFieldsID) {
+        this.itemClassID = itemClassID;
+        this.dateAdded = createdAt;
+        this.userAdded = userAdded;
+        this.itemType = itemType;
+        this.itemClassInformation = itemClassInformation;
+        this.itemClassFieldsID = itemClassFieldsID;
+    }
+    
     public Integer getItemClassID() {
         return itemClassID;
     }
@@ -113,31 +119,6 @@ public class Itemclass implements Serializable {
     public void setItemType(String itemType) {
         this.itemType = itemType;
     }
-
-    public Boolean getIsChargeableType() {
-        return isChargeableType;
-    }
-
-    public void setIsChargeableType(Boolean isChargeableType) {
-        this.isChargeableType = isChargeableType;
-    }
-
-    public Boolean getIsDepletingType() {
-        return isDepletingType;
-    }
-
-    public void setIsDepletingType(Boolean isDepletingType) {
-        this.isDepletingType = isDepletingType;
-    }
-
-    public Boolean getIsDepreactiationType() {
-        return isDepreactiationType;
-    }
-
-    public void setIsDepreactiationType(Boolean isDepreactiationType) {
-        this.isDepreactiationType = isDepreactiationType;
-    }
-
     public String getItemClassInformation() {
         return itemClassInformation;
     }
