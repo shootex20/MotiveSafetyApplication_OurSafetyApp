@@ -54,7 +54,7 @@ public class Itemclass implements Serializable {
     private Itemclassfields itemClassFieldsID;
             
             
-    private java.sql.Timestamp createdAt;
+    //private java.sql.Timestamp createdAt;
 
     public Itemclass() {
     }
@@ -65,7 +65,7 @@ public class Itemclass implements Serializable {
     public Itemclass(Integer itemClassID, Date dateAdded, Integer userAdded, 
             String itemType, String itemClassInformation, Itemclassfields itemClassFieldsID) {
         this.itemClassID = itemClassID;
-        this.dateAdded = createdAt;
+        this.dateAdded = dateAdded;
         this.userAdded = userAdded;
         this.itemType = itemType;
         this.itemClassInformation = itemClassInformation;

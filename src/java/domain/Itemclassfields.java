@@ -56,20 +56,19 @@ public class Itemclassfields implements Serializable {
     @JoinColumn(name = "typeLibrary_ID", referencedColumnName = "typeLibrary_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Typelibrary typeLibraryID;
-    
-    private java.sql.Timestamp createdAt;
+
 
     public Itemclassfields() {
     }
-
     public Itemclassfields(Integer itemClassFieldsID) {
         this.itemClassFieldsID = itemClassFieldsID;
     }
-    
-    public Itemclassfields(Integer itemClassFieldsID, Integer userAdded, 
+    //private java.sql.Timestamp createdAt;
+    public Itemclassfields(Integer itemClassFieldsID, Date dateAdded, Integer userAdded, 
             String fieldDescr, String fieldDescrType, Typelibrary typeLibraryID) {
+      
         this.itemClassFieldsID = itemClassFieldsID;
-        this.dateAdded = createdAt;
+        this.dateAdded = dateAdded;
         this.userAdded = userAdded;
         this.fieldDescr = fieldDescr;
         this.fieldDescrType = fieldDescrType;

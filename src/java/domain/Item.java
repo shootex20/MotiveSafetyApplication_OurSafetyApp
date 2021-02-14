@@ -76,11 +76,12 @@ public class Item implements Serializable {
         this.itemID = itemID;
     }
     
-    public Item(Integer itemID, String model, boolean isChargeableType, 
+    public Item(Integer itemID, Date dateAdded ,String model, boolean isChargeableType, 
     boolean isDepletingType, boolean isDepreactiationType, 
     String itemClassInformation, String serialNumber, Date purchaseDate, Company companyID) {
         
         this.itemID = itemID;
+        this.dateAdded = dateAdded;
         this.purchaseDate = purchaseDate;
         this.itemClassInformation = itemClassInformation;
         this.model = model;
