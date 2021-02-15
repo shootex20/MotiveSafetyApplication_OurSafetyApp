@@ -36,7 +36,7 @@ public class Item implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "item_ID")
+    @Column(name = "item_ID", insertable=false)
     private Integer itemID;
     @Column(name = "dateAdded")
     @Temporal(TemporalType.DATE)
@@ -44,11 +44,11 @@ public class Item implements Serializable {
     @Column(name = "DateRemoved", insertable=false)
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
-    @Column(name = "userAdded")
+    @Column(name = "userAdded", insertable=false)
     private Integer userAdded;
     @Column(name = "userRemoved", insertable=false)
     private Integer userRemoved;
-    @Column(name = "itemClass_ID")
+    @Column(name = "itemClass_ID", insertable = false)
     private Integer itemClassID;
     @Column(name = "model")
     private String model;
@@ -74,6 +74,19 @@ public class Item implements Serializable {
 
     public Item(Integer itemID) {
         this.itemID = itemID;
+    }
+    public Item(String model, boolean isChargeableType, 
+    boolean isDepletingType, boolean isDepreactiationType, 
+    String itemClassInformation, String serialNumber, Date purchaseDate, Company companyID) {
+        
+        this.purchaseDate = purchaseDate;
+        this.itemClassInformation = itemClassInformation;
+        this.model = model;
+        this.isChargeableType = isChargeableType;
+        this.isDepletingType = isDepletingType;
+        this.isDepreactiationType = isDepreactiationType;
+        this.serialNumber = serialNumber;
+        this.companyID = companyID;
     }
     
     public Item(Integer itemID, Date dateAdded ,String model, boolean isChargeableType, 

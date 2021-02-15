@@ -605,8 +605,8 @@ INSERT INTO `emergencycontact` (`emergencyContact_ID`, `dateAdded`, `dateRemoved
 DELETE FROM `item`;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
 INSERT INTO `item` (`item_ID`, `dateAdded`, `DateRemoved`, `userAdded`, `userRemoved`, `itemClass_ID`, `model`, `company_ID`, `isChargeableType`, `isDepletingType`, `isDepreactiationType`, `itemClassInformation`, `serialNumber`, `purchaseDate`) VALUES
-	(1, '2021-02-09', NULL, 1, NULL, 1, NULL, 1, 1, 1, 1, 'car infor', '123456', '2021-02-12'),
-	(2, '2021-02-12', NULL, 1, NULL, 2, NULL, 2, 1, 1, 1, 'screwdriver infor', '123457', '2021-02-12');
+	(1, '2021-02-09', NULL, 1, NULL, 1, 'F150', 1, 1, 1, 1, 'car infor', '123456', '2021-02-12'),
+	(2, '2021-02-12', NULL, 1, NULL, 2, 'Milwaukee', 2, 1, 1, 1, 'screwdriver infor', '123457', '2021-02-12');
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 
 -- Dumping data for table oursafetydb.itemclass: ~2 rows (approximately)

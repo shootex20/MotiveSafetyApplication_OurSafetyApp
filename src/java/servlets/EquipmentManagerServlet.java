@@ -5,12 +5,16 @@
  */
 package servlets;
 
+import dataaccess.CompanyDB;
 import dataaccess.ItemDB;
 import domain.Company;
 import domain.Item;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +24,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import services.Equipment;
 
 /**
  *
@@ -67,7 +72,64 @@ public class EquipmentManagerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/WEB-INF/equipmentmanager.jsp").forward(request, response);
+        
+        String action = request.getParameter("action");
+        
+        Company comp = new Company(1);
+        
+        CompanyDB compDB = new CompanyDB();
+        
+        try {
+            comp = compDB.get(comp.getCompanyID());
+        } catch (Exception ex) {
+            Logger.getLogger(EquipmentManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Equipment equip = new Equipment();
+        
+        if(action.equals("Add"))
+        {
+        String model = request.getParameter("model");
+        String serial = request.getParameter("serialnumber");
+        String information = request.getParameter("itemClassInformation");
+        Boolean isChargeable = Boolean.parseBoolean(request.getParameter("isChargeable"));
+        Boolean isDepleting = Boolean.parseBoolean(request.getParameter("isDepleting"));
+        Boolean isDepreactiationType = Boolean.parseBoolean(request.getParameter("isDepreactiationType"));
+        //Parses the date to java format date.
+        String date = request.getParameter("datePurchased");
+        
+        Date datePurchased = null;
+            try {
+                datePurchased = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+                //Checks category List
+            } catch (ParseException ex) {
+                Logger.getLogger(EquipmentManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            /*End of Java data parse.*/
+            try {
+                equip.insert(model, isChargeable, isDepleting, isDepreactiationType, serial, information, datePurchased, comp);
+                doGet(request, response);
+            } catch (Exception ex) {
+                Logger.getLogger(EquipmentManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+       
+        else if(action.equals("Delete"))
+        {
+            String id = request.getParameter("itemID");
+            System.out.print(id);
+            int intid = Integer.parseInt(id);
+            try {
+                equip.delete(intid);
+                request.setAttribute("message", "Item successfully deleted.");
+                doGet(request, response);
+            } catch (Exception ex) {
+                Logger.getLogger(EquipmentManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+        
     }
 
 }

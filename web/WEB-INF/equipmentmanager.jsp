@@ -39,43 +39,47 @@
             </c:forEach>
         </table>
         <br>
+        ${message}
+        <br>
+        
         <h3>Add Equipment</h3>
         <br>
+        <form method="post"> 
         <label for="title">Make/Model: </label>
-        <input type="text" name="itemnames" value="${newItem.model}">
+        <input type="text" name="model" value="${newItem.model}">
         <br>
         <br>
         <label for="title">Serial Number: </label>
-        <input type="text" name="itemnames" value="${newItem.serialNumber}">
+        <input type="text" name="serialnumber" value="${newItem.serialNumber}">
         <br>
         <br>
         <label for="isChargeable">Equipment is Chargeable?(Yes/No): </label>
         <select name="isChargeable" var="isChargeable">
-            <option value="True">Yes</option>
-            <option value="False">No</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
         </select>
         <br>
         <br>
           <label for="isDepleting">Equipment Depletes? (Yes/No):  </label>
         <select name="isDepleting" var="isDepleting">
-            <option value="True">Yes</option>
-            <option value="False">No</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
         </select>
         <br>
         <br>
         <label for="isDepreactiationType">Equipment Depreaction? (Yes/No):  </label>
         <select name="isDepreactiationType" var="isDepreactiationType">
-            <option value="True">Yes</option>
-            <option value="False">No</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
         </select>
         <br>
         <br>
         <label for="itemnames">Item Information: </label>
-        <input type="text" name="itemnames" value="${newItem.itemClassInformation}">
+        <input type="text" name="itemClassInformation" value="${newItem.itemClassInformation}">
         <br>
         <br>
         <label for="datePurchased">Date Purchased: </label>
-        <input type="date" value="newItem.datePurchased"></date-input>
+        <input type="date" name="datePurchased" value="newItem.datePurchased"></date-input>
     <br>
     <br>
     <!--This is where the itemclass database starts! -->
@@ -100,5 +104,6 @@
         <br>
         <br>
         <input type="submit" name="action" value="Add">
+        </form>
     </body>
 </html>
