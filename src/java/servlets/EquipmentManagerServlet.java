@@ -107,7 +107,7 @@ public class EquipmentManagerServlet extends HttpServlet {
             }
             /*End of Java data parse.*/
             try {
-                equip.insert(model, isChargeable, isDepleting, isDepreactiationType, serial, information, datePurchased, comp);
+                equip.insert(model, isChargeable, isDepleting, isDepreactiationType, information, serial, datePurchased, comp);
                 doGet(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(EquipmentManagerServlet.class.getName()).log(Level.SEVERE, null, ex);

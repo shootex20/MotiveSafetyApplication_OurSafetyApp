@@ -21,6 +21,7 @@
                 <th>Serial</th>
                 <th>Date Added</th>
                 <th>UserID Added</th>
+                <th>Item Information</th>
             </tr>
             <c:forEach var="equipmentItem" items="${equipment}">
             <tr>
@@ -29,6 +30,7 @@
                 <td>${equipmentItem.serialNumber}</td>
                 <td>${equipmentItem.dateAdded}</td>
                 <td>${equipmentItem.userAdded}</td>
+                <td>${equipmentItem.itemClassInformation}</td>
                 <td>
                 <form method="post"> 
                 <input type="submit" name="action" value="Delete">
