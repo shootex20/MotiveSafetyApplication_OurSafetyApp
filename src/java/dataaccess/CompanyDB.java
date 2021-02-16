@@ -16,7 +16,7 @@ import domain.Company;
 
 /**
  *
- * @author 813017
+ * @author 813017, 844817
  */
 public class CompanyDB {
 
@@ -32,4 +32,17 @@ public class CompanyDB {
             em.close();
         }
     }
+    /**
+ public void insert(String title, String contents, String owner) throws Exception {
+        Note note = new Note(0, title, contents);
+        UserDB userDB = new UserDB();
+        User user = userDB.get(owner);
+        note.setOwner(user);
+        
+        NoteDB noteDB = new NoteDB();
+        noteDB.insert(note);
+    }
+
+    **/
+    
 }
