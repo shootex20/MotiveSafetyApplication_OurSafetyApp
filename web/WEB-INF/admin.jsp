@@ -10,12 +10,19 @@
     </head>
     <body>
         <h1>MotiveSafety OurSafety Application</h1>
-        <h2>Manage Users</h2>
+        <h2>Manage Companies</h2>
         <table>
             <tr>
-                <th>Username</th>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Commpany Id</th>
+                <th>Date Added</th>
+                <th>User Added</th>
+                <th>Name</th>
+                <th>Short Name</th>
+                <th>Description</th>
+                <th>Salt Hash</th>
+                <th>Account</th>
+                <th>Industry</th>
+                <th>URL</th>
                 <th>Delete</th>
                 <th>Edit</th>
             </tr>
@@ -43,13 +50,18 @@
             </c:forEach>
         </table>
         <c:if test="${selectedUser == null}">
-            <h3>Add User</h3>
+            <h3>Add Company</h3>
             <form action="users" method="POST">
-                username: <input type="text" name="username"><br>
-                password: <input type="password" name="password"><br>
-                first name: <input type="text" name="firstname"><br>
-                last name: <input type="text" name="lastname"><br>
-                email: <input type="email" name="email"><br>
+                Company Id: <input type="text" name="username"><br>
+                Date Added <input type="password" name="password"><br>
+                User Added: <input type="text" name="firstname"><br>
+                Name: <input type="text" name="lastname"><br>
+                Short Name: <input type="email" name="email"><br>
+                Description: <input type="email" name="email"><br>
+                Salt Hash: <input type="email" name="email"><br>
+                Account: <input type="email" name="email"><br>
+                Industry: <input type="email" name="email"><br>
+                URL: <input type="email" name="email"><br>
                 <input type="hidden" name="action" value="add">
                 <input type="submit" value="Save">
             </form>
