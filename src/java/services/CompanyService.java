@@ -9,6 +9,8 @@ package services;
  *
  * @author 844817
  */
-public class AccountService {
+public class CompanyService {
+    
+    //private CompanyDB userDB; 
     
 }

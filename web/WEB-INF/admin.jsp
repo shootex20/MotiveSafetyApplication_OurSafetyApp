@@ -13,10 +13,86 @@
         <h2>Manage Companies</h2>
         <table>
             <tr>
-                <th>Commpany Id</th>
+                <th>Company Id</th>
                 <th>Date Added</th>
                 <th>Name</th>
                 <th>Short Name</th>
+                <th>Description</th>
+                <th>Account</th>
+                <th>Industry</th>
+                <th>URL</th>
+                <th>Delete</th>
+                <th>Edit</th>
+            </tr>
+            
+              <c:forEach var="comp" items="${comps}">
+                <tr>
+                    <td>${comp.compid}</td>
+                    <td>${comp.dateadded}</td>
+                    <td>${comp.compname}</td>
+                    <td>${comp.shortname}</td>
+                    <td>${comp.description}</td>
+                    <td>${comp.account}</td>
+                    <td>${comp.industry}</td>
+                    <td>${comp.url}</td>
+                    <td>
+                        <form action="comps" method="post" >
+                            <input type="submit" value="Delete">
+                            <input type="hidden" name="action" value="delete">
+                            <input type="hidden" name="selectedUsername" value="${comp.compid}">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="users" method="get">
+                            <input type="submit" value="Edit">
+                            <input type="hidden" name="action" value="view">
+                            <input type="hidden" name="selectedUsername" value="${comp.compid}">
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+        <c:if test="${selectedComp == null}">
+            <h3>Add Company</h3>
+            <form action="comps" method="POST">
+                Company Id: <input type="text" name="compid"><br>
+                Date Added <input type="text" name="dateadded"><br>
+                Name: <input type="text" name="compname"><br>
+                Short Name: <input type="text" name="shortname"><br>
+                Description: <input type="text" name="description"><br>
+                
+                Account: <input type="text" name="account"><br>
+                Industry: <input type="text" name="industry"><br>
+                URL: <input type="text" name="url"><br>
+                <input type="hidden" name="action" value="add">
+                <input type="submit" value="Save">
+            </form>
+        </c:if>
+        <c:if test="${selectedComp != null}">
+            <h3>Edit User</h3>
+            <form action="comps" method="POST">
+                Company Id: <input type="text" name="compid" value="${selectedComp.compid}" readonly><br>
+                Date Added: <input type="text" name="dateadded" value="${selectedComp.dateadded}"><br>
+                Name: <input type="text" name="compname" value="${selectedComp.compname}"><br>
+                Short Name: <input type="text" name="shortname" value="${selectedComp.shortname}"><br>
+                Description: <input type="text" name="description" value="${selectedComp.description}"><br>
+                Account: <input type="text" name="account" value="${selectedComp.account}"><br>
+                Industry: <input type="text" name="industry" value="${selectedComp.industry}"><br>
+                URL: <input type="text" name="url" value="${selectedComp.url}"><br>
+                <input type="hidden" name="action" value="edit">
+                <input type="submit" value="Save">
+            </form>
+        </c:if>
+            
+            
+            <!--for managers
+             <h2>Manage Managers</h2>
+        <table>
+            <tr>
+                <th>Company Id</th>
+                <th>Date Added</th>
+                <th>First Name</th>
+                <th>Last Name</th>
                 <th>Description</th>
                 <th>Account</th>
                 <th>Industry</th>
@@ -47,34 +123,8 @@
                 </tr>
             </c:forEach>
         </table>
-        <c:if test="${selectedUser == null}">
-            <h3>Add Company</h3>
-            <form action="users" method="POST">
-                Company Id: <input type="text" name="username"><br>
-                Date Added <input type="password" name="password"><br>
-                User Added: <input type="text" name="firstname"><br>
-                Name: <input type="text" name="lastname"><br>
-                Short Name: <input type="email" name="email"><br>
-                Description: <input type="email" name="email"><br>
-                Salt Hash: <input type="email" name="email"><br>
-                Account: <input type="email" name="email"><br>
-                Industry: <input type="email" name="email"><br>
-                URL: <input type="email" name="email"><br>
-                <input type="hidden" name="action" value="add">
-                <input type="submit" value="Save">
-            </form>
-        </c:if>
-        <c:if test="${selectedUser != null}">
-            <h3>Edit User</h3>
-            <form action="users" method="POST">
-                username: <input type="text" name="username" value="${selectedUser.username}" readonly><br>
-                password: <input type="password" name="password" value="${selectedUser.password}"><br>
-                first name: <input type="text" name="firstname" value="${selectedUser.firstname}"><br>
-                last name: <input type="text" name="lastname" value="${selectedUser.lastname}"><br>
-                email: <input type="email" name="email" value="${selectedUser.email}"><br>
-                <input type="hidden" name="action" value="edit">
-                <input type="submit" value="Save">
-            </form>
-        </c:if>
+            
+            -->
+            
     </body>
 </html>
