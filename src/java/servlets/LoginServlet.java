@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        /*
+        
         AccountService acctServ = new AccountService();
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         String email = request.getParameter("email_input");
@@ -56,10 +56,10 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("inventory");
 
         } else {
-*/
             request.setAttribute("loginMsg", "This account is inactive.");
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         
     }
-
+    }
 }
+

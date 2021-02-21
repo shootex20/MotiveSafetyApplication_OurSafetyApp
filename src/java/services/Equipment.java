@@ -25,11 +25,11 @@ public class Equipment {
         return items;
     }
     
-    public void insert(String model, boolean isChargeableType, 
+    public void insert(Date dateAdded,String model, boolean isChargeableType, 
             boolean isDepletingType, boolean isDepreactiationType, 
             String itemClassInformation, String serialNumber, Date purchase, Company compID) 
             throws Exception {
-        Item items = new Item(model, isChargeableType, isDepletingType, isDepreactiationType, itemClassInformation, serialNumber, purchase, compID);
+        Item items = new Item(dateAdded, model, isChargeableType, isDepletingType, isDepreactiationType, itemClassInformation, serialNumber, purchase, compID);
         CompanyDB userDB = new CompanyDB();
         Company comp = userDB.get(compID.getCompanyID());
         items.setCompanyID(comp);

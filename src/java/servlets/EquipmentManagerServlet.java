@@ -98,16 +98,21 @@ public class EquipmentManagerServlet extends HttpServlet {
         //Parses the date to java format date.
         String date = request.getParameter("datePurchased");
         
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateAdded;
+        dateAdded = new Date();
+        String tempDate = formatter.format(dateAdded);
         Date datePurchased = null;
-            try {
-                datePurchased = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-                //Checks category List
-            } catch (ParseException ex) {
-                Logger.getLogger(EquipmentManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
             /*End of Java data parse.*/
             try {
-                equip.insert(model, isChargeable, isDepleting, isDepreactiationType, serial, information, datePurchased, comp);
+                /*Formats the created date*/
+                dateAdded = new SimpleDateFormat("yyyy-MM-dd").parse(tempDate);
+                /*Formats the date purchased.*/
+                datePurchased = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+                /*Inserst*/
+                equip.insert(dateAdded, model, isChargeable, isDepleting, isDepreactiationType, information, serial, datePurchased, comp);
                 doGet(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(EquipmentManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
