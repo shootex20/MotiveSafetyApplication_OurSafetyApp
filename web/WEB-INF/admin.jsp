@@ -15,11 +15,9 @@
             <tr>
                 <th>Commpany Id</th>
                 <th>Date Added</th>
-                <th>User Added</th>
                 <th>Name</th>
                 <th>Short Name</th>
                 <th>Description</th>
-                <th>Salt Hash</th>
                 <th>Account</th>
                 <th>Industry</th>
                 <th>URL</th>
