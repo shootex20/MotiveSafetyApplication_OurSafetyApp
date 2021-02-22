@@ -70,11 +70,27 @@ public class Company implements Serializable {
     @OneToMany(mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Companyrelationship> companyrelationshipList;
 
+    // may not work
+    private Logins username;
+
+    
     public Company() {
     }
 
     public Company(Integer companyID) {
         this.companyID = companyID;
+    }
+
+    public Company(Integer companyID, Date dateAdded, String name, String shortname, String description, String account, String industry) {
+       this.companyID = companyID;
+       this.dateAdded = dateAdded;
+       this.name = name;
+       this.shortname = shortname;
+       this.description = description;
+       this.account = account;
+       this.industry = industry;
+      // this.urlList = url;
+       
     }
 
     public Integer getCompanyID() {
@@ -238,4 +254,18 @@ public class Company implements Serializable {
         return "domain.Company[ companyID=" + companyID + " ]";
     }
     
+    
+      public Logins getUsername() {
+        return username;
+    }
+
+    public void setUsername(Logins username) {
+       this.username = username;
+    }
+
+   /** public void setCompanyID(Logins companyID) {
+        this.companyID = companyID;
+    }
+    
+    **/
 }
