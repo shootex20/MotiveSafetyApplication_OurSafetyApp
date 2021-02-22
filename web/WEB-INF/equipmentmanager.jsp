@@ -85,13 +85,13 @@
     <br>
     <br>
     <!--This is where the itemclass database starts! -->
-    <!--
+    
      <label for="itemnames">Item Information: </label>
         <input type="text" name="itemnames" value="${newItemclass.itemType}">
         <br>
         <br>
       <!--This is where the itemclassfields database starts -->
-      <!--
+      
       <label for="itemType">Type of Item: </label>
         <select name="itemType" id="itemType">
         <c:forEach items="${itemTypes}" var="itemType">
@@ -100,15 +100,15 @@
         </select>
         <br>
         <br>
+        <!--
         <label for="title">Brief Description: </label>
         <input type="text" name="fieldDescr" value="${itemclassfields.fieldDescr}">
         <br>
-        <br>
+        <br-->
         <label for="title">Type of Equipment: </label>
         <input type="text" name="fieldDescrType" value="${itemclassfields.fieldDescrType}">
         <br>
         <br>
-        -->
         <input type="submit" name="action" value="Add">
         </form>
     </body>

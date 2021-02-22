@@ -42,4 +42,5 @@ public class Equipment {
         Item hi = (Item) itemDB.get(id);
         itemDB.delete(hi);
     }
+    
 }
