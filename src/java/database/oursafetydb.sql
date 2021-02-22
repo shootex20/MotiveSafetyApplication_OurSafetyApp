@@ -208,7 +208,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`itemClass` (
 `userRemoved` int, 
 `itemType` VARCHAR (50), 
 `itemClassFields_ID` int, /*FK*/ 
-`itemClassInformation` VARCHAR(30),
+`itemClassInformation` VARCHAR(100),
 PRIMARY KEY (`ItemClass_ID`), 
 INDEX `fk_itemClass_itemClassFields_idx` (`itemClassFields_ID` ASC), 
 CONSTRAINT `fk_itemClass_itemClassFields_ID` 
