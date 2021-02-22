@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
  * @author 844817
  */
 public class UserDB {
+    
      public Logins get(String email) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -23,4 +24,20 @@ public class UserDB {
             em.close();
         }
     }
+
+    public Logins get(int companyID) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        
+        try {
+        
+        Logins user = em.find(Logins.class, companyID);
+        return user;
+        } finally {
+        em.close();
+        }
+    }
+     
+     
+     
+     
 }
