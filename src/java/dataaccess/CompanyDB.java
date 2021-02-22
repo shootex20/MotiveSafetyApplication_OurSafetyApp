@@ -12,6 +12,7 @@ import domain.Item;
 import domain.Itemclass;
 
 import domain.Company;
+import domain.Logins;
 
 
 /**
@@ -20,8 +21,107 @@ import domain.Company;
  */
 public class CompanyDB {
 
+    
+    
+    
+    /**
+     * Get a single company by their id.
+     *
+     * @param companyID The unique username.
+     * @return A Company object if found, null otherwise.
+     * @throws Exception
+    
+     */
+    public Company get(Integer companyID ) throws Exception {
+     EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
- 
+        try {
+            Company comp = em.find(Company.class, companyID);
+            return comp;
+        } finally {
+            em.close();
+
+        }
+    }
+    
+    
+    
+     public List<Company> getAll() throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+
+        try {
+            List<Company> comp = em.createNamedQuery("Company.findAll", Company.class).getResultList();
+             return comp;
+    
+        } finally {
+            em.close();
+        }
+        
+    }
+  
+    
+    
+public int insert(Company comp) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        try {
+            
+            trans.begin();
+            em.persist(comp);
+            //em.merge(user);
+            trans.commit();
+            
+        } catch (Exception ex) {
+            trans.rollback();
+        } finally {
+            em.close();
+            return 1;
+        }
+    }
+
+public int update(Company comp) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        try {
+            trans.begin();
+           em.merge(comp);
+           trans.commit();
+           
+        } catch (Exception ex) {
+            trans.rollback();
+        } finally {
+           em.close();
+           return 1;
+        }
+        
+    }
+
+
+public int delete(Company comp) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        
+        try {
+
+           trans.begin();
+           em.remove(em.merge(comp));
+           trans.commit();
+           
+        } catch (Exception ex) {
+         trans.rollback();
+         
+        } finally {
+             em.close();
+             return 1;
+        } 
+       
+    }
+
+
+
+
+
+ /**
     public Company get(int id) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -32,83 +132,73 @@ public class CompanyDB {
             em.close();
         }
     }
-    /**
-   public List<Note> getAll(String owner) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        
-        try {
-            User user = em.find(User.class, owner);
-            return user.getNoteList();
-        } finally {
-            em.close();
-        }
-    }
-
-    public Note get(int noteId) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        
-        try {
-            Note note = em.find(Note.class, noteId);
-            // System.out.println("first name: " + note.getOwner().getFirstName());
-            // get all notes of the same owner as that note
-            // List<Note> notes = note.getOwner().getNoteList();
-            return note;
-        } finally { 
-            em.close();
-        }
-    }
-
-    public void insert(Note note) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
-        
-        try {
-            User user = note.getOwner();
-            user.getNoteList().add(note);
-            trans.begin();
-            em.persist(note);
-            em.merge(user);
-            trans.commit();
-        } catch (Exception ex) {
-            trans.rollback();
-        } finally {
-            em.close();
-        }
-    }
-
-    public void update(Note note) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
-        
-        try {
-            trans.begin();
-            em.merge(note);
-            trans.commit();
-        } catch (Exception ex) {
-            trans.rollback();
-        } finally {
-            em.close();
-        }
-    }
-
-    public void delete(Note note) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
-        
-        try {
-            User user = note.getOwner();
-            user.getNoteList().remove(note);
-            trans.begin();
-            em.remove(em.merge(note));
-            em.merge(user);
-            trans.commit();
-        } catch (Exception ex) {
-            trans.rollback();
-        } finally {
-            em.close();
-        }
-    }
-
-    **/
     
+    
+        public List<Company> getAll(String name) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        
+        try {
+            Company comp = em.find(Company.class, name);
+            return comp.getName();
+        } finally {
+            em.close();
+        }
+    }
+
+    
+    
+     public void insert(Company comp) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        
+        try {
+            Logins user = comp.getUsername();
+           // user.getNoteList().add(note);
+            trans.begin();
+            em.persist(comp);
+            em.merge(user);
+            trans.commit();
+        } catch (Exception ex) {
+            trans.rollback();
+        } finally {
+            em.close();
+        }
+    }
+    
+    
+    
+      public void update(Company comp) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        
+        try {
+            trans.begin();
+            em.merge(comp);
+            trans.commit();
+        } catch (Exception ex) {
+            trans.rollback();
+        } finally {
+            em.close();
+        }
+    }
+     
+      
+         public void delete(Company comp) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        
+        try {
+            //User user = note.getOwner();
+            //user.getNoteList().remove(note);
+            trans.begin();
+            em.remove(em.merge(comp));
+           // em.merge(user);
+            trans.commit();
+        } catch (Exception ex) {
+            trans.rollback();
+        } finally {
+            em.close();
+        }
+    }
+     **/
 }
