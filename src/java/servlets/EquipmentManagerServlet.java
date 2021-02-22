@@ -7,11 +7,11 @@ package servlets;
 
 import dataaccess.CompanyDB;
 import dataaccess.ItemDB;
+import dataaccess.TypeLibraryDB;
 import domain.Company;
 import domain.Item;
+import domain.Typelibrary;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -55,8 +55,30 @@ public class EquipmentManagerServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(EquipmentManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+       
         request.setAttribute("equipment", itemsList);
+        
+        TypeLibraryDB typeDB = new TypeLibraryDB();
+        
+        List<Typelibrary> typeList = new ArrayList<Typelibrary>();
+        
+        try {
+            typeList = (List<Typelibrary>) typeDB.getAll();
+        } catch (Exception ex) {
+            Logger.getLogger(EquipmentManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(typeList.get(1).getTypeLibraryID());
+        List<Typelibrary> equipList = new ArrayList<Typelibrary>();
+        
+        for(int i = 0; i < typeList.size(); i++)
+        {
+            if(typeList.get(i).getTypeLibraryID() >= 200 && typeList.get(i).getTypeLibraryID() < 300)
+            {
+                equipList.add(typeList.get(i));
+            }
+        }
+        
+        request.setAttribute("types", equipList);
         
         getServletContext().getRequestDispatcher("/WEB-INF/equipmentmanager.jsp").forward(request, response);
     }
@@ -123,7 +145,6 @@ public class EquipmentManagerServlet extends HttpServlet {
         else if(action.equals("Delete"))
         {
             String id = request.getParameter("itemID");
-            System.out.print(id);
             int intid = Integer.parseInt(id);
             try {
                 equip.delete(intid);

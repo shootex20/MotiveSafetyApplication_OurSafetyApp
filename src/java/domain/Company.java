@@ -71,7 +71,7 @@ public class Company implements Serializable {
     private List<Companyrelationship> companyrelationshipList;
 
     // may not work
-    private Logins username;
+   // private Logins username;
 
     
     public Company() {
@@ -80,7 +80,8 @@ public class Company implements Serializable {
     public Company(Integer companyID) {
         this.companyID = companyID;
     }
-
+    
+    /* Commented out due to issues between equipment manager servlet
     public Company(Integer companyID, Date dateAdded, String name, String shortname, String description, String account, String industry) {
        this.companyID = companyID;
        this.dateAdded = dateAdded;
@@ -89,9 +90,10 @@ public class Company implements Serializable {
        this.description = description;
        this.account = account;
        this.industry = industry;
-      // this.urlList = url;
+       this.urlList = url;
        
     }
+    */
 
     public Integer getCompanyID() {
         return companyID;
@@ -254,7 +256,7 @@ public class Company implements Serializable {
         return "domain.Company[ companyID=" + companyID + " ]";
     }
     
-    
+    /* Commented out due to issues between equipment manager servlet
       public Logins getUsername() {
         return username;
     }
