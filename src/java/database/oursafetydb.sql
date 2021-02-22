@@ -613,8 +613,8 @@ INSERT INTO `item` (`item_ID`, `dateAdded`, `DateRemoved`, `userAdded`, `userRem
 DELETE FROM `itemclass`;
 /*!40000 ALTER TABLE `itemclass` DISABLE KEYS */;
 INSERT INTO `itemclass` (`itemClass_ID`, `DateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `itemType`, `itemClassFields_ID`, `itemClassInformation`) VALUES
-	(1, '2021-02-09', NULL, 1, NULL, NULL, 1, NULL),
-	(2, '2021-02-09', NULL, 1, NULL, NULL, 2, NULL);
+	(1, '2021-02-09', NULL, 1, NULL, NULL, 1, 'What is the type of the car?'),
+	(2, '2021-02-09', NULL, 1, NULL, NULL, 2, 'What is the type of the screwdriver header ?');
 /*!40000 ALTER TABLE `itemclass` ENABLE KEYS */;
 
 -- Dumping data for table oursafetydb.itemclassfields: ~2 rows (approximately)
@@ -630,7 +630,7 @@ DELETE FROM `logins`;
 /*!40000 ALTER TABLE `logins` DISABLE KEYS */;
 INSERT INTO `logins` (`user_id`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `username`, `password`, `company_ID`, `person_ID`, `isActive`, `isAdmin`) VALUES
 	(1, '2021-02-09', NULL, 0, NULL, 'admin', 'password', NULL, NULL, 'T', 'T'),
-	(2, '2021-02-09', NULL, 1, NULL, 'manager1', NULL, 2, 2, 'T', 'F');
+	(2, '2021-02-09', NULL, 1, NULL, 'manager1', 'password', 2, 2, 'T', 'F');
 /*!40000 ALTER TABLE `logins` ENABLE KEYS */;
 
 -- Dumping data for table oursafetydb.manual: ~2 rows (approximately)
