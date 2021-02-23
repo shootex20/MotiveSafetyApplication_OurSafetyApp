@@ -20,7 +20,7 @@
                 <th>Model</th>
                 <th>Serial</th>
                 <th>Date Added</th>
-                <th>UserID Added</th>
+                <th>Purchase Date</th>
                 <th>Item Information</th>
             </tr>
             <c:forEach var="equipmentItem" items="${equipment}">
@@ -29,7 +29,7 @@
                 <td>${equipmentItem.model}</td>
                 <td>${equipmentItem.serialNumber}</td>
                 <td>${equipmentItem.dateAdded}</td>
-                <td>${equipmentItem.userAdded}</td>
+                <td>${equipmentItem.purchaseDate}</td>
                 <td>${equipmentItem.itemClassInformation}</td>
                 <td>
                 <form method="post"> 
@@ -46,7 +46,14 @@
         
         <h3>Add Equipment</h3>
         <br>
-        <form method="post"> 
+        <form method="post">     
+        <label for="itemType">Type of Item: </label>
+        <select name="itemType" id="itemType">
+        <c:forEach items="${types}" var="itemType">
+        <option value="${itemType.typeLibraryID}">${itemType.description}</option>
+        </c:forEach>
+        </select>
+        
         <label for="title">Make/Model: </label>
         <input type="text" name="model" value="${newItem.model}">
         <br>
@@ -84,28 +91,6 @@
         <input type="date" name="datePurchased" value="newItem.datePurchased" required></date-input>
     <br>
     <br>
-
-    <!--This is where the itemclass database starts! -->
-     <label for="itemnames">Item Information: </label>
-        <input type="text" name="itemnames" value="${newItemclass.itemType}">
-        <br>
-        <br>
-      <!--This is where the itemclassfields database starts -->
-      <label for="itemType">Type of Item: </label>
-        <select name="itemType" id="itemType">
-        <c:forEach items="${types}" var="itemType">
-        <option value="${itemType.typeLibraryID}">${itemType.description}</option>
-        </c:forEach>
-        </select>
-        <br>
-        <br>
-        <label for="title">Brief Description: </label>
-        <input type="text" name="fieldDescr" value="${itemclassfields.fieldDescr}">
-        <br>
-        <br
-        <br>
-        <label for="title">Type of Equipment: </label>
-        <input type="text" name="fieldDescrType" value="${itemclassfields.fieldDescrType}">
         <br>
         <br>
         <input type="submit" name="action" value="Add">

@@ -72,7 +72,7 @@ public class EquipmentManagerServlet extends HttpServlet {
         
         for(int i = 0; i < typeList.size(); i++)
         {
-            if(typeList.get(i).getTypeLibraryID() >= 200 && typeList.get(i).getTypeLibraryID() < 300)
+            if(typeList.get(i).getTypeLibraryID() > 200 && typeList.get(i).getTypeLibraryID() < 300)
             {
                 equipList.add(typeList.get(i));
             }
