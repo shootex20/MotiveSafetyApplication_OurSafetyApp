@@ -72,7 +72,7 @@ public class EquipmentManagerServlet extends HttpServlet {
         
         for(int i = 0; i < typeList.size(); i++)
         {
-            if(typeList.get(i).getTypeLibraryID() >= 200 && typeList.get(i).getTypeLibraryID() < 300)
+            if(typeList.get(i).getTypeLibraryID() > 200 && typeList.get(i).getTypeLibraryID() < 300)
             {
                 equipList.add(typeList.get(i));
             }
@@ -120,14 +120,15 @@ public class EquipmentManagerServlet extends HttpServlet {
         //Parses the date to java format date.
         String date = request.getParameter("datePurchased");
         
-        
+        /*End of Java data parse.*/
+
+                
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date dateAdded;
         dateAdded = new Date();
         String tempDate = formatter.format(dateAdded);
         Date datePurchased = null;
 
-            /*End of Java data parse.*/
             try {
                 /*Formats the created date*/
                 dateAdded = new SimpleDateFormat("yyyy-MM-dd").parse(tempDate);
@@ -135,10 +136,12 @@ public class EquipmentManagerServlet extends HttpServlet {
                 datePurchased = new SimpleDateFormat("yyyy-MM-dd").parse(date);
                 /*Inserst*/
                 equip.insert(dateAdded, model, isChargeable, isDepleting, isDepreactiationType, information, serial, datePurchased, comp);
+                request.setAttribute("message", "Item added successfully.");
                 doGet(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(EquipmentManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
             
         }
        

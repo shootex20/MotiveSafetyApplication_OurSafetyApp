@@ -1,4 +1,3 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -17,7 +16,7 @@
         </div>
         <form action="login" method="post" class="loginForm">
             <input type="hidden" name="hidden_login" value="hiddenLogin">
-            <label>Email: </label><input type="text" name="email_input" value="">
+            <label>Username: </label><input type="text" name="username_input" value="">
             <label>Password: </label><input type="password" name="password_input" value="">
             <input type="submit" value="Log In">
         </form>

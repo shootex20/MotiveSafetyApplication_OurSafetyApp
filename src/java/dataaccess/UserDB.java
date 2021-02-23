@@ -13,12 +13,13 @@ import javax.persistence.EntityManager;
  * @author 844817
  */
 public class UserDB {
-    
-     public Logins get(String email) {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        
+
+    EntityManager em = DBUtil.getEmFactory().createEntityManager();
+
+    public Logins getUser(String username) {
+
         try {
-            Logins user = em.find(Logins.class, email);
+            Logins user = em.createNamedQuery("Logins.getUser", Logins.class).setParameter("username", username).getSingleResult();
             return user;
         } finally {
             em.close();
@@ -26,18 +27,13 @@ public class UserDB {
     }
 
     public Logins get(int companyID) {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        
+
         try {
-        
-        Logins user = em.find(Logins.class, companyID);
-        return user;
+            Logins user = em.find(Logins.class, companyID);
+            return user;
         } finally {
-        em.close();
+            em.close();
         }
     }
-     
-     
-     
-     
+
 }
