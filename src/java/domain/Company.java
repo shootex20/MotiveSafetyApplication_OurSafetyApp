@@ -81,19 +81,18 @@ public class Company implements Serializable {
         this.companyID = companyID;
     }
     
-    /* Commented out due to issues between equipment manager servlet
-    public Company(Integer companyID, Date dateAdded, String name, String shortname, String description, String account, String industry) {
-       this.companyID = companyID;
+    /* Commented out due to issues between equipment manager servlet */
+    public Company( Date dateAdded, String name, String shortname, String description, String account, String industry) {
        this.dateAdded = dateAdded;
        this.name = name;
        this.shortname = shortname;
        this.description = description;
        this.account = account;
        this.industry = industry;
-       this.urlList = url;
+       //this.urlList = url;
        
     }
-    */
+    
 
     public Integer getCompanyID() {
         return companyID;
