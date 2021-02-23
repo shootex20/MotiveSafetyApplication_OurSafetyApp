@@ -81,7 +81,7 @@
         <br>
         <br>
         <label for="datePurchased">Date Purchased: </label>
-        <input type="date" name="datePurchased" value="newItem.datePurchased"></date-input>
+        <input type="date" name="datePurchased" value="newItem.datePurchased" required></date-input>
     <br>
     <br>
 
