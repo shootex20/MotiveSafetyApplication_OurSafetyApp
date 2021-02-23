@@ -15,7 +15,6 @@ public class CompanyServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         String linkAction = request.getParameter("action");
-        /*
 
         if (linkAction != null && linkAction.equals("logout")) {
             session.invalidate();
@@ -32,8 +31,8 @@ public class CompanyServlet extends HttpServlet {
         } else if (session.getAttribute("userName") != null) {
             getServletContext().getRequestDispatcher("/WEB-INF/companyManagement.jsp").forward(request, response);
         }
-*/
-         getServletContext().getRequestDispatcher("/WEB-INF/companyManagement.jsp").forward(request, response);
+
+        getServletContext().getRequestDispatcher("/WEB-INF/companyManagement.jsp").forward(request, response);
 
     }
 

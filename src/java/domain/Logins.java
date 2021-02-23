@@ -27,7 +27,8 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "logins")
 @NamedQueries({
-    @NamedQuery(name = "Logins.findAll", query = "SELECT l FROM Logins l")})
+    @NamedQuery(name = "Logins.findAll", query = "SELECT l FROM Logins l")
+    , @NamedQuery(name = "Logins.getUser", query = "SELECT l FROM Logins l WHERE l.username = :username")})
 public class Logins implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -179,5 +180,5 @@ public class Logins implements Serializable {
     public String toString() {
         return "domain.Logins[ userId=" + userId + " ]";
     }
-    
+
 }

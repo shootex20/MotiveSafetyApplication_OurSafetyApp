@@ -1,4 +1,3 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -20,11 +19,11 @@
                 <th>Description</th>
                 <th>Account</th>
                 <th>Industry</th>
-              <!--  <th>URL</th> -->
+                <!--  <th>URL</th> -->
                 <th>Delete</th>
                 <th>Edit</th>
             </tr>
-            
+            <%--
               <c:forEach var="comp" items="${comps}">
                 <tr>
                     <td>${comp.compid}</td>
@@ -51,6 +50,7 @@
                     </td>
                 </tr>
             </c:forEach>
+            --%>
         </table>
         <c:if test="${selectedComp == null}">
             <h3>Add Company</h3>
@@ -60,10 +60,10 @@
                 Name: <input type="text" name="compname"><br>
                 Short Name: <input type="text" name="shortname"><br>
                 Description: <input type="text" name="description"><br>
-                
+
                 Account: <input type="text" name="account"><br>
                 Industry: <input type="text" name="industry"><br>
-              <!--  URL: <input type="text" name="url"><br> -->
+                <!--  URL: <input type="text" name="url"><br> -->
                 <input type="hidden" name="action" value="add">
                 <input type="submit" value="Save">
             </form>
@@ -83,15 +83,15 @@
                 <input type="submit" value="Save">
             </form>
         </c:if>
-            
-            
-            <!--for managers-->
-             <h2>Manage Managers</h2>
+
+
+        <!--for managers-->
+        <h2>Manage Managers</h2>
         <table>
             <tr>
                 <th>Manager Id</th>
                 <th>Date Added</th>
-                 <th>Date Removed</th>
+                <th>Date Removed</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
@@ -99,8 +99,8 @@
                 <th>Delete</th>
                 <th>Edit</th>
             </tr>
-            
-              <c:forEach var="managers" items="${managers}">
+
+            <c:forEach var="managers" items="${managers}">
                 <tr>
                     <td>${managers.managerID}</td>
                     <td>${managers.dateAdded}</td>
@@ -126,7 +126,7 @@
                 </tr>
             </c:forEach>
         </table>
-            <c:if test="${selectedManager == null}">
+        <c:if test="${selectedManager == null}">
             <h3>Add Manager</h3>
             <form action="managers" method="POST">
                 Manager Id: <input type="number" name="managerID"><br>
@@ -136,7 +136,7 @@
                 last Name: <input type="text" name="lastname"><br>
                 Email: <input type="email" name="email"><br>
                 Company ID: <input type="number" name="companyID"><br>
-               
+
                 <input type="hidden" name="action" value="add">
                 <input type="submit" value="Save">
             </form>
@@ -156,8 +156,8 @@
                 <input type="submit" value="Save">
             </form>
         </c:if>
-            
-            
-            
+
+
+
     </body>
 </html>

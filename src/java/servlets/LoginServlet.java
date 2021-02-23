@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import services.AccountService;
 
-
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
@@ -20,6 +19,7 @@ public class LoginServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         session.invalidate();
+
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         return;
 
@@ -29,22 +29,23 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        
         AccountService acctServ = new AccountService();
-        getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-        String email = request.getParameter("email_input");
+
+        String username = request.getParameter("username_input");
         String password = request.getParameter("password_input");
 
-        Logins user = acctServ.login(email, password);
+        Logins user = acctServ.login(username, password);
 
-        if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
+        if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
             request.setAttribute("loginMsg", "Be sure to fill in your log in credentials");
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+            return;
         }
 
         if (user == null) {
             request.setAttribute("loginMsg", "There is no such account");
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+            return;
         }
 
         HttpSession session = request.getSession();
@@ -54,13 +55,12 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("admin");
 
         } else if (user.getIsActive() == 'T') {
-            response.sendRedirect("inventory");
+            response.sendRedirect("company");
 
         } else {
             request.setAttribute("loginMsg", "This account is inactive.");
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-        
+        }
     }
-    }
-}
 
+}
