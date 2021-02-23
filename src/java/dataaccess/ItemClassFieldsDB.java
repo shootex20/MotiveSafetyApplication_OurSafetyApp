@@ -32,56 +32,16 @@ public class ItemClassFieldsDB {
         }
     }
     
-    /*
-        public void insert(Itemclassfields item) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
         
+    public List<Itemclassfields> getAll() throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
-            Item theItem = item.getCompanyID();
-            theItem.getItemClassID().add(item);
-            trans.begin();
-            em.persist(item);
-            em.merge(theItem);
-            trans.commit();
-        } catch (Exception ex) {
-            trans.rollback();
+            List<Itemclassfields> item = em.createNamedQuery("Itemclassfields.findAll", Itemclassfields.class).getResultList();
+             return item;
+    
         } finally {
             em.close();
         }
     }
-
-    public void update(Item item) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
-        
-        try {
-            trans.begin();
-            em.merge(item);
-            trans.commit();
-        } catch (Exception ex) {
-            trans.rollback();
-        } finally {
-            em.close();
-        }
-    }
-
-    public void delete(Item item) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
-        
-        try {
-            Company user = item.getCompanyID();
-            user.getItemList().remove(item);
-            trans.begin();
-            em.remove(em.merge(item));
-            em.merge(user);
-            trans.commit();
-        } catch (Exception ex) {
-            trans.rollback();
-        } finally {
-            em.close();
-        }
-    }
-*/
+   
 }

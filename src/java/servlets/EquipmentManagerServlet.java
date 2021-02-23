@@ -6,10 +6,14 @@
 package servlets;
 
 import dataaccess.CompanyDB;
+import dataaccess.ItemClassDB;
+import dataaccess.ItemClassFieldsDB;
 import dataaccess.ItemDB;
 import dataaccess.TypeLibraryDB;
 import domain.Company;
 import domain.Item;
+import domain.Itemclass;
+import domain.Itemclassfields;
 import domain.Typelibrary;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -36,18 +40,13 @@ public class EquipmentManagerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String action = request.getParameter("action");
-        //Inventory inv = new Inventory();
         HttpSession session = request.getSession();
-        
         Company curr = new Company(1);
-        
         ItemDB itemDB = new ItemDB();
-        
-        Item newItem = null;
-        
         List<Item> itemsList = new ArrayList<Item>();
+        
         
         
         try {
@@ -96,20 +95,80 @@ public class EquipmentManagerServlet extends HttpServlet {
             throws ServletException, IOException {
         
         String action = request.getParameter("action");
-        
         Company comp = new Company(1);
-        
         CompanyDB compDB = new CompanyDB();
+        Equipment equip = new Equipment();
+        
+        
+        
+        if(action.equals("addform"))
+        {
+
+        String type = request.getParameter("itemType");
+        int typeID = Integer.parseInt(type);
+
+        List<Typelibrary> typeArray = new ArrayList<Typelibrary>();
+        TypeLibraryDB typeDB = new TypeLibraryDB();
+        Typelibrary typeOfCat = new Typelibrary();
         
         try {
-            comp = compDB.get(comp.getCompanyID());
+            typeArray = typeDB.getAll();
         } catch (Exception ex) {
             Logger.getLogger(EquipmentManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        Equipment equip = new Equipment();
+        for (int i = 0; i < typeArray.size(); i++)
+        {
+            if(typeID == typeArray.get(i).getTypeLibraryID())
+            {
+                typeOfCat = typeArray.get(i);
+            }
+        }
         
-        if(action.equals("Add"))
+        List<Itemclassfields> icfList = new ArrayList<Itemclassfields>();
+        ItemClassFieldsDB icfDB = new ItemClassFieldsDB();
+        Itemclassfields icf = new Itemclassfields();
+        
+        try {
+            icfList = icfDB.getAll();
+        } catch (Exception ex) {
+            Logger.getLogger(EquipmentManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for(int i = 0; i < icfList.size(); i++)
+        {
+            if(typeOfCat.getTypeLibraryID() == icfList.get(i).getTypeLibraryID().getTypeLibraryID())
+            {
+                icf = icfList.get(i);
+            }
+        }
+        
+        List<Itemclass> icList = new ArrayList<Itemclass>();
+        ItemClassDB icDB = new ItemClassDB();
+        Itemclass ic = new Itemclass();
+        
+        try {
+            icList = icDB.getAll();
+        } catch (Exception ex) {
+            Logger.getLogger(EquipmentManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for(int i = 0; i < icList.size(); i++)
+        {
+            if(icf.getItemClassFieldsID() == icList.get(i).getItemClassFieldsID().getItemClassFieldsID())
+            {
+                ic = icList.get(i);
+            }
+        }
+        
+        request.setAttribute("question", ic.getItemClassInformation());
+        /*Hidden value, this is required.**/
+        request.setAttribute("selectedType", type);
+        doGet(request, response);
+        }
+        
+
+        else if(action.equals("Add"))
         {
         String model = request.getParameter("model");
         String serial = request.getParameter("serialnumber");
@@ -117,34 +176,35 @@ public class EquipmentManagerServlet extends HttpServlet {
         Boolean isChargeable = Boolean.parseBoolean(request.getParameter("isChargeable"));
         Boolean isDepleting = Boolean.parseBoolean(request.getParameter("isDepleting"));
         Boolean isDepreactiationType = Boolean.parseBoolean(request.getParameter("isDepreactiationType"));
-        //Parses the date to java format date.
         String date = request.getParameter("datePurchased");
-        
-        /*End of Java data parse.*/
 
-                
+        Date dateAdded = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date dateAdded;
-        dateAdded = new Date();
         String tempDate = formatter.format(dateAdded);
         Date datePurchased = null;
+
 
             try {
                 /*Formats the created date*/
                 dateAdded = new SimpleDateFormat("yyyy-MM-dd").parse(tempDate);
                 /*Formats the date purchased.*/
                 datePurchased = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-                /*Inserst*/
-                equip.insert(dateAdded, model, isChargeable, isDepleting, isDepreactiationType, information, serial, datePurchased, comp);
-                request.setAttribute("message", "Item added successfully.");
-                doGet(request, response);
+                    if(datePurchased.after(dateAdded))
+                    {
+                        request.setAttribute("message", "Purchase date cannot be past the current date!");
+                        doGet(request, response);
+                    }
+                    else
+                    {
+                        /*Inserst*/
+                        equip.insert(dateAdded, model, isChargeable, isDepleting, isDepreactiationType, information, serial, datePurchased, comp);
+                        request.setAttribute("message", "Item added successfully.");
+                        doGet(request, response);
+                    }
             } catch (Exception ex) {
                 Logger.getLogger(EquipmentManagerServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            
         }
-       
         else if(action.equals("Delete"))
         {
             String id = request.getParameter("itemID");

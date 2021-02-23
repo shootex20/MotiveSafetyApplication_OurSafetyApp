@@ -22,6 +22,17 @@ import javax.persistence.TypedQuery;
  * @author 813017
  */
 public class TypeLibraryDB {
+    
+        public Typelibrary get(int type_ID) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        
+        try {
+            Typelibrary type = em.find(Typelibrary.class, type_ID);
+            return type;
+        } finally { 
+            em.close();
+        }
+    }
 
      public List<Typelibrary> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

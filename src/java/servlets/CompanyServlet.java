@@ -13,6 +13,7 @@ public class CompanyServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+
         HttpSession session = request.getSession();
         String linkAction = request.getParameter("action");
 
@@ -32,7 +33,9 @@ public class CompanyServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/WEB-INF/companyManagement.jsp").forward(request, response);
         }
 
+
         getServletContext().getRequestDispatcher("/WEB-INF/companyManagement.jsp").forward(request, response);
+
 
     }
 

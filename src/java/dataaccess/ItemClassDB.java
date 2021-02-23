@@ -33,4 +33,15 @@ public class ItemClassDB {
             em.close();
         }
     }
+    
+         public List<Itemclass> getAll() throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            List<Itemclass> item = em.createNamedQuery("Itemclass.findAll", Itemclass.class).getResultList();
+             return item;
+    
+        } finally {
+            em.close();
+        }
+         }
 }

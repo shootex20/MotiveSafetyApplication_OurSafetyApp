@@ -53,20 +53,37 @@
         <br>
         <div class="text-success">
         ${message}
+        ${temp}
         </div>
         <br>
-        
         <h3>Add Equipment</h3>
         <br>
         <div class="form-group">
-            <form method="post">     
-                <label for="itemType">Type of Item: </label>
-                <select name="itemType" id="itemType">
-                    <c:forEach items="${types}" var="itemType">
-                        <option value="${itemType.typeLibraryID}">${itemType.description}</option>
-                    </c:forEach>
-                </select>
-                <br>
+                <form method="post"> 
+                    <label for="itemType">Type of Item: </label>
+
+                    <select name="itemType" id="itemType">
+                        <c:forEach items="${types}" var="itemType">
+                            <c:choose>
+                            <c:when test="${not empty selectedType && selectedType eq itemType.typeLibraryID}">
+                                <option value="${itemType.typeLibraryID}" selected = "true">${itemType.description}</option>
+                            </c:when>
+                            <c:otherwise>
+                            <option value="${itemType.typeLibraryID}">${itemType.description}</option>
+                            </c:otherwise>
+                         </c:choose>
+                            <!--<option value="${itemType.typeLibraryID}">${itemType.description}</option>-->
+                        </c:forEach>
+                            <input type="hidden" name="action" value="addform">
+                    </select>
+                    <br>
+                    <input type="hidden" name="selectedType" value="">
+                    <input type="submit" id="addbutton" class="btn btn-primary" value="Add Equipment">
+                    <br>
+                    <br>
+                </form>
+                    <c:if test="${selectedType != null}">
+                <form method="post"> 
                 <label for="title">Make/Model: </label>
                 <input type="text" name="model" value="${newItem.model}">
                 <br>
@@ -91,7 +108,7 @@
                     <option value="false">No</option>
                 </select>
                 <br>
-                <label for="itemnames">Item Information: </label>
+                <label for="itemnames">${question}</label>
                 <input type="text" name="itemClassInformation" value="${newItem.itemClassInformation}">
                 <br>
                 <label for="datePurchased">Date Purchased: </label>
@@ -100,6 +117,7 @@
 
                 <input type="submit" name="action" id="addbutton" class="btn btn-primary" value="Add">
             </form>
+                </c:if>
         </div>
 
         <div class="jumbotron">
