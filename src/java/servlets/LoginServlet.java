@@ -50,12 +50,12 @@ public class LoginServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         session.setAttribute("userName", user.getUsername());
-
+        session.setAttribute("userID", user.getUserId());
         if (user.getIsAdmin() == 'T' && user.getIsActive() == 'T') {
             response.sendRedirect("admin");
 
         } else if (user.getIsActive() == 'T') {
-            response.sendRedirect("company");
+            response.sendRedirect("companyWelcome");
 
         } else {
             request.setAttribute("loginMsg", "This account is inactive.");

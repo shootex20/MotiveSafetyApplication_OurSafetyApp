@@ -8,6 +8,14 @@
         <servlet-name>ErrorServlet</servlet-name>
         <servlet-class>servlets.ErrorServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>companyWelcomeServlet</servlet-name>
+        <servlet-class>servlets.companyWelcomeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>employeeDraftServlet</servlet-name>
+        <servlet-class>servlets.employeeDraftServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ErrorServlet</servlet-name>
         <url-pattern>/error</url-pattern>
@@ -51,6 +59,14 @@
     <servlet-mapping>
         <servlet-name>AdminServlet</servlet-name>
         <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>companyWelcomeServlet</servlet-name>
+        <url-pattern>/companyWelcome</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>employeeDraftServlet</servlet-name>
+        <url-pattern>/employeeDraft</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
