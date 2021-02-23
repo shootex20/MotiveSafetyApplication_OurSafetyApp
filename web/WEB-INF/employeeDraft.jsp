@@ -15,7 +15,7 @@
 
                 
                 <div class="EmployeeDraft">
-                      <h1>Employee Draft & OurSafety</h1>
+                      <h1>Employee Draft & OurSafetyApp</h1>
                       
                         <h1>To be finished</h1>
                     
