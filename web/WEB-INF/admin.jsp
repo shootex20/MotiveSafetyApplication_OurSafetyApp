@@ -30,7 +30,7 @@
               <c:forEach var="companys" items="${company}">
                 <tr>
                     <td>${companys.companyID}</td>
-                   <td>${companys.dateadded}</td>
+                   <td>${comp.dateadded}</td>
                     <td>${companys.name}</td>
                     <td>${companys.shortname}</td>
                     <td>${companys.description}</td>
