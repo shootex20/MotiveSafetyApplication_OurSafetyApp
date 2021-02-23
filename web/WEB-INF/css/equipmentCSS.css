@@ -34,3 +34,8 @@ table{
 p {
     text-align: center
 }
+.text-success{
+    margin-left: 45%;
+    font-style: oblique;
+    font-weight: bold;
+}

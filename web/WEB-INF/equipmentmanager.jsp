@@ -51,9 +51,11 @@
             </c:forEach>
         </table>
         <br>
+        <div class="text-success">
         ${message}
+        </div>
         <br>
-
+        
         <h3>Add Equipment</h3>
         <br>
         <div class="form-group">
