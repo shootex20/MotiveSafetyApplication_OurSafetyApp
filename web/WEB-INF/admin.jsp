@@ -3,6 +3,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+                <style type="text/css">
+            <%@include file="css/equipmentCSS.css" %>
+        </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>MotiveSafety OurSafety Admin Functionality</title>
         <link href="CSS-MEDIA/Index.css" rel="stylesheet" type="text/css">
@@ -23,35 +26,35 @@
                 <th>Delete</th>
                 <th>Edit</th>
             </tr>
-            <%--
-              <c:forEach var="comp" items="${comps}">
+            
+              <c:forEach var="companys" items="${company}">
                 <tr>
-                    <td>${comp.compid}</td>
-                    <td>${comp.dateadded}</td>
-                    <td>${comp.compname}</td>
-                    <td>${comp.shortname}</td>
-                    <td>${comp.description}</td>
-                    <td>${comp.account}</td>
-                    <td>${comp.industry}</td>
+                    <td>${companys.companyID}</td>
+                   <td>${comp.dateadded}</td>
+                    <td>${companys.name}</td>
+                    <td>${companys.shortname}</td>
+                    <td>${companys.description}</td>
+                    <td>${companys.account}</td>
+                    <td>${companys.industry}</td>
                    <!-- <td>${comp.url}</td> -->
                     <td>
                         <form action="comps" method="post" >
                             <input type="submit" value="Delete">
                             <input type="hidden" name="action" value="delete">
-                            <input type="hidden" name="selectedCompany" value="${comp.compid}">
+                            <input type="hidden" name="selectedCompany" value="${companys.companyID}">
                         </form>
                     </td>
                     <td>
-                        <form action="users" method="get">
+                        <form action="comps" method="get">
                             <input type="submit" value="Edit">
                             <input type="hidden" name="action" value="view">
-                            <input type="hidden" name="selectedCompany" value="${comp.compid}">
+                            <input type="hidden" name="selectedCompany" value="${companys.companyID}">
                         </form>
                     </td>
                 </tr>
             </c:forEach>
-            --%>
         </table>
+
         <c:if test="${selectedComp == null}">
             <h3>Add Company</h3>
             <form action="comps" method="POST">
@@ -156,7 +159,6 @@
                 <input type="submit" value="Save">
             </form>
         </c:if>
-
 
 
     </body>

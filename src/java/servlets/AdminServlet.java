@@ -1,9 +1,11 @@
 package servlets;
 
+import dataaccess.CompanyDB;
 import domain.Company;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,9 +22,9 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-         CompanyService cs = new CompanyService();
+
          String action = request.getParameter("action");
+         
          if (action != null && action.equals("view")) {
             Integer selectedCompany = Integer.parseInt(request.getParameter("selectedCompany"));
             try {
@@ -32,18 +34,17 @@ public class AdminServlet extends HttpServlet {
                 Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+         
         
-        
-         List<Company> comp = null;        
+        CompanyDB cs = new CompanyDB();
+        List<Company> comp = new ArrayList<Company>();        
         try {
             comp = cs.getAll();
         } catch (Exception ex) {
             Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        request.setAttribute("comps", comp);
-         
-         
-         
+        request.setAttribute("company", comp);
+
         getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
     }
 
@@ -51,6 +52,7 @@ public class AdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
       
+        
         try {
             
             CompanyService cs = new CompanyService();

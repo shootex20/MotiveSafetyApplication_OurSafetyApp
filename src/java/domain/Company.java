@@ -81,6 +81,7 @@ public class Company implements Serializable {
         this.companyID = companyID;
     }
     
+    
     /* Commented out due to issues between equipment manager servlet */
     public Company( Date dateAdded, String name, String shortname, String description, String account, String industry) {
        this.dateAdded = dateAdded;
@@ -92,6 +93,7 @@ public class Company implements Serializable {
        //this.urlList = url;
        
     }
+   
     
 
     public Integer getCompanyID() {
