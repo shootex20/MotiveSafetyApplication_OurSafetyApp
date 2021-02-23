@@ -23,6 +23,7 @@
             <br>
         </header>
         <h3>Manage Current Equipment</h3>
+        <br>
         <table>
             <tr class="table-warning">
                 <th>DB ID </th>
