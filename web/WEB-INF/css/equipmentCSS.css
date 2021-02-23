@@ -13,3 +13,24 @@ table, th, td
     border: 1px solid black;
     text-align: center;
 }
+body{
+    margin-top: 5%;
+    text-align: center;
+}
+h1, h2, h3{
+    text-align: center;
+}
+table{
+    margin-left: 30%;
+}
+#addbutton{
+    margin-left: 13%
+}.form-group{
+    margin-left: 40%
+}
+.socialMedia{
+    margin-left: 48%
+}
+p {
+    text-align: center
+}
