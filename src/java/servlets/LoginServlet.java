@@ -18,11 +18,14 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        session.invalidate();
+
+        if (session.getAttribute("userName") != null) {
+            response.sendRedirect("companyWelcome");
+            return;
+        }
 
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         return;
-
     }
 
     @Override

@@ -3,9 +3,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <style type="text/css">
+            <%@include file="css/company.css" %>
+        </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>companyManagement JSP</title>
-        <link href="CSS-MEDIA/Index.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <header class="companyHeader">

@@ -32,53 +32,60 @@ public class companyWelcomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession session = request.getSession();
-        int userID = (Integer)session.getAttribute("userID");       
-        Logins logins = new Logins();      
+
+        // DQ: This segment will probably be replaced by a filter
+        if (session.getAttribute("userName") == null) {
+            response.sendRedirect("login");
+            return;
+        }
+
+        int userID = (Integer) session.getAttribute("userID");
+        Logins logins = new Logins();
         Company company = logins.getCompanyID();
-        String logout = request.getParameter("logout");     
+        String logout = request.getParameter("action");
         String equipment = request.getParameter("equipment");
         String employeeDraft = request.getParameter("employeeDraft");
-        String manual = request.getParameter("manual");          
+        String manual = request.getParameter("manual");
         LoginDB logindb = new LoginDB();
-        
+
         try {
             List<Logins> loginList = logindb.getAll();
-            for(Logins login: loginList){
-                if(login.getUserId() == userID){
+            for (Logins login : loginList) {
+                if (login.getUserId() == userID) {
                     logins = login;
                 }
             }
         } catch (Exception ex) {
             Logger.getLogger(companyWelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        request.setAttribute("companyName",logins.getCompanyID().getDescription());
+
+        request.setAttribute("companyName", logins.getCompanyID().getDescription());
 
         try {
-            if(company != null){
-                response.sendRedirect("company");   
+            if (company != null) {
+                response.sendRedirect("company");
+                return;
+            } else if (equipment != null) {
+                response.sendRedirect("equipmentmanager");
+                return;
+            } else if (employeeDraft != null) {
+                response.sendRedirect("employeeDraft");
+                return;
+            } else if (manual != null) {
+                response.sendRedirect("manual");
+                return;
+            } else if (logout != null) {
+                session.invalidate();
+                session = request.getSession();
+                response.sendRedirect("login");
                 return;
             }
-            else if(equipment != null){
-                response.sendRedirect("equipmentmanager");   
-                return;
-            }
-             else if(employeeDraft != null){
-                response.sendRedirect("employeeDraft");   
-                return;
-            }
-            else if(manual != null){
-                response.sendRedirect("manual");   
-                return;
-            }
-            } catch (Exception ex) {
-                Logger.getLogger(companyWelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        } catch (Exception ex) {
+            Logger.getLogger(companyWelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        
-        
         getServletContext().getRequestDispatcher("/WEB-INF/companyWelcome.jsp").forward(request, response);
 
     }
