@@ -8,7 +8,6 @@
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>login JSP</title>
-        <link href="CSS-MEDIA/Index.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <div class="loginHeader">
@@ -18,8 +17,8 @@
             <p>${loginMsg}</p>
         </div>
         <form action="login" method="post" class="loginForm">
-            <label>Username: </label><input type="text" name="username_input" value="">
-            <label>Password: </label><input type="password" name="password_input" value="">
+            <label>Username: </label><input type="text" name="username_input">
+            <label>Password: </label><input type="password" name="password_input">
             <input type="submit" value="Log in">
         </form>
     </body>

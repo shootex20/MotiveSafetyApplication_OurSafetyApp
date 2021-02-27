@@ -13,8 +13,8 @@
         <servlet-class>servlets.companyWelcomeServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>employeeDraftServlet</servlet-name>
-        <servlet-class>servlets.employeeDraftServlet</servlet-class>
+        <servlet-name>employeeServlet</servlet-name>
+        <servlet-class>servlets.EmployeeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ErrorServlet</servlet-name>
@@ -65,8 +65,8 @@
         <url-pattern>/companyWelcome</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>employeeDraftServlet</servlet-name>
-        <url-pattern>/employeeDraft</url-pattern>
+        <servlet-name>employeeServlet</servlet-name>
+        <url-pattern>/employee</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

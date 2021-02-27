@@ -22,9 +22,9 @@
         <header class="companyWelcomHeader">
             <ul>
                 <li><a href="company?company">${companyName} Company Page</a></li>
-                <li><a href="equipmentmanager">equipment page</a></li>
-                <li><a href="manual?manual">manual Page</a></li>
-                <li><a href="employeeDraft?employeeDraft">employee Draft page</a></li>
+                <li><a href="equipmentmanager">Equipment page</a></li>
+                <li><a href="manual?manual">Manual Page</a></li>
+                <li><a href="employee?employee">Employee page</a></li>
                 <li><a href="companyWelcome?action=logout">Logout</a></li>            
             </ul>
         </header>

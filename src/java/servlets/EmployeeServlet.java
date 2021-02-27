@@ -1,19 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
 import dataaccess.LoginDB;
-import dataaccess.ManualDB;
-import domain.Company;
 import domain.Logins;
-import domain.Manual;
-import domain.Typelibrary;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +16,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author 809968
  */
-public class companyWelcomeServlet extends HttpServlet {
+public class EmployeeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -43,10 +32,10 @@ public class companyWelcomeServlet extends HttpServlet {
 
         int userID = (Integer) session.getAttribute("userID");
         Logins logins = new Logins();
-        Company company = logins.getCompanyID();
-        String logout = request.getParameter("action");
+        String logout = request.getParameter("logout");
+        String company = request.getParameter("company");
         String equipment = request.getParameter("equipment");
-        String employeeDraft = request.getParameter("employeeDraft");
+        String companyWelcome = request.getParameter("companyWelcome");
         String manual = request.getParameter("manual");
         LoginDB logindb = new LoginDB();
 
@@ -62,7 +51,6 @@ public class companyWelcomeServlet extends HttpServlet {
         }
 
         request.setAttribute("companyName", logins.getCompanyID().getDescription());
-
         try {
             if (company != null) {
                 response.sendRedirect("company");
@@ -70,8 +58,8 @@ public class companyWelcomeServlet extends HttpServlet {
             } else if (equipment != null) {
                 response.sendRedirect("equipmentmanager");
                 return;
-            } else if (employeeDraft != null) {
-                response.sendRedirect("employee");
+            } else if (companyWelcome != null) {
+                response.sendRedirect("companyWelcome");
                 return;
             } else if (manual != null) {
                 response.sendRedirect("manual");
@@ -83,17 +71,18 @@ public class companyWelcomeServlet extends HttpServlet {
                 return;
             }
         } catch (Exception ex) {
-            Logger.getLogger(companyWelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        getServletContext().getRequestDispatcher("/WEB-INF/companyWelcome.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/employee.jsp").forward(request, response);
 
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/WEB-INF/companyWelcome.jsp").forward(request, response);
+
+        getServletContext().getRequestDispatcher("/WEB-INF/employee.jsp").forward(request, response);
 
     }
 }
