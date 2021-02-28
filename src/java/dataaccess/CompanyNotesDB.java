@@ -5,14 +5,11 @@
  */
 package dataaccess;
 
+import domain.Companynotes;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import domain.Item;
-import domain.Itemclass;
-import domain.Itemclassfields;
-import domain.Company;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 
 /**
@@ -21,37 +18,49 @@ import javax.persistence.Query;
  */
 public class CompanyNotesDB {
     
-        public List<Item> getAll(Company companyID) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        try {
-            Company company = em.find(Company.class, companyID.getCompanyID());
-            return company.getItemList();
-        } finally {
-            em.close();
-        }
+    
+        public List<Companynotes> getAll() throws Exception {
+         EntityManager em = DBUtil.getEmFactory().createEntityManager();
+          TypedQuery<Companynotes> query = em.createNamedQuery("Companynotes.findAll", Companynotes.class);
+         List<Companynotes> results = query.getResultList();
+            return results;
     }
-   
-    public Item get(int item_ID) throws Exception {
+   /*
+    public Address get(int address_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
-            Item item = em.find(Item.class, item_ID);
-            return item;
+            Address add = em.find(Address.class, address_ID);
+            return add;
         } finally { 
             em.close();
         }
     }
+*/
     
-        public void insert(Item item) throws Exception {
+    public void insert(Companynotes note) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+
+        try {
+            trans.begin();
+            em.persist(note);
+            trans.commit();
+        }catch (Exception ex) {
+            trans.rollback();
+        }finally {
+            em.close();
+        
+        }
+    }
+
+    public void update(Companynotes note) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         
         try {
-            Company user = item.getCompanyID();
-            user.getItemList().add(item);
             trans.begin();
-            em.persist(item);
-            em.merge(user);
+            em.merge(note);
             trans.commit();
         } catch (Exception ex) {
             trans.rollback();
@@ -60,33 +69,14 @@ public class CompanyNotesDB {
         }
     }
 
-    public void update(Item item) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+    public void delete(Companynotes note) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();  
         EntityTransaction trans = em.getTransaction();
-        
         try {
             trans.begin();
-            em.merge(item);
+            em.remove(em.merge(note));
             trans.commit();
-        } catch (Exception ex) {
-            trans.rollback();
-        } finally {
-            em.close();
-        }
-    }
-
-    public void delete(Item item) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
-        
-        try {
-            Company user = item.getCompanyID();
-            user.getItemList().remove(item);
-            trans.begin();
-            em.remove(em.merge(item));
-            em.merge(user);
-            trans.commit();
-        } catch (Exception ex) {
+        } catch(Exception ex){
             trans.rollback();
         } finally {
             em.close();

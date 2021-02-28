@@ -12,6 +12,8 @@ import domain.Item;
 import domain.Itemclass;
 import domain.Itemclassfields;
 import domain.Company;
+import domain.Companyperson;
+import domain.Companypersonaddress;
 import javax.persistence.Query;
 
 
@@ -21,34 +23,26 @@ import javax.persistence.Query;
  */
 public class CompanyPersonAddressDB {
     
-        public List<Item> getAll(Company companyID) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        try {
-            Company company = em.find(Company.class, companyID.getCompanyID());
-            return company.getItemList();
-        } finally {
-            em.close();
-        }
-    }
    
-    public Item get(int item_ID) throws Exception {
+    public Companypersonaddress get(int companyperson_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
-            Item item = em.find(Item.class, item_ID);
-            return item;
+            Companypersonaddress companyperson = em.find(Companypersonaddress.class, companyperson_ID);
+            return companyperson;
         } finally { 
             em.close();
         }
     }
+    /*
     
-        public void insert(Item item) throws Exception {
+        public void insert(Companypersonaddress companyperson) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         
         try {
             Company user = item.getCompanyID();
-            user.getItemList().add(item);
+            user.getItemList().add(companyperson);
             trans.begin();
             em.persist(item);
             em.merge(user);
@@ -92,4 +86,5 @@ public class CompanyPersonAddressDB {
             em.close();
         }
     }
+*/
 }

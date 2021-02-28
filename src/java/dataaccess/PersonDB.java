@@ -12,8 +12,6 @@ import domain.Item;
 import domain.Itemclass;
 import domain.Itemclassfields;
 import domain.Company;
-import domain.Companyperson;
-import domain.Companypersonphone;
 import javax.persistence.Query;
 
 
@@ -21,21 +19,19 @@ import javax.persistence.Query;
  *
  * @author Chelsey Coughlin
  */
-public class CompanyPersonPhoneDB {
-    /*
+public class PersonDB {
     
-        public List<Companypersonphone> getAll(Companyperson companyID) throws Exception {
+        public List<Item> getAll(Company companyID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
-            Companypersonphone company = em.find(Companypersonphone.class, companyID.getCompanyPersonID());
-            return company.();
+            Company company = em.find(Company.class, companyID.getCompanyID());
+            return company.getItemList();
         } finally {
             em.close();
         }
     }
-      
    
-    public Companypersonaddress get(int companyPerson) throws Exception {
+    public Item get(int item_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
@@ -96,5 +92,4 @@ public class CompanyPersonPhoneDB {
             em.close();
         }
     }
-*/
 }
