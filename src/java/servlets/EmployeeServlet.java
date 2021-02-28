@@ -73,6 +73,9 @@ public class EmployeeServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
+        
 
         getServletContext().getRequestDispatcher("/WEB-INF/employee.jsp").forward(request, response);
 
