@@ -12,6 +12,7 @@ import domain.Item;
 import domain.Itemclass;
 import domain.Itemclassfields;
 import domain.Company;
+import domain.Companyperson;
 import javax.persistence.Query;
 
 
@@ -20,76 +21,16 @@ import javax.persistence.Query;
  * @author Chelsey Coughlin
  */
 public class CompanypersonDB {
-    
-        public List<Item> getAll(Company companyID) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        try {
-            Company company = em.find(Company.class, companyID.getCompanyID());
-            return company.getItemList();
-        } finally {
-            em.close();
-        }
-    }
-   
-    public Item get(int item_ID) throws Exception {
+
+    public Companyperson get(int person_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
-            Item item = em.find(Item.class, item_ID);
-            return item;
+            Companyperson compPer = em.find(Companyperson.class, person_ID);
+            return compPer;
         } finally { 
             em.close();
         }
     }
-    
-        public void insert(Item item) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
-        
-        try {
-            Company user = item.getCompanyID();
-            user.getItemList().add(item);
-            trans.begin();
-            em.persist(item);
-            em.merge(user);
-            trans.commit();
-        } catch (Exception ex) {
-            trans.rollback();
-        } finally {
-            em.close();
-        }
-    }
-
-    public void update(Item item) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
-        
-        try {
-            trans.begin();
-            em.merge(item);
-            trans.commit();
-        } catch (Exception ex) {
-            trans.rollback();
-        } finally {
-            em.close();
-        }
-    }
-
-    public void delete(Item item) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
-        
-        try {
-            Company user = item.getCompanyID();
-            user.getItemList().remove(item);
-            trans.begin();
-            em.remove(em.merge(item));
-            em.merge(user);
-            trans.commit();
-        } catch (Exception ex) {
-            trans.rollback();
-        } finally {
-            em.close();
-        }
-    }
+ 
 }

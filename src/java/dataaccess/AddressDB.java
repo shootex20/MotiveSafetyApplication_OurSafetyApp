@@ -20,13 +20,15 @@ import javax.persistence.TypedQuery;
  */
 public class AddressDB {
     
+/* May not be used not sure yet.
+    
         public List<Address> getAll() throws Exception {
          EntityManager em = DBUtil.getEmFactory().createEntityManager();
           TypedQuery<Address> query = em.createNamedQuery("Address.findAll", Address.class);
          List<Address> results = query.getResultList();
             return results;
     }
-   
+   */
     public Address get(int address_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         

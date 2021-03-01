@@ -12,6 +12,8 @@ import domain.Item;
 import domain.Itemclass;
 import domain.Itemclassfields;
 import domain.Company;
+import domain.Companyperson;
+import domain.Person;
 import javax.persistence.Query;
 
 
@@ -21,15 +23,18 @@ import javax.persistence.Query;
  */
 public class PersonDB {
     
-        public List<Item> getAll(Company companyID) throws Exception {
+     public List<Person> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
-            Company company = em.find(Company.class, companyID.getCompanyID());
-            return company.getItemList();
+            List<Person> person = em.createNamedQuery("Person.findAll", Person.class).getResultList();
+             return person;
+    
         } finally {
             em.close();
         }
+        
     }
+     /*
    
     public Item get(int item_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -91,5 +96,7 @@ public class PersonDB {
         } finally {
             em.close();
         }
+
     }
+*/
 }
