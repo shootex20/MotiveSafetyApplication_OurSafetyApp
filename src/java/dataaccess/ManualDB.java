@@ -17,6 +17,7 @@ import domain.Manual;
  */
 public class ManualDB {
     
+    
     public ArrayList<Manual> getAll() throws Exception {
         
     ArrayList<Manual> manuals = new ArrayList<>();
@@ -42,4 +43,5 @@ public class ManualDB {
     return manuals;
   
     }
+
 }

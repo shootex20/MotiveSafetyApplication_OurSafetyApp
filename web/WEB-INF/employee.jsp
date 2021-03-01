@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,26 +28,24 @@
                     <th>Last Name</th>
                     <th>Birthdate</th>
                     <th>Gender</th>
-                    <th>Phone Number</th>
                     <th>Email</th>
+                    <th>Phone Number</th>
                     <th>Address</th>
                     <th>Position</th>
                     <th>Role</th>
                     <th></th>
                     <th></th>
                 </tr>
-                <%--
-                <c:forEach items="employeeList" var="emp">
+                
+                <c:forEach  var="emp" items="${employeeList}">
                     <tr>
-                        <th>${emp.firstName}</th>
-                        <th>${emp.lastName}</th>
-                        <th>${emp.birthdate}</th>
-                        <th>${emp.gender}</th>
-                        <th>${emp.phone}</th>
+                        <th>${emp.personID.firstName}</th>
+                        <th>${emp.personID.lastName}</th>
+                        <th>${emp.personID.dateOfBirth}</th>
+                        <th>${emp.personID.gender}</th>
                         <th>${emp.email}</th>
-                        <th>${emp.address}</th>
-                        <th>${emp.position}</th>
-                        <th>${emp.role}</th>
+                        <th>${emp.companypersonphoneList}</th>
+<%--
                         <td>
                             <form action="company" method="post">
                                 <input type="hidden" name="hidden_comp_emp_edit" value="hiddenEdit">
@@ -61,11 +60,13 @@
                                 <input type="submit" value="Remove">
                             </form>
                         </td>
+--%>
                     </tr>
                 </c:forEach>
-                --%>
+                
             </table>
         </div>
+            <%--
         <form action="company" method="post" class="companyAddForm">
             <h3>Add a new employee</h3>
             <input type="hidden" name="hidden_comp_emp_add" value="hiddenCompany"><br>
@@ -81,5 +82,6 @@
             <input type="submit" value="Add To Company">
             ${compAddMsg}
         </form>
+            --%>
     </body>
 </html>

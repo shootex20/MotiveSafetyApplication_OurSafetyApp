@@ -35,6 +35,7 @@ public class AdminServlet extends HttpServlet {
             }
         }
          
+         
         
         CompanyDB cs = new CompanyDB();
         List<Company> comp = new ArrayList<Company>();        

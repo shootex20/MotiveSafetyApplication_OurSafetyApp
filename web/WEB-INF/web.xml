@@ -13,7 +13,7 @@
         <servlet-class>servlets.companyWelcomeServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>employeeServlet</servlet-name>
+        <servlet-name>EmployeeServlet</servlet-name>
         <servlet-class>servlets.EmployeeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
@@ -32,6 +32,11 @@
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>servlets.LoginServlet</servlet-class>
     </servlet>
+    
+        <servlet-mapping>
+        <servlet-name>EmployeeServlet</servlet-name>
+        <url-pattern>/employee</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -63,10 +68,6 @@
     <servlet-mapping>
         <servlet-name>companyWelcomeServlet</servlet-name>
         <url-pattern>/companyWelcome</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>employeeServlet</servlet-name>
-        <url-pattern>/employee</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

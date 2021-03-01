@@ -32,6 +32,8 @@ public class CompanyDB {
      * @throws Exception
     
      */
+    
+    
     public Company get(Integer companyID ) throws Exception {
      EntityManager em = DBUtil.getEmFactory().createEntityManager();
 

@@ -34,6 +34,17 @@ public class PersonDB {
         }
         
     }
+     
+         public Person get(int person_ID) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        
+        try {
+            Person person = em.find(Person.class, person_ID);
+            return person;
+        } finally { 
+            em.close();
+        }
+    }
      /*
    
     public Item get(int item_ID) throws Exception {

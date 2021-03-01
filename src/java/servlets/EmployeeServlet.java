@@ -1,8 +1,14 @@
 package servlets;
 
+import dataaccess.CompanypersonDB;
 import dataaccess.LoginDB;
+import dataaccess.PersonDB;
+import domain.Company;
+import domain.Companyperson;
 import domain.Logins;
+import domain.Person;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +35,8 @@ public class EmployeeServlet extends HttpServlet {
             response.sendRedirect("login");
             return;
         }
+        
+        Person temp = new Person(1);
 
         int userID = (Integer) session.getAttribute("userID");
         Logins logins = new Logins();
@@ -74,8 +82,19 @@ public class EmployeeServlet extends HttpServlet {
             Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        Company curr = new Company(1);
+        CompanypersonDB compPerDB = new CompanypersonDB();
         
         
+        List<Companyperson> compPersonList = new ArrayList<Companyperson>();
+        
+        try {
+            compPersonList = (List<Companyperson>) compPerDB.getAll(curr);
+        } catch (Exception ex) {
+            Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        request.setAttribute("employeeList", compPersonList);
 
         getServletContext().getRequestDispatcher("/WEB-INF/employee.jsp").forward(request, response);
 
