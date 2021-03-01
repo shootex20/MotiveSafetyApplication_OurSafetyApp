@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-                <style type="text/css">
-            <%@include file="css/equipmentCSS.css" %>
+        <style type="text/css">
+            <%@include file="css/adminCSS.css" %>
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>MotiveSafety OurSafety Admin Functionality</title>
+        <title>MotiveSafety OurSafety Administrators</title>
         <link href="CSS-MEDIA/Index.css" rel="stylesheet" type="text/css">
     </head>
     <body>
@@ -26,11 +26,11 @@
                 <th>Delete</th>
                 <th>Edit</th>
             </tr>
-            
-              <c:forEach var="companys" items="${company}">
+
+            <c:forEach var="companys" items="${company}">
                 <tr>
                     <td>${companys.companyID}</td>
-                   <td>${companys.dateadded}</td>
+                    <td>${companys.dateadded}</td>
                     <td>${companys.name}</td>
                     <td>${companys.shortname}</td>
                     <td>${companys.description}</td>
@@ -58,15 +58,14 @@
         <c:if test="${selectedComp == null}">
             <h3>Add Company</h3>
             <form action="comps" method="POST">
-                Company Id: <input type="number" name="compid"><br>
-                Date Added <input type="date" name="dateadded"><br>
-                Name: <input type="text" name="compname"><br>
-                Short Name: <input type="text" name="shortname"><br>
-                Description: <input type="text" name="description"><br>
-
-                Account: <input type="text" name="account"><br>
-                Industry: <input type="text" name="industry"><br>
-                <!--  URL: <input type="text" name="url"><br> -->
+                <label>Company Id: </label><input type="number" name="compid"><br>
+                <label>Date Added </label><input type="date" name="dateadded"><br>
+                <label>Name: </label><input type="text" name="compname"><br>
+                <label>Short Name: </label><input type="text" name="shortname"><br>
+                <label>Description: </label><input type="text" name="description"><br>
+                <label>Account: </label><input type="text" name="account"><br>
+                <label>Industry: </label><input type="text" name="industry"><br>
+                <%--<label>URL: </label><input type="text" name="url"><br> --%>
                 <input type="hidden" name="action" value="add">
                 <input type="submit" value="Save">
             </form>
@@ -74,14 +73,14 @@
         <c:if test="${selectedComp != null}">
             <h3>Edit User</h3>
             <form action="comps" method="POST">
-                Company Id: <input type="number" name="compid" value="${selectedComp.compid}" readonly><br>
-                Date Added: <input type="date" name="dateadded" value="${selectedComp.dateadded}"><br>
-                Name: <input type="text" name="compname" value="${selectedComp.compname}"><br>
-                Short Name: <input type="text" name="shortname" value="${selectedComp.shortname}"><br>
-                Description: <input type="text" name="description" value="${selectedComp.description}"><br>
-                Account: <input type="text" name="account" value="${selectedComp.account}"><br>
-                Industry: <input type="text" name="industry" value="${selectedComp.industry}"><br>
-               <!-- URL: <input type="text" name="url" value="${selectedComp.url}"><br> -->
+                <label>Company Id: </label><input type="number" name="compid" value="${selectedComp.compid}" readonly><br>
+                <label>Date Added: </label><input type="date" name="dateadded" value="${selectedComp.dateadded}"><br>
+                <label>Name: </label><input type="text" name="compname" value="${selectedComp.compname}"><br>
+                <label>Short Name: </label><input type="text" name="shortname" value="${selectedComp.shortname}"><br>
+                <label>Description: </label><input type="text" name="description" value="${selectedComp.description}"><br>
+                <label>Account: </label><input type="text" name="account" value="${selectedComp.account}"><br>
+                <label>Industry: </label><input type="text" name="industry" value="${selectedComp.industry}"><br>
+                <%-- <label>URL: </label<input type="text" name="url" value="${selectedComp.url}"><br> --%>
                 <input type="hidden" name="action" value="edit">
                 <input type="submit" value="Save">
             </form>
@@ -132,34 +131,43 @@
         <c:if test="${selectedManager == null}">
             <h3>Add Manager</h3>
             <form action="managers" method="POST">
-                Manager Id: <input type="number" name="managerID"><br>
-                Date Added <input type="date" name="dateAdded"><br>
-                Date Removed <input type="date" name="dateRemoved"><br>
-                First Name: <input type="text" name="firstname"><br>
-                last Name: <input type="text" name="lastname"><br>
-                Email: <input type="email" name="email"><br>
-                Company ID: <input type="number" name="companyID"><br>
-
+                <label>Manager Id: </label><input type="number" name="managerID"><br>
+                <label>Date Added </label><input type="date" name="dateAdded"><br>
+                <label>Date Removed </label> <input type="date" name="dateRemoved"><br>
+                <label>First Name: </label><input type="text" name="firstname"><br>
+                <label>last Name: </label><input type="text" name="lastname"><br>
+                <label>Email: </label><input type="email" name="email"><br>
+                <label>Password: </label><input type="password" name="passwordAdd"><span>${passAddMsg}</span><br>
+                <label>Company ID: </label><input type="number" name="companyID"><br>
                 <input type="hidden" name="action" value="add">
                 <input type="submit" value="Save">
+            </form>
+            <form action="managers" method="POST">
+                <input type="hidden" name="displayPass" value="showAdd">
+                <input type="submit" value="Show Password"
             </form>
         </c:if>
         <c:if test="${selectedManager != null}">
             <h3>Edit User</h3>
             <form action="managers" method="POST">
-                Manager Id: <input type="number" name="managerID" value="${selectedManager.managerID}" readonly><br>
-                Date Added: <input type="date" name="dateAdded" value="${selectedManager.dateAdded}"><br>
-                Date Removed: <input type="date" name="dateRemoved" value="${selectedManager.dateRemoved}"><br>
-                First Name: <input type="text" name="firstname" value="${selectedManager.firstname}"><br>
-                Last Name: <input type="text" name="lastname" value="${selectedManager.lastname}"><br>
-                Email: <input type="email" name="email" value="${selectedManager.email}"><br>
-                Company ID: <input type="number" name="account" value="${selectedManager.account}"><br>
-                Industry: <input type="text" name="companyID" value="${selectedManager.companyID}" readonly><br>
+                <label>Manager Id: </label><input type="number" name="managerID" value="${selectedManager.managerID}" readonly><br>
+                <label>Date Added: </label><input type="date" name="dateAdded" value="${selectedManager.dateAdded}"><br>
+                <label>Date Removed: </label><input type="date" name="dateRemoved" value="${selectedManager.dateRemoved}"><br>
+                <label>First Name: </label><input type="text" name="firstname" value="${selectedManager.firstname}"><br>
+                <label>Last Name: </label><input type="text" name="lastname" value="${selectedManager.lastname}"><br>
+                <label>Email: </label><input type="email" name="email" value="${selectedManager.email}"><br>
+                <label>Old Password: </label><input type="password" name="oldpassword"><span>${passEditOldMsg}</span><br>
+                <label>New Password: </label><input type="password" name="newpassword"><span>passEditNewMsg</span><br>
+                <label>Company ID: </label><input type="number" name="account" value="${selectedManager.account}"><br>
+                <label>Industry: </label><input type="text" name="companyID" value="${selectedManager.companyID}" readonly><br>
                 <input type="hidden" name="action" value="edit">
                 <input type="submit" value="Save">
             </form>
+            <form action="managers" method="POST">
+                <input type="hidden" name="displayPass" value="showEdit">
+                <input type="submit" value="Show Password"
+            </form>
         </c:if>
-
 
     </body>
 </html>

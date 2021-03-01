@@ -42,14 +42,6 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>CompanyServlet</servlet-name>
-        <servlet-class>servlets.CompanyServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>CompanyServlet</servlet-name>
-        <url-pattern>/company</url-pattern>
-    </servlet-mapping>
-    <servlet>
         <servlet-name>ManualServlet</servlet-name>
         <servlet-class>servlets.ManualServlet</servlet-class>
     </servlet>
