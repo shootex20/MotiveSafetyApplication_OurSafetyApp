@@ -5,11 +5,14 @@
  */
 package dataaccess;
 
+import domain.Itemclassfields;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import domain.Manual;
+import java.util.List;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -18,30 +21,27 @@ import domain.Manual;
 public class ManualDB {
     
     
-    public ArrayList<Manual> getAll() throws Exception {
+   public Manual get(int id) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
-    ArrayList<Manual> manuals = new ArrayList<>();
-    ConnectionPool connectionPool = ConnectionPool.getInstance();
-    Connection connection = connectionPool.getConnection();
-    PreparedStatement statement = null;
-    ResultSet result = null;
-    String sql = "SELECT * FROM manual";
-    
-    try {
-        statement = connection.prepareStatement(sql);
-        result = statement.executeQuery();
-        while(result.next()){
-            //to be edited
+        try {
+            Manual manual = em.find(Manual.class, id);
+            return manual;
+        } finally { 
+            em.close();
         }
     }
-        finally {
-        DBUtil.closeResultSet(result);
-        DBUtil.closePreparedStatement(statement);
-        connectionPool.freeConnection(connection);
-    }
     
-    return manuals;
-  
+        
+    public List<Manual> getAll() throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            List<Manual> manual = em.createNamedQuery("Manual.findAll", Manual.class).getResultList();
+             return manual;
+    
+        } finally {
+            em.close();
+        }
     }
 
 }

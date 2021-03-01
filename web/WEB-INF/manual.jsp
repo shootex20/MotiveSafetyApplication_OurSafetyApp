@@ -10,23 +10,23 @@
     </head>
     <body>
         <h1>Manual Pages for OurSafety Application</h1>
-        <table>
+<!--        <table>
             <tr>
                 <th>Manual Id</th>
                 <th>Date Added</th>
                 <th>Title</th>
                 <th>Intention</th>
-                <th>Overview</th>
-                <th>Content</th> <!--would have links to the actual manuals-->
+                <th>Content</th> would have links to the actual manuals
             </tr>
+            <c:forEach var="manual" items="${manualList}">
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>${manual.manualID}</td>
+                <td>${manual.dateAdded}</td>
+                <td>${manual.title}</td>
+                <td>${manual.intention}</td>
+                <td>${manual.content}</td>
             </tr>
-        </table>
+            </c:forEach>
+        </table>-->
     </body>
 </html>
