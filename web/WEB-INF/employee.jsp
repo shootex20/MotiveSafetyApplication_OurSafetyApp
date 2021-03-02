@@ -31,8 +31,6 @@
                     <th>Email</th>
                     <th>Phone Number</th>
                     <th>Address</th>
-                    <th>Position</th>
-                    <th>Role</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -45,17 +43,27 @@
                         <th>${emp.personID.dateOfBirth}</th>
                         <th>${emp.personID.gender}</th>
                         <th>${emp.email}</th>
-                        <c:forEach  var="add" items="${emp.companypersonaddressList}">
+                        <c:if test="${empty emp.companypersonphoneList}">
+                        <th></th>
+                        </c:if>
+                        <c:if test="${not empty emp.companypersonphoneList}">
+                        <c:forEach  var="phone" items="${emp.companypersonphoneList}">
                         <th>
-                        <c:if test="${empty add}">
-                        </c:if>
-                        <c:if test="${not empty add.addressID}">
-                        ${add.addressID.city}
-                        </c:if>
+                        ${phone.phoneID.countryCode}-${phone.phoneID.areaCode}-${phone.phoneID.localNumber}-${phone.phoneID.extension}
                         </th>
                         </c:forEach>
-
-
+                        </c:if>
+                        
+                        <c:if test="${empty emp.companypersonaddressList}">
+                            <th></th>
+                        </c:if>
+                        <c:if test="${not empty emp.companypersonaddressList}">
+                        <c:forEach  var="add" items="${emp.companypersonaddressList}">
+                        <th>
+                        ${add.addressID.addressLine1} ${add.addressID.addressLine2}, ${add.addressID.city}, ${add.addressID.province} ${add.addressID.postalCode}, ${add.addressID.country}
+                        </th>
+                        </c:forEach>
+                        </c:if>
                         <td>
                             <form action="company" method="post">
                                 <input type="hidden" name="hidden_comp_emp_edit" value="hiddenEdit">
@@ -73,7 +81,6 @@
                             </form>
                         </td>
                     </tr>
-
                 </c:forEach>
                 
             </table>
