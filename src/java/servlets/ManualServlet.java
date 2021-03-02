@@ -19,22 +19,23 @@ public class ManualServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         HttpSession session = request.getSession();
         if (session.getAttribute("userName") == null) {
             response.sendRedirect("login");
             return;
         }
-        ManualDB manualDB = new ManualDB(); 
         
+        
+        ManualDB manualDB = new ManualDB();         
         int userID = (Integer) session.getAttribute("userID");
-        
-        ArrayList currentManual = new ArrayList();
+        ArrayList <Manual> currentManual = new ArrayList();
         
         try {
             List <Manual> manual = manualDB.getAll();
             for (Manual m: manual){
                 if (m.getUserAdded() == userID) {
-                    currentManual.add(manual);
+                    currentManual.add(m);
                 }
             }
         } catch (Exception ex) {

@@ -10,7 +10,7 @@
     </head>
     <body>
         <h1>Manual Pages for OurSafety Application</h1>
-<!--        <table>
+        <table>
             <tr>
                 <th>Manual Id</th>
                 <th>Date Added</th>
@@ -27,6 +27,6 @@
                 <td>${manual.content}</td>
             </tr>
             </c:forEach>
-        </table>-->
+        </table>
     </body>
 </html>
