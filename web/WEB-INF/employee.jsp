@@ -38,35 +38,46 @@
                 </tr>
                 
                 <c:forEach  var="emp" items="${employeeList}">
+                    <c:set var="empNum" value="emp"/>
                     <tr>
                         <th>${emp.personID.firstName}</th>
                         <th>${emp.personID.lastName}</th>
                         <th>${emp.personID.dateOfBirth}</th>
                         <th>${emp.personID.gender}</th>
                         <th>${emp.email}</th>
-                        <th>${emp.companypersonphoneList}</th>
-<%--
+                        <c:forEach  var="add" items="${emp.companypersonaddressList}">
+                        <th>
+                        <c:if test="${empty add}">
+                        </c:if>
+                        <c:if test="${not empty add.addressID}">
+                        ${add.addressID.city}
+                        </c:if>
+                        </th>
+                        </c:forEach>
+
+
                         <td>
                             <form action="company" method="post">
                                 <input type="hidden" name="hidden_comp_emp_edit" value="hiddenEdit">
-                                <input type="hidden" name="hidden_ed" value="${emp.id}">
+                                <input type="hidden" name="hidden_ed_cp" value="${emp.companyPersonID}">
+                                <input type="hidden" name="hidden_ed_p" value="${emp.personID.personID}">
                                 <input type="submit" value="Edit">
                             </form>
                         </td>
                         <td>
                             <form action="company" method="post">
                                 <input type="hidden" name="hidden_comp_emp_del" value="hiddenDelete">
-                                <input type="hidden" name="hidden_del" value="${emp.id}">
+                                <input type="hidden" name="hidden_del_cp" value="${emp.companyPersonID}">
+                                <input type="hidden" name="hidden_del_p" value="${emp.personID.personID}">
                                 <input type="submit" value="Remove">
                             </form>
                         </td>
---%>
                     </tr>
+
                 </c:forEach>
                 
             </table>
         </div>
-            <%--
         <form action="company" method="post" class="companyAddForm">
             <h3>Add a new employee</h3>
             <input type="hidden" name="hidden_comp_emp_add" value="hiddenCompany"><br>
@@ -82,6 +93,5 @@
             <input type="submit" value="Add To Company">
             ${compAddMsg}
         </form>
-            --%>
     </body>
 </html>

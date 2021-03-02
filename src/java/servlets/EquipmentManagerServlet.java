@@ -9,11 +9,13 @@ import dataaccess.CompanyDB;
 import dataaccess.ItemClassDB;
 import dataaccess.ItemClassFieldsDB;
 import dataaccess.ItemDB;
+import dataaccess.LoginDB;
 import dataaccess.TypeLibraryDB;
 import domain.Company;
 import domain.Item;
 import domain.Itemclass;
 import domain.Itemclassfields;
+import domain.Logins;
 import domain.Typelibrary;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -40,10 +42,33 @@ public class EquipmentManagerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        HttpSession session = request.getSession();
+
+        // DQ: This segment will probably be replaced by a filter
+        if (session.getAttribute("userName") == null) {
+            response.sendRedirect("login");
+            return;
+        }
+
+        int userID = (Integer) session.getAttribute("userID");
+        Logins logins = new Logins();
+        String logout = request.getParameter("action");
+        LoginDB logindb = new LoginDB();
+
+        try {
+            List<Logins> loginList = logindb.getAll();
+            for (Logins login : loginList) {
+                if (login.getUserId() == userID) {
+                    logins = login;
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(companyWelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Company curr = logins.getCompanyID();
 
         String action = request.getParameter("action");
-        HttpSession session = request.getSession();
-        Company curr = new Company(1);
         ItemDB itemDB = new ItemDB();
         List<Item> itemsList = new ArrayList<Item>();
         
@@ -94,8 +119,25 @@ public class EquipmentManagerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        HttpSession session = request.getSession();
+        int userID = (Integer) session.getAttribute("userID");
+        Logins logins = new Logins();
+        String logout = request.getParameter("action");
+        LoginDB logindb = new LoginDB();
+
+        try {
+            List<Logins> loginList = logindb.getAll();
+            for (Logins login : loginList) {
+                if (login.getUserId() == userID) {
+                    logins = login;
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(companyWelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Company comp = logins.getCompanyID();
+        
         String action = request.getParameter("action");
-        Company comp = new Company(1);
         CompanyDB compDB = new CompanyDB();
         Equipment equip = new Equipment();
         

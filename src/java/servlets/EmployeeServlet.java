@@ -1,10 +1,14 @@
 package servlets;
 
+import dataaccess.CompanyPersonAddressDB;
 import dataaccess.CompanypersonDB;
+import dataaccess.CompanypositionsDB;
 import dataaccess.LoginDB;
 import dataaccess.PersonDB;
 import domain.Company;
 import domain.Companyperson;
+import domain.Companypersonaddress;
+import domain.Companypositions;
 import domain.Logins;
 import domain.Person;
 import java.io.IOException;
@@ -85,8 +89,10 @@ public class EmployeeServlet extends HttpServlet {
         Company curr = new Company(1);
         CompanypersonDB compPerDB = new CompanypersonDB();
         
+        CompanyPersonAddressDB addressDB = new CompanyPersonAddressDB();
         
         List<Companyperson> compPersonList = new ArrayList<Companyperson>();
+        List<Companypersonaddress> addList = new ArrayList<Companypersonaddress>();
         
         try {
             compPersonList = (List<Companyperson>) compPerDB.getAll(curr);
@@ -94,6 +100,8 @@ public class EmployeeServlet extends HttpServlet {
             Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        
+
         request.setAttribute("employeeList", compPersonList);
 
         getServletContext().getRequestDispatcher("/WEB-INF/employee.jsp").forward(request, response);
