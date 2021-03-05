@@ -33,17 +33,17 @@ public class Company implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "company_ID")
+    @Column(name = "company_ID", insertable=false)
     private Integer companyID;
     @Column(name = "dateAdded")
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
-    @Column(name = "dateRemoved")
+    @Column(name = "dateRemoved", insertable=false)
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
     @Column(name = "userAdded")
     private Integer userAdded;
-    @Column(name = "userRemoved")
+    @Column(name = "userRemoved", insertable=false)
     private Integer userRemoved;
     @Column(name = "shortname")
     private String shortname;
