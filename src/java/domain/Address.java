@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -60,9 +61,9 @@ public class Address implements Serializable {
     @Column(name = "postalCode")
     private String postalCode;
     @JoinColumn(name = "typeLibrary_ID", referencedColumnName = "typeLibrary_ID")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Typelibrary typeLibraryID;
-    @OneToMany(mappedBy = "addressID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "addressID", fetch = FetchType.EAGER)
     private List<Companypersonaddress> companypersonaddressList;
 
     public Address() {

@@ -38,11 +38,12 @@ public class CompanyService {
         return companyDB.getAll();
     }
      
-     
+     /*
      public int insert(int companyID, Date dateadded, String name, String shortname, String description, String account,  String industry) throws Exception {
          Company comp = new Company (companyID,dateadded, name, shortname, description, account, industry);
          return companyDB.insert(comp);
     }
+     
      
      
     

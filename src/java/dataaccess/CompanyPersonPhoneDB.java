@@ -28,6 +28,17 @@ public class CompanyPersonPhoneDB {
         }
     }
         
+        public Companypersonphone get(Companyperson compPerson) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        
+        try {
+            Companypersonphone add = em.find(Companypersonphone.class, compPerson);
+            return add;
+        } finally { 
+            em.close();
+        }
+    }
+        
         public void update(Companypersonphone comp) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -65,7 +76,7 @@ public class CompanyPersonPhoneDB {
         EntityTransaction trans = em.getTransaction();
         try {
             trans.begin();
-            em.remove(em.merge(add));
+            em.remove(add);
             trans.commit();
         } catch(Exception ex){
             trans.rollback();

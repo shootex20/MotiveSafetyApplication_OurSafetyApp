@@ -62,7 +62,7 @@ public class PhoneDB {
         EntityTransaction trans = em.getTransaction();
         try {
             trans.begin();
-            em.remove(em.merge(phone));
+            em.remove(phone);
             trans.commit();
         } catch(Exception ex){
             trans.rollback();

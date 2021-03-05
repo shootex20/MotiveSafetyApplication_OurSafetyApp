@@ -14,6 +14,8 @@ import domain.Itemclassfields;
 import domain.Company;
 import domain.Companyperson;
 import domain.Person;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Query;
 
 
@@ -78,12 +80,12 @@ public class PersonDB {
         }
     }
 
-    public void delete(Person add) throws Exception {
+    public void delete(Person user) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();  
         EntityTransaction trans = em.getTransaction();
         try {
             trans.begin();
-            em.remove(em.merge(add));
+            em.remove(user);
             trans.commit();
         } catch(Exception ex){
             trans.rollback();

@@ -22,7 +22,7 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+/*
          String action = request.getParameter("action");
          
          if (action != null && action.equals("view")) {
@@ -47,13 +47,14 @@ public class AdminServlet extends HttpServlet {
         request.setAttribute("company", comp);
 
         getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
+*/
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
       
-        
+        /*
         try {
             
             CompanyService cs = new CompanyService();
@@ -98,6 +99,8 @@ public class AdminServlet extends HttpServlet {
         }
         
         getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
+*/
     }
+
 
 }

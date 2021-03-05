@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -56,12 +57,12 @@ public class Person implements Serializable {
     private Date dateOfBirth;
     @Column(name = "gender")
     private Character gender;
-    @OneToMany(mappedBy = "personID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personID", fetch = FetchType.EAGER)
     private List<Companyperson> companypersonList;
     @JoinColumn(name = "emergencyContact_ID", referencedColumnName = "emergencyContact_ID")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Emergencycontact emergencyContactID;
-    @OneToMany(mappedBy = "personID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personID", fetch = FetchType.EAGER)
     private List<Logins> loginsList;
 
     public Person() {

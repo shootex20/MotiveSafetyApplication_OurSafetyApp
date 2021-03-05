@@ -67,7 +67,7 @@ public class AddressDB {
         EntityTransaction trans = em.getTransaction();
         try {
             trans.begin();
-            em.remove(em.merge(add));
+            em.remove(add);
             trans.commit();
         } catch(Exception ex){
             trans.rollback();

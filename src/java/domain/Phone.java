@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -56,9 +57,9 @@ public class Phone implements Serializable {
     @Column(name = "extension")
     private String extension;
     @JoinColumn(name = "typeLibrary_ID", referencedColumnName = "typeLibrary_ID")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Typelibrary typeLibraryID;
-    @OneToMany(mappedBy = "phoneID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "phoneID", fetch = FetchType.EAGER)
     private List<Companypersonphone> companypersonphoneList;
 
     public Phone() {

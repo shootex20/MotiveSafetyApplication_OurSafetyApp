@@ -8,6 +8,7 @@ package domain;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -49,10 +50,10 @@ public class Companypersonphone implements Serializable {
     @Column(name = "userRemoved", insertable=false)
     private Integer userRemoved;
     @JoinColumn(name = "companyPerson_ID", referencedColumnName = "companyPerson_ID")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Companyperson companyPersonID;
     @JoinColumn(name = "phone_ID", referencedColumnName = "phone_ID")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Phone phoneID;
 
     public Companypersonphone() {

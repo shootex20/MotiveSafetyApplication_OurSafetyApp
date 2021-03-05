@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -49,17 +50,17 @@ public class Companyperson implements Serializable {
     private Integer userRemoved;
     @Column(name = "email")
     private String email;
-    @OneToMany(mappedBy = "companyPersonID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
     private List<Companynotes> companynotesList;
     @JoinColumn(name = "company_ID", referencedColumnName = "company_ID")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Company companyID;
     @JoinColumn(name = "person_ID", referencedColumnName = "person_ID")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Person personID;
-    @OneToMany(mappedBy = "companyPersonID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
     private List<Companypersonaddress> companypersonaddressList;
-    @OneToMany(mappedBy = "companyPersonID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
     private List<Companypersonphone> companypersonphoneList;
 
     public Companyperson() {
