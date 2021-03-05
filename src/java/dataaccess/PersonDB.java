@@ -45,69 +45,50 @@ public class PersonDB {
             em.close();
         }
     }
-     /*
-   
-    public Item get(int item_ID) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        
-        try {
-            Item item = em.find(Item.class, item_ID);
-            return item;
-        } finally { 
-            em.close();
+         
+    public void update(Person comp) throws Exception {
+            EntityManager em = DBUtil.getEmFactory().createEntityManager();
+            EntityTransaction trans = em.getTransaction();
+            try {
+                trans.begin();
+               em.merge(comp);
+               trans.commit();
+
+            } catch (Exception ex) {
+                trans.rollback();
+            } finally {
+               em.close();
+            }
+
         }
-    }
     
-        public void insert(Item item) throws Exception {
+        public void insert(Person add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
-        
+
         try {
-            Company user = item.getCompanyID();
-            user.getItemList().add(item);
             trans.begin();
-            em.persist(item);
-            em.merge(user);
+            em.persist(add);
             trans.commit();
-        } catch (Exception ex) {
+        }catch (Exception ex) {
+            trans.rollback();
+        }finally {
+            em.close();
+        
+        }
+    }
+
+    public void delete(Person add) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();  
+        EntityTransaction trans = em.getTransaction();
+        try {
+            trans.begin();
+            em.remove(em.merge(add));
+            trans.commit();
+        } catch(Exception ex){
             trans.rollback();
         } finally {
             em.close();
         }
     }
-
-    public void update(Item item) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
-        
-        try {
-            trans.begin();
-            em.merge(item);
-            trans.commit();
-        } catch (Exception ex) {
-            trans.rollback();
-        } finally {
-            em.close();
-        }
-    }
-
-    public void delete(Item item) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
-        
-        try {
-            Company user = item.getCompanyID();
-            user.getItemList().remove(item);
-            trans.begin();
-            em.remove(em.merge(item));
-            em.merge(user);
-            trans.commit();
-        } catch (Exception ex) {
-            trans.rollback();
-        } finally {
-            em.close();
-        }
-
-    }
-*/
 }

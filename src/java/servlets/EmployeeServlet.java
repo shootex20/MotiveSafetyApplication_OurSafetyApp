@@ -132,6 +132,8 @@ public class EmployeeServlet extends HttpServlet {
         if(action.equals("Add"))  
         {
             
+            
+            
         }
         else if (action.equals("Edit"))
         {
@@ -139,6 +141,8 @@ public class EmployeeServlet extends HttpServlet {
         }
         else if (action.equals("Delete"))
         {
+            
+            
             
         }
         

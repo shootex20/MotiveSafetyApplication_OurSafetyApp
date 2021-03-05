@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import domain.Companyperson;
 import domain.Companypersonphone;
+import javax.persistence.EntityTransaction;
 
 
 /**
@@ -27,4 +28,49 @@ public class CompanyPersonPhoneDB {
         }
     }
         
+        public void update(Companypersonphone comp) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        try {
+            trans.begin();
+           em.merge(comp);
+           trans.commit();
+           
+        } catch (Exception ex) {
+            trans.rollback();
+        } finally {
+           em.close();
+        }
+        
+    }
+        
+        public void insert(Companypersonphone add) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+
+        try {
+            trans.begin();
+            em.persist(add);
+            trans.commit();
+        }catch (Exception ex) {
+            trans.rollback();
+        }finally {
+            em.close();
+        
+        }
+    }
+
+    public void delete(Companypersonphone add) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();  
+        EntityTransaction trans = em.getTransaction();
+        try {
+            trans.begin();
+            em.remove(em.merge(add));
+            trans.commit();
+        } catch(Exception ex){
+            trans.rollback();
+        } finally {
+            em.close();
+        }
+    }
 }
