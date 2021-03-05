@@ -31,25 +31,29 @@
                     <th>Email</th>
                     <th>Phone Number</th>
                     <th>Address</th>
-                    <th></th>
-                    <th></th>
+                    <th>Position</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
                 
                 <c:forEach  var="emp" items="${employeeList}">
-                    <c:set var="empNum" value="emp"/>
                     <tr>
                         <th>${emp.personID.firstName}</th>
                         <th>${emp.personID.lastName}</th>
                         <th>${emp.personID.dateOfBirth}</th>
                         <th>${emp.personID.gender}</th>
                         <th>${emp.email}</th>
+
                         <c:if test="${empty emp.companypersonphoneList}">
-                        <th></th>
+                            <th> </th>
                         </c:if>
+                            
                         <c:if test="${not empty emp.companypersonphoneList}">
                         <c:forEach  var="phone" items="${emp.companypersonphoneList}">
-                        <th>
+                            <th>
+                            <c:if test="${phone.companyPersonID eq emp}">
                         ${phone.phoneID.countryCode}-${phone.phoneID.areaCode}-${phone.phoneID.localNumber}-${phone.phoneID.extension}
+                            </c:if>
                         </th>
                         </c:forEach>
                         </c:if>
@@ -57,6 +61,8 @@
                         <c:if test="${empty emp.companypersonaddressList}">
                             <th></th>
                         </c:if>
+                                
+                                
                         <c:if test="${not empty emp.companypersonaddressList}">
                         <c:forEach  var="add" items="${emp.companypersonaddressList}">
                         <th>
@@ -64,25 +70,38 @@
                         </th>
                         </c:forEach>
                         </c:if>
-                        <td>
+                        
+                        <th>
+                        <c:forEach var="pos" items="${positionList}">
+
+                            <c:if test="${pos.companyPersonID eq (emp.companyPersonID)}">
+
+                            ${pos.positionTitle} 
+
+                            </c:if>
+
+                        </c:forEach>
+                        </th>
+
+
+                        <th>
                             <form action="company" method="post">
                                 <input type="hidden" name="hidden_comp_emp_edit" value="hiddenEdit">
                                 <input type="hidden" name="hidden_ed_cp" value="${emp.companyPersonID}">
                                 <input type="hidden" name="hidden_ed_p" value="${emp.personID.personID}">
                                 <input type="submit" value="Edit">
                             </form>
-                        </td>
-                        <td>
+                        </th>
+                        <th>
                             <form action="company" method="post">
                                 <input type="hidden" name="hidden_comp_emp_del" value="hiddenDelete">
                                 <input type="hidden" name="hidden_del_cp" value="${emp.companyPersonID}">
                                 <input type="hidden" name="hidden_del_p" value="${emp.personID.personID}">
                                 <input type="submit" value="Remove">
                             </form>
-                        </td>
+                        </th>
                     </tr>
                 </c:forEach>
-                
             </table>
         </div>
         <form action="company" method="post" class="companyAddForm">

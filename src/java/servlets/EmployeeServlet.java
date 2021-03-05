@@ -2,7 +2,7 @@ package servlets;
 
 import dataaccess.CompanyPersonAddressDB;
 import dataaccess.CompanypersonDB;
-import dataaccess.CompanypositionsDB;
+import dataaccess.CompanyPositionsDB;
 import dataaccess.LoginDB;
 import dataaccess.PersonDB;
 import domain.Company;
@@ -88,20 +88,32 @@ public class EmployeeServlet extends HttpServlet {
         
         Company curr = new Company(1);
         CompanypersonDB compPerDB = new CompanypersonDB();
-        
-        CompanyPersonAddressDB addressDB = new CompanyPersonAddressDB();
+        CompanyPositionsDB posDB = new CompanyPositionsDB();
         
         List<Companyperson> compPersonList = new ArrayList<Companyperson>();
-        List<Companypersonaddress> addList = new ArrayList<Companypersonaddress>();
+        List<Companypositions> positionsList = new ArrayList<Companypositions>();
+        List<Companypositions> compPositions = new ArrayList<Companypositions>();
         
         try {
             compPersonList = (List<Companyperson>) compPerDB.getAll(curr);
         } catch (Exception ex) {
             Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+        try {
+            positionsList = posDB.getAll();
+        } catch (Exception ex) {
+        Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
+        for (int i = 0; i < compPersonList.size(); i++)
+        {
+            if(compPersonList.get(i).getCompanyID().getCompanyID() == positionsList.get(i).getCompanyID())
+            {
+                compPositions.add(positionsList.get(i));
+            }
+        }
+        
+        request.setAttribute("positionList", compPositions);
         request.setAttribute("employeeList", compPersonList);
 
         getServletContext().getRequestDispatcher("/WEB-INF/employee.jsp").forward(request, response);
