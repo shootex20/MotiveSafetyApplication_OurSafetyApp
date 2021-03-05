@@ -60,7 +60,8 @@ public class EmployeeServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(companyWelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        CompanyDB compDB = new CompanyDB();
+        //Test data.    Must be deleted when finished.
+      //Company curr = new Company(1);
 
         Company curr = logins.getCompanyID();
  
