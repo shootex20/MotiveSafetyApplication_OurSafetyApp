@@ -23,17 +23,9 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
-
-        // DQ: This segment will probably be replaced by a filter
-        if (session.getAttribute("userName") == null) {
-            response.sendRedirect("login");
-            return;
-        }
-
-        String action = request.getParameter("action");
-
-        if (action != null && action.equals("view")) {
+         String action = request.getParameter("action");
+         
+         if (action != null && action.equals("view")) {
             Integer selectedCompany = Integer.parseInt(request.getParameter("selectedCompany"));
             try {
                 Company comp = cs.get(selectedCompany);
@@ -42,9 +34,11 @@ public class AdminServlet extends HttpServlet {
                 Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
+         
+         
+        
         CompanyDB cs = new CompanyDB();
-        List<Company> comp = new ArrayList<>();
+        List<Company> comp = new ArrayList<Company>();        
         try {
             comp = cs.getAll();
         } catch (Exception ex) {
@@ -58,33 +52,24 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+      
+        
         try {
-
+            
             CompanyService cs = new CompanyService();
             String action = request.getParameter("action");
-            String passwordAction = request.getParameter("displayPass");
             Integer companyid = Integer.parseInt(request.getParameter("compid"));
-
+            
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
             Date dateadded = sdf.parse(request.getParameter("dateadded"));
-
+           
             String compname = request.getParameter("compname");
             String shortname = request.getParameter("shortname");
             String description = request.getParameter("description");
             String account = request.getParameter("account");
             String industry = request.getParameter("industry");
-
-            String managerID = request.getParameter("managerID");
-            String dateAdded = request.getParameter("dateAdded");
-            String dateRemoved = request.getParameter("dateRemoved");
-            String firstName = request.getParameter("firstname");
-            String lastName = request.getParameter("lastname");
-            String email = request.getParameter("email");
-            String password = request.getParameter("passwordAdd");
-            String oldPassword = request.getParameter("oldpassword");
-            String newPassword = request.getParameter("newpassword");
-
+            
+            
             try {
                 if (action.equals("delete")) {
                     Integer selectedCompany = Integer.parseInt(request.getParameter("selectedCompany"));
@@ -97,7 +82,7 @@ public class AdminServlet extends HttpServlet {
             } catch (Exception ex) {
                 request.setAttribute("errorMessage", "An error occured.");
             }
-
+            
             List<Company> comps = null;
             try {
                 comps = (List<Company>) cs.getAll();
@@ -105,19 +90,13 @@ public class AdminServlet extends HttpServlet {
                 Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             request.setAttribute("comps", comps);
-
-            if (passwordAction != null && passwordAction.equals("showAdd")) {
-                request.setAttribute("passAddMsg", "Plain Text: " + password);
-            } else if (passwordAction != null & passwordAction.equals("showEdit")) {
-                request.setAttribute("passEditOldMsg", "Plain Text: " + oldPassword);
-                request.setAttribute("passEditNewMsg", "Plain Text: " + newPassword);
-            }
-
+            
+            
             getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
         } catch (ParseException ex) {
             Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
     }
 

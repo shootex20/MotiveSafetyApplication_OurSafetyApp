@@ -1,5 +1,6 @@
 package servlets;
 
+import dataaccess.CompanyDB;
 import dataaccess.CompanyPersonAddressDB;
 import dataaccess.CompanypersonDB;
 import dataaccess.CompanyPositionsDB;
@@ -39,8 +40,6 @@ public class EmployeeServlet extends HttpServlet {
             response.sendRedirect("login");
             return;
         }
-        
-        Person temp = new Person(1);
 
         int userID = (Integer) session.getAttribute("userID");
         Logins logins = new Logins();
@@ -61,8 +60,13 @@ public class EmployeeServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(companyWelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //Test data.    Must be deleted when finished.
+      //Company curr = new Company(1);
 
+        Company curr = logins.getCompanyID();
+ 
         request.setAttribute("companyName", logins.getCompanyID().getDescription());
+        
         try {
             if (company != null) {
                 response.sendRedirect("company");
@@ -86,7 +90,6 @@ public class EmployeeServlet extends HttpServlet {
             Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        Company curr = new Company(1);
         CompanypersonDB compPerDB = new CompanypersonDB();
         CompanyPositionsDB posDB = new CompanyPositionsDB();
         
@@ -123,6 +126,27 @@ public class EmployeeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String action = request.getParameter("action");
+                
+        if(action.equals("Add"))  
+        {
+            
+            
+            
+        }
+        else if (action.equals("Edit"))
+        {
+            
+        }
+        else if (action.equals("Delete"))
+        {
+            
+            
+            
+        }
+        
+        
 
         getServletContext().getRequestDispatcher("/WEB-INF/employee.jsp").forward(request, response);
 

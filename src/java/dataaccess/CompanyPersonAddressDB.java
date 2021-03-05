@@ -32,5 +32,52 @@ public class CompanyPersonAddressDB {
             em.close();
         }
     }
+    
+    public void update(Companypersonaddress comp) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        try {
+            trans.begin();
+           em.merge(comp);
+           trans.commit();
+           
+        } catch (Exception ex) {
+            trans.rollback();
+        } finally {
+           em.close();
+
+        }
+        
+    }
+    
+    public void insert(Companypersonaddress add) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+
+        try {
+            trans.begin();
+            em.persist(add);
+            trans.commit();
+        }catch (Exception ex) {
+            trans.rollback();
+        }finally {
+            em.close();
+        
+        }
+    }
+
+    public void delete(Companypersonaddress add) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();  
+        EntityTransaction trans = em.getTransaction();
+        try {
+            trans.begin();
+            em.remove(em.merge(add));
+            trans.commit();
+        } catch(Exception ex){
+            trans.rollback();
+        } finally {
+            em.close();
+        }
+    }
   
 }

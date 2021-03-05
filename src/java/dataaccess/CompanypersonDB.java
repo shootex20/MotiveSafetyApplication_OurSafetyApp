@@ -8,12 +8,8 @@ package dataaccess;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import domain.Item;
-import domain.Itemclass;
-import domain.Itemclassfields;
 import domain.Company;
 import domain.Companyperson;
-import javax.persistence.Query;
 
 
 /**
@@ -39,6 +35,51 @@ public class CompanypersonDB {
             Companyperson compPer = em.find(Companyperson.class, person_ID);
             return compPer;
         } finally { 
+            em.close();
+        }
+    }
+    
+    public void update(Companyperson comp) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        try {
+           trans.begin();
+           em.merge(comp);
+           trans.commit();
+        } catch (Exception ex) {
+            trans.rollback();
+        } finally {
+           em.close();
+        }
+        
+    }
+    
+            public void insert(Companyperson add) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+
+        try {
+            trans.begin();
+            em.persist(add);
+            trans.commit();
+        }catch (Exception ex) {
+            trans.rollback();
+        }finally {
+            em.close();
+        
+        }
+    }
+
+    public void delete(Companyperson add) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();  
+        EntityTransaction trans = em.getTransaction();
+        try {
+            trans.begin();
+            em.remove(em.merge(add));
+            trans.commit();
+        } catch(Exception ex){
+            trans.rollback();
+        } finally {
             em.close();
         }
     }

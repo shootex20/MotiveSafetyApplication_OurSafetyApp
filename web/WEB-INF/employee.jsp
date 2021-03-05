@@ -75,9 +75,7 @@
                         <c:forEach var="pos" items="${positionList}">
 
                             <c:if test="${pos.companyPersonID eq (emp.companyPersonID)}">
-
                             ${pos.positionTitle} 
-
                             </c:if>
 
                         </c:forEach>
@@ -88,16 +86,16 @@
                             <form action="company" method="post">
                                 <input type="hidden" name="hidden_comp_emp_edit" value="hiddenEdit">
                                 <input type="hidden" name="hidden_ed_cp" value="${emp.companyPersonID}">
-                                <input type="hidden" name="hidden_ed_p" value="${emp.personID.personID}">
-                                <input type="submit" value="Edit">
+                                <input type="hidden" name="hidden_ed_person" value="${emp.personID.personID}">
+                                <input type="submit" name="action" value="Edit">
                             </form>
                         </th>
                         <th>
                             <form action="company" method="post">
                                 <input type="hidden" name="hidden_comp_emp_del" value="hiddenDelete">
                                 <input type="hidden" name="hidden_del_cp" value="${emp.companyPersonID}">
-                                <input type="hidden" name="hidden_del_p" value="${emp.personID.personID}">
-                                <input type="submit" value="Remove">
+                                <input type="hidden" name="hidden_del_person" value="${emp.personID.personID}">
+                                <input type="submit" name="action" value="Remove">
                             </form>
                         </th>
                     </tr>
@@ -116,7 +114,7 @@
             <label>Address</label><input type="text" name="comp_address"><br>
             <label>Position</label><input type="text" name="comp_phone"><br>
             <label>Role</label><input type="text" name="comp_role"><br>
-            <input type="submit" value="Add To Company">
+            <input type="submit" name="action" value="Add">
             ${compAddMsg}
         </form>
     </body>

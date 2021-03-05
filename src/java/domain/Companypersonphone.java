@@ -36,17 +36,17 @@ public class Companypersonphone implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "companyPersonPhone_ID")
+    @Column(name = "companyPersonPhone_ID", insertable=false)
     private Integer companyPersonPhoneID;
     @Column(name = "dateAdded")
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
-    @Column(name = "dateRemoved")
+    @Column(name = "dateRemoved", insertable=false)
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
     @Column(name = "userAdded")
     private Integer userAdded;
-    @Column(name = "userRemoved")
+    @Column(name = "userRemoved", insertable=false)
     private Integer userRemoved;
     @JoinColumn(name = "companyPerson_ID", referencedColumnName = "companyPerson_ID")
     @ManyToOne(fetch = FetchType.EAGER)
