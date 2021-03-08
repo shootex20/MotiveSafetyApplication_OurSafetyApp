@@ -630,7 +630,8 @@ DELETE FROM `logins`;
 /*!40000 ALTER TABLE `logins` DISABLE KEYS */;
 INSERT INTO `logins` (`user_id`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `username`, `password`, `company_ID`, `person_ID`, `isActive`, `isAdmin`) VALUES
 	(1, '2021-02-09', NULL, 0, NULL, 'admin', 'password', NULL, NULL, 'T', 'T'),
-	(2, '2021-02-09', NULL, 1, NULL, 'manager1', 'password', 2, 2, 'T', 'F');
+	(2, '2021-02-09', NULL, 1, NULL, 'manager1', 'password', 2, 2, 'T', 'F'),
+        (3, '2021-03-07', NULL, 1, NULL, 'manager2', 'password', 1, 3, 'T', 'F');
 /*!40000 ALTER TABLE `logins` ENABLE KEYS */;
 
 -- Dumping data for table oursafetydb.manual: ~2 rows (approximately)
