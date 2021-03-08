@@ -13,6 +13,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,6 +24,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -29,12 +33,25 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "address")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a")})
+    @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a")
+    , @NamedQuery(name = "Address.findByAddressID", query = "SELECT a FROM Address a WHERE a.addressID = :addressID")
+    , @NamedQuery(name = "Address.findByDateAdded", query = "SELECT a FROM Address a WHERE a.dateAdded = :dateAdded")
+    , @NamedQuery(name = "Address.findByDateRemoved", query = "SELECT a FROM Address a WHERE a.dateRemoved = :dateRemoved")
+    , @NamedQuery(name = "Address.findByUserAdded", query = "SELECT a FROM Address a WHERE a.userAdded = :userAdded")
+    , @NamedQuery(name = "Address.findByUserRemoved", query = "SELECT a FROM Address a WHERE a.userRemoved = :userRemoved")
+    , @NamedQuery(name = "Address.findByAddressLine1", query = "SELECT a FROM Address a WHERE a.addressLine1 = :addressLine1")
+    , @NamedQuery(name = "Address.findByAddressLine2", query = "SELECT a FROM Address a WHERE a.addressLine2 = :addressLine2")
+    , @NamedQuery(name = "Address.findByCity", query = "SELECT a FROM Address a WHERE a.city = :city")
+    , @NamedQuery(name = "Address.findByProvince", query = "SELECT a FROM Address a WHERE a.province = :province")
+    , @NamedQuery(name = "Address.findByCountry", query = "SELECT a FROM Address a WHERE a.country = :country")
+    , @NamedQuery(name = "Address.findByPostalCode", query = "SELECT a FROM Address a WHERE a.postalCode = :postalCode")})
 public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "address_ID", insertable=false)
     private Integer addressID;
@@ -61,7 +78,7 @@ public class Address implements Serializable {
     @Column(name = "postalCode")
     private String postalCode;
     @JoinColumn(name = "typeLibrary_ID", referencedColumnName = "typeLibrary_ID")
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Typelibrary typeLibraryID;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "addressID", fetch = FetchType.EAGER)
     private List<Companypersonaddress> companypersonaddressList;
@@ -169,6 +186,7 @@ public class Address implements Serializable {
         this.typeLibraryID = typeLibraryID;
     }
 
+    @XmlTransient
     public List<Companypersonaddress> getCompanypersonaddressList() {
         return companypersonaddressList;
     }

@@ -21,6 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -28,8 +29,17 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "companynotes")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Companynotes.findAll", query = "SELECT c FROM Companynotes c")})
+    @NamedQuery(name = "Companynotes.findAll", query = "SELECT c FROM Companynotes c")
+    , @NamedQuery(name = "Companynotes.findByCompanyNotesID", query = "SELECT c FROM Companynotes c WHERE c.companyNotesID = :companyNotesID")
+    , @NamedQuery(name = "Companynotes.findByDateAdded", query = "SELECT c FROM Companynotes c WHERE c.dateAdded = :dateAdded")
+    , @NamedQuery(name = "Companynotes.findByDateRemoved", query = "SELECT c FROM Companynotes c WHERE c.dateRemoved = :dateRemoved")
+    , @NamedQuery(name = "Companynotes.findByUserAdded", query = "SELECT c FROM Companynotes c WHERE c.userAdded = :userAdded")
+    , @NamedQuery(name = "Companynotes.findByUserRemoved", query = "SELECT c FROM Companynotes c WHERE c.userRemoved = :userRemoved")
+    , @NamedQuery(name = "Companynotes.findByNoteDate", query = "SELECT c FROM Companynotes c WHERE c.noteDate = :noteDate")
+    , @NamedQuery(name = "Companynotes.findByNoteIndex", query = "SELECT c FROM Companynotes c WHERE c.noteIndex = :noteIndex")
+    , @NamedQuery(name = "Companynotes.findByNote", query = "SELECT c FROM Companynotes c WHERE c.note = :note")})
 public class Companynotes implements Serializable {
 
     private static final long serialVersionUID = 1L;

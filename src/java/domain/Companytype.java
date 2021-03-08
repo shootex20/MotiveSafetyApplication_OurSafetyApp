@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,6 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -26,12 +29,19 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "companytype")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Companytype.findAll", query = "SELECT c FROM Companytype c")})
+    @NamedQuery(name = "Companytype.findAll", query = "SELECT c FROM Companytype c")
+    , @NamedQuery(name = "Companytype.findByCompanyTypeID", query = "SELECT c FROM Companytype c WHERE c.companyTypeID = :companyTypeID")
+    , @NamedQuery(name = "Companytype.findByDateAdded", query = "SELECT c FROM Companytype c WHERE c.dateAdded = :dateAdded")
+    , @NamedQuery(name = "Companytype.findByDateRemoved", query = "SELECT c FROM Companytype c WHERE c.dateRemoved = :dateRemoved")
+    , @NamedQuery(name = "Companytype.findByUserAdded", query = "SELECT c FROM Companytype c WHERE c.userAdded = :userAdded")
+    , @NamedQuery(name = "Companytype.findByUserRemoved", query = "SELECT c FROM Companytype c WHERE c.userRemoved = :userRemoved")})
 public class Companytype implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "companyType_ID")
     private Integer companyTypeID;

@@ -13,6 +13,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,6 +24,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -29,12 +33,23 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "phone")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Phone.findAll", query = "SELECT p FROM Phone p")})
+    @NamedQuery(name = "Phone.findAll", query = "SELECT p FROM Phone p")
+    , @NamedQuery(name = "Phone.findByPhoneID", query = "SELECT p FROM Phone p WHERE p.phoneID = :phoneID")
+    , @NamedQuery(name = "Phone.findByDateAdded", query = "SELECT p FROM Phone p WHERE p.dateAdded = :dateAdded")
+    , @NamedQuery(name = "Phone.findByDateRemoved", query = "SELECT p FROM Phone p WHERE p.dateRemoved = :dateRemoved")
+    , @NamedQuery(name = "Phone.findByUserAdded", query = "SELECT p FROM Phone p WHERE p.userAdded = :userAdded")
+    , @NamedQuery(name = "Phone.findByUserRemoved", query = "SELECT p FROM Phone p WHERE p.userRemoved = :userRemoved")
+    , @NamedQuery(name = "Phone.findByCountryCode", query = "SELECT p FROM Phone p WHERE p.countryCode = :countryCode")
+    , @NamedQuery(name = "Phone.findByAreaCode", query = "SELECT p FROM Phone p WHERE p.areaCode = :areaCode")
+    , @NamedQuery(name = "Phone.findByLocalNumber", query = "SELECT p FROM Phone p WHERE p.localNumber = :localNumber")
+    , @NamedQuery(name = "Phone.findByExtension", query = "SELECT p FROM Phone p WHERE p.extension = :extension")})
 public class Phone implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "phone_ID", insertable=false)
     private Integer phoneID;
@@ -57,7 +72,7 @@ public class Phone implements Serializable {
     @Column(name = "extension")
     private String extension;
     @JoinColumn(name = "typeLibrary_ID", referencedColumnName = "typeLibrary_ID")
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Typelibrary typeLibraryID;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "phoneID", fetch = FetchType.EAGER)
     private List<Companypersonphone> companypersonphoneList;
@@ -149,6 +164,7 @@ public class Phone implements Serializable {
         this.typeLibraryID = typeLibraryID;
     }
 
+    @XmlTransient
     public List<Companypersonphone> getCompanypersonphoneList() {
         return companypersonphoneList;
     }

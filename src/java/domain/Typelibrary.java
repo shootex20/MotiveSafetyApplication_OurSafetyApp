@@ -9,9 +9,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -19,6 +22,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -26,12 +31,22 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "typelibrary")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Typelibrary.findAll", query = "SELECT t FROM Typelibrary t")})
+    @NamedQuery(name = "Typelibrary.findAll", query = "SELECT t FROM Typelibrary t")
+    , @NamedQuery(name = "Typelibrary.findByTypeLibraryID", query = "SELECT t FROM Typelibrary t WHERE t.typeLibraryID = :typeLibraryID")
+    , @NamedQuery(name = "Typelibrary.findByDateAdded", query = "SELECT t FROM Typelibrary t WHERE t.dateAdded = :dateAdded")
+    , @NamedQuery(name = "Typelibrary.findByDateRemoved", query = "SELECT t FROM Typelibrary t WHERE t.dateRemoved = :dateRemoved")
+    , @NamedQuery(name = "Typelibrary.findByUserAdded", query = "SELECT t FROM Typelibrary t WHERE t.userAdded = :userAdded")
+    , @NamedQuery(name = "Typelibrary.findByUserRemoved", query = "SELECT t FROM Typelibrary t WHERE t.userRemoved = :userRemoved")
+    , @NamedQuery(name = "Typelibrary.findByType", query = "SELECT t FROM Typelibrary t WHERE t.type = :type")
+    , @NamedQuery(name = "Typelibrary.findByDescription", query = "SELECT t FROM Typelibrary t WHERE t.description = :description")
+    , @NamedQuery(name = "Typelibrary.findByIsCategory", query = "SELECT t FROM Typelibrary t WHERE t.isCategory = :isCategory")})
 public class Typelibrary implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "typeLibrary_ID")
     private Integer typeLibraryID;
@@ -51,19 +66,19 @@ public class Typelibrary implements Serializable {
     private String description;
     @Column(name = "isCategory")
     private Character isCategory;
-    @OneToMany(mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Address> addressList;
-    @OneToMany(mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Manual> manualList;
-    @OneToMany(mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Url> urlList;
-    @OneToMany(mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Phone> phoneList;
-    @OneToMany(mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Companytype> companytypeList;
-    @OneToMany(mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Itemclassfields> itemclassfieldsList;
-    @OneToMany(mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Companyrelationship> companyrelationshipList;
 
     public Typelibrary() {
@@ -137,6 +152,7 @@ public class Typelibrary implements Serializable {
         this.isCategory = isCategory;
     }
 
+    @XmlTransient
     public List<Address> getAddressList() {
         return addressList;
     }
@@ -145,6 +161,7 @@ public class Typelibrary implements Serializable {
         this.addressList = addressList;
     }
 
+    @XmlTransient
     public List<Manual> getManualList() {
         return manualList;
     }
@@ -153,6 +170,7 @@ public class Typelibrary implements Serializable {
         this.manualList = manualList;
     }
 
+    @XmlTransient
     public List<Url> getUrlList() {
         return urlList;
     }
@@ -161,6 +179,7 @@ public class Typelibrary implements Serializable {
         this.urlList = urlList;
     }
 
+    @XmlTransient
     public List<Phone> getPhoneList() {
         return phoneList;
     }
@@ -169,6 +188,7 @@ public class Typelibrary implements Serializable {
         this.phoneList = phoneList;
     }
 
+    @XmlTransient
     public List<Companytype> getCompanytypeList() {
         return companytypeList;
     }
@@ -177,6 +197,7 @@ public class Typelibrary implements Serializable {
         this.companytypeList = companytypeList;
     }
 
+    @XmlTransient
     public List<Itemclassfields> getItemclassfieldsList() {
         return itemclassfieldsList;
     }
@@ -185,6 +206,7 @@ public class Typelibrary implements Serializable {
         this.itemclassfieldsList = itemclassfieldsList;
     }
 
+    @XmlTransient
     public List<Companyrelationship> getCompanyrelationshipList() {
         return companyrelationshipList;
     }

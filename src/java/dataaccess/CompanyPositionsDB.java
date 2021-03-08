@@ -10,6 +10,7 @@ import domain.Companyperson;
 import domain.Companypositions;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 
 /**
@@ -67,6 +68,21 @@ public class CompanyPositionsDB {
             em.close();
         }
         
+    }
+     
+         public int delete(Companypositions user) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();  
+        EntityTransaction trans = em.getTransaction();
+        try {
+            trans.begin();
+            em.remove(user);
+            trans.commit();
+        } catch(Exception ex){
+            trans.rollback();
+        } finally {
+            em.close();
+            return 1;
+        }
     }
   
 }

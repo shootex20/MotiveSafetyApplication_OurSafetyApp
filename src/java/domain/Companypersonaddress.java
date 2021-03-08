@@ -8,10 +8,11 @@ package domain;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,6 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -27,30 +29,37 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "companypersonaddress")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Companypersonaddress.findAll", query = "SELECT c FROM Companypersonaddress c")})
+    @NamedQuery(name = "Companypersonaddress.findAll", query = "SELECT c FROM Companypersonaddress c")
+    , @NamedQuery(name = "Companypersonaddress.findByCompanyPersonAddressID", query = "SELECT c FROM Companypersonaddress c WHERE c.companyPersonAddressID = :companyPersonAddressID")
+    , @NamedQuery(name = "Companypersonaddress.findByDateAdded", query = "SELECT c FROM Companypersonaddress c WHERE c.dateAdded = :dateAdded")
+    , @NamedQuery(name = "Companypersonaddress.findByDateRemoved", query = "SELECT c FROM Companypersonaddress c WHERE c.dateRemoved = :dateRemoved")
+    , @NamedQuery(name = "Companypersonaddress.findByUserAdded", query = "SELECT c FROM Companypersonaddress c WHERE c.userAdded = :userAdded")
+    , @NamedQuery(name = "Companypersonaddress.findByUserRemoved", query = "SELECT c FROM Companypersonaddress c WHERE c.userRemoved = :userRemoved")})
 public class Companypersonaddress implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "companyPersonAddress_ID", insertable=false)
+    @Column(name = "companyPersonAddress_ID", insertable = false)
     private Integer companyPersonAddressID;
     @Column(name = "dateAdded")
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
-    @Column(name = "dateRemoved", insertable=false)
+    @Column(name = "dateRemoved", insertable = false)
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
     @Column(name = "userAdded")
     private Integer userAdded;
-    @Column(name = "userRemoved", insertable=false)
+    @Column(name = "userRemoved", insertable = false)
     private Integer userRemoved;
     @JoinColumn(name = "address_ID", referencedColumnName = "address_ID")
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Address addressID;
     @JoinColumn(name = "companyPerson_ID", referencedColumnName = "companyPerson_ID")
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Companyperson companyPersonID;
 
     public Companypersonaddress() {

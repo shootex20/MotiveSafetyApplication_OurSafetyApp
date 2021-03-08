@@ -23,6 +23,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -30,8 +32,19 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "manual")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Manual.findAll", query = "SELECT m FROM Manual m")})
+    @NamedQuery(name = "Manual.findAll", query = "SELECT m FROM Manual m")
+    , @NamedQuery(name = "Manual.findByManualID", query = "SELECT m FROM Manual m WHERE m.manualID = :manualID")
+    , @NamedQuery(name = "Manual.findByDateAdded", query = "SELECT m FROM Manual m WHERE m.dateAdded = :dateAdded")
+    , @NamedQuery(name = "Manual.findByDateRemoved", query = "SELECT m FROM Manual m WHERE m.dateRemoved = :dateRemoved")
+    , @NamedQuery(name = "Manual.findByUserAdded", query = "SELECT m FROM Manual m WHERE m.userAdded = :userAdded")
+    , @NamedQuery(name = "Manual.findByUserRemoved", query = "SELECT m FROM Manual m WHERE m.userRemoved = :userRemoved")
+    , @NamedQuery(name = "Manual.findByParent", query = "SELECT m FROM Manual m WHERE m.parent = :parent")
+    , @NamedQuery(name = "Manual.findByTitle", query = "SELECT m FROM Manual m WHERE m.title = :title")
+    , @NamedQuery(name = "Manual.findByIntention", query = "SELECT m FROM Manual m WHERE m.intention = :intention")
+    , @NamedQuery(name = "Manual.findByOverview", query = "SELECT m FROM Manual m WHERE m.overview = :overview")
+    , @NamedQuery(name = "Manual.findByContent", query = "SELECT m FROM Manual m WHERE m.content = :content")})
 public class Manual implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -161,6 +174,7 @@ public class Manual implements Serializable {
         this.typeLibraryID = typeLibraryID;
     }
 
+    @XmlTransient
     public List<Manualuse> getManualuseList() {
         return manualuseList;
     }

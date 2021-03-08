@@ -4,6 +4,7 @@ import dataaccess.CompanyDB;
 import dataaccess.ItemDB;
 import domain.Company;
 import domain.Item;
+import domain.Itemclass;
 import java.util.Date;
 import java.util.List;
 

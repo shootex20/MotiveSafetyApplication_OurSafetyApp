@@ -5,9 +5,11 @@
  */
 package dataaccess;
 
+import domain.Companypositions;
 import domain.Logins;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 /**
  *
@@ -24,5 +26,20 @@ public class LoginDB {
             em.close();
         }
         
+    }
+       
+        public int delete(Logins user) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();  
+        EntityTransaction trans = em.getTransaction();
+        try {
+            trans.begin();
+            em.remove(user);
+            trans.commit();
+        } catch(Exception ex){
+            trans.rollback();
+        } finally {
+            em.close();
+            return 1;
+        }
     }
 }

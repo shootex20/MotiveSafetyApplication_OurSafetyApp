@@ -17,6 +17,7 @@ import domain.Companypositions;
 import domain.Logins;
 import domain.Person;
 import domain.Phone;
+import domain.Typelibrary;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -119,13 +120,6 @@ public class EmployeeServlet extends HttpServlet {
         Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        for (int i = 0; i < compPersonList.size(); i++)
-        {
-            if(compPersonList.get(i).getCompanyID().getCompanyID() == positionsList.get(i).getCompanyID())
-            {
-                compPositions.add(positionsList.get(i));
-            }
-        }
         
         request.setAttribute("positionList", compPositions);
         request.setAttribute("employeeList", compPersonList);
@@ -190,7 +184,7 @@ public class EmployeeServlet extends HttpServlet {
             
             int companyPersonID = Integer.parseInt(companyPersonIDString);
             int personID = Integer.parseInt(personIDString);
-            /*
+            
             if(logins.getPersonID().getPersonID() == personID)
             {
                 request.setAttribute("message", "You can't delete yourself!");
@@ -198,13 +192,16 @@ public class EmployeeServlet extends HttpServlet {
             }
             else
             {
-                */
+                
             Companyperson cpToDelete = new Companyperson();
             Person personToDelete = new Person();
             Address addToDelete = new Address();
             List<Companypersonaddress> cpAddToDeleteList = new ArrayList<Companypersonaddress>();
             Phone phoneToDelete = new Phone();
             List <Companypersonphone> cpPhoneToDeleteList = new ArrayList<Companypersonphone>();
+            
+            List <Companypositions> cpPosition = new ArrayList<Companypositions>();
+            Companypositions test= new Companypositions();
             
             Companypersonaddress cpAddToDelete = new Companypersonaddress();
             Companypersonphone cpPhoneToDelete = new Companypersonphone();
@@ -221,8 +218,9 @@ public class EmployeeServlet extends HttpServlet {
 
                 //Used to delete the phones and phone lists.
                cpPhoneToDeleteList = compPhoneDB.getAll(cpToDelete);
-                
                
+               cpPosition = compPosDB.getAll();
+
                
                 //Deletes the addresses.
                 for (int i = 0; i < cpAddToDeleteList.size(); i++)
@@ -236,6 +234,7 @@ public class EmployeeServlet extends HttpServlet {
                     phoneToDelete = cpPhoneToDeleteList.get(i).getPhoneID();
                     phoneDB.delete(phoneToDelete);
                 }
+                
 
                 personDB.delete(personToDelete);
                 //Deletes company person
@@ -250,6 +249,7 @@ public class EmployeeServlet extends HttpServlet {
                     request.setAttribute("message", ex);
                      doGet(request, response);   
                 }
+            }
             
             
         }

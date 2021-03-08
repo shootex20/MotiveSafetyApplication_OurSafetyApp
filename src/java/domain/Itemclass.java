@@ -7,18 +7,24 @@ package domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -26,12 +32,21 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "itemclass")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Itemclass.findAll", query = "SELECT i FROM Itemclass i")})
+    @NamedQuery(name = "Itemclass.findAll", query = "SELECT i FROM Itemclass i")
+    , @NamedQuery(name = "Itemclass.findByItemClassID", query = "SELECT i FROM Itemclass i WHERE i.itemClassID = :itemClassID")
+    , @NamedQuery(name = "Itemclass.findByDateAdded", query = "SELECT i FROM Itemclass i WHERE i.dateAdded = :dateAdded")
+    , @NamedQuery(name = "Itemclass.findByDateRemoved", query = "SELECT i FROM Itemclass i WHERE i.dateRemoved = :dateRemoved")
+    , @NamedQuery(name = "Itemclass.findByUserAdded", query = "SELECT i FROM Itemclass i WHERE i.userAdded = :userAdded")
+    , @NamedQuery(name = "Itemclass.findByUserRemoved", query = "SELECT i FROM Itemclass i WHERE i.userRemoved = :userRemoved")
+    , @NamedQuery(name = "Itemclass.findByItemType", query = "SELECT i FROM Itemclass i WHERE i.itemType = :itemType")
+    , @NamedQuery(name = "Itemclass.findByItemClassInformation", query = "SELECT i FROM Itemclass i WHERE i.itemClassInformation = :itemClassInformation")})
 public class Itemclass implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "itemClass_ID")
     private Integer itemClassID;
@@ -49,12 +64,11 @@ public class Itemclass implements Serializable {
     private String itemType;
     @Column(name = "itemClassInformation")
     private String itemClassInformation;
+    @OneToMany(mappedBy = "itemClassID", fetch = FetchType.EAGER)
+    private List<Item> itemList;
     @JoinColumn(name = "itemClassFields_ID", referencedColumnName = "itemClassFields_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Itemclassfields itemClassFieldsID;
-            
-            
-    //private java.sql.Timestamp createdAt;
 
     public Itemclass() {
     }
@@ -62,6 +76,7 @@ public class Itemclass implements Serializable {
     public Itemclass(Integer itemClassID) {
         this.itemClassID = itemClassID;
     }
+    
     public Itemclass(Integer itemClassID, Date dateAdded, Integer userAdded, 
             String itemType, String itemClassInformation, Itemclassfields itemClassFieldsID) {
         this.itemClassID = itemClassID;
@@ -119,12 +134,22 @@ public class Itemclass implements Serializable {
     public void setItemType(String itemType) {
         this.itemType = itemType;
     }
+
     public String getItemClassInformation() {
         return itemClassInformation;
     }
 
     public void setItemClassInformation(String itemClassInformation) {
         this.itemClassInformation = itemClassInformation;
+    }
+
+    @XmlTransient
+    public List<Item> getItemList() {
+        return itemList;
+    }
+
+    public void setItemList(List<Item> itemList) {
+        this.itemList = itemList;
     }
 
     public Itemclassfields getItemClassFieldsID() {

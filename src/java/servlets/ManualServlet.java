@@ -21,10 +21,10 @@ public class ManualServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-        if (session.getAttribute("userName") == null) {
-            response.sendRedirect("login");
-            return;
-        }
+//        if (session.getAttribute("userName") == null) {
+//            response.sendRedirect("login");
+//            return;
+//        }
         
         
         ManualDB manualDB = new ManualDB();         

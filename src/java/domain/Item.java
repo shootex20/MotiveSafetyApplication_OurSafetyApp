@@ -21,6 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -28,8 +29,21 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "item")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Item.findAll", query = "SELECT i FROM Item i")})
+    @NamedQuery(name = "Item.findAll", query = "SELECT i FROM Item i")
+    , @NamedQuery(name = "Item.findByItemID", query = "SELECT i FROM Item i WHERE i.itemID = :itemID")
+    , @NamedQuery(name = "Item.findByDateAdded", query = "SELECT i FROM Item i WHERE i.dateAdded = :dateAdded")
+    , @NamedQuery(name = "Item.findByDateRemoved", query = "SELECT i FROM Item i WHERE i.dateRemoved = :dateRemoved")
+    , @NamedQuery(name = "Item.findByUserAdded", query = "SELECT i FROM Item i WHERE i.userAdded = :userAdded")
+    , @NamedQuery(name = "Item.findByUserRemoved", query = "SELECT i FROM Item i WHERE i.userRemoved = :userRemoved")
+    , @NamedQuery(name = "Item.findByModel", query = "SELECT i FROM Item i WHERE i.model = :model")
+    , @NamedQuery(name = "Item.findByIsChargeableType", query = "SELECT i FROM Item i WHERE i.isChargeableType = :isChargeableType")
+    , @NamedQuery(name = "Item.findByIsDepletingType", query = "SELECT i FROM Item i WHERE i.isDepletingType = :isDepletingType")
+    , @NamedQuery(name = "Item.findByIsDepreactiationType", query = "SELECT i FROM Item i WHERE i.isDepreactiationType = :isDepreactiationType")
+    , @NamedQuery(name = "Item.findByItemClassInformation", query = "SELECT i FROM Item i WHERE i.itemClassInformation = :itemClassInformation")
+    , @NamedQuery(name = "Item.findBySerialNumber", query = "SELECT i FROM Item i WHERE i.serialNumber = :serialNumber")
+    , @NamedQuery(name = "Item.findByPurchaseDate", query = "SELECT i FROM Item i WHERE i.purchaseDate = :purchaseDate")})
 public class Item implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,8 +62,6 @@ public class Item implements Serializable {
     private Integer userAdded;
     @Column(name = "userRemoved", insertable=false)
     private Integer userRemoved;
-    @Column(name = "itemClass_ID", insertable = false)
-    private Integer itemClassID;
     @Column(name = "model")
     private String model;
     @Column(name = "isChargeableType")
@@ -68,6 +80,9 @@ public class Item implements Serializable {
     @JoinColumn(name = "company_ID", referencedColumnName = "company_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Company companyID;
+    @JoinColumn(name = "itemClass_ID", referencedColumnName = "itemClass_ID", insertable=false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Itemclass itemClassID;
 
     public Item() {
     }
@@ -75,6 +90,7 @@ public class Item implements Serializable {
     public Item(Integer itemID) {
         this.itemID = itemID;
     }
+    
     public Item(Date dateAdded, String model, boolean isChargeableType, 
     boolean isDepletingType, boolean isDepreactiationType, 
     String itemClassInformation, String serialNumber, Date purchaseDate, Company companyID) {
@@ -146,14 +162,6 @@ public class Item implements Serializable {
         this.userRemoved = userRemoved;
     }
 
-    public Integer getItemClassID() {
-        return itemClassID;
-    }
-
-    public void setItemClassID(Integer itemClassID) {
-        this.itemClassID = itemClassID;
-    }
-
     public String getModel() {
         return model;
     }
@@ -216,6 +224,14 @@ public class Item implements Serializable {
 
     public void setCompanyID(Company companyID) {
         this.companyID = companyID;
+    }
+
+    public Itemclass getItemClassID() {
+        return itemClassID;
+    }
+
+    public void setItemClassID(Itemclass itemClassID) {
+        this.itemClassID = itemClassID;
     }
 
     @Override

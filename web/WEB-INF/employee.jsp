@@ -70,7 +70,7 @@
                         </th>
                         </c:forEach>
                         </c:if>
-                        
+                        <%--
                         <th>
                         <c:forEach var="pos" items="${positionList}">
 
@@ -81,7 +81,7 @@
                         </c:forEach>
                         </th>
 
-
+                        --%>
                         <th>
                             <form action="employee" method="post">
                                 <input type="hidden" name="hidden_comp_emp_edit" value="hiddenEdit">

@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,6 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -26,12 +29,21 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "companyrelationship")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Companyrelationship.findAll", query = "SELECT c FROM Companyrelationship c")})
+    @NamedQuery(name = "Companyrelationship.findAll", query = "SELECT c FROM Companyrelationship c")
+    , @NamedQuery(name = "Companyrelationship.findByCompanyRelationshipID", query = "SELECT c FROM Companyrelationship c WHERE c.companyRelationshipID = :companyRelationshipID")
+    , @NamedQuery(name = "Companyrelationship.findByDateAdded", query = "SELECT c FROM Companyrelationship c WHERE c.dateAdded = :dateAdded")
+    , @NamedQuery(name = "Companyrelationship.findByDateRemoved", query = "SELECT c FROM Companyrelationship c WHERE c.dateRemoved = :dateRemoved")
+    , @NamedQuery(name = "Companyrelationship.findByUserAdded", query = "SELECT c FROM Companyrelationship c WHERE c.userAdded = :userAdded")
+    , @NamedQuery(name = "Companyrelationship.findByUserRemoved", query = "SELECT c FROM Companyrelationship c WHERE c.userRemoved = :userRemoved")
+    , @NamedQuery(name = "Companyrelationship.findByParent", query = "SELECT c FROM Companyrelationship c WHERE c.parent = :parent")
+    , @NamedQuery(name = "Companyrelationship.findByChild", query = "SELECT c FROM Companyrelationship c WHERE c.child = :child")})
 public class Companyrelationship implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "companyRelationship_ID")
     private Integer companyRelationshipID;
