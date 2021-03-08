@@ -103,25 +103,15 @@ public class EmployeeServlet extends HttpServlet {
         }
         
         CompanypersonDB compPerDB = new CompanypersonDB();
-        CompanyPositionsDB posDB = new CompanyPositionsDB();
         
         List<Companyperson> compPersonList = new ArrayList<Companyperson>();
-        List<Companypositions> positionsList = new ArrayList<Companypositions>();
-        List<Companypositions> compPositions = new ArrayList<Companypositions>();
         
         try {
             compPersonList = (List<Companyperson>) compPerDB.getAll(curr);
         } catch (Exception ex) {
             Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try {
-            positionsList = posDB.getAll();
-        } catch (Exception ex) {
-        Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
-        
-        request.setAttribute("positionList", compPositions);
         request.setAttribute("employeeList", compPersonList);
 
         getServletContext().getRequestDispatcher("/WEB-INF/employee.jsp").forward(request, response);
@@ -194,7 +184,7 @@ public class EmployeeServlet extends HttpServlet {
             {
                 
             Companyperson cpToDelete = new Companyperson();
-            Person personToDelete = new Person();
+            Person personToDelete = new Person(3);
             Address addToDelete = new Address();
             List<Companypersonaddress> cpAddToDeleteList = new ArrayList<Companypersonaddress>();
             Phone phoneToDelete = new Phone();
@@ -206,13 +196,17 @@ public class EmployeeServlet extends HttpServlet {
             Companypersonaddress cpAddToDelete = new Companypersonaddress();
             Companypersonphone cpPhoneToDelete = new Companypersonphone();
             
+            LoginDB loginDB = new LoginDB();
+            List<Logins> loginList = new ArrayList<Logins>();
+            Logins t = new Logins();
+            
+            
+            
             try {
                 
                 personToDelete = personDB.get(personID);
-                
+               
                 cpToDelete = compPersonDB.get(companyPersonID);
-
-                
                 //Used to delete address and address lists.
                 cpAddToDeleteList = compAddDB.getAll(cpToDelete);
 
@@ -233,12 +227,12 @@ public class EmployeeServlet extends HttpServlet {
                 {
                     phoneToDelete = cpPhoneToDeleteList.get(i).getPhoneID();
                     phoneDB.delete(phoneToDelete);
-                }
-                
+                }          
 
-                personDB.delete(personToDelete);
+
+                //personDB.delete(personToDelete);
                 //Deletes company person
-                compPersonDB.delete(cpToDelete);
+                //compPersonDB.delete(cpToDelete);
                 //Deletes person
 
                 

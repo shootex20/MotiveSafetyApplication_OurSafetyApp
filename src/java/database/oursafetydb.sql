@@ -69,6 +69,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`companyPerson` (
 `company_ID` int, /*FK*/ 
 `person_ID` int, /*FK*/ 
 `email` VARCHAR(60),
+`isEmployeeActive` CHAR, 
 PRIMARY KEY (`companyPerson_ID`), 
 INDEX `companyPerson_company_id_fk_idx` (`company_ID` ASC),
 INDEX `companyPerson_person_id_fk_idx` (`person_ID` ASC),
@@ -337,20 +338,6 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`emergencyContact` (
 PRIMARY KEY(`emergencyContact_ID`))
 ENGINE = InnoDB;
 
-/*
-CREATE TABLE IF NOT EXISTS `oursafetydb`.`addressRegion` ( 
- `addressRegion_ID` int AUTO_INCREMENT, /*PK
-`dateAdded` date, 
-`dateRemoved` date, 
-`userAdded` int, 
-`userRemoved` int, 
-`parentType` int, /*  for)*/ 
-/*`parentID` int, /*  for)
-`spaceCode` VARCHAR(10), 
-PRIMARY KEY (`addressRegion_ID`)) 
-ENGINE = InnoDB;
-*/
- 
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`address` ( 
 `address_ID`  int AUTO_INCREMENT, 
 `dateAdded`  date, 
@@ -551,7 +538,7 @@ INSERT INTO `companyperson` (`companyPerson_ID`, `dateAdded`, `dateRemoved`, `us
 DELETE FROM `companypersonaddress`;
 /*!40000 ALTER TABLE `companypersonaddress` DISABLE KEYS */;
 INSERT INTO `companypersonaddress` (`companyPersonAddress_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `companyPerson_ID`, `address_ID`) VALUES
-	(1, '2021-02-09', NULL, 1, NULL, NULL, NULL),
+	(1, '2021-02-09', NULL, 1, NULL, 3, 2),
 	(2, '2021-02-09', NULL, 1, NULL, 2, 1);
 /*!40000 ALTER TABLE `companypersonaddress` ENABLE KEYS */;
 

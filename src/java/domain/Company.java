@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -74,19 +75,19 @@ public class Company implements Serializable {
     private String account;
     @Column(name = "industry")
     private String industry;
-    @OneToMany(mappedBy = "companyID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Item> itemList;
-    @OneToMany(mappedBy = "companyID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Companyperson> companypersonList;
-    @OneToMany(mappedBy = "companyID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Url> urlList;
-    @OneToMany(mappedBy = "companyID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Companypositions> companypositionsList;
-    @OneToMany(mappedBy = "companyID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Companytype> companytypeList;
-    @OneToMany(mappedBy = "companyID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Logins> loginsList;
-    @OneToMany(mappedBy = "companyID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Companyrelationship> companyrelationshipList;
 
     public Company() {

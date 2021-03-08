@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -76,7 +77,7 @@ public class Manual implements Serializable {
     @JoinColumn(name = "typeLibrary_ID", referencedColumnName = "typeLibrary_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Typelibrary typeLibraryID;
-    @OneToMany(mappedBy = "manualID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "manualID", fetch = FetchType.EAGER)
     private List<Manualuse> manualuseList;
 
     public Manual() {

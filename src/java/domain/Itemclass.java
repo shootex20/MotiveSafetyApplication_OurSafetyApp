@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -64,7 +65,7 @@ public class Itemclass implements Serializable {
     private String itemType;
     @Column(name = "itemClassInformation")
     private String itemClassInformation;
-    @OneToMany(mappedBy = "itemClassID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "itemClassID", fetch = FetchType.EAGER)
     private List<Item> itemList;
     @JoinColumn(name = "itemClassFields_ID", referencedColumnName = "itemClassFields_ID")
     @ManyToOne(fetch = FetchType.EAGER)

@@ -8,6 +8,7 @@ package domain;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,7 +42,7 @@ public class Country implements Serializable {
     private Integer countryID;
     @Column(name = "countryName")
     private String countryName;
-    @OneToMany(mappedBy = "countryID")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "countryID")
     private List<Province> provinceList;
 
     public Country() {

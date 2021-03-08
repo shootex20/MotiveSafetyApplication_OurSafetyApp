@@ -69,7 +69,7 @@ public class Emergencycontact implements Serializable {
     private String emergencyContactNumber;
     @Column(name = "emergencyContactRelationship")
     private String emergencyContactRelationship;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "emergencyContactID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "emergencyContactID", fetch = FetchType.EAGER)
     private List<Person> personList;
 
     public Emergencycontact() {

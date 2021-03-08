@@ -74,7 +74,7 @@ public class Phone implements Serializable {
     @JoinColumn(name = "typeLibrary_ID", referencedColumnName = "typeLibrary_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Typelibrary typeLibraryID;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "phoneID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "phoneID", fetch = FetchType.EAGER)
     private List<Companypersonphone> companypersonphoneList;
 
     public Phone() {

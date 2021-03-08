@@ -42,7 +42,7 @@ public class EquipmentManagerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*
+        
         HttpSession session = request.getSession();
 
         // DQ: This segment will probably be replaced by a filter
@@ -66,9 +66,9 @@ public class EquipmentManagerServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(companyWelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        */
-        //Company curr = logins.getCompanyID();
-        Company curr = new Company(1);
+        
+        Company curr = logins.getCompanyID();
+        //Company curr = new Company(1);
         
         String action = request.getParameter("action");
         ItemDB itemDB = new ItemDB();
@@ -122,11 +122,11 @@ public class EquipmentManagerServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-       // int userID = (Integer) session.getAttribute("userID");
+        int userID = (Integer) session.getAttribute("userID");
         Logins logins = new Logins();
         String logout = request.getParameter("action");
         LoginDB logindb = new LoginDB();
-/*
+
         try {
             List<Logins> loginList = logindb.getAll();
             for (Logins login : loginList) {
@@ -137,9 +137,9 @@ public class EquipmentManagerServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(companyWelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //Company comp = logins.getCompanyID();
-        */
-        Company comp = new Company(1);
+        Company comp = logins.getCompanyID();
+        
+        //Company comp = new Company(1);
         
         String action = request.getParameter("action");
         CompanyDB compDB = new CompanyDB();

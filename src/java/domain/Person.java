@@ -72,12 +72,12 @@ public class Person implements Serializable {
     private Date dateOfBirth;
     @Column(name = "gender")
     private Character gender;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "personID", fetch = FetchType.EAGER)
     private List<Companyperson> companypersonList;
     @JoinColumn(name = "emergencyContact_ID", referencedColumnName = "emergencyContact_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Emergencycontact emergencyContactID;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "personID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "personID", fetch = FetchType.EAGER)
     private List<Logins> loginsList;
 
     public Person() {

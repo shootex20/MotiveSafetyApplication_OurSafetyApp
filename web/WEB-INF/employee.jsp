@@ -70,18 +70,9 @@
                         </th>
                         </c:forEach>
                         </c:if>
-                        <%--
-                        <th>
-                        <c:forEach var="pos" items="${positionList}">
-
-                            <c:if test="${pos.companyPersonID eq (emp.companyPersonID)}">
-                            ${pos.positionTitle} 
-                            </c:if>
-
+                        <c:forEach var="pos" items="${emp.companypositionsList}">
+                        <th>${pos.positionTitle}</th>
                         </c:forEach>
-                        </th>
-
-                        --%>
                         <th>
                             <form action="employee" method="post">
                                 <input type="hidden" name="hidden_comp_emp_edit" value="hiddenEdit">

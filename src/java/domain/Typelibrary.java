@@ -66,19 +66,19 @@ public class Typelibrary implements Serializable {
     private String description;
     @Column(name = "isCategory")
     private Character isCategory;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Address> addressList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Manual> manualList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Url> urlList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Phone> phoneList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Companytype> companytypeList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Itemclassfields> itemclassfieldsList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Companyrelationship> companyrelationshipList;
 
     public Typelibrary() {

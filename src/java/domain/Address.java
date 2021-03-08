@@ -80,7 +80,7 @@ public class Address implements Serializable {
     @JoinColumn(name = "typeLibrary_ID", referencedColumnName = "typeLibrary_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Typelibrary typeLibraryID;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "addressID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "addressID", fetch = FetchType.EAGER)
     private List<Companypersonaddress> companypersonaddressList;
 
     public Address() {

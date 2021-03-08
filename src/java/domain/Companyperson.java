@@ -44,6 +44,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Companyperson.findByEmail", query = "SELECT c FROM Companyperson c WHERE c.email = :email")})
 public class Companyperson implements Serializable {
 
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,6 +63,8 @@ public class Companyperson implements Serializable {
     private Integer userRemoved;
     @Column(name = "email")
     private String email;
+    @Column(name = "isEmployeeActive")
+    private Character isEmployeeActive;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
     private List<Companynotes> companynotesList;
     @JoinColumn(name = "company_ID", referencedColumnName = "company_ID")
@@ -70,11 +73,11 @@ public class Companyperson implements Serializable {
     @JoinColumn(name = "person_ID", referencedColumnName = "person_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Person personID;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
     private List<Companypersonaddress> companypersonaddressList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
     private List<Companypositions> companypositionsList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
     private List<Companypersonphone> companypersonphoneList;
 
     public Companyperson() {
@@ -131,7 +134,15 @@ public class Companyperson implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    public Character getIsEmployeeActive() {
+        return isEmployeeActive;
+    }
 
+    public void setIsEmployeeActive(Character isEmployeeActive) {
+        this.isEmployeeActive = isEmployeeActive;
+    }
+    
     @XmlTransient
     public List<Companynotes> getCompanynotesList() {
         return companynotesList;
