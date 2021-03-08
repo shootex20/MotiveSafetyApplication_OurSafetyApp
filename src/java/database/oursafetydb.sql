@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`companyPerson` (
 `company_ID` int, /*FK*/ 
 `person_ID` int, /*FK*/ 
 `email` VARCHAR(60),
-`isEmployeeActive` CHAR, 
+`isEmployeeActive` BIT NOT NULL, 
 PRIMARY KEY (`companyPerson_ID`), 
 INDEX `companyPerson_company_id_fk_idx` (`company_ID` ASC),
 INDEX `companyPerson_person_id_fk_idx` (`person_ID` ASC),

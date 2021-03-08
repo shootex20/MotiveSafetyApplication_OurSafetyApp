@@ -44,7 +44,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Companyperson.findByEmail", query = "SELECT c FROM Companyperson c WHERE c.email = :email")})
 public class Companyperson implements Serializable {
 
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,8 +62,9 @@ public class Companyperson implements Serializable {
     private Integer userRemoved;
     @Column(name = "email")
     private String email;
+    @Basic(optional = false)
     @Column(name = "isEmployeeActive")
-    private Character isEmployeeActive;
+    private boolean isEmployeeActive;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
     private List<Companynotes> companynotesList;
     @JoinColumn(name = "company_ID", referencedColumnName = "company_ID")
@@ -135,11 +135,11 @@ public class Companyperson implements Serializable {
         this.email = email;
     }
     
-    public Character getIsEmployeeActive() {
+    public boolean getIsEmployeeActive() {
         return isEmployeeActive;
     }
 
-    public void setIsEmployeeActive(Character isEmployeeActive) {
+    public void setIsEmployeeActive(boolean isEmployeeActive) {
         this.isEmployeeActive = isEmployeeActive;
     }
     
