@@ -528,10 +528,10 @@ INSERT INTO `companynotes` (`companyNotes_ID`, `dateAdded`, `dateRemoved`, `user
 -- Dumping data for table oursafetydb.companyperson: ~3 rows (approximately)
 DELETE FROM `companyperson`;
 /*!40000 ALTER TABLE `companyperson` DISABLE KEYS */;
-INSERT INTO `companyperson` (`companyPerson_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `company_ID`, `person_ID`, `email`) VALUES
-	(1, '2021-02-09', NULL, 2, NULL, NULL, NULL, NULL),
-	(2, '2021-02-09', NULL, 2, NULL, 1, 3, 'charls@gmail.com'),
-	(3, '2021-02-12', NULL, 2, NULL, 1, 2, 'jason@gmail.com');
+INSERT INTO `companyperson` (`companyPerson_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `company_ID`, `person_ID`, `email`, `isEmployeeActive`) VALUES
+	(1, '2021-02-09', NULL, 2, NULL, NULL, NULL, NULL, 1),
+	(2, '2021-02-09', NULL, 2, NULL, 1, 3, 'charls@gmail.com', 1),
+	(3, '2021-02-12', NULL, 2, NULL, 1, 2, 'jason@gmail.com', 1);
 /*!40000 ALTER TABLE `companyperson` ENABLE KEYS */;
 
 -- Dumping data for table oursafetydb.companypersonaddress: ~2 rows (approximately)
