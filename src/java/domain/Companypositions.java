@@ -10,14 +10,18 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -25,32 +29,41 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "companypositions")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Companypositions.findAll", query = "SELECT c FROM Companypositions c")})
+    @NamedQuery(name = "Companypositions.findAll", query = "SELECT c FROM Companypositions c")
+    , @NamedQuery(name = "Companypositions.findByCompanyPositionsID", query = "SELECT c FROM Companypositions c WHERE c.companyPositionsID = :companyPositionsID")
+    , @NamedQuery(name = "Companypositions.findByDateAdded", query = "SELECT c FROM Companypositions c WHERE c.dateAdded = :dateAdded")
+    , @NamedQuery(name = "Companypositions.findByDateRemoved", query = "SELECT c FROM Companypositions c WHERE c.dateRemoved = :dateRemoved")
+    , @NamedQuery(name = "Companypositions.findByUserAdded", query = "SELECT c FROM Companypositions c WHERE c.userAdded = :userAdded")
+    , @NamedQuery(name = "Companypositions.findByUserRemoved", query = "SELECT c FROM Companypositions c WHERE c.userRemoved = :userRemoved")
+    , @NamedQuery(name = "Companypositions.findByPositionTitle", query = "SELECT c FROM Companypositions c WHERE c.positionTitle = :positionTitle")})
 public class Companypositions implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "companyPositions_ID", insertable=false)
+    @Column(name = "companyPositions_ID")
     private Integer companyPositionsID;
     @Column(name = "dateAdded")
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
-    @Column(name = "dateRemoved", insertable=false)
+    @Column(name = "dateRemoved")
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
     @Column(name = "userAdded")
     private Integer userAdded;
-    @Column(name = "userRemoved", insertable=false)
+    @Column(name = "userRemoved")
     private Integer userRemoved;
-    @Column(name = "company_ID")
-    private Integer companyID;
-    @Column(name = "companyPerson_ID")
-    private Integer companyPersonID;
     @Column(name = "positionTitle")
     private String positionTitle;
+    @JoinColumn(name = "companyPerson_ID", referencedColumnName = "companyPerson_ID")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Companyperson companyPersonID;
+    @JoinColumn(name = "company_ID", referencedColumnName = "company_ID")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Company companyID;
 
     public Companypositions() {
     }
@@ -99,28 +112,28 @@ public class Companypositions implements Serializable {
         this.userRemoved = userRemoved;
     }
 
-    public Integer getCompanyID() {
-        return companyID;
-    }
-
-    public void setCompanyID(Integer companyID) {
-        this.companyID = companyID;
-    }
-
-    public Integer getCompanyPersonID() {
-        return companyPersonID;
-    }
-
-    public void setCompanyPersonID(Integer companyPersonID) {
-        this.companyPersonID = companyPersonID;
-    }
-
     public String getPositionTitle() {
         return positionTitle;
     }
 
     public void setPositionTitle(String positionTitle) {
         this.positionTitle = positionTitle;
+    }
+
+    public Companyperson getCompanyPersonID() {
+        return companyPersonID;
+    }
+
+    public void setCompanyPersonID(Companyperson companyPersonID) {
+        this.companyPersonID = companyPersonID;
+    }
+
+    public Company getCompanyID() {
+        return companyID;
+    }
+
+    public void setCompanyID(Company companyID) {
+        this.companyID = companyID;
     }
 
     @Override

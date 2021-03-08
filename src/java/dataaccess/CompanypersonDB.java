@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import domain.Company;
 import domain.Companyperson;
+import domain.Person;
 
 
 /**
@@ -69,15 +70,35 @@ public class CompanypersonDB {
         
         }
     }
-
-    public void delete(Companyperson add) throws Exception {
+/*
+    public int delete(Companyperson user) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();  
         EntityTransaction trans = em.getTransaction();
         try {
             trans.begin();
-            em.remove(em.merge(add));
+            em.remove(user);
             trans.commit();
         } catch(Exception ex){
+            trans.rollback();
+        } finally {
+            em.close();
+            return 1;
+        }
+    }
+*/
+    
+        public void delete(Companyperson person) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        
+        try {
+            Company user = person.getCompanyID();
+            user.getCompanypersonList().remove(person);
+            trans.begin();
+            em.remove(em.merge(person));
+            em.merge(user);
+            trans.commit();
+        } catch (Exception ex) {
             trans.rollback();
         } finally {
             em.close();

@@ -9,9 +9,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,6 +24,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,12 +33,20 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "companyperson")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Companyperson.findAll", query = "SELECT c FROM Companyperson c")})
+    @NamedQuery(name = "Companyperson.findAll", query = "SELECT c FROM Companyperson c")
+    , @NamedQuery(name = "Companyperson.findByCompanyPersonID", query = "SELECT c FROM Companyperson c WHERE c.companyPersonID = :companyPersonID")
+    , @NamedQuery(name = "Companyperson.findByDateAdded", query = "SELECT c FROM Companyperson c WHERE c.dateAdded = :dateAdded")
+    , @NamedQuery(name = "Companyperson.findByDateRemoved", query = "SELECT c FROM Companyperson c WHERE c.dateRemoved = :dateRemoved")
+    , @NamedQuery(name = "Companyperson.findByUserAdded", query = "SELECT c FROM Companyperson c WHERE c.userAdded = :userAdded")
+    , @NamedQuery(name = "Companyperson.findByUserRemoved", query = "SELECT c FROM Companyperson c WHERE c.userRemoved = :userRemoved")
+    , @NamedQuery(name = "Companyperson.findByEmail", query = "SELECT c FROM Companyperson c WHERE c.email = :email")})
 public class Companyperson implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "companyPerson_ID", insertable=false)
     private Integer companyPersonID;
@@ -49,7 +62,10 @@ public class Companyperson implements Serializable {
     private Integer userRemoved;
     @Column(name = "email")
     private String email;
-    @OneToMany(mappedBy = "companyPersonID", fetch = FetchType.EAGER)
+    @Basic(optional = false)
+    @Column(name = "isEmployeeActive")
+    private boolean isEmployeeActive;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
     private List<Companynotes> companynotesList;
     @JoinColumn(name = "company_ID", referencedColumnName = "company_ID")
     @ManyToOne(fetch = FetchType.EAGER)
@@ -57,9 +73,11 @@ public class Companyperson implements Serializable {
     @JoinColumn(name = "person_ID", referencedColumnName = "person_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Person personID;
-    @OneToMany(mappedBy = "companyPersonID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
     private List<Companypersonaddress> companypersonaddressList;
-    @OneToMany(mappedBy = "companyPersonID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
+    private List<Companypositions> companypositionsList;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
     private List<Companypersonphone> companypersonphoneList;
 
     public Companyperson() {
@@ -116,7 +134,16 @@ public class Companyperson implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    public boolean getIsEmployeeActive() {
+        return isEmployeeActive;
+    }
 
+    public void setIsEmployeeActive(boolean isEmployeeActive) {
+        this.isEmployeeActive = isEmployeeActive;
+    }
+    
+    @XmlTransient
     public List<Companynotes> getCompanynotesList() {
         return companynotesList;
     }
@@ -141,6 +168,7 @@ public class Companyperson implements Serializable {
         this.personID = personID;
     }
 
+    @XmlTransient
     public List<Companypersonaddress> getCompanypersonaddressList() {
         return companypersonaddressList;
     }
@@ -149,6 +177,16 @@ public class Companyperson implements Serializable {
         this.companypersonaddressList = companypersonaddressList;
     }
 
+    @XmlTransient
+    public List<Companypositions> getCompanypositionsList() {
+        return companypositionsList;
+    }
+
+    public void setCompanypositionsList(List<Companypositions> companypositionsList) {
+        this.companypositionsList = companypositionsList;
+    }
+
+    @XmlTransient
     public List<Companypersonphone> getCompanypersonphoneList() {
         return companypersonphoneList;
     }

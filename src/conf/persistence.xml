@@ -23,6 +23,9 @@
     <class>domain.Phone</class>
     <class>domain.Typelibrary</class>
     <class>domain.Url</class>
+    <class>domain.City</class>
+    <class>domain.Province</class>
+    <class>domain.Country</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
   </persistence-unit>
 </persistence>

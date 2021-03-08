@@ -21,6 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -28,8 +29,17 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "manualuse")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Manualuse.findAll", query = "SELECT m FROM Manualuse m")})
+    @NamedQuery(name = "Manualuse.findAll", query = "SELECT m FROM Manualuse m")
+    , @NamedQuery(name = "Manualuse.findByManualUseID", query = "SELECT m FROM Manualuse m WHERE m.manualUseID = :manualUseID")
+    , @NamedQuery(name = "Manualuse.findByDateAdded", query = "SELECT m FROM Manualuse m WHERE m.dateAdded = :dateAdded")
+    , @NamedQuery(name = "Manualuse.findByDateRemoved", query = "SELECT m FROM Manualuse m WHERE m.dateRemoved = :dateRemoved")
+    , @NamedQuery(name = "Manualuse.findByUserAdded", query = "SELECT m FROM Manualuse m WHERE m.userAdded = :userAdded")
+    , @NamedQuery(name = "Manualuse.findByUserRemoved", query = "SELECT m FROM Manualuse m WHERE m.userRemoved = :userRemoved")
+    , @NamedQuery(name = "Manualuse.findByCompanyID", query = "SELECT m FROM Manualuse m WHERE m.companyID = :companyID")
+    , @NamedQuery(name = "Manualuse.findByCompanyRole", query = "SELECT m FROM Manualuse m WHERE m.companyRole = :companyRole")
+    , @NamedQuery(name = "Manualuse.findByJob", query = "SELECT m FROM Manualuse m WHERE m.job = :job")})
 public class Manualuse implements Serializable {
 
     private static final long serialVersionUID = 1L;

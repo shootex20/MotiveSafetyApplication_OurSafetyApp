@@ -70,20 +70,11 @@
                         </th>
                         </c:forEach>
                         </c:if>
-                        
-                        <th>
-                        <c:forEach var="pos" items="${positionList}">
-
-                            <c:if test="${pos.companyPersonID eq (emp.companyPersonID)}">
-                            ${pos.positionTitle} 
-                            </c:if>
-
+                        <c:forEach var="pos" items="${emp.companypositionsList}">
+                        <th>${pos.positionTitle}</th>
                         </c:forEach>
-                        </th>
-
-
                         <th>
-                            <form action="company" method="post">
+                            <form action="employee" method="post">
                                 <input type="hidden" name="hidden_comp_emp_edit" value="hiddenEdit">
                                 <input type="hidden" name="hidden_ed_cp" value="${emp.companyPersonID}">
                                 <input type="hidden" name="hidden_ed_person" value="${emp.personID.personID}">
@@ -91,7 +82,7 @@
                             </form>
                         </th>
                         <th>
-                            <form action="company" method="post">
+                            <form action="employee" method="post">
                                 <input type="hidden" name="hidden_comp_emp_del" value="hiddenDelete">
                                 <input type="hidden" name="hidden_del_cp" value="${emp.companyPersonID}">
                                 <input type="hidden" name="hidden_del_person" value="${emp.personID.personID}">
@@ -102,7 +93,11 @@
                 </c:forEach>
             </table>
         </div>
-        <form action="company" method="post" class="companyAddForm">
+            
+            <br>
+            ${message}
+            <br>
+        <form action="employee"  method="post" class="companyAddForm">
             <h3>Add a new employee</h3>
             <input type="hidden" name="hidden_comp_emp_add" value="hiddenCompany"><br>
             <label>First Name</label><input type="text" name="comp_firstname"><br>

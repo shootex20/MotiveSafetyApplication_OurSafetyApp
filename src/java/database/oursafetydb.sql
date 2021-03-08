@@ -69,6 +69,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`companyPerson` (
 `company_ID` int, /*FK*/ 
 `person_ID` int, /*FK*/ 
 `email` VARCHAR(60),
+`isEmployeeActive` BIT NOT NULL, 
 PRIMARY KEY (`companyPerson_ID`), 
 INDEX `companyPerson_company_id_fk_idx` (`company_ID` ASC),
 INDEX `companyPerson_person_id_fk_idx` (`person_ID` ASC),
@@ -337,20 +338,6 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`emergencyContact` (
 PRIMARY KEY(`emergencyContact_ID`))
 ENGINE = InnoDB;
 
-/*
-CREATE TABLE IF NOT EXISTS `oursafetydb`.`addressRegion` ( 
- `addressRegion_ID` int AUTO_INCREMENT, /*PK
-`dateAdded` date, 
-`dateRemoved` date, 
-`userAdded` int, 
-`userRemoved` int, 
-`parentType` int, /*  for)*/ 
-/*`parentID` int, /*  for)
-`spaceCode` VARCHAR(10), 
-PRIMARY KEY (`addressRegion_ID`)) 
-ENGINE = InnoDB;
-*/
- 
 CREATE TABLE IF NOT EXISTS `oursafetydb`.`address` ( 
 `address_ID`  int AUTO_INCREMENT, 
 `dateAdded`  date, 
@@ -541,17 +528,17 @@ INSERT INTO `companynotes` (`companyNotes_ID`, `dateAdded`, `dateRemoved`, `user
 -- Dumping data for table oursafetydb.companyperson: ~3 rows (approximately)
 DELETE FROM `companyperson`;
 /*!40000 ALTER TABLE `companyperson` DISABLE KEYS */;
-INSERT INTO `companyperson` (`companyPerson_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `company_ID`, `person_ID`, `email`) VALUES
-	(1, '2021-02-09', NULL, 2, NULL, NULL, NULL, NULL),
-	(2, '2021-02-09', NULL, 2, NULL, 1, 3, 'charls@gmail.com'),
-	(3, '2021-02-12', NULL, 2, NULL, 1, 2, 'jason@gmail.com');
+INSERT INTO `companyperson` (`companyPerson_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `company_ID`, `person_ID`, `email`, `isEmployeeActive`) VALUES
+	(1, '2021-02-09', NULL, 2, NULL, NULL, NULL, NULL, 1),
+	(2, '2021-02-09', NULL, 2, NULL, 1, 3, 'charls@gmail.com', 1),
+	(3, '2021-02-12', NULL, 2, NULL, 1, 2, 'jason@gmail.com', 1);
 /*!40000 ALTER TABLE `companyperson` ENABLE KEYS */;
 
 -- Dumping data for table oursafetydb.companypersonaddress: ~2 rows (approximately)
 DELETE FROM `companypersonaddress`;
 /*!40000 ALTER TABLE `companypersonaddress` DISABLE KEYS */;
 INSERT INTO `companypersonaddress` (`companyPersonAddress_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `companyPerson_ID`, `address_ID`) VALUES
-	(1, '2021-02-09', NULL, 1, NULL, NULL, NULL),
+	(1, '2021-02-09', NULL, 1, NULL, 3, 2),
 	(2, '2021-02-09', NULL, 1, NULL, 2, 1);
 /*!40000 ALTER TABLE `companypersonaddress` ENABLE KEYS */;
 
@@ -630,7 +617,8 @@ DELETE FROM `logins`;
 /*!40000 ALTER TABLE `logins` DISABLE KEYS */;
 INSERT INTO `logins` (`user_id`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `username`, `password`, `company_ID`, `person_ID`, `isActive`, `isAdmin`) VALUES
 	(1, '2021-02-09', NULL, 0, NULL, 'admin', 'password', NULL, NULL, 'T', 'T'),
-	(2, '2021-02-09', NULL, 1, NULL, 'manager1', 'password', 2, 2, 'T', 'F');
+	(2, '2021-02-09', NULL, 1, NULL, 'manager1', 'password', 2, 2, 'T', 'F'),
+        (3, '2021-03-07', NULL, 1, NULL, 'manager2', 'password', 1, 3, 'T', 'F');
 /*!40000 ALTER TABLE `logins` ENABLE KEYS */;
 
 -- Dumping data for table oursafetydb.manual: ~2 rows (approximately)

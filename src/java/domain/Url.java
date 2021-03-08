@@ -21,6 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -28,8 +29,15 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "url")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Url.findAll", query = "SELECT u FROM Url u")})
+    @NamedQuery(name = "Url.findAll", query = "SELECT u FROM Url u")
+    , @NamedQuery(name = "Url.findByUrlID", query = "SELECT u FROM Url u WHERE u.urlID = :urlID")
+    , @NamedQuery(name = "Url.findByDateAdded", query = "SELECT u FROM Url u WHERE u.dateAdded = :dateAdded")
+    , @NamedQuery(name = "Url.findByDateRemoved", query = "SELECT u FROM Url u WHERE u.dateRemoved = :dateRemoved")
+    , @NamedQuery(name = "Url.findByUserAdded", query = "SELECT u FROM Url u WHERE u.userAdded = :userAdded")
+    , @NamedQuery(name = "Url.findByUserRemoved", query = "SELECT u FROM Url u WHERE u.userRemoved = :userRemoved")
+    , @NamedQuery(name = "Url.findByUrl", query = "SELECT u FROM Url u WHERE u.url = :url")})
 public class Url implements Serializable {
 
     private static final long serialVersionUID = 1L;

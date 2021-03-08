@@ -33,6 +33,17 @@ public class CompanyPersonAddressDB {
         }
     }
     
+        public Companypersonaddress get(Companyperson compPerson) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        
+        try {
+            Companypersonaddress add = em.find(Companypersonaddress.class, compPerson);
+            return add;
+        } finally { 
+            em.close();
+        }
+    }
+    
     public void update(Companypersonaddress comp) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -71,7 +82,7 @@ public class CompanyPersonAddressDB {
         EntityTransaction trans = em.getTransaction();
         try {
             trans.begin();
-            em.remove(em.merge(add));
+            em.remove(add);
             trans.commit();
         } catch(Exception ex){
             trans.rollback();

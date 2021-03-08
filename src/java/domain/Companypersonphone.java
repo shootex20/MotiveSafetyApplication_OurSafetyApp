@@ -21,6 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -28,25 +29,31 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "companypersonphone")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Companypersonphone.findAll", query = "SELECT c FROM Companypersonphone c")})
+    @NamedQuery(name = "Companypersonphone.findAll", query = "SELECT c FROM Companypersonphone c")
+    , @NamedQuery(name = "Companypersonphone.findByCompanyPersonPhoneID", query = "SELECT c FROM Companypersonphone c WHERE c.companyPersonPhoneID = :companyPersonPhoneID")
+    , @NamedQuery(name = "Companypersonphone.findByDateAdded", query = "SELECT c FROM Companypersonphone c WHERE c.dateAdded = :dateAdded")
+    , @NamedQuery(name = "Companypersonphone.findByDateRemoved", query = "SELECT c FROM Companypersonphone c WHERE c.dateRemoved = :dateRemoved")
+    , @NamedQuery(name = "Companypersonphone.findByUserAdded", query = "SELECT c FROM Companypersonphone c WHERE c.userAdded = :userAdded")
+    , @NamedQuery(name = "Companypersonphone.findByUserRemoved", query = "SELECT c FROM Companypersonphone c WHERE c.userRemoved = :userRemoved")})
 public class Companypersonphone implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "companyPersonPhone_ID", insertable=false)
+    @Column(name = "companyPersonPhone_ID", insertable = false)
     private Integer companyPersonPhoneID;
     @Column(name = "dateAdded")
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
-    @Column(name = "dateRemoved", insertable=false)
+    @Column(name = "dateRemoved", insertable = false)
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
     @Column(name = "userAdded")
     private Integer userAdded;
-    @Column(name = "userRemoved", insertable=false)
+    @Column(name = "userRemoved", insertable = false)
     private Integer userRemoved;
     @JoinColumn(name = "companyPerson_ID", referencedColumnName = "companyPerson_ID")
     @ManyToOne(fetch = FetchType.EAGER)

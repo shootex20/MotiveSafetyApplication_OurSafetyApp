@@ -9,9 +9,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,6 +24,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,12 +33,23 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "person")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")})
+    @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")
+    , @NamedQuery(name = "Person.findByPersonID", query = "SELECT p FROM Person p WHERE p.personID = :personID")
+    , @NamedQuery(name = "Person.findByDateAdded", query = "SELECT p FROM Person p WHERE p.dateAdded = :dateAdded")
+    , @NamedQuery(name = "Person.findByDateRemoved", query = "SELECT p FROM Person p WHERE p.dateRemoved = :dateRemoved")
+    , @NamedQuery(name = "Person.findByUserAdded", query = "SELECT p FROM Person p WHERE p.userAdded = :userAdded")
+    , @NamedQuery(name = "Person.findByUserRemoved", query = "SELECT p FROM Person p WHERE p.userRemoved = :userRemoved")
+    , @NamedQuery(name = "Person.findByFirstName", query = "SELECT p FROM Person p WHERE p.firstName = :firstName")
+    , @NamedQuery(name = "Person.findByLastName", query = "SELECT p FROM Person p WHERE p.lastName = :lastName")
+    , @NamedQuery(name = "Person.findByDateOfBirth", query = "SELECT p FROM Person p WHERE p.dateOfBirth = :dateOfBirth")
+    , @NamedQuery(name = "Person.findByGender", query = "SELECT p FROM Person p WHERE p.gender = :gender")})
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "person_ID", insertable=false)
     private Integer personID;
@@ -56,12 +72,12 @@ public class Person implements Serializable {
     private Date dateOfBirth;
     @Column(name = "gender")
     private Character gender;
-    @OneToMany(mappedBy = "personID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "personID", fetch = FetchType.EAGER)
     private List<Companyperson> companypersonList;
     @JoinColumn(name = "emergencyContact_ID", referencedColumnName = "emergencyContact_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Emergencycontact emergencyContactID;
-    @OneToMany(mappedBy = "personID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "personID", fetch = FetchType.EAGER)
     private List<Logins> loginsList;
 
     public Person() {
@@ -143,6 +159,7 @@ public class Person implements Serializable {
         this.gender = gender;
     }
 
+    @XmlTransient
     public List<Companyperson> getCompanypersonList() {
         return companypersonList;
     }
@@ -159,6 +176,7 @@ public class Person implements Serializable {
         this.emergencyContactID = emergencyContactID;
     }
 
+    @XmlTransient
     public List<Logins> getLoginsList() {
         return loginsList;
     }

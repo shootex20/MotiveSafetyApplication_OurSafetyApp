@@ -9,9 +9,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -19,6 +22,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -26,24 +31,37 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "company")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Company.findAll", query = "SELECT c FROM Company c")})
+    @NamedQuery(name = "Company.findAll", query = "SELECT c FROM Company c")
+    , @NamedQuery(name = "Company.findByCompanyID", query = "SELECT c FROM Company c WHERE c.companyID = :companyID")
+    , @NamedQuery(name = "Company.findByDateAdded", query = "SELECT c FROM Company c WHERE c.dateAdded = :dateAdded")
+    , @NamedQuery(name = "Company.findByDateRemoved", query = "SELECT c FROM Company c WHERE c.dateRemoved = :dateRemoved")
+    , @NamedQuery(name = "Company.findByUserAdded", query = "SELECT c FROM Company c WHERE c.userAdded = :userAdded")
+    , @NamedQuery(name = "Company.findByUserRemoved", query = "SELECT c FROM Company c WHERE c.userRemoved = :userRemoved")
+    , @NamedQuery(name = "Company.findByShortname", query = "SELECT c FROM Company c WHERE c.shortname = :shortname")
+    , @NamedQuery(name = "Company.findByName", query = "SELECT c FROM Company c WHERE c.name = :name")
+    , @NamedQuery(name = "Company.findByDescription", query = "SELECT c FROM Company c WHERE c.description = :description")
+    , @NamedQuery(name = "Company.findBySaltHash", query = "SELECT c FROM Company c WHERE c.saltHash = :saltHash")
+    , @NamedQuery(name = "Company.findByAccount", query = "SELECT c FROM Company c WHERE c.account = :account")
+    , @NamedQuery(name = "Company.findByIndustry", query = "SELECT c FROM Company c WHERE c.industry = :industry")})
 public class Company implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "company_ID", insertable=false)
+    @Column(name = "company_ID")
     private Integer companyID;
     @Column(name = "dateAdded")
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
-    @Column(name = "dateRemoved", insertable=false)
+    @Column(name = "dateRemoved")
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
     @Column(name = "userAdded")
     private Integer userAdded;
-    @Column(name = "userRemoved", insertable=false)
+    @Column(name = "userRemoved")
     private Integer userRemoved;
     @Column(name = "shortname")
     private String shortname;
@@ -57,44 +75,27 @@ public class Company implements Serializable {
     private String account;
     @Column(name = "industry")
     private String industry;
-    @OneToMany(mappedBy = "companyID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Item> itemList;
-    @OneToMany(mappedBy = "companyID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Companyperson> companypersonList;
-    @OneToMany(mappedBy = "companyID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Url> urlList;
-    @OneToMany(mappedBy = "companyID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
+    private List<Companypositions> companypositionsList;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Companytype> companytypeList;
-    @OneToMany(mappedBy = "companyID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Logins> loginsList;
-    @OneToMany(mappedBy = "companyID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Companyrelationship> companyrelationshipList;
 
-    // may not work
-   // private Logins username;
-
-    
     public Company() {
     }
 
     public Company(Integer companyID) {
         this.companyID = companyID;
     }
-    
-    
-    /* Commented out due to issues between equipment manager servlet */
-    public Company( Date dateAdded, String name, String shortname, String description, String account, String industry) {
-       this.dateAdded = dateAdded;
-       this.name = name;
-       this.shortname = shortname;
-       this.description = description;
-       this.account = account;
-       this.industry = industry;
-       //this.urlList = url;
-       
-    }
-   
-    
 
     public Integer getCompanyID() {
         return companyID;
@@ -184,6 +185,7 @@ public class Company implements Serializable {
         this.industry = industry;
     }
 
+    @XmlTransient
     public List<Item> getItemList() {
         return itemList;
     }
@@ -192,6 +194,7 @@ public class Company implements Serializable {
         this.itemList = itemList;
     }
 
+    @XmlTransient
     public List<Companyperson> getCompanypersonList() {
         return companypersonList;
     }
@@ -200,6 +203,7 @@ public class Company implements Serializable {
         this.companypersonList = companypersonList;
     }
 
+    @XmlTransient
     public List<Url> getUrlList() {
         return urlList;
     }
@@ -208,6 +212,16 @@ public class Company implements Serializable {
         this.urlList = urlList;
     }
 
+    @XmlTransient
+    public List<Companypositions> getCompanypositionsList() {
+        return companypositionsList;
+    }
+
+    public void setCompanypositionsList(List<Companypositions> companypositionsList) {
+        this.companypositionsList = companypositionsList;
+    }
+
+    @XmlTransient
     public List<Companytype> getCompanytypeList() {
         return companytypeList;
     }
@@ -216,6 +230,7 @@ public class Company implements Serializable {
         this.companytypeList = companytypeList;
     }
 
+    @XmlTransient
     public List<Logins> getLoginsList() {
         return loginsList;
     }
@@ -224,6 +239,7 @@ public class Company implements Serializable {
         this.loginsList = loginsList;
     }
 
+    @XmlTransient
     public List<Companyrelationship> getCompanyrelationshipList() {
         return companyrelationshipList;
     }
@@ -257,18 +273,4 @@ public class Company implements Serializable {
         return "domain.Company[ companyID=" + companyID + " ]";
     }
     
-    /* Commented out due to issues between equipment manager servlet
-      public Logins getUsername() {
-        return username;
-    }
-
-    public void setUsername(Logins username) {
-       this.username = username;
-    }
-
-   /** public void setCompanyID(Logins companyID) {
-        this.companyID = companyID;
-    }
-    
-    **/
 }

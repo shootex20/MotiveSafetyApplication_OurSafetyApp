@@ -9,9 +9,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,6 +24,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,12 +33,21 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "itemclassfields")
+@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Itemclassfields.findAll", query = "SELECT i FROM Itemclassfields i")})
+    @NamedQuery(name = "Itemclassfields.findAll", query = "SELECT i FROM Itemclassfields i")
+    , @NamedQuery(name = "Itemclassfields.findByItemClassFieldsID", query = "SELECT i FROM Itemclassfields i WHERE i.itemClassFieldsID = :itemClassFieldsID")
+    , @NamedQuery(name = "Itemclassfields.findByDateAdded", query = "SELECT i FROM Itemclassfields i WHERE i.dateAdded = :dateAdded")
+    , @NamedQuery(name = "Itemclassfields.findByDateRemoved", query = "SELECT i FROM Itemclassfields i WHERE i.dateRemoved = :dateRemoved")
+    , @NamedQuery(name = "Itemclassfields.findByUserAdded", query = "SELECT i FROM Itemclassfields i WHERE i.userAdded = :userAdded")
+    , @NamedQuery(name = "Itemclassfields.findByUserRemoved", query = "SELECT i FROM Itemclassfields i WHERE i.userRemoved = :userRemoved")
+    , @NamedQuery(name = "Itemclassfields.findByFieldDescr", query = "SELECT i FROM Itemclassfields i WHERE i.fieldDescr = :fieldDescr")
+    , @NamedQuery(name = "Itemclassfields.findByFieldDescrType", query = "SELECT i FROM Itemclassfields i WHERE i.fieldDescrType = :fieldDescrType")})
 public class Itemclassfields implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "itemClassFields_ID")
     private Integer itemClassFieldsID;
@@ -51,19 +65,19 @@ public class Itemclassfields implements Serializable {
     private String fieldDescr;
     @Column(name = "fieldDescrType")
     private String fieldDescrType;
-    @OneToMany(mappedBy = "itemClassFieldsID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "itemClassFieldsID", fetch = FetchType.EAGER)
     private List<Itemclass> itemclassList;
     @JoinColumn(name = "typeLibrary_ID", referencedColumnName = "typeLibrary_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Typelibrary typeLibraryID;
 
-
     public Itemclassfields() {
     }
+
     public Itemclassfields(Integer itemClassFieldsID) {
         this.itemClassFieldsID = itemClassFieldsID;
     }
-    //private java.sql.Timestamp createdAt;
+    
     public Itemclassfields(Integer itemClassFieldsID, Date dateAdded, Integer userAdded, 
             String fieldDescr, String fieldDescrType, Typelibrary typeLibraryID) {
       
@@ -132,6 +146,7 @@ public class Itemclassfields implements Serializable {
         this.fieldDescrType = fieldDescrType;
     }
 
+    @XmlTransient
     public List<Itemclass> getItemclassList() {
         return itemclassList;
     }
