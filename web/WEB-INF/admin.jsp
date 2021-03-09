@@ -120,10 +120,12 @@
                 <th>Date Removed</th>
                 <th>Username</th>
                 <th>Password</th>
+                <th>Is Active?</th>
+                <<%-- 
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Date of Birth</th>
-                <th>Gender</th>
+                <th>Gender</th>--%>
                 <th>Delete</th>
                 <%--   <th>Email</th>
                  --%>
@@ -136,11 +138,12 @@
                     <td>${user.dateRemoved}</td>
                     <td>${user.username}</td>
                     <td>${user.password}</td>
+                  <%--
                     <td>${user.personID.firstName}</td>
                     <td>${user.personID.lastName}</td>
                     <td>${user.personID.dateOfBirth}</td>
                     <td>${user.personID.gender}</td>
-                   <%-- <td>${user.personID..email}</td> --%>
+                    <td>${user.personID..email}</td> --%>
                     </tr>
               
                
