@@ -1,7 +1,41 @@
-body {
-    
+.loginHeader{
+    background-color: blue;
+    color: white;
 }
 
-.loginHeader {
-    
+.socialMedia{
+    margin-left: 48%
+}
+
+p,h1,h2,h3,h4,h5,h6 {
+    text-align: center
+}
+
+.form-group{
+    text-align: center;
+}
+
+.mains {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.welcome {
+    color:tomato
+}
+
+.contact{
+    text-align: center;
+    width:70%;
+    margin-left: 15%
+}
+
+footer{
+    position: fixed;
+    background-color: blue;
+    width: 100%;
+    bottom: 0;
+    color: white;
 }
