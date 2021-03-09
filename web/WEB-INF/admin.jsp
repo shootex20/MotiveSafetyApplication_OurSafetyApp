@@ -81,66 +81,168 @@
             </form>
         </c:if>
 
-            <%--
-        <!--for managers-->
+           <!--for managers-->
         <h2>Manage Managers</h2>
+        
+        <%--
+        <div class="form-group">
+            <form method="post">
+                
+        <label>Company Name: </label>
+        <select name="companyNames" id="companyNames">
+            <c:forEach var="companys" items="${company}">
+              
+                <c:choose>
+                            <c:when test="${not empty selectedComp && selectedComp eq company.companyID}">
+                                <option value="${company.companyID}" selected = "true">${company.name}</option>
+                            </c:when>
+                            <c:otherwise>
+                            <option value="${company.companyID}">${company.name}</option>
+                            </c:otherwise>
+                         </c:choose>
+         <option value="${companys.name}" ${companys.companyID == selectedComp ? 'selected="selected"' : ''}> ${companys.getName()}</option> 
+         
+            </c:forEach>
+                             <input type="hidden" name="action" value="addform">
+        </select>
+         <br>
+                    <input type="hidden" name="selectedComp" value="">
+                    <input type="submit" id="addbutton" class="btn btn-primary" value="Load Managers">
+                    <br>
+                    <br>
+            </form>
+        </div>
+        --%>
         <table>
             <tr>
-                <th>Manager Id</th>
+                <th>Person Id</th>
                 <th>Date Added</th>
                 <th>Date Removed</th>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Email</th>
-                <th>Company ID</th>
-                <th>Delete</th>
-                <th>Edit</th>
+                <th>Date of Birth</th>
+                <th>Gender</th>
+                <%--   <th>Email</th>
+                <th>Delete</th> --%>
             </tr>
-
-            <c:forEach var="managers" items="${managers}">
-                <tr>
-                    <td>${managers.managerID}</td>
-                    <td>${managers.dateAdded}</td>
-                    <td>${managers.dateRemoved}</td>
-                    <td>${managers.firstName}</td>
-                    <td>${managers.lastName}</td>
-                    <td>${managers.email}</td>
+             <c:forEach var="persons"  items="${person}">
+                
+                    <tr>
+                    <td>${persons.personID}</td>
+                    <td>${persons.dateAdded}</td>
+                    <td>${persons.dateRemoved}</td>
+                    <td>${persons.firstName}</td>
+                    <td>${persons.lastName}</td>
+                    <td>${persons.dateOfBirth}</td>
+                    <td>${persons.gender}</td>
+                    </tr>
+                     
+                    <!-- <td>${managers.password}</td>
                     <td>${managers.companyID}</td>
+                    <td>${managers.personID}</td>
+                    <td>${managers.isActive}</td>
+                    <td>${managers.isAdmin}</td> -->
+                    
+               <%--
+              
                     <td>
-                        <form action="managers" method="post" >
+                        <form action="admin" method="post" >
                             <input type="submit" value="Delete">
-                            <input type="hidden" name="action" value="delete">
-                            <input type="hidden" name="selectedManager" value="${managers.managerID}">
+                            <input type="hidden" name="actionM" value="delete">
+                            <input type="hidden" name="selectedManager" value="${persons.personID}">
                         </form>
                     </td>
+                                        
+  <%--
                     <td>
-                        <form action="managers" method="get">
+                        <form action="admin" method="get">
                             <input type="submit" value="Edit">
-                            <input type="hidden" name="action" value="view">
-                            <input type="hidden" name="selectedManager" value="${managers.selectedManager}">
+                            <input type="hidden" name="actionM" value="view">
+                            <input type="hidden" name="selectedManager" value="${persons.personID}">
                         </form>
                     </td>
+                   
+                    
                 </tr>
+            --%>
+            
             </c:forEach>
+                  
         </table>
+        <h3>Add Manager</h3>
+        <div class="admin-group">
+            <form method="admin">
+                <label for="managerCompany">Company Name: </label>
+                <select name="managerCompany" id="managerCompany">
+                    <c:forEach var="companyNames" items="${company}">
+                        <c:choose>
+                            <c:when test="${not empty selectedComp && selectedComp eq company.companyID}">
+                                <option value="${companyNames.companyID}" selected="true">${companyNames.name} </option>
+                                
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${companyNames.companyID}">${companyNames.name}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                    
+                </select>
+                <br>
+                    <input type="hidden" name="selectedComp" value="">
+                    <input type="submit" id="addCompanybutton" class="btn btn-primary" value="Select Company">
+                    <br>
+                    <br>
+            </form>
+            <c:if test="${selectedManager == null}">
+                <form method="admin">
+                    First Name: <input type="text" name="firstname"><br>
+                    Last Name: <input type="text" name="lastname"><br>
+                    Date of Birth <input type="date" name="dob"><br>
+                    <label for="gender"> Gender: </label>
+                <select name="gender" var="gender">  
+                     <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select> <br>
+           
+                <input type="hidden" name="actionM" value="add">
+                <input type="submit" value="Add User" class="btn btn-primary"> 
+                </form>
+            </c:if>
+        </div>
+        
+        
+        
+        
+        
+        <%--
         <c:if test="${selectedManager == null}">
             <h3>Add Manager</h3>
-            <form action="managers" method="POST">
-                Manager Id: <input type="number" name="managerID"><br>
-                Date Added <input type="date" name="dateAdded"><br>
-                Date Removed <input type="date" name="dateRemoved"><br>
-                First Name: <input type="text" name="firstname"><br>
-                last Name: <input type="text" name="lastname"><br>
-                Email: <input type="email" name="email"><br>
-                Company ID: <input type="number" name="companyID"><br>
-
-                <input type="hidden" name="action" value="add">
-                <input type="submit" value="Save">
+            <form action="admin" method="POST">
+              <!--  Manager Id: <input type="number" name="managerID"><br> -->
+              <!--  Date Added <input type="date" name="dateAdded"><br> -->
+              <!--  Date Removed <input type="date" name="dateRemoved"><br> -->
+              
+                Username: <input type="text" name="username"><br>
+                Password: <input type="text" name="password"><br>
+                <label for="isActive"> Is active? (Yes/No): </label>
+                <select name="isActive" var="isActive">  
+                     <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select> <br>
+                <label for="isAdmin"> Is admin? (Yes/No): </label>
+                <select name="isAdmin" var="isAdmin">  
+                     <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select> <br>
+           
+                <input type="hidden" name="actionM" value="add">
+                <input type="submit" value="Add User"> 
             </form>
         </c:if>
+            <%--
         <c:if test="${selectedManager != null}">
-            <h3>Edit User</h3>
-            <form action="managers" method="POST">
+            <h3>Edit Manager</h3>
+            <form action="admin" method="POST">
                 Manager Id: <input type="number" name="managerID" value="${selectedManager.managerID}" readonly><br>
                 Date Added: <input type="date" name="dateAdded" value="${selectedManager.dateAdded}"><br>
                 Date Removed: <input type="date" name="dateRemoved" value="${selectedManager.dateRemoved}"><br>
@@ -153,7 +255,7 @@
                 <input type="submit" value="Save">
             </form>
         </c:if>
---%>
+            --%>
 
     </body>
 </html>
