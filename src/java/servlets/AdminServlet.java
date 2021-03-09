@@ -2,6 +2,8 @@ package servlets;
 
 import dataaccess.CompanyDB;
 import domain.Company;
+import domain.Person;
+import dataaccess.PersonDB;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -46,6 +48,39 @@ public class AdminServlet extends HttpServlet {
             Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         request.setAttribute("company", comp);
+        
+        // for logins 
+        
+         PersonDB pdb = new PersonDB();
+         String actionM = request.getParameter("actionM");
+         
+          
+         List<Person> personUser = new ArrayList<Person>();
+        try {
+      
+            personUser = pdb.getAll();
+        } catch (Exception ex) {
+            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+         request.setAttribute("person", personUser);
+        
+           /**
+         if (actionM != null && actionM.equals("view")) {
+            Integer selectedManager = Integer.parseInt(request.getParameter("selectedManager"));
+            try {
+                Logins login = mdb.get(selectedManager);
+                request.setAttribute("selectedMan", login);
+            } catch (Exception ex) {
+                Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        **/
+        
+        
+        
+        
+        
 
         getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
 
