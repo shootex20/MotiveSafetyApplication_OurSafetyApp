@@ -21,7 +21,7 @@
         </header>
         <div class="companyEmployees">
             <h1>${companyName} & OurSafety</h1>
-            <h3>Employee List</h3>
+            <h3>Current Employee List</h3>
             <table>
                 <tr>
                     <th>First Name</th>
@@ -63,6 +63,77 @@
                         </c:if>
                                 
                                 
+                        <c:if test="${not empty emp.companypersonaddressList}">
+                        <c:forEach  var="add" items="${emp.companypersonaddressList}">
+                        <th>
+                        ${add.addressID.addressLine1} ${add.addressID.addressLine2}, ${add.addressID.city}, ${add.addressID.province} ${add.addressID.postalCode}, ${add.addressID.country}
+                        </th>
+                        </c:forEach>
+                        </c:if>
+                        <c:forEach var="pos" items="${emp.companypositionsList}">
+                        <th>${pos.positionTitle}</th>
+                        </c:forEach>
+                        <th>
+                            <form action="employee" method="post">
+                                <input type="hidden" name="hidden_comp_emp_edit" value="hiddenEdit">
+                                <input type="hidden" name="hidden_ed_cp" value="${emp.companyPersonID}">
+                                <input type="hidden" name="hidden_ed_person" value="${emp.personID.personID}">
+                                <input type="submit" name="action" value="Edit">
+                            </form>
+                        </th>
+                        <th>
+                            <form action="employee" method="post">
+                                <input type="hidden" name="hidden_comp_emp_del" value="hiddenDelete">
+                                <input type="hidden" name="hidden_del_cp" value="${emp.companyPersonID}">
+                                <input type="hidden" name="hidden_del_person" value="${emp.personID.personID}">
+                                <input type="submit" name="action" value="Remove">
+                            </form>
+                        </th>
+                    </tr>
+                </c:forEach>
+            </table>
+            
+            <h3>Current Employee List</h3>
+            <table>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Birthdate</th>
+                    <th>Gender</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Address</th>
+                    <th>Position</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                
+                <c:forEach  var="emp" items="${inActiveEmployeeList}">
+                    <tr>
+                        <th>${emp.personID.firstName}</th>
+                        <th>${emp.personID.lastName}</th>
+                        <th>${emp.personID.dateOfBirth}</th>
+                        <th>${emp.personID.gender}</th>
+                        <th>${emp.email}</th>
+
+                        <c:if test="${empty emp.companypersonphoneList}">
+                            <th> </th>
+                        </c:if>
+                            
+                        <c:if test="${not empty emp.companypersonphoneList}">
+                        <c:forEach  var="phone" items="${emp.companypersonphoneList}">
+                            <th>
+                            <c:if test="${phone.companyPersonID eq emp}">
+                        ${phone.phoneID.countryCode}-${phone.phoneID.areaCode}-${phone.phoneID.localNumber}-${phone.phoneID.extension}
+                            </c:if>
+                        </th>
+                        </c:forEach>
+                        </c:if>
+                        
+                        <c:if test="${empty emp.companypersonaddressList}">
+                            <th></th>
+                        </c:if>
+                                           
                         <c:if test="${not empty emp.companypersonaddressList}">
                         <c:forEach  var="add" items="${emp.companypersonaddressList}">
                         <th>
