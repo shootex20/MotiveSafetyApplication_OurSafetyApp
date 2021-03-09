@@ -77,8 +77,6 @@ public class Person implements Serializable {
     @JoinColumn(name = "emergencyContact_ID", referencedColumnName = "emergencyContact_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Emergencycontact emergencyContactID;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "personID", fetch = FetchType.EAGER)
-    private List<Logins> loginsList;
 
     public Person() {
     }
@@ -174,15 +172,6 @@ public class Person implements Serializable {
 
     public void setEmergencyContactID(Emergencycontact emergencyContactID) {
         this.emergencyContactID = emergencyContactID;
-    }
-
-    @XmlTransient
-    public List<Logins> getLoginsList() {
-        return loginsList;
-    }
-
-    public void setLoginsList(List<Logins> loginsList) {
-        this.loginsList = loginsList;
     }
 
     @Override

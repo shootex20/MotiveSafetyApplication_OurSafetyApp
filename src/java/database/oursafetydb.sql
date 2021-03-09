@@ -96,22 +96,15 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`logins` (
 `username` varchar(30), 
 `password` varchar(30), 
 `company_ID` int, 
-`person_ID` int, 
 `isActive` CHAR, 
 `isAdmin` CHAR, 
 PRIMARY KEY (`user_ID`), 
 INDEX `logins_company_id_fk_idx` (`company_ID` ASC), 
-INDEX `logins_person_id_fk_idx` (`person_ID` ASC), 
 CONSTRAINT `logins_company_id_fk` 
     FOREIGN KEY (`company_ID`) 
     REFERENCES `oursafetydb`.`company` (`company_ID`) 
     ON DELETE NO ACTION 
-    ON UPDATE NO ACTION, 
-CONSTRAINT `logins_person_id_fk` 
-    FOREIGN KEY (`person_ID`) 
-    REFERENCES `oursafetydb`.`person` (`person_ID`) 
-    ON DELETE NO ACTION 
-    ON UPDATE NO ACTION) 
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -615,10 +608,10 @@ INSERT INTO `itemclassfields` (`itemClassFields_ID`, `dateAdded`, `dateRemoved`,
 -- Dumping data for table oursafetydb.logins: ~2 rows (approximately)
 DELETE FROM `logins`;
 /*!40000 ALTER TABLE `logins` DISABLE KEYS */;
-INSERT INTO `logins` (`user_id`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `username`, `password`, `company_ID`, `person_ID`, `isActive`, `isAdmin`) VALUES
-	(1, '2021-02-09', NULL, 0, NULL, 'admin', 'password', NULL, NULL, 'T', 'T'),
-	(2, '2021-02-09', NULL, 1, NULL, 'manager1', 'password', 2, 2, 'T', 'F'),
-        (3, '2021-03-07', NULL, 1, NULL, 'manager2', 'password', 1, 3, 'T', 'F');
+INSERT INTO `logins` (`user_id`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `username`, `password`, `company_ID`, `isActive`, `isAdmin`) VALUES
+	(1, '2021-02-09', NULL, 0, NULL, 'admin', 'password', NULL, 'T', 'T'),
+	(2, '2021-02-09', NULL, 1, NULL, 'manager1', 'password', 2, 'T', 'F'),
+        (3, '2021-03-07', NULL, 1, NULL, 'manager2', 'password', 1, 'T', 'F');
 /*!40000 ALTER TABLE `logins` ENABLE KEYS */;
 
 -- Dumping data for table oursafetydb.manual: ~2 rows (approximately)

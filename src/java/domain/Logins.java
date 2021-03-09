@@ -57,9 +57,6 @@ public class Logins implements Serializable {
     @JoinColumn(name = "company_ID", referencedColumnName = "company_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Company companyID;
-    @JoinColumn(name = "person_ID", referencedColumnName = "person_ID")
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Person personID;
 
     public Logins() {
     }
@@ -146,14 +143,6 @@ public class Logins implements Serializable {
 
     public void setCompanyID(Company companyID) {
         this.companyID = companyID;
-    }
-
-    public Person getPersonID() {
-        return personID;
-    }
-
-    public void setPersonID(Person personID) {
-        this.personID = personID;
     }
 
     @Override
