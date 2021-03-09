@@ -105,14 +105,29 @@ public class EmployeeServlet extends HttpServlet {
         CompanypersonDB compPerDB = new CompanypersonDB();
         
         List<Companyperson> compPersonList = new ArrayList<Companyperson>();
+        List<Companyperson> compPersonListNotActive = new ArrayList<Companyperson>();
+        List<Companyperson> compPersonListActive = new ArrayList<Companyperson>();
         
         try {
             compPersonList = (List<Companyperson>) compPerDB.getAll(curr);
         } catch (Exception ex) {
             Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        for (int i = 0; i < compPersonList.size(); i++)
+        {
+            if(compPersonList.get(i).getIsEmployeeActive() == false)
+            {
+                compPersonListNotActive.add(compPersonList.get(i));
+            }
+            else if (compPersonList.get(i).getIsEmployeeActive() == true)
+            {
+                compPersonListActive.add(compPersonList.get(i));
+            }
+        }
 
-        request.setAttribute("employeeList", compPersonList);
+        request.setAttribute("employeeList", compPersonListActive);
+        request.setAttribute("inActiveEmployeeList", compPersonListNotActive);
 
         getServletContext().getRequestDispatcher("/WEB-INF/employee.jsp").forward(request, response);
 
@@ -146,7 +161,6 @@ public class EmployeeServlet extends HttpServlet {
         }
         
         Company curr = logins.getCompanyID();
-        Person loggedIn = logins.getPersonID();
         
         String action = request.getParameter("action");
         
@@ -167,77 +181,38 @@ public class EmployeeServlet extends HttpServlet {
         {
             
         }
-        else if (action.equals("Remove"))
+        else if (action.equals("Deactivate"))
         {
-            String companyPersonIDString = request.getParameter("hidden_del_cp");
-            String personIDString = request.getParameter("hidden_del_person");
+            String companyPersonIDString = request.getParameter("hidden_da_cp");
+            String personIDString = request.getParameter("hidden_da_person");
             
             int companyPersonID = Integer.parseInt(companyPersonIDString);
             int personID = Integer.parseInt(personIDString);
             
-            if(logins.getPersonID().getPersonID() == personID)
-            {
-                request.setAttribute("message", "You can't delete yourself!");
-                doGet(request, response);
-            }
-            else
-            {
+          
                 
-            Companyperson cpToDelete = new Companyperson();
-            Person personToDelete = new Person(3);
-            Address addToDelete = new Address();
-            List<Companypersonaddress> cpAddToDeleteList = new ArrayList<Companypersonaddress>();
-            Phone phoneToDelete = new Phone();
-            List <Companypersonphone> cpPhoneToDeleteList = new ArrayList<Companypersonphone>();
-            
-            List <Companypositions> cpPosition = new ArrayList<Companypositions>();
-            Companypositions test= new Companypositions();
-            
-            Companypersonaddress cpAddToDelete = new Companypersonaddress();
-            Companypersonphone cpPhoneToDelete = new Companypersonphone();
-            
-            LoginDB loginDB = new LoginDB();
-            List<Logins> loginList = new ArrayList<Logins>();
-            Logins t = new Logins();
+            Companyperson cpToDeactivate = new Companyperson();
+            Person personToDeactivate = new Person();
             
             
             
             try {
                 
-                personToDelete = personDB.get(personID);
-               
-                cpToDelete = compPersonDB.get(companyPersonID);
-                //Used to delete address and address lists.
-                cpAddToDeleteList = compAddDB.getAll(cpToDelete);
-
-                //Used to delete the phones and phone lists.
-               cpPhoneToDeleteList = compPhoneDB.getAll(cpToDelete);
-               
-               cpPosition = compPosDB.getAll();
-
-               
-                //Deletes the addresses.
-                for (int i = 0; i < cpAddToDeleteList.size(); i++)
-                {
-                    addToDelete = cpAddToDeleteList.get(i).getAddressID();
-                    addressDB.delete(addToDelete);
-                }
-
-                for (int i = 0; i < cpPhoneToDeleteList.size(); i++)
-                {
-                    phoneToDelete = cpPhoneToDeleteList.get(i).getPhoneID();
-                    phoneDB.delete(phoneToDelete);
-                }          
-
-
-                //personDB.delete(personToDelete);
-                //Deletes company person
-                //compPersonDB.delete(cpToDelete);
-                //Deletes person
-
+                personToDeactivate = personDB.get(personID);
+                cpToDeactivate = compPersonDB.get(companyPersonID);
                 
-                request.setAttribute("message", "Successfully Deleted: " + personToDelete.getFirstName() + " " + personToDelete.getLastName());
-                doGet(request, response);      
+                if(personToDeactivate == null && cpToDeactivate == null)
+                {
+                request.setAttribute("message", "Error, could not deactivate user.");
+                doGet(request, response);  
+                }
+                else
+                {
+                    
+                    
+                request.setAttribute("message", "Successfully Deactivated: " + personToDeactivate.getFirstName() + " " + personToDeactivate.getLastName());
+                doGet(request, response);  
+                }      
                 } catch (Exception ex) {
                     Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
                     request.setAttribute("message", ex);
@@ -252,4 +227,4 @@ public class EmployeeServlet extends HttpServlet {
         //getServletContext().getRequestDispatcher("/WEB-INF/employee.jsp").forward(request, response);
 
     }
-}
+

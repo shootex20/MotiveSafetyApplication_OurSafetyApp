@@ -21,12 +21,12 @@
         </header>
         <div class="companyEmployees">
             <h1>${companyName} & OurSafety</h1>
-            <h3>Current Employee List</h3>
+            <h3>Current Active Employee List</h3>
             <table>
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Birthdate</th>
+                    <th>Birth date</th>
                     <th>Gender</th>
                     <th>Email</th>
                     <th>Phone Number</th>
@@ -84,21 +84,22 @@
                         <th>
                             <form action="employee" method="post">
                                 <input type="hidden" name="hidden_comp_emp_del" value="hiddenDelete">
-                                <input type="hidden" name="hidden_del_cp" value="${emp.companyPersonID}">
-                                <input type="hidden" name="hidden_del_person" value="${emp.personID.personID}">
-                                <input type="submit" name="action" value="Remove">
+                                <input type="hidden" name="hidden_de_cp" value="${emp.companyPersonID}">
+                                <input type="hidden" name="hidden_de_person" value="${emp.personID.personID}">
+                                <input type="hidden" name="action" name="DeactivateEmployee">
+                                <input type="submit" value="Deactivate">
                             </form>
                         </th>
                     </tr>
                 </c:forEach>
             </table>
             
-            <h3>Current Employee List</h3>
+            <h3>Current In-Active Employee List</h3>
             <table>
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Birthdate</th>
+                    <th>Birth date</th>
                     <th>Gender</th>
                     <th>Email</th>
                     <th>Phone Number</th>
@@ -108,20 +109,20 @@
                     <th>Delete</th>
                 </tr>
                 
-                <c:forEach  var="emp" items="${inActiveEmployeeList}">
+                <c:forEach  var="empInActive" items="${inActiveEmployeeList}">
                     <tr>
-                        <th>${emp.personID.firstName}</th>
-                        <th>${emp.personID.lastName}</th>
-                        <th>${emp.personID.dateOfBirth}</th>
-                        <th>${emp.personID.gender}</th>
-                        <th>${emp.email}</th>
+                        <th>${empInActive.personID.firstName}</th>
+                        <th>${empInActive.personID.lastName}</th>
+                        <th>${empInActive.personID.dateOfBirth}</th>
+                        <th>${empInActive.personID.gender}</th>
+                        <th>${empInActive.email}</th>
 
-                        <c:if test="${empty emp.companypersonphoneList}">
+                        <c:if test="${empty empInActive.companypersonphoneList}">
                             <th> </th>
                         </c:if>
                             
-                        <c:if test="${not empty emp.companypersonphoneList}">
-                        <c:forEach  var="phone" items="${emp.companypersonphoneList}">
+                        <c:if test="${not empty empInActive.companypersonphoneList}">
+                        <c:forEach  var="phone" items="${empInActive.companypersonphoneList}">
                             <th>
                             <c:if test="${phone.companyPersonID eq emp}">
                         ${phone.phoneID.countryCode}-${phone.phoneID.areaCode}-${phone.phoneID.localNumber}-${phone.phoneID.extension}
@@ -130,34 +131,33 @@
                         </c:forEach>
                         </c:if>
                         
-                        <c:if test="${empty emp.companypersonaddressList}">
+                        <c:if test="${empty empInActive.companypersonaddressList}">
                             <th></th>
                         </c:if>
                                            
-                        <c:if test="${not empty emp.companypersonaddressList}">
-                        <c:forEach  var="add" items="${emp.companypersonaddressList}">
+                        <c:if test="${not empty empInActive.companypersonaddressList}">
+                        <c:forEach  var="add" items="${empInActive.companypersonaddressList}">
                         <th>
                         ${add.addressID.addressLine1} ${add.addressID.addressLine2}, ${add.addressID.city}, ${add.addressID.province} ${add.addressID.postalCode}, ${add.addressID.country}
                         </th>
                         </c:forEach>
                         </c:if>
-                        <c:forEach var="pos" items="${emp.companypositionsList}">
+                        <c:forEach var="pos" items="${empInActive.companypositionsList}">
                         <th>${pos.positionTitle}</th>
                         </c:forEach>
                         <th>
                             <form action="employee" method="post">
-                                <input type="hidden" name="hidden_comp_emp_edit" value="hiddenEdit">
-                                <input type="hidden" name="hidden_ed_cp" value="${emp.companyPersonID}">
-                                <input type="hidden" name="hidden_ed_person" value="${emp.personID.personID}">
+                                <input type="hidden" name="hidden_ed_cp" value="${empInActive.companyPersonID}">
+                                <input type="hidden" name="hidden_ed_person" value="${empInActive.personID.personID}">
                                 <input type="submit" name="action" value="Edit">
                             </form>
                         </th>
                         <th>
                             <form action="employee" method="post">
-                                <input type="hidden" name="hidden_comp_emp_del" value="hiddenDelete">
-                                <input type="hidden" name="hidden_del_cp" value="${emp.companyPersonID}">
-                                <input type="hidden" name="hidden_del_person" value="${emp.personID.personID}">
-                                <input type="submit" name="action" value="Remove">
+                                <input type="hidden" name="hidden_ra_cp" value="${empInActive.companyPersonID}">
+                                <input type="hidden" name="hidden_ra_person" value="${empInActive.personID.personID}">
+                                <input type="hidden" name="action" name="ActivateEmployee">
+                                <input type="submit" value="Activate">
                             </form>
                         </th>
                     </tr>
