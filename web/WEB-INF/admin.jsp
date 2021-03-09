@@ -22,7 +22,6 @@
                 <th>Description</th>
                 <th>Account</th>
                 <th>Industry</th>
-                <!--  <th>URL</th> -->
                 <th>Delete</th>
                 <th>Edit</th>
             </tr>
@@ -35,7 +34,6 @@
                     <td>${companys.description}</td>
                     <td>${companys.account}</td>
                     <td>${companys.industry}</td>
-                   <!-- <td>${comp.url}</td> -->
                     <td>
                         <form action="admin" method="post" >
                             <input type="submit" value="Delete">

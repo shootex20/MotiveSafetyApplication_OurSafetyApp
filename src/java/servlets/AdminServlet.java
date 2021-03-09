@@ -23,6 +23,7 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          CompanyDB cs = new CompanyDB();
+         CompanyService compservice = new CompanyService();
          String action = request.getParameter("action");
          
          if (action != null && action.equals("view")) {
@@ -89,13 +90,25 @@ public class AdminServlet extends HttpServlet {
             
             CompanyDB cd = new CompanyDB();
             
+            /**
+             List<Company> comp = new ArrayList<Company>();        
+        try {
+            comp = cs.getAll();
+        } catch (Exception ex) {
+            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        request.setAttribute("company", comp);
+            
+            
+            **/
+            
             List<Company> comps = new ArrayList<Company>(); 
             try {
                 comps = (List<Company>) cs.getAll();
             } catch (Exception ex) {
                 Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            request.setAttribute("comps", comps);
+            request.setAttribute("company", comps);
         getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
 
     }
