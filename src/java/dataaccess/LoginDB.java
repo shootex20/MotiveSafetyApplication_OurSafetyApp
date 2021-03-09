@@ -42,4 +42,8 @@ public class LoginDB {
             return 1;
         }
     }
+
+    public Logins get(Integer userID) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

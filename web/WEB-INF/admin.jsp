@@ -115,12 +115,13 @@
         --%>
         <table>
             <tr>
-                <th>Person Id</th>
+                <th>User Id</th>
                 <th>Date Added</th>
-                <th>Date Removed</th>
                 <th>Username</th>
                 <th>Password</th>
+                <th>Company Id</th>
                 <th>Is Active?</th>
+                <th>Is Admin</th>
                 <<%-- 
                 <th>First Name</th>
                 <th>Last Name</th>
@@ -135,9 +136,13 @@
                     <tr>
                     <td>${user.userId}</td>
                     <td>${user.dateAdded}</td>
-                    <td>${user.dateRemoved}</td>
                     <td>${user.username}</td>
                     <td>${user.password}</td>
+                    <td>${user.companyID.companyID}</td>
+                    
+                    <td>${user.isActive}</td>
+                    <td>${user.isAdmin}</td>
+                    
                   <%--
                     <td>${user.personID.firstName}</td>
                     <td>${user.personID.lastName}</td>
@@ -198,14 +203,22 @@
             </form>
             <c:if test="${selectedManager == null}">
                 <form method="admin">
-                    First Name: <input type="text" name="firstname"><br>
-                    Last Name: <input type="text" name="lastname"><br>
-                    Date of Birth <input type="date" name="dob"><br>
-                    <label for="gender"> Gender: </label>
-                <select name="gender" var="gender">  
-                     <option value="M">Male</option>
-                    <option value="F">Female</option>
+                    Username: <input type="text" name="username"><br>
+                    Password: <input type="text" name="password"><br>
+                    Company ID <input type="date" name="compID"><br>
+                    <label for="isActive"> Is Active?: </label>
+                <select name="isActive" var="isActive">  
+                     <option value="T">True</option>
+                    <option value="F">False</option>
                 </select> <br>
+                     <label for="isAdmin"> Is Admin?: </label>
+                <select name="isAdmin" var="isAdmin">  
+                     <option value="T">True</option>
+                    <option value="F">False</option>
+                </select> 
+                    
+                    
+                    <br>
            
                 <input type="hidden" name="actionM" value="add">
                 <input type="submit" value="Add User" class="btn btn-primary"> 

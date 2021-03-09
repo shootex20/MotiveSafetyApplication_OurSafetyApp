@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import services.CompanyService;
+import services.LoginService;
 
 public class AdminServlet extends HttpServlet {
 
@@ -95,6 +96,7 @@ public class AdminServlet extends HttpServlet {
             throws ServletException, IOException {
       
          CompanyService cs = new CompanyService();
+         LoginService ls = new LoginService();
             String action = request.getParameter("action");
            // Integer companyid = Integer.parseInt(request.getParameter("compid"));
             Date dateAdded = new Date();
@@ -148,6 +150,16 @@ public class AdminServlet extends HttpServlet {
                 Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             request.setAttribute("company", comps);
+            
+            
+             List<Logins> user = new ArrayList<Logins>(); 
+            try {
+                user = (List<Logins>) ls.getAll();
+            } catch (Exception ex) {
+                Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            request.setAttribute("logins", user);
+            
         getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
 
     }
