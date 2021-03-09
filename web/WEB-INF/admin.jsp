@@ -205,7 +205,23 @@
                 <form method="admin">
                     Username: <input type="text" name="username"><br>
                     Password: <input type="text" name="password"><br>
-                    Company ID <input type="date" name="compID"><br>
+                    
+                    <label for="userCompanyID">Company ID: </label>
+                <select name="userCompanyID" id="userCompanyID">
+                    <c:forEach var="logincompanyID" items="${company}">
+                        <c:choose>
+                            <c:when test="${not empty selectedComp && selectedComp eq company.companyID}">
+                                <option value="${logincompanyID.companyID}" selected="true">${logincompanyID.companyID} </option>
+                                
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${logincompanyID.companyID}">${logincompanyID.companyID}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </select>
+                    
+                    <br>
                     <label for="isActive"> Is Active?: </label>
                 <select name="isActive" var="isActive">  
                      <option value="T">True</option>
