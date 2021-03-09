@@ -97,6 +97,16 @@ public class Company implements Serializable {
         this.companyID = companyID;
     }
 
+    public Company(Date dateAdded, String name, String shortname, String description, String account, String industry) {
+        this.dateAdded = dateAdded;
+        this.name = name;
+        this.shortname = shortname;
+        this.description = description;
+        this.account = account;
+        this.industry = industry;
+               
+    }
+
     public Integer getCompanyID() {
         return companyID;
     }

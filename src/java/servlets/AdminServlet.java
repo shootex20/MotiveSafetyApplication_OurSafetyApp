@@ -22,7 +22,7 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-/*
+         CompanyDB cs = new CompanyDB();
          String action = request.getParameter("action");
          
          if (action != null && action.equals("view")) {
@@ -37,7 +37,7 @@ public class AdminServlet extends HttpServlet {
          
          
         
-        CompanyDB cs = new CompanyDB();
+       
         List<Company> comp = new ArrayList<Company>();        
         try {
             comp = cs.getAll();
@@ -47,22 +47,26 @@ public class AdminServlet extends HttpServlet {
         request.setAttribute("company", comp);
 
         getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
-*/
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
       
-        /*
-        try {
-            
-            CompanyService cs = new CompanyService();
+         CompanyService cs = new CompanyService();
             String action = request.getParameter("action");
-            Integer companyid = Integer.parseInt(request.getParameter("compid"));
+           // Integer companyid = Integer.parseInt(request.getParameter("compid"));
+            Date dateAdded = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+             String tempDate = sdf.format(dateAdded);
             
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
-            Date dateadded = sdf.parse(request.getParameter("dateadded"));
+        try {        
+            dateAdded = new SimpleDateFormat("yyyy-MM-dd").parse(tempDate);
+        } catch (ParseException ex) {
+            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
            
             String compname = request.getParameter("compname");
             String shortname = request.getParameter("shortname");
@@ -75,31 +79,25 @@ public class AdminServlet extends HttpServlet {
                 if (action.equals("delete")) {
                     Integer selectedCompany = Integer.parseInt(request.getParameter("selectedCompany"));
                     cs.delete(selectedCompany);
-                } else if (action.equals("edit")) {
-                    cs.update(companyid, dateadded, compname, shortname, description, account, industry);
-                } else if (action.equals("add")) {
-                    cs.insert(companyid, dateadded, compname, shortname, description, account, industry);
+                } 
+                else if (action.equals("add")) {
+                    cs.insert(dateAdded, compname, shortname, description, account, industry);
                 }
             } catch (Exception ex) {
                 request.setAttribute("errorMessage", "An error occured.");
             }
             
-            List<Company> comps = null;
+            CompanyDB cd = new CompanyDB();
+            
+            List<Company> comps = new ArrayList<Company>(); 
             try {
                 comps = (List<Company>) cs.getAll();
             } catch (Exception ex) {
                 Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             request.setAttribute("comps", comps);
-            
-            
-            getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
         getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
-*/
+
     }
 
 

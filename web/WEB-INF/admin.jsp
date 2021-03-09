@@ -26,11 +26,10 @@
                 <th>Delete</th>
                 <th>Edit</th>
             </tr>
-            
-              <c:forEach var="companys" items="${company}">
+            <c:forEach var="companys" items="${company}">
                 <tr>
                     <td>${companys.companyID}</td>
-                   <td>${companys.dateadded}</td>
+                   <td>${companys.dateAdded}</td>
                     <td>${companys.name}</td>
                     <td>${companys.shortname}</td>
                     <td>${companys.description}</td>
@@ -38,14 +37,14 @@
                     <td>${companys.industry}</td>
                    <!-- <td>${comp.url}</td> -->
                     <td>
-                        <form action="comps" method="post" >
+                        <form action="admin" method="post" >
                             <input type="submit" value="Delete">
                             <input type="hidden" name="action" value="delete">
                             <input type="hidden" name="selectedCompany" value="${companys.companyID}">
                         </form>
                     </td>
                     <td>
-                        <form action="comps" method="get">
+                        <form action="admin" method="get">
                             <input type="submit" value="Edit">
                             <input type="hidden" name="action" value="view">
                             <input type="hidden" name="selectedCompany" value="${companys.companyID}">
@@ -57,18 +56,15 @@
 
         <c:if test="${selectedComp == null}">
             <h3>Add Company</h3>
-            <form action="comps" method="POST">
-                Company Id: <input type="number" name="compid"><br>
-                Date Added <input type="date" name="dateadded"><br>
+            <form action="admin" method="POST">
                 Name: <input type="text" name="compname"><br>
                 Short Name: <input type="text" name="shortname"><br>
                 Description: <input type="text" name="description"><br>
 
                 Account: <input type="text" name="account"><br>
                 Industry: <input type="text" name="industry"><br>
-                <!--  URL: <input type="text" name="url"><br> -->
                 <input type="hidden" name="action" value="add">
-                <input type="submit" value="Save">
+                <input type="submit" value="Add Company">
             </form>
         </c:if>
         <c:if test="${selectedComp != null}">
@@ -87,7 +83,7 @@
             </form>
         </c:if>
 
-
+            <%--
         <!--for managers-->
         <h2>Manage Managers</h2>
         <table>
@@ -159,7 +155,7 @@
                 <input type="submit" value="Save">
             </form>
         </c:if>
-
+--%>
 
     </body>
 </html>
