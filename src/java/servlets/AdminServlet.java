@@ -1,9 +1,11 @@
 package servlets;
 
 import dataaccess.CompanyDB;
+import dataaccess.LoginDB;
 import domain.Company;
 import domain.Person;
 import dataaccess.PersonDB;
+import domain.Logins;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -51,19 +53,21 @@ public class AdminServlet extends HttpServlet {
         
         // for logins 
         
-         PersonDB pdb = new PersonDB();
+         LoginDB pdb = new LoginDB();
          String actionM = request.getParameter("actionM");
          
           
-         List<Person> personUser = new ArrayList<Person>();
+       //  List<Person> personUser = new ArrayList<Person>();
+       List<Logins> loginUser = new ArrayList<Logins>();
+       
         try {
       
-            personUser = pdb.getAll();
+            loginUser = pdb.getAll();
         } catch (Exception ex) {
             Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
        
-         request.setAttribute("person", personUser);
+         request.setAttribute("logins", loginUser);
         
            /**
          if (actionM != null && actionM.equals("view")) {

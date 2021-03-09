@@ -118,38 +118,38 @@
                 <th>Person Id</th>
                 <th>Date Added</th>
                 <th>Date Removed</th>
+                <th>Username</th>
+                <th>Password</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Date of Birth</th>
                 <th>Gender</th>
+                <th>Delete</th>
                 <%--   <th>Email</th>
-                <th>Delete</th> --%>
+                 --%>
             </tr>
-             <c:forEach var="persons"  items="${person}">
+             <c:forEach var="user"  items="${logins}">
                 
                     <tr>
-                    <td>${persons.personID}</td>
-                    <td>${persons.dateAdded}</td>
-                    <td>${persons.dateRemoved}</td>
-                    <td>${persons.firstName}</td>
-                    <td>${persons.lastName}</td>
-                    <td>${persons.dateOfBirth}</td>
-                    <td>${persons.gender}</td>
+                    <td>${user.userId}</td>
+                    <td>${user.dateAdded}</td>
+                    <td>${user.dateRemoved}</td>
+                    <td>${user.username}</td>
+                    <td>${user.password}</td>
+                    <td>${user.personID.firstName}</td>
+                    <td>${user.personID.lastName}</td>
+                    <td>${user.personID.dateOfBirth}</td>
+                    <td>${user.personID.gender}</td>
+                   <%-- <td>${user.personID..email}</td> --%>
                     </tr>
-                     
-                    <!-- <td>${managers.password}</td>
-                    <td>${managers.companyID}</td>
-                    <td>${managers.personID}</td>
-                    <td>${managers.isActive}</td>
-                    <td>${managers.isAdmin}</td> -->
-                    
-               <%--
               
+               
+              <%--
                     <td>
                         <form action="admin" method="post" >
                             <input type="submit" value="Delete">
                             <input type="hidden" name="actionM" value="delete">
-                            <input type="hidden" name="selectedManager" value="${persons.personID}">
+                            <input type="hidden" name="selectedUser" value="${user.userId}">
                         </form>
                     </td>
                                         
