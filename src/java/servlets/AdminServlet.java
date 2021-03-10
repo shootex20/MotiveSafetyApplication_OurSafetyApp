@@ -154,11 +154,17 @@ public class AdminServlet extends HttpServlet {
                     // variables
                     String username = request.getParameter("username");
                     String password = request.getParameter("password");
+                    int ss = Integer.parseInt(request.getParameter("userCompanyID"));
+                    Company cc = null;
                     
-                    
-                   // Company compID = ls.getCompanyID(Integer.parseInt(request.getParameter("userCompanyID")));
-                   
-                   // Integer companySelectedId = Integer.parseInt(request.getParameter("userCompanyID"));
+                    CompanyDB companydb = new CompanyDB();
+                    try {
+                        cc = companydb.get(ss);
+
+                        // Integer companySelectedId = Integer.parseInt(request.getParameter("userCompanyID"));
+                    } catch (Exception ex) {
+                        Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     
                     
                    // System.out.print(companySelectedId);
@@ -185,7 +191,7 @@ public class AdminServlet extends HttpServlet {
                             isActive = active.charAt(0);
                             isAdmin = admin.charAt(0);
                             
-                            ls.insert(dateAdded, username, password, compM, isActive, isAdmin);
+                            ls.insert(dateAdded, username, password, cc, isActive, isAdmin);
                         }
                     } catch (Exception ex) {
                         request.setAttribute("errorMessage", "An error occured.");
@@ -203,7 +209,6 @@ public class AdminServlet extends HttpServlet {
                     }
                     
                     request.setAttribute("logins", user);
-                    
                     getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
             
        
