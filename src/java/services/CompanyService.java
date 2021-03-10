@@ -5,6 +5,7 @@
  */
 package services;
 
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import dataaccess.CompanyDB;
 import dataaccess.UserDB;
 import domain.Company;
@@ -54,10 +55,44 @@ public class CompanyService {
         companyDB.delete(comp);  
         return companyDB.delete(comp);
     }
+     
+     
+      public int update2( Date dateAdded, String name, String shortname, String description, String account,  String industry) throws Exception {
+       // Company comp = getCompanyID(Id);
+       Integer id = null;
+        Company comp = getCompanyID(id);
+        comp.getDateAdded();
+       // comp.setDateAdded(dateAdded);
+        comp.setName(name);
+        comp.setShortname(shortname);
+        comp.setDescription(description);
+        comp.setAccount(account);
+        comp.setIndustry(industry);
+        return companyDB.update(comp);
+       
+    }
+
+      
+      
+        public int update( Integer id, String name, String shortname, String description, String account,  String industry) throws Exception {
+        Company comp = getCompanyID(id);
+       
+        comp.setName(name);
+        comp.setShortname(shortname);
+        comp.setDescription(description);
+        comp.setAccount(account);
+        comp.setIndustry(industry);
+        return companyDB.update(comp);
+       
+    }
 
     private Company get(SingularAttribute<Company, Integer> companyID) {
         return companyDB.get(companyID);
     }
-    
-    
+
+    private Company getCompanyID(Integer id) throws Exception {
+        return companyDB.get(id);
+    }
+
+   
 }

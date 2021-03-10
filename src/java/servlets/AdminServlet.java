@@ -31,7 +31,7 @@ public class AdminServlet extends HttpServlet {
          CompanyService compservice = new CompanyService();
          String action = request.getParameter("action");
          
-    /**     if (action != null && action.equals("view")) {
+         if (action != null && action.equals("view")) {
             Integer selectedCompany = Integer.parseInt(request.getParameter("selectedCompany"));
             try {
                 Company comp = cs.get(selectedCompany);
@@ -41,7 +41,7 @@ public class AdminServlet extends HttpServlet {
             }
         }
          
-         **/
+         
         
        
         List<Company> comp = new ArrayList<Company>();        
@@ -71,16 +71,16 @@ public class AdminServlet extends HttpServlet {
          request.setAttribute("logins", loginUser);
         
            
-         if ((actionM != null && actionM.equals("view")) && action != null && action.equals("view")) {
-            Integer selectedManager = Integer.parseInt(request.getParameter("selectedManager"));
-             Integer selectedCompany = Integer.parseInt(request.getParameter("selectedCompany"));
+         if ((actionM != null && actionM.equals("view"))) {
+            Integer selectedManager = Integer.parseInt(request.getParameter("selectedMan"));
+           
             try {
                 Logins login = pdb.get(selectedManager);
-                Company compsel = cs.get(selectedCompany);
+               // Company compsel = cs.get(selectedCompany);
                // Company comp = cs.get(selectedCompany);
                 request.setAttribute("selectedMan", login);
                  
-                request.setAttribute("selectedComp", compsel);
+                //request.setAttribute("selectedComp", compsel);
             } catch (Exception ex) {
                 Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -112,8 +112,7 @@ public class AdminServlet extends HttpServlet {
                     } catch (ParseException ex) {
                         Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    
-                    
+         
                     String compname = request.getParameter("compname");
                     String shortname = request.getParameter("shortname");
                     String description = request.getParameter("description");
@@ -125,6 +124,10 @@ public class AdminServlet extends HttpServlet {
                         if (action.equals("delete")) {
                             Integer selectedCompany = Integer.parseInt(request.getParameter("selectedCompany"));
                             cs.delete(selectedCompany);
+                        } else if (action.equals("edit")) {
+                           
+                           Integer id = Integer.parseInt(request.getParameter("id"));
+                            cs.update(id, compname, shortname, description, account, industry);
                         }
                         else if (action.equals("add")) {
                             cs.insert(dateAdded, compname, shortname, description, account, industry);
@@ -154,8 +157,37 @@ public class AdminServlet extends HttpServlet {
                     // variables
                     String username = request.getParameter("username");
                     String password = request.getParameter("password");
-                    int ss = Integer.parseInt(request.getParameter("userCompanyID"));
-                    Company cc = null;
+                  
+                    /**int ss = Integer.parseInt(request.getParameter("userCompanyID"));
+                    Company cc = new Company();
+                    
+                    CompanyDB companydb = new CompanyDB();
+                    try {
+                        cc = companydb.get(ss);
+
+                        // Integer companySelectedId = Integer.parseInt(request.getParameter("userCompanyID"));
+                    } catch (Exception ex) {
+                        Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    **/
+                    
+                   // System.out.print(companySelectedId);
+                    
+                    String active = request.getParameter("isActive");
+                    String admin = request.getParameter("isAdmin");
+                    // if statement if active/admin is null
+                    Character isActive;
+                    Character isAdmin;
+                   
+                    
+                    try {
+                        if (actionM.equals("deleteM")) {
+                            Integer selectedManager = Integer.parseInt(request.getParameter("selectedMan"));
+                            ls.delete(selectedManager);
+                        }
+                        else if (actionM.equals("addUser") & (admin != null && active != null) ) {
+                            int ss = Integer.parseInt(request.getParameter("userCompanyID"));
+                    Company cc = new Company();
                     
                     CompanyDB companydb = new CompanyDB();
                     try {
@@ -166,28 +198,6 @@ public class AdminServlet extends HttpServlet {
                         Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     
-                    
-                   // System.out.print(companySelectedId);
-                    
-                    String active = request.getParameter("isActive");
-                    String admin = request.getParameter("isAdmin");
-                    // if statement if active/admin is null
-                    Character isActive;
-                    Character isAdmin;
-                    /**
-                     * if (admin != null && active != null ) {
-                     * isActive = active.charAt(0);
-                     * isAdmin = admin.charAt(0);
-                     * }
-                     **/
-                    
-                    
-                    try {
-                        if (actionM.equals("delete")) {
-                            Integer selectedManager = Integer.parseInt(request.getParameter("selectedManager"));
-                            ls.delete(selectedManager);
-                        }
-                        else if (actionM.equals("addUser") & (admin != null && active != null) ) {
                             isActive = active.charAt(0);
                             isAdmin = admin.charAt(0);
                             
@@ -209,6 +219,7 @@ public class AdminServlet extends HttpServlet {
                     }
                     
                     request.setAttribute("logins", user);
+                    
                     getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
             
        
