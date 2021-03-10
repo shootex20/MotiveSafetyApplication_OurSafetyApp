@@ -31,7 +31,7 @@ public class AdminServlet extends HttpServlet {
          CompanyService compservice = new CompanyService();
          String action = request.getParameter("action");
          
-         if (action != null && action.equals("view")) {
+    /**     if (action != null && action.equals("view")) {
             Integer selectedCompany = Integer.parseInt(request.getParameter("selectedCompany"));
             try {
                 Company comp = cs.get(selectedCompany);
@@ -41,7 +41,7 @@ public class AdminServlet extends HttpServlet {
             }
         }
          
-         
+         **/
         
        
         List<Company> comp = new ArrayList<Company>();        
@@ -70,21 +70,21 @@ public class AdminServlet extends HttpServlet {
        
          request.setAttribute("logins", loginUser);
         
-           /**
-         if (actionM != null && actionM.equals("view")) {
+           
+         if ((actionM != null && actionM.equals("view")) && action != null && action.equals("view")) {
             Integer selectedManager = Integer.parseInt(request.getParameter("selectedManager"));
+             Integer selectedCompany = Integer.parseInt(request.getParameter("selectedCompany"));
             try {
-                Logins login = mdb.get(selectedManager);
+                Logins login = pdb.get(selectedManager);
+                Company compsel = cs.get(selectedCompany);
+               // Company comp = cs.get(selectedCompany);
                 request.setAttribute("selectedMan", login);
+                 
+                request.setAttribute("selectedComp", compsel);
             } catch (Exception ex) {
                 Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        **/
-        
-        
-        
-        
         
 
         getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
@@ -95,73 +95,118 @@ public class AdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
       
-         CompanyService cs = new CompanyService();
-         LoginService ls = new LoginService();
-            String action = request.getParameter("action");
-           // Integer companyid = Integer.parseInt(request.getParameter("compid"));
-            Date dateAdded = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-             String tempDate = sdf.format(dateAdded);
+      
+                    CompanyService cs = new CompanyService();
+                    LoginService ls = new LoginService();
+                    
+                    
+                    String action = request.getParameter("action");
+                    
+                    // Integer companyid = Integer.parseInt(request.getParameter("compid"));
+                    Date dateAdded = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    String tempDate = sdf.format(dateAdded);
+                    
+                    try {
+                        dateAdded = new SimpleDateFormat("yyyy-MM-dd").parse(tempDate);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    
+                    String compname = request.getParameter("compname");
+                    String shortname = request.getParameter("shortname");
+                    String description = request.getParameter("description");
+                    String account = request.getParameter("account");
+                    String industry = request.getParameter("industry");
+                    
+                    
+                    try {
+                        if (action.equals("delete")) {
+                            Integer selectedCompany = Integer.parseInt(request.getParameter("selectedCompany"));
+                            cs.delete(selectedCompany);
+                        }
+                        else if (action.equals("add")) {
+                            cs.insert(dateAdded, compname, shortname, description, account, industry);
+                        }
+                    } catch (Exception ex) {
+                        request.setAttribute("errorMessage", "An error occured.");
+                    }
+                    
+                    
+                    CompanyDB compID = new CompanyDB();
+                    
+                    
+                    List<Company> comps = new ArrayList<Company>();
+                    try {
+                        comps = (List<Company>) cs.getAll();
+                    } catch (Exception ex) {
+                        Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    request.setAttribute("company", comps);
+                    
+                    
+                    // for logins
+                    Logins logins = new Logins();
+                      Company compM = logins.getCompanyID();
+                    String actionM = request.getParameter("actionM");
+                    
+                    // variables
+                    String username = request.getParameter("username");
+                    String password = request.getParameter("password");
+                    
+                    
+                   // Company compID = ls.getCompanyID(Integer.parseInt(request.getParameter("userCompanyID")));
+                   
+                    
+                    
+                    //System.out.print(compID);
+                    
+                    String active = request.getParameter("isActive");
+                    String admin = request.getParameter("isAdmin");
+                    // if statement if active/admin is null
+                    Character isActive;
+                    Character isAdmin;
+                    /**
+                     * if (admin != null && active != null ) {
+                     * isActive = active.charAt(0);
+                     * isAdmin = admin.charAt(0);
+                     * }
+                     **/
+                    
+                    
+                    try {
+                        if (actionM.equals("delete")) {
+                            Integer selectedManager = Integer.parseInt(request.getParameter("selectedManager"));
+                            ls.delete(selectedManager);
+                        }
+                        else if (actionM.equals("addUser") & (admin != null && active != null) ) {
+                            isActive = active.charAt(0);
+                            isAdmin = admin.charAt(0);
+                            
+                            ls.insert(dateAdded, username, password, compM, isActive, isAdmin);
+                        }
+                    } catch (Exception ex) {
+                        request.setAttribute("errorMessage", "An error occured.");
+                    }
+                    
+                    LoginDB loginDB = new LoginDB();
+                    
+                    List<Logins> user = new ArrayList<Logins>();
+                    
+                    try {
+                        
+                        user = (List<Logins>) ls.getAll();
+                    } catch (Exception ex) {
+                        Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    request.setAttribute("logins", user);
+                    
+                    getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
             
-        try {        
-            dateAdded = new SimpleDateFormat("yyyy-MM-dd").parse(tempDate);
-        } catch (ParseException ex) {
-            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
-           
-            String compname = request.getParameter("compname");
-            String shortname = request.getParameter("shortname");
-            String description = request.getParameter("description");
-            String account = request.getParameter("account");
-            String industry = request.getParameter("industry");
-            
-            
-            try {
-                if (action.equals("delete")) {
-                    Integer selectedCompany = Integer.parseInt(request.getParameter("selectedCompany"));
-                    cs.delete(selectedCompany);
-                } 
-                else if (action.equals("add")) {
-                    cs.insert(dateAdded, compname, shortname, description, account, industry);
-                }
-            } catch (Exception ex) {
-                request.setAttribute("errorMessage", "An error occured.");
-            }
-            
-            CompanyDB cd = new CompanyDB();
-            
-            /**
-             List<Company> comp = new ArrayList<Company>();        
-        try {
-            comp = cs.getAll();
-        } catch (Exception ex) {
-            Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        request.setAttribute("company", comp);
-            
-            
-            **/
-            
-            List<Company> comps = new ArrayList<Company>(); 
-            try {
-                comps = (List<Company>) cs.getAll();
-            } catch (Exception ex) {
-                Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            request.setAttribute("company", comps);
-            
-            
-             List<Logins> user = new ArrayList<Logins>(); 
-            try {
-                user = (List<Logins>) ls.getAll();
-            } catch (Exception ex) {
-                Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            request.setAttribute("logins", user);
-            
-        getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
-
+       
+       
     }
 
 

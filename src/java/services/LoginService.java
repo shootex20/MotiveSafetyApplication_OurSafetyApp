@@ -5,8 +5,11 @@
  */
 package services;
 
+import dataaccess.CompanyDB;
 import dataaccess.LoginDB;
+import domain.Company;
 import domain.Logins;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,6 +20,7 @@ public class LoginService {
       
     
        private LoginDB loginDB;
+       private CompanyDB companyDB;
     
     public LoginService() {
         loginDB = new LoginDB();
@@ -32,5 +36,28 @@ public class LoginService {
      public List<Logins> getAll() throws Exception {
         return loginDB.getAll();
     }
+     
+     
+         public int insert(Date dateAdded, String username, String password, Company companyID, Character isActive, Character isAdmin) throws Exception {
+         Logins user = new Logins ( dateAdded, username, password, companyID, isActive, isAdmin);
+         return loginDB.insert(user);
+    }
+     
+     
+    
+    
+     public int delete(Integer userID) throws Exception {
+        Logins user = loginDB.get(userID);
+        loginDB.delete(user);  
+        return loginDB.delete(user);
+    }
+
+    public Company getCompanyID(int categoryID) throws Exception {
+        return companyDB.get(categoryID);
+       
+    }
+
+       
+    
      
 }

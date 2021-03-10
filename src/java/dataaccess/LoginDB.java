@@ -42,8 +42,35 @@ public class LoginDB {
             return 1;
         }
     }
+        
+        
+         public int insert(Logins user) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        try {
+            
+            trans.begin();
+            em.persist(user);
+            //em.merge(user);
+            trans.commit();
+            
+        } catch (Exception ex) {
+            trans.rollback();
+        } finally {
+            em.close();
+            return 1;
+        }
+    }
 
     public Logins get(Integer userID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      EntityManager em = DBUtil.getEmFactory().createEntityManager();
+
+        try {
+            Logins user = em.find(Logins.class, userID);
+            return user;
+        } finally {
+            em.close();
+
+        }
     }
 }

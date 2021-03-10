@@ -65,6 +65,35 @@ public class Logins implements Serializable {
         this.userId = userId;
     }
 
+    public Logins(Date dateAdded, String username, String password, Company companyID, Character isActive, Character isAdmin) {
+        this.dateAdded = dateAdded;
+        this.username = username;
+        this.password = password;
+        this.companyID = companyID;
+        this.isActive = isActive;
+        this.isAdmin = isAdmin;
+               
+    }
+    
+    
+      public Logins(Date dateAdded, String username, String password, Character isActive, Character isAdmin) {
+        this.dateAdded = dateAdded;
+        this.username = username;
+        this.password = password;
+ 
+        this.isActive = isActive;
+        this.isAdmin = isAdmin;
+               
+    }
+
+    public Logins(Date dateAdded, String username, String password, Company companyID) {
+         this.dateAdded = dateAdded;
+        this.username = username;
+        this.password = password;
+    }
+
+    
+
     public Integer getUserId() {
         return userId;
     }
@@ -170,4 +199,5 @@ public class Logins implements Serializable {
         return "domain.Logins[ userId=" + userId + " ]";
     }
 
+    
 }

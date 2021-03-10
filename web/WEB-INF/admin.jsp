@@ -122,14 +122,9 @@
                 <th>Company Id</th>
                 <th>Is Active?</th>
                 <th>Is Admin</th>
-                <<%-- 
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Date of Birth</th>
-                <th>Gender</th>--%>
+          
                 <th>Delete</th>
-                <%--   <th>Email</th>
-                 --%>
+  
             </tr>
              <c:forEach var="user"  items="${logins}">
                 
@@ -177,6 +172,49 @@
             </c:forEach>
                   
         </table>
+       
+             <c:if test="${selectedManager == null}">
+            <h3>Add Manager</h3>
+            <form action="admin" method="POST">
+                 Username: <input type="text" name="username"><br>
+                    Password: <input type="text" name="password"><br>
+                       
+                  <label for="userCompanyID">Company Name: </label>
+                <select name="userCompanyID" id="userCompanyID">
+                    <c:forEach var="logincompanyID" items="${company}">
+                        <c:choose>
+                            <c:when test="${not empty selectedComp && selectedComp eq company.companyID}">
+                                <option value="${logincompanyID.companyID}" selected="true">${logincompanyID.name} </option>
+                                
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${logincompanyID.name}">${logincompanyID.name}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </select>
+                    
+                    <br>
+                    <label for="isActive" name="isActive"> Is Active?: </label>
+                <select name="isActive" var="isActive">  
+                     <option value="T">True</option>
+                    <option value="F">False</option>
+                </select> <br>
+                     <label for="isAdmin" name="isAdmin"> Is Admin?: </label>
+                <select name="isAdmin" var="isAdmin">  
+                     <option value="T">True</option>
+                    <option value="F">False</option>
+                </select> 
+                    
+                    
+                    <br>
+           
+                <input type="hidden" name="actionM" value="addUser">
+                <input type="submit" value="Add User" class="btn btn-primary"> 
+            </form>
+        </c:if>
+            
+                 <%--
         <h3>Add Manager</h3>
         <div class="admin-group">
             <form method="admin">
@@ -236,13 +274,13 @@
                     
                     <br>
            
-                <input type="hidden" name="actionM" value="add">
+                <input type="hidden" name="actionM" value="addUser">
                 <input type="submit" value="Add User" class="btn btn-primary"> 
                 </form>
             </c:if>
         </div>
         
-        
+        --%>
         
         
         
