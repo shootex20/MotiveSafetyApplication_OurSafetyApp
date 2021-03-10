@@ -64,7 +64,7 @@ public class PersonDB {
 
         }
     
-        public void insert(Person add) throws Exception {
+        public int insert(Person add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
@@ -76,41 +76,8 @@ public class PersonDB {
             trans.rollback();
         }finally {
             em.close();
-        
+            return add.getPersonID();
         }
     }
-        /*
-
-    public void delete(Person user) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();  
-        EntityTransaction trans = em.getTransaction();
-        try {
-            trans.begin();
-            em.remove(user);
-            trans.commit();
-        } catch(Exception ex){
-            trans.rollback();
-        } finally {
-            em.close();
-        }
-    }
-
-            public void delete(Companyperson person) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
-        
-        try {
-            Company user = person.getCompanyID();
-            user.getCompanypersonList().remove(person);
-            trans.begin();
-            em.remove(em.merge(person));
-            em.merge(user);
-            trans.commit();
-        } catch (Exception ex) {
-            trans.rollback();
-        } finally {
-            em.close();
-        }
-    }
-*/
+  
 }

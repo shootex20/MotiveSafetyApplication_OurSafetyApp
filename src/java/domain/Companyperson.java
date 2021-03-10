@@ -50,7 +50,7 @@ public class Companyperson implements Serializable {
     @Basic(optional = false)
     @Column(name = "companyPerson_ID", insertable=false)
     private Integer companyPersonID;
-    @Column(name = "dateAdded")
+    @Column(name = "dateAdded", insertable=false)
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
     @Column(name = "dateRemoved", insertable=false)
@@ -70,7 +70,7 @@ public class Companyperson implements Serializable {
     @JoinColumn(name = "company_ID", referencedColumnName = "company_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Company companyID;
-    @JoinColumn(name = "person_ID", referencedColumnName = "person_ID")
+    @JoinColumn(name = "person_ID", referencedColumnName = "person_ID", insertable=false)
     @ManyToOne(fetch = FetchType.EAGER)
     private Person personID;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
@@ -85,6 +85,13 @@ public class Companyperson implements Serializable {
 
     public Companyperson(Integer companyPersonID) {
         this.companyPersonID = companyPersonID;
+    }
+    
+        public Companyperson(String email, boolean isEmployeeActive, Company companyID) {
+        this.dateAdded = dateAdded;
+        this.email = email;
+        this.isEmployeeActive = isEmployeeActive;
+        this.companyID = companyID;
     }
 
     public Integer getCompanyPersonID() {

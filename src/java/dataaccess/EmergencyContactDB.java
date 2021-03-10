@@ -12,6 +12,7 @@ import domain.Item;
 import domain.Itemclass;
 import domain.Itemclassfields;
 import domain.Company;
+import domain.Emergencycontact;
 import javax.persistence.Query;
 
 
@@ -42,54 +43,20 @@ public class EmergencyContactDB {
         }
     }
     
-        public void insert(Item item) throws Exception {
+        public int insert(Emergencycontact add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
-        
+
         try {
-            Company user = item.getCompanyID();
-            user.getItemList().add(item);
             trans.begin();
-            em.persist(item);
-            em.merge(user);
+            em.persist(add);
             trans.commit();
-        } catch (Exception ex) {
+        }catch (Exception ex) {
             trans.rollback();
-        } finally {
+        }finally {
             em.close();
+            return add.getEmergencyContactID();
         }
     }
 
-    public void update(Item item) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
-        
-        try {
-            trans.begin();
-            em.merge(item);
-            trans.commit();
-        } catch (Exception ex) {
-            trans.rollback();
-        } finally {
-            em.close();
-        }
-    }
-
-    public void delete(Item item) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
-        
-        try {
-            Company user = item.getCompanyID();
-            user.getItemList().remove(item);
-            trans.begin();
-            em.remove(em.merge(item));
-            em.merge(user);
-            trans.commit();
-        } catch (Exception ex) {
-            trans.rollback();
-        } finally {
-            em.close();
-        }
-    }
 }

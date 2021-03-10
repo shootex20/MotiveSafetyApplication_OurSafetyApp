@@ -55,7 +55,7 @@ public class CompanyPersonPhoneDB {
         
     }
         
-        public void insert(Companypersonphone add) throws Exception {
+        public int insert(Companypersonphone add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
@@ -67,7 +67,7 @@ public class CompanyPersonPhoneDB {
             trans.rollback();
         }finally {
             em.close();
-        
+            return add.getCompanyPersonPhoneID();
         }
     }
 

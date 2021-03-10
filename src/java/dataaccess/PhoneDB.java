@@ -26,19 +26,19 @@ public class PhoneDB {
         }
     }
     
-    public void insert(Phone phone) throws Exception {
+        public int insert(Phone add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
         try {
             trans.begin();
-            em.persist(phone);
+            em.persist(add);
             trans.commit();
         }catch (Exception ex) {
             trans.rollback();
         }finally {
             em.close();
-        
+            return add.getPhoneID();
         }
     }
 

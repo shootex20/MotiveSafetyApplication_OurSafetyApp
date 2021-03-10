@@ -61,7 +61,7 @@ public class CompanyPersonAddressDB {
         
     }
     
-    public void insert(Companypersonaddress add) throws Exception {
+        public int insert(Companypersonaddress add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
@@ -73,21 +73,7 @@ public class CompanyPersonAddressDB {
             trans.rollback();
         }finally {
             em.close();
-        
-        }
-    }
-
-    public void delete(Companypersonaddress add) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();  
-        EntityTransaction trans = em.getTransaction();
-        try {
-            trans.begin();
-            em.remove(add);
-            trans.commit();
-        } catch(Exception ex){
-            trans.rollback();
-        } finally {
-            em.close();
+            return add.getCompanyPersonAddressID();
         }
     }
   

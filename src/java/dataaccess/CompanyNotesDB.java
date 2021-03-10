@@ -6,6 +6,7 @@
 package dataaccess;
 
 import domain.Companynotes;
+import java.sql.ResultSet;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -42,7 +43,7 @@ public class CompanyNotesDB {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
-        try {
+        try {       
             trans.begin();
             em.persist(note);
             trans.commit();
@@ -50,7 +51,6 @@ public class CompanyNotesDB {
             trans.rollback();
         }finally {
             em.close();
-        
         }
     }
 

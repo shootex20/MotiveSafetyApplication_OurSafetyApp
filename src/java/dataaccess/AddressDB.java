@@ -31,7 +31,7 @@ public class AddressDB {
         }
     }
     
-    public void insert(Address add) throws Exception {
+        public int insert(Address add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
@@ -43,7 +43,7 @@ public class AddressDB {
             trans.rollback();
         }finally {
             em.close();
-        
+            return add.getAddressID();
         }
     }
 

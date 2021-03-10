@@ -173,6 +173,16 @@ public class EmployeeServlet extends HttpServlet {
                 
         if(action.equals("Add"))  
         {
+            
+            Companyperson test = new Companyperson("uwu@gmail.com", true, curr);
+            try {
+               int temp = compPersonDB.insert(test);
+               request.setAttribute("message", temp);
+             doGet(request, response);  
+            } catch (Exception ex) {
+                Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+                doGet(request, response);  
+            }
 
         }
         else if (action.equals("Edit"))

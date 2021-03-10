@@ -70,18 +70,19 @@ public class CompanyPositionsDB {
         
     }
      
-         public int delete(Companypositions user) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();  
+        public int insert(Companypositions add) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
+
         try {
             trans.begin();
-            em.remove(user);
+            em.persist(add);
             trans.commit();
-        } catch(Exception ex){
+        }catch (Exception ex) {
             trans.rollback();
-        } finally {
+        }finally {
             em.close();
-            return 1;
+            return add.getCompanyPositionsID();
         }
     }
   
