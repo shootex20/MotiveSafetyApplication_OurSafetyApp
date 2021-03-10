@@ -43,7 +43,7 @@ public class EmergencyContactDB {
         }
     }
     
-        public int insert(Emergencycontact add) throws Exception {
+        public Emergencycontact insert(Emergencycontact add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
@@ -55,7 +55,7 @@ public class EmergencyContactDB {
             trans.rollback();
         }finally {
             em.close();
-            return add.getEmergencyContactID();
+            return add;
         }
     }
 

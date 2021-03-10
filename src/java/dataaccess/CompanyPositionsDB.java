@@ -70,7 +70,7 @@ public class CompanyPositionsDB {
         
     }
      
-        public int insert(Companypositions add) throws Exception {
+        public Companypositions insert(Companypositions add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
@@ -82,7 +82,7 @@ public class CompanyPositionsDB {
             trans.rollback();
         }finally {
             em.close();
-            return add.getCompanyPositionsID();
+            return add;
         }
     }
   

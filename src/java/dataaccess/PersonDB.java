@@ -64,7 +64,7 @@ public class PersonDB {
 
         }
     
-        public int insert(Person add) throws Exception {
+        public Person insert(Person add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
@@ -76,7 +76,7 @@ public class PersonDB {
             trans.rollback();
         }finally {
             em.close();
-            return add.getPersonID();
+            return add;
         }
     }
   

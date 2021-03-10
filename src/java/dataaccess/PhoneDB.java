@@ -26,7 +26,7 @@ public class PhoneDB {
         }
     }
     
-        public int insert(Phone add) throws Exception {
+        public Phone insert(Phone add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
@@ -38,7 +38,7 @@ public class PhoneDB {
             trans.rollback();
         }finally {
             em.close();
-            return add.getPhoneID();
+            return add;
         }
     }
 
