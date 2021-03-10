@@ -74,11 +74,10 @@
                         <th>${pos.positionTitle}</th>
                         </c:forEach>
                         <th>
-                            <form action="employee" method="post">
-                                <input type="hidden" name="hidden_comp_emp_edit" value="hiddenEdit">
-                                <input type="hidden" name="hidden_ed_cp" value="${emp.companyPersonID}">
-                                <input type="hidden" name="hidden_ed_person" value="${emp.personID.personID}">
-                                <input type="submit" name="action" value="Edit">
+                            <form action="employee" method="get">
+                                <input type="hidden" name="selectedUser" value="${emp.companyPersonID}">
+                                <input type="hidden" name="action" value="Edit">
+                                <input type="submit" value="Edit">
                             </form>
                         </th>
                         <th>
@@ -104,7 +103,6 @@
                     <th>Phone Number</th>
                     <th>Address</th>
                     <th>Position</th>
-                    <th>Edit</th>
                     <th>Activate</th>
                 </tr>
                 
@@ -146,13 +144,6 @@
                         </c:forEach>
                         <th>
                             <form action="employee" method="post">
-                                <input type="hidden" name="hidden_ed_cp" value="${empInActive.companyPersonID}">
-                                <input type="hidden" name="hidden_ed_person" value="${empInActive.personID.personID}">
-                                <input type="submit" name="action" value="Edit">
-                            </form>
-                        </th>
-                        <th>
-                            <form action="employee" method="post">
                                 <input type="hidden" name="hidden_ra_cp" value="${empInActive.companyPersonID}">
                                 <input type="hidden" name="hidden_ra_person" value="${empInActive.personID.personID}">
                                 <input type="hidden" name="action" value="ActivateEmployee">
@@ -167,20 +158,48 @@
             <br>
             ${message}
             <br>
+        <c:if test="${selectedUser == null}">
         <form action="employee"  method="post" class="companyAddForm">
             <h3>Add a new employee</h3>
             <input type="hidden" name="hidden_comp_emp_add" value="hiddenCompany"><br>
-            <label>First Name</label><input type="text" name="comp_firstname"><br>
-            <label>Last Name</label><input type="text" name="comp_lastname"><br>
-            <label>Birth Date</label><input type="date" name="comp_birthday"><br>
-            <label>Gender</label><input type="text" name="comp_gender"><br>
-            <label>Phone Number</label><input type="tel" name="comp_phone" placeholder="1234567890"><br>
-            <label>Email</label><input type="email" name="comp_email" placeholder="Ex: address@service.com"><br>
-            <label>Address</label><input type="text" name="comp_address"><br>
-            <label>Position</label><input type="text" name="comp_phone"><br>
-            <label>Role</label><input type="text" name="comp_role"><br>
+            <label>First Name</label><input required type="text" name="comp_firstname"><br>
+            <label>Last Name</label><input required type="text" name="comp_lastname"><br>
+            <label>Birth Date</label><input required type="date" name="comp_birthday"><br>
+            <label>Gender</label><input required type="text" name="comp_gender"><br>
+            <label>Phone Number</label><input required type="tel" name="comp_phone" placeholder="123-456-7890"><br>
+            <label>Email</label><input required type="email" name="comp_email" placeholder="Ex: address@service.com"><br>
+            <label>Address</label><input required type="text" name="comp_address"><br>
+            <label>Position</label><input required type="text" name="comp_pos"><br>
+            <h3>Emergency Contact Details</h3>
+            <label>First name</label><input required type="text" name="emer_first"><br>
+            <label>Last name</label><input required type="text" name="emer_last"><br>
+            <label>Phone Number</label><input required type="tel" name="emer_phone" placeholder="1234567890"><br>
+            <label>Relationship</label><input required type="text" name="emer_relationship"><br>
             <input type="submit" name="action" value="Add">
             ${compAddMsg}
         </form>
+        </c:if>
+        <c:if test="${selectedUser != null}">
+            <form action="employee"  method="post" class="companyAddForm">
+            <h3>Edit employee</h3>
+            <input type="hidden" name="hidden_comp_emp_add" value="hiddenCompany"><br>
+            <label>First Name</label><input required type="text" name="edcomp_firstname"><br>
+            <label>Last Name</label><input required type="text" name="edcomp_lastname"><br>
+            <label>Birth Date</label><input required type="date" name="edcomp_birthday"><br>
+            <label>Gender</label><input required type="text" name="edcomp_gender"><br>
+            <label>Phone Number</label><input required type="tel" name="edcomp_phone" placeholder="123-456-7890"><br>
+            <label>Email</label><input required type="email" name="edcomp_email" placeholder="Ex: address@service.com"><br>
+            <label>Address</label><input required type="text" name="edcomp_address"><br>
+            <label>Position</label><input required type="text" name="edcomp_phone"><br>
+            <h3>Emergency Contact Details</h3>
+            <label>First name</label><input required type="text" name="edemer_first"><br>
+            <label>Last name</label><input required type="text" name="edemer_last"><br>
+            <label>Phone Number</label><input required type="tel" name="edemer_phone" placeholder="1234567890"><br>
+            <label>Relationship</label><input required type="text" name="edemer_relationship"><br>
+            <input type="hidden" name="action" value="Edit">
+            <input type="submit" value="Save">
+            ${compAddMsg}
+        </form>
+            </c:if>
     </body>
 </html>

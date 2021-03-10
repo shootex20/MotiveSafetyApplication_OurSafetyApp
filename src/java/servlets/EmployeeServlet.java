@@ -19,7 +19,10 @@ import domain.Person;
 import domain.Phone;
 import domain.Typelibrary;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -159,25 +162,46 @@ public class EmployeeServlet extends HttpServlet {
         }
         
         Company curr = logins.getCompanyID();
-        
-        String action = request.getParameter("action");
-        
         /**Database stuff, do not touch.**/
         CompanypersonDB compPersonDB = new CompanypersonDB();
         PersonDB personDB = new PersonDB();
-        AddressDB addressDB = new AddressDB();
-        CompanyPersonAddressDB compAddDB = new CompanyPersonAddressDB();
-        PhoneDB phoneDB = new PhoneDB();
-        CompanyPersonPhoneDB compPhoneDB = new CompanyPersonPhoneDB();
-        CompanyPositionsDB compPosDB = new CompanyPositionsDB();
+        String action = request.getParameter("action");
+        
+        if (action != null && action.equals("view")) {
+        
+        }
+        
                 
         if(action.equals("Add"))  
         {
-            
-            Companyperson test = new Companyperson("uwu@gmail.com", true, curr);
+            /*Person start*/
+            String firstname = request.getParameter("comp_firstname");
+            String lastname = request.getParameter("comp_lastname");
+            String birthdate = request.getParameter("comp_birthday");
+            Date dateBorn = null;
             try {
-               int temp = compPersonDB.insert(test);
-               request.setAttribute("message", temp);
+                /*Formats the date purchased.*/
+                dateBorn = new SimpleDateFormat("yyyy-MM-dd").parse(birthdate);
+            } catch (ParseException ex) {
+                Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            String gender = request.getParameter("comp_gender");
+            
+            /*Phone#*/
+            String phonenum = request.getParameter("comp_phone");
+            /*Address*/
+            String address = request.getParameter("comp_address");
+            /*Position*/
+            String position = request.getParameter("comp_pos");
+            
+            /*Emergency Contact*/
+            String emerFirst = request.getParameter("emer_first");
+            String emerLast = request.getParameter("emer_last");
+            String emerPhone = request.getParameter("emer_phone");
+            String EmerRelation = request.getParameter("emer_relationship");        
+            try {
+
+               request.setAttribute("message", "New employee added!");
              doGet(request, response);  
             } catch (Exception ex) {
                 Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -187,7 +211,31 @@ public class EmployeeServlet extends HttpServlet {
         }
         else if (action.equals("Edit"))
         {
+            /*Person start*/
+            String firstname = request.getParameter("edcomp_firstname");
+            String lastname = request.getParameter("edcomp_lastname");
+            String birthdate = request.getParameter("edcomp_birthday");
+            Date dateBorn = null;
+            try {
+                /*Formats the date purchased.*/
+                dateBorn = new SimpleDateFormat("yyyy-MM-dd").parse(birthdate);
+            } catch (ParseException ex) {
+                Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            String gender = request.getParameter("edcomp_gender");
             
+            /*Phone#*/
+            String phonenum = request.getParameter("edcomp_phone");
+            /*Address*/
+            String address = request.getParameter("edcomp_address");
+            /*Position*/
+            String position = request.getParameter("edcomp_pos");
+            
+            /*Emergency Contact*/
+            String emerFirst = request.getParameter("edemer_first");
+            String emerLast = request.getParameter("edemer_last");
+            String emerPhone = request.getParameter("edemer_phone");
+            String EmerRelation = request.getParameter("edemer_relationship");    
         }
         else if (action.equals("DeactivateEmployee"))
         {
