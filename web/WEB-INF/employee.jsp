@@ -33,7 +33,7 @@
                     <th>Address</th>
                     <th>Position</th>
                     <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Deactivate</th>
                 </tr>
                 
                 <c:forEach  var="emp" items="${employeeList}">
@@ -83,11 +83,10 @@
                         </th>
                         <th>
                             <form action="employee" method="post">
-                                <input type="hidden" name="hidden_comp_emp_del" value="hiddenDelete">
-                                <input type="hidden" name="hidden_de_cp" value="${emp.companyPersonID}">
-                                <input type="hidden" name="hidden_de_person" value="${emp.personID.personID}">
-                                <input type="hidden" name="action" name="DeactivateEmployee">
-                                <input type="submit" value="Deactivate">
+                                <input type="hidden" name="hidden_da_cp" value="${emp.companyPersonID}">
+                                <input type="hidden" name="hidden_da_person" value="${emp.personID.personID}">
+                                <input type="hidden" name="action" value="DeactivateEmployee">
+                                <input type="submit" value="Deactivate" onclick="return confirm('Are you sure you want to deactivate ${emp.personID.firstName} ${emp.personID.lastName}?')">
                             </form>
                         </th>
                     </tr>
@@ -106,7 +105,7 @@
                     <th>Address</th>
                     <th>Position</th>
                     <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Activate</th>
                 </tr>
                 
                 <c:forEach  var="empInActive" items="${inActiveEmployeeList}">
@@ -124,7 +123,7 @@
                         <c:if test="${not empty empInActive.companypersonphoneList}">
                         <c:forEach  var="phone" items="${empInActive.companypersonphoneList}">
                             <th>
-                            <c:if test="${phone.companyPersonID eq emp}">
+                            <c:if test="${phone.companyPersonID eq empInActive}">
                         ${phone.phoneID.countryCode}-${phone.phoneID.areaCode}-${phone.phoneID.localNumber}-${phone.phoneID.extension}
                             </c:if>
                         </th>
@@ -156,8 +155,8 @@
                             <form action="employee" method="post">
                                 <input type="hidden" name="hidden_ra_cp" value="${empInActive.companyPersonID}">
                                 <input type="hidden" name="hidden_ra_person" value="${empInActive.personID.personID}">
-                                <input type="hidden" name="action" name="ActivateEmployee">
-                                <input type="submit" value="Activate">
+                                <input type="hidden" name="action" value="ActivateEmployee">
+                                <input type="submit" value="Activate" onclick="return confirm('Are you sure you want to reactivate ${empInActive.personID.firstName} ${empInActive.personID.lastName}?')">
                             </form>
                         </th>
                     </tr>

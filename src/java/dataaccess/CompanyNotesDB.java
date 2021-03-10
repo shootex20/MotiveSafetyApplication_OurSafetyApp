@@ -25,18 +25,18 @@ public class CompanyNotesDB {
          List<Companynotes> results = query.getResultList();
             return results;
     }
-   /*
-    public Address get(int address_ID) throws Exception {
+   
+    public Companynotes get(int compNotesID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
-            Address add = em.find(Address.class, address_ID);
+            Companynotes add = em.find(Companynotes.class, compNotesID);
             return add;
         } finally { 
             em.close();
         }
     }
-*/
+
     
     public void insert(Companynotes note) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

@@ -41,7 +41,9 @@ public class companyWelcomeServlet extends HttpServlet {
 //            return;
 //        }
 
-        int userID = 2;
+    /**Minor change here, removes hard coding on userID.**/
+       // int userID = 2;
+        int userID = (Integer) session.getAttribute("userID");
         Logins logins = new Logins();
         Company company = logins.getCompanyID();
         String logout = request.getParameter("action");
