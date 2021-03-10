@@ -176,8 +176,10 @@
              <c:if test="${selectedManager == null}">
             <h3>Add Manager</h3>
             <form action="admin" method="POST">
+                
+                
                  Username: <input type="text" name="username"><br>
-                    Password: <input type="text" name="password"><br>
+                 Password: <input type="text" name="password"><br>
                        
                   <label for="userCompanyID">Company Name: </label>
                 <select name="userCompanyID" id="userCompanyID">
@@ -188,7 +190,7 @@
                                 
                             </c:when>
                             <c:otherwise>
-                                <option value="${logincompanyID.name}">${logincompanyID.name}</option>
+                                <option value="${logincompanyID.companyID}">${logincompanyID.name}</option>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>

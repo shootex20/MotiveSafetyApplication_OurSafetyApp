@@ -158,9 +158,10 @@ public class AdminServlet extends HttpServlet {
                     
                    // Company compID = ls.getCompanyID(Integer.parseInt(request.getParameter("userCompanyID")));
                    
+                   // Integer companySelectedId = Integer.parseInt(request.getParameter("userCompanyID"));
                     
                     
-                    //System.out.print(compID);
+                   // System.out.print(companySelectedId);
                     
                     String active = request.getParameter("isActive");
                     String admin = request.getParameter("isAdmin");
