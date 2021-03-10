@@ -123,7 +123,7 @@
                         <c:if test="${not empty empInActive.companypersonphoneList}">
                         <c:forEach  var="phone" items="${empInActive.companypersonphoneList}">
                             <th>
-                            <c:if test="${phone.companyPersonID eq emp}">
+                            <c:if test="${phone.companyPersonID eq empInActive}">
                         ${phone.phoneID.countryCode}-${phone.phoneID.areaCode}-${phone.phoneID.localNumber}-${phone.phoneID.extension}
                             </c:if>
                         </th>
