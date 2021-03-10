@@ -66,8 +66,6 @@ public class EmployeeServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(companyWelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //Test data.    Must be deleted when finished.
-      //Company curr = new Company(1);
 
         Company curr = logins.getCompanyID();
         if(logins.getCompanyID().getCompanyID() == null)
@@ -181,15 +179,13 @@ public class EmployeeServlet extends HttpServlet {
         {
             
         }
-        else if (action.equals("Deactivate"))
+        else if (action.equals("DeactivateEmployee"))
         {
             String companyPersonIDString = request.getParameter("hidden_da_cp");
             String personIDString = request.getParameter("hidden_da_person");
             
             int companyPersonID = Integer.parseInt(companyPersonIDString);
             int personID = Integer.parseInt(personIDString);
-            
-          
                 
             Companyperson cpToDeactivate = new Companyperson();
             Person personToDeactivate = new Person();
@@ -208,8 +204,8 @@ public class EmployeeServlet extends HttpServlet {
                 }
                 else
                 {
-                    
-                    
+                cpToDeactivate.setIsEmployeeActive(false);
+                compPersonDB.update(cpToDeactivate);
                 request.setAttribute("message", "Successfully Deactivated: " + personToDeactivate.getFirstName() + " " + personToDeactivate.getLastName());
                 doGet(request, response);  
                 }      
@@ -219,12 +215,40 @@ public class EmployeeServlet extends HttpServlet {
                      doGet(request, response);   
                 }
             }
+            else if (action.equals("ActivateEmployee"))
+            {
+            String companyPersonIDString = request.getParameter("hidden_ra_cp");
+            String personIDString = request.getParameter("hidden_ra_person");
             
+            int companyPersonID = Integer.parseInt(companyPersonIDString);
+            int personID = Integer.parseInt(personIDString);
+                
+            Companyperson cpToReactivate = new Companyperson();
+            Person personToReactivate = new Person();
             
+            try {
+                
+                personToReactivate = personDB.get(personID);
+                cpToReactivate = compPersonDB.get(companyPersonID);
+                
+                if(personToReactivate == null && cpToReactivate == null)
+                {
+                request.setAttribute("message", "Error, could not reactivate user.");
+                doGet(request, response);  
+                }
+                else
+                {
+                cpToReactivate.setIsEmployeeActive(true);
+                compPersonDB.update(cpToReactivate);
+                request.setAttribute("message", "Successfully Reactivated: " + personToReactivate.getFirstName() + " " + personToReactivate.getLastName());
+                doGet(request, response);  
+                }      
+                } catch (Exception ex) {
+                    Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    request.setAttribute("message", ex);
+                    doGet(request, response);   
+                }
+            }    
         }
-        
-
-        //getServletContext().getRequestDispatcher("/WEB-INF/employee.jsp").forward(request, response);
-
     }
 

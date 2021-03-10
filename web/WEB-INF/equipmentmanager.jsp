@@ -43,7 +43,7 @@
                     <td>${equipmentItem.itemClassInformation}</td>
                     <td>
                         <form method="post"> 
-                            <input type="submit" name="action" class="btn btn-danger" value="Delete">
+                            <input type="submit" name="action" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure you want to delete ${equipmentItem.model} with item information ${equipmentItem.itemClassInformation}?')">
                             <input type="hidden" name="itemID" value="${equipmentItem.itemID}">
                         </form>
                     </td>

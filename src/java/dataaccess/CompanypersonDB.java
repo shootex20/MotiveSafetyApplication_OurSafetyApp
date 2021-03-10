@@ -55,7 +55,7 @@ public class CompanypersonDB {
         
     }
     
-            public void insert(Companyperson add) throws Exception {
+        public void insert(Companyperson add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
@@ -70,23 +70,10 @@ public class CompanypersonDB {
         
         }
     }
-/*
-    public int delete(Companyperson user) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();  
-        EntityTransaction trans = em.getTransaction();
-        try {
-            trans.begin();
-            em.remove(user);
-            trans.commit();
-        } catch(Exception ex){
-            trans.rollback();
-        } finally {
-            em.close();
-            return 1;
-        }
-    }
-*/
-    
+
+
+    /*Does not work.*/
+            /*
         public void delete(Companyperson person) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -104,5 +91,6 @@ public class CompanypersonDB {
             em.close();
         }
     }
+*/
  
 }
