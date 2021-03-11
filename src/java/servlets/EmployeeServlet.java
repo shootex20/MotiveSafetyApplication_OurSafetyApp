@@ -54,7 +54,7 @@ public class EmployeeServlet extends HttpServlet {
 
         int userID = (Integer) session.getAttribute("userID");
         Logins logins = new Logins();
-        String logout = request.getParameter("logout");
+        String logout = request.getParameter("action");
         String company = request.getParameter("company");
         String equipment = request.getParameter("equipment");
         String companyWelcome = request.getParameter("companyWelcome");

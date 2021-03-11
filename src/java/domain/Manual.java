@@ -83,6 +83,15 @@ public class Manual implements Serializable {
     public Manual() {
     }
 
+    public Manual(Date dateAdded, int userAdded,Typelibrary typeLibraryID, String title, String intention, String content ){
+        this.dateAdded = dateAdded;
+        this.userAdded = userAdded;
+        this.typeLibraryID = typeLibraryID;
+        this.title = title;
+        this.intention = intention;
+        this.content = content;
+    }
+    
     public Manual(Integer manualID) {
         this.manualID = manualID;
     }

@@ -50,6 +50,7 @@
                 </tr>
             </c:forEach>
         </table>
+        
         <br>
         <div class="text-success">
         ${message}
@@ -76,6 +77,7 @@
                         </c:forEach>
                             <input type="hidden" name="action" value="addform">
                     </select>
+                    
                     <br>
                     <input type="hidden" name="selectedType" value="">
                     <input type="submit" id="addbutton" class="btn btn-primary" value="Add Equipment">

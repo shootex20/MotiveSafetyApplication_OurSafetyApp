@@ -21,7 +21,6 @@
 
         <header class="companyWelcomHeader">
             <ul>
-                <li><a href="company?company">${companyName} Company Page</a></li>
                 <li><a href="equipmentmanager">Equipment page</a></li>
                 <li><a href="manual?manual">Manual Page</a></li>
                 <li><a href="employee?employee">Employee page</a></li>

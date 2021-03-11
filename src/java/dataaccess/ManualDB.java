@@ -5,7 +5,10 @@
  */
 package dataaccess;
 
+import domain.Company;
+import domain.Item;
 import domain.Itemclassfields;
+import domain.Logins;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +16,7 @@ import java.util.ArrayList;
 import domain.Manual;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 /**
  *
@@ -43,5 +47,49 @@ public class ManualDB {
             em.close();
         }
     }
+    
+    public void insert(Manual manual) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        
+        try {
+            trans.begin();
+            em.persist(manual);
+            trans.commit();
+        } catch (Exception ex) {
+            trans.rollback();
+        } finally {
+            em.close();
+        }
+    }
 
+    public int delete(Manual manual) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();  
+        EntityTransaction trans = em.getTransaction();
+        try {
+            trans.begin();
+            em.remove(manual);
+            trans.commit();
+        } catch(Exception ex){
+            trans.rollback();
+        } finally {
+            em.close();
+            return 1;
+        }
+    }
+            
+    public void update(Manual manual) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        
+        try {
+            trans.begin();
+            em.merge(manual);
+            trans.commit();
+        } catch (Exception ex) {
+            trans.rollback();
+        } finally {
+            em.close();
+        }
+    }
 }
