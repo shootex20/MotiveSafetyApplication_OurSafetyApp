@@ -125,7 +125,7 @@
                 
                 
                  Username: <input type="text" name="username"><br>
-                 Password: <input type="text" name="password"><br>
+                 Password: <input type="password" name="password"><br>
                        
                   <label for="userCompanyID">Company Name: </label>
                 <select name="userCompanyID" id="userCompanyID">

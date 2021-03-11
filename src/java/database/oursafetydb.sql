@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `oursafetydb`.`logins` (
 `userAdded` int, 
 `userRemoved` int, 
 `username` varchar(30), 
-`password` varchar(30), 
+`password` varchar(200), 
 `company_ID` int, 
 `isActive` CHAR, 
 `isAdmin` CHAR, 
