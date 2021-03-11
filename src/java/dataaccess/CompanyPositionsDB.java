@@ -44,7 +44,7 @@ public class CompanyPositionsDB {
         }
     }
     
-    public Companypositions get(int personID ) throws Exception {
+    public Companypositions get(Companyperson personID ) throws Exception {
      EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
         try {
@@ -68,6 +68,21 @@ public class CompanyPositionsDB {
             em.close();
         }
         
+    }
+     
+         public void update(Companypositions pos) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        
+        try {
+            trans.begin();
+            em.merge(pos);
+            trans.commit();
+        } catch (Exception ex) {
+            trans.rollback();
+        } finally {
+            em.close();
+        }
     }
      
         public Companypositions insert(Companypositions add) throws Exception {

@@ -174,8 +174,16 @@
             <label>First Name</label><input required type="text" name="comp_firstname"><br>
             <label>Last Name</label><input required type="text" name="comp_lastname"><br>
             <label>Birth Date</label><input required type="date" name="comp_birthday"><br>
+            <%--
             <label>Gender</label><input required type="text" name="comp_gender"><br>
+            --%>
+            <select name="comp_gender" id="comp_gender">
+            <option value="F">Female</option>
+            <option value="M">Male</option>
+            <option value="O">Other</option>
+            </select><br>
             <label>Phone Number</label><input required pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" type="tel" name="comp_phone" placeholder="123-456-7890"><br>
+            <label>Phone Ext</label><input type="tel" name="comp_phoneExt" placeholder="7890"><br>
             <label>Email</label><input required type="email" name="comp_email" placeholder="Ex: address@service.com"><br>
             <label>Address Line 1</label><input required type="text" name="comp_addressLine1"><br>
             <label>Address Line 2</label><input required type="text" name="comp_addressLine2"><br>  
@@ -195,19 +203,29 @@
         </c:if>
         <c:if test="${user != null}">
             <h3>Edit employee</h3>
+            
+            <input type="hidden" name="userID" value="${user.companyPersonID}">
+            
             <form action="employee"  method="post" class="companyAddForm">
             <input type="hidden" name="hidden_comp_emp_add" value="hiddenCompany"><br>
 
             <label>First Name</label><input required type="text" name="edcomp_firstname" value="${user.personID.firstName}"><br>
             <label>Last Name</label><input required type="text" name="edcomp_lastname" value="${user.personID.lastName}"><br>
            <%-- <label>Birth Date</label><input required type="date" name="edcomp_birthday" value="${formattedDate}"><br>
-            --%>           
-            <label>Gender</label><input required type="text" name="edcomp_gender" value="${user.personID.gender}"><br>
+                      
+            <label>Gender</label><input required type="text" name="edcomp_gender" value="${user.personID.gender}">
+ --%>
+        <select name="edcomp_gender" id="edcomp_gender">
+        <option value="F">Female</option>
+        <option value="M">Male</option>
+        <option value="O">Other</option>
+        </select><br>
                        
             <c:forEach  var="phone" items="${user.companypersonphoneList}">
                             <th>
                    <c:if test="${phone.companyPersonID eq user}">
-             <label>Phone Number</label><input pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" required type="tel" name="edcomp_phone" placeholder="123-456-7890" value="${phone.phoneID.countryCode}-${phone.phoneID.areaCode}-${phone.phoneID.localNumber}-${phone.phoneID.extension}"><br>
+             <label>Phone Number</label><input pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" required type="tel" name="edcomp_phone" placeholder="123-456-7890" value="${phone.phoneID.countryCode}-${phone.phoneID.areaCode}-${phone.phoneID.localNumber}"><br>
+                         <label>Phone Ext</label><input type="tel" name="edcomp_phoneExt" placeholder="7890" value="${phone.phoneID.extension}"><br>
                     </c:if>
                 </th>
             </c:forEach>

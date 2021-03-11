@@ -5,6 +5,7 @@ import dataaccess.CompanyPersonAddressDB;
 import dataaccess.CompanyPersonPhoneDB;
 import dataaccess.CompanypersonDB;
 import dataaccess.CompanyPositionsDB;
+import dataaccess.EmergencyContactDB;
 import dataaccess.LoginDB;
 import dataaccess.PersonDB;
 import dataaccess.PhoneDB;
@@ -14,6 +15,7 @@ import domain.Companyperson;
 import domain.Companypersonaddress;
 import domain.Companypersonphone;
 import domain.Companypositions;
+import domain.Emergencycontact;
 import domain.Logins;
 import domain.Person;
 import domain.Phone;
@@ -187,12 +189,16 @@ public class EmployeeServlet extends HttpServlet {
             Logger.getLogger(companyWelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        Company curr = logins.getCompanyID();
+       Company curr = logins.getCompanyID();
         /**Database stuff, do not touch.**/
         CompanypersonDB compPersonDB = new CompanypersonDB();
         PersonDB personDB = new PersonDB();
-        
-
+        CompanyPersonAddressDB compAddressDB = new CompanyPersonAddressDB();
+        CompanyPersonPhoneDB compPhoneDB = new CompanyPersonPhoneDB();
+        CompanyPositionsDB compPosDB = new CompanyPositionsDB();
+        EmergencyContactDB emerConDB = new EmergencyContactDB();
+        AddressDB addDB = new AddressDB();
+        PhoneDB phoneDB = new PhoneDB();
                 
         if(action.equals("Add"))  
         {
@@ -211,6 +217,7 @@ public class EmployeeServlet extends HttpServlet {
             
             /*Phone#*/
             String phonenum = request.getParameter("comp_phone");
+            String phoneExt = request.getParameter("edcomp_phoneExt");
             /*Address*/
             String addressLine1 = request.getParameter("comp_addressLine1");
             String addressLine2 = request.getParameter("comp_addressLine2");
@@ -238,23 +245,73 @@ public class EmployeeServlet extends HttpServlet {
         }
         else if (action.equals("Save"))
         {
+            String id = request.getParameter("userID");
+            
+            /*
+                Companyperson compPersEdit = new Companyperson();
+                Person personEdit = new Person();
+                Emergencycontact contactEdit = new Emergencycontact();
+                Companypersonaddress cpAddEdit = new Companypersonaddress();
+                Companypersonphone cpPhoneEdit = new Companypersonphone();
+                Address addEdit = new Address();
+                Phone phoneEdit = new Phone();
+                Companypositions positionEdit = new Companypositions();
+            */
+            try {
+                Companyperson compPersEdit = compPersonDB.get(Integer.parseInt(id));
+                Person personEdit = compPersEdit.getPersonID();
+                Emergencycontact contactEdit = personEdit.getEmergencyContactID();
+                Companypersonaddress cpAddEdit = compAddressDB.get(compPersEdit);
+                Companypersonphone cpPhoneEdit = compPhoneDB.get(compPersEdit);
+                Address addEdit = cpAddEdit.getAddressID();
+                Phone phoneEdit = cpPhoneEdit.getPhoneID();
+                Companypositions positionEdit = compPosDB.get(compPersEdit);
+
+
+            
+            if(compPersEdit != null)
+            {
             /*Person start*/
             String firstname = request.getParameter("edcomp_firstname");
             String lastname = request.getParameter("edcomp_lastname");
-            String birthdate = request.getParameter("edcomp_birthday");
-            /*
-            Date dateBorn = null;
-            try {
-                dateBorn = new SimpleDateFormat("yyyy-MM-dd").parse(birthdate);
-            } catch (ParseException ex) {
-                Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            */
+            //String birthdate = request.getParameter("edcomp_birthday");
             
             String gender = request.getParameter("edcomp_gender");
             
+            char genChar = gender.charAt(0);
+            
+            personEdit.setFirstName(firstname);
+            personEdit.setLastName(lastname);
+            personEdit.setGender(genChar);
+            
+                try {
+                    personDB.update(personEdit);
+                } catch (Exception ex) {
+                    Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
             /*Phone#*/
             String phonenum = request.getParameter("edcomp_phone");
+            String phoneExt = request.getParameter("edcomp_phoneExt");
+            
+            String[] phoneParts = phonenum.split("-");
+            String countryCode = phoneParts[0];
+            String areaCode = phoneParts[1];
+            String localNum = phoneParts[2];
+            String local = phoneParts[3];
+            
+            String fullLocal = localNum + "-" + local;
+            
+            phoneEdit.setCountryCode(countryCode);
+            phoneEdit.setAreaCode(areaCode);
+            phoneEdit.setLocalNumber(fullLocal);
+            
+                try {
+                    phoneDB.update(phoneEdit);
+                } catch (Exception ex) {
+                    Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
             /*Address*/
             String addressLine1 = request.getParameter("edcomp_addressLine1");
             String addressLine2 = request.getParameter("edcomp_addressLine2");
@@ -262,14 +319,63 @@ public class EmployeeServlet extends HttpServlet {
             String addressProvince = request.getParameter("edcomp_prov");
             String addressPostal = request.getParameter("edcomp_postal");
             String addressCountry = request.getParameter("edcomp_country");
+            
+            addEdit.setAddressLine1(addressLine1);
+            addEdit.setAddressLine2(addressLine2);
+            addEdit.setCity(addressCity);
+            addEdit.setProvince(addressProvince);
+            addEdit.setPostalCode(addressPostal);
+            addEdit.setCountry(addressCountry);
+            
+                try {
+                    addDB.update(addEdit);
+                } catch (Exception ex) {
+                    Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
             /*Position*/
             String position = request.getParameter("edcomp_pos");
+            
+            positionEdit.setPositionTitle(position);
+            
+                try {
+                    compPosDB.update(positionEdit);
+                } catch (Exception ex) {
+                    Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+            
             
             /*Emergency Contact*/
             String emerFirst = request.getParameter("edemer_first");
             String emerLast = request.getParameter("edemer_last");
             String emerPhone = request.getParameter("edemer_phone");
-            String EmerRelation = request.getParameter("edemer_relationship");    
+            String emerRelation = request.getParameter("edemer_relationship"); 
+            
+            contactEdit.setEmergencyContactFirstName(emerFirst);
+            contactEdit.setEmergencyContactLastName(emerLast);
+            contactEdit.setEmergencyContactNumber(emerPhone);
+            contactEdit.setEmergencyContactRelationship(emerRelation);
+            
+                try {
+                    emerConDB.update(contactEdit);
+                } catch (Exception ex) {
+                    Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+            }
+            
+            else
+            {
+            request.setAttribute("message", "Error");
+            doGet(request, response);  
+            }
+                        } catch (Exception ex) {
+                doGet(request, response);
+                Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
         }
         else if (action.equals("DeactivateEmployee"))
         {

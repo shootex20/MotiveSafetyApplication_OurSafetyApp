@@ -21,29 +21,23 @@ import javax.persistence.Query;
  * @author Chelsey Coughlin
  */
 public class EmergencyContactDB {
-    
-        public List<Item> getAll(Company companyID) throws Exception {
+
+        public void update(Emergencycontact con) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        
         try {
-            Company company = em.find(Company.class, companyID.getCompanyID());
-            return company.getItemList();
+            trans.begin();
+            em.merge(con);
+            trans.commit();
+        } catch (Exception ex) {
+            trans.rollback();
         } finally {
             em.close();
         }
     }
-   
-    public Item get(int item_ID) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
-        try {
-            Item item = em.find(Item.class, item_ID);
-            return item;
-        } finally { 
-            em.close();
-        }
-    }
-    
-        public Emergencycontact insert(Emergencycontact add) throws Exception {
+    public Emergencycontact insert(Emergencycontact add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
