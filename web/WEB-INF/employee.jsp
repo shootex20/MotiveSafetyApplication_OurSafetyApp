@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -174,14 +175,19 @@
             <label>Last Name</label><input required type="text" name="comp_lastname"><br>
             <label>Birth Date</label><input required type="date" name="comp_birthday"><br>
             <label>Gender</label><input required type="text" name="comp_gender"><br>
-            <label>Phone Number</label><input required type="tel" name="comp_phone" placeholder="123-456-7890"><br>
+            <label>Phone Number</label><input required pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" type="tel" name="comp_phone" placeholder="123-456-7890"><br>
             <label>Email</label><input required type="email" name="comp_email" placeholder="Ex: address@service.com"><br>
-            <label>Address</label><input required type="text" name="comp_address"><br>
+            <label>Address Line 1</label><input required type="text" name="comp_addressLine1"><br>
+            <label>Address Line 2</label><input required type="text" name="comp_addressLine2"><br>  
+            <label>City</label><input required type="text" name="comp_city"><br>
+            <label>Province</label><input required type="text" name="eomp_prov"><br>
+            <label>Postal Code</label><input required type="text" name="comp_postal"><br>
+            <label>Country</label><input required type="text" name="comp_country"><br>
             <label>Position</label><input required type="text" name="comp_pos"><br>
             <h3>Emergency Contact Details</h3>
             <label>First name</label><input required type="text" name="emer_first"><br>
             <label>Last name</label><input required type="text" name="emer_last"><br>
-            <label>Phone Number</label><input required type="tel" name="emer_phone" placeholder="1234567890"><br>
+            <label>Phone Number</label><input required type="tel" name="emer_phone" pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="1234567890"><br>
             <label>Relationship</label><input required type="text" name="emer_relationship"><br>
             <input type="submit" name="action" value="Add">
             ${compAddMsg}
@@ -191,21 +197,42 @@
             <h3>Edit employee</h3>
             <form action="employee"  method="post" class="companyAddForm">
             <input type="hidden" name="hidden_comp_emp_add" value="hiddenCompany"><br>
-            <label>First Name</label><input required type="text" name="edcomp_firstname"><br>
-            <label>Last Name</label><input required type="text" name="edcomp_lastname"><br>
-            <label>Birth Date</label><input required type="date" name="edcomp_birthday"><br>
-            <label>Gender</label><input required type="text" name="edcomp_gender"><br>
-            <label>Phone Number</label><input required type="tel" name="edcomp_phone" placeholder="123-456-7890"><br>
-            <label>Email</label><input required type="email" name="edcomp_email" placeholder="Ex: address@service.com"><br>
-            <label>Address</label><input required type="text" name="edcomp_address"><br>
-            <label>Position</label><input required type="text" name="edcomp_phone"><br>
+
+            <label>First Name</label><input required type="text" name="edcomp_firstname" value="${user.personID.firstName}"><br>
+            <label>Last Name</label><input required type="text" name="edcomp_lastname" value="${user.personID.lastName}"><br>
+           <%-- <label>Birth Date</label><input required type="date" name="edcomp_birthday" value="${formattedDate}"><br>
+            --%>           
+            <label>Gender</label><input required type="text" name="edcomp_gender" value="${user.personID.gender}"><br>
+                       
+            <c:forEach  var="phone" items="${user.companypersonphoneList}">
+                            <th>
+                   <c:if test="${phone.companyPersonID eq user}">
+             <label>Phone Number</label><input pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" required type="tel" name="edcomp_phone" placeholder="123-456-7890" value="${phone.phoneID.countryCode}-${phone.phoneID.areaCode}-${phone.phoneID.localNumber}-${phone.phoneID.extension}"><br>
+                    </c:if>
+                </th>
+            </c:forEach>
+            
+            <label>Email</label><input required type="email" name="edcomp_email" placeholder="Ex: address@service.com" value="${user.email}"><br>
+
+            <c:forEach  var="add" items="${user.companypersonaddressList}">
+            <label>Address Line 1</label><input required type="text" name="edcomp_addressLine1" value="${add.addressID.addressLine1}"><br>
+            <label>Address Line 2</label><input required type="text" name="edcomp_addressLine2" value="${add.addressID.addressLine2}"><br>  
+            <label>City</label><input required type="text" name="edcomp_city" value="${add.addressID.city}"><br>
+            <label>Province</label><input required type="text" name="edcomp_prov" value="${add.addressID.province}"><br>
+            <label>Postal Code</label><input required type="text" name="edcomp_postal" value="${add.addressID.postalCode}"><br>
+            <label>Country</label><input required type="text" name="edcomp_country" value="${add.addressID.country}"><br>
+            </c:forEach>
+            
+            <c:forEach var="pos" items="${user.companypositionsList}">
+            <label>Position</label><input required type="text" name="edcomp_pos" value="${pos.positionTitle}"><br>
+            </c:forEach>
+
             <h3>Emergency Contact Details</h3>
-            <label>First name</label><input required type="text" name="edemer_first"><br>
-            <label>Last name</label><input required type="text" name="edemer_last"><br>
-            <label>Phone Number</label><input required type="tel" name="edemer_phone" placeholder="1234567890"><br>
-            <label>Relationship</label><input required type="text" name="edemer_relationship"><br>
-            <input type="hidden" name="action" value="Edit">
-            <input type="submit" value="Save">
+            <label>First name</label><input required type="text" name="edemer_first" value="${user.personID.emergencyContactID.emergencyContactFirstName}"><br>
+            <label>Last name</label><input required type="text" name="edemer_last" value="${user.personID.emergencyContactID.emergencyContactLastName}"><br>
+            <label>Phone Number</label><input required type="tel" name="edemer_phone" placeholder="1234567890" pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}"  value="${user.personID.emergencyContactID.emergencyContactNumber}"><br>
+            <label>Relationship</label><input required type="text" name="edemer_relationship"  value="${user.personID.emergencyContactID.emergencyContactRelationship}"><br>
+            <input type="submit" name="action" value="Save">
             ${compAddMsg}
         </form>
             </c:if>

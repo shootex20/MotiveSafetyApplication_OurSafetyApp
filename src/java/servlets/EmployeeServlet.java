@@ -43,6 +43,8 @@ public class EmployeeServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
+        
+        String action = request.getParameter("action");
 
         // DQ: This segment will probably be replaced by a filter
         if (session.getAttribute("userName") == null) {
@@ -126,6 +128,28 @@ public class EmployeeServlet extends HttpServlet {
                 compPersonListActive.add(compPersonList.get(i));
             }
         }
+        
+                if (action != null && action.equals("view")){
+                String selectedEmp = request.getParameter("edactive");
+            try {
+                Companyperson toEdit = compPerDB.get(Integer.parseInt(selectedEmp));
+                request.setAttribute("user", toEdit);
+            } catch (Exception ex) {
+                Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        }
+        else if (action != null && action.equals("view1")) {
+          String selectedEmp = request.getParameter("edinactive"); 
+          
+            try {
+                Companyperson toEdit = compPerDB.get(Integer.parseInt(selectedEmp));
+                request.setAttribute("user", toEdit);
+            } catch (Exception ex) {
+                Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        }
 
         request.setAttribute("employeeList", compPersonListActive);
         request.setAttribute("inActiveEmployeeList", compPersonListNotActive);
@@ -139,6 +163,8 @@ public class EmployeeServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
+        String action = request.getParameter("action");
+
 
         // DQ: This segment will probably be replaced by a filter
         if (session.getAttribute("userName") == null) {
@@ -165,30 +191,8 @@ public class EmployeeServlet extends HttpServlet {
         /**Database stuff, do not touch.**/
         CompanypersonDB compPersonDB = new CompanypersonDB();
         PersonDB personDB = new PersonDB();
-        String action = request.getParameter("action");
         
-        if (action != null && action.equals("view")) {
-        String selectedEmp = request.getParameter("edactive");
-            try {
-                Companyperson toEdit = compPersonDB.get(Integer.parseInt(selectedEmp));
-                request.setAttribute("user", toEdit);
-            } catch (Exception ex) {
-                Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
-        }
-//        else if (action != null && action.equals("view1")) {
-//          String selectedEmp = request.getParameter("edinactive"); 
-//          
-//            try {
-//                Companyperson toEdit = compPersonDB.get(Integer.parseInt(selectedEmp));
-//                request.setAttribute("selectedUser", toEdit);
-//            } catch (Exception ex) {
-//                Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        
-//        }
-//        else
+
                 
         if(action.equals("Add"))  
         {
@@ -208,7 +212,12 @@ public class EmployeeServlet extends HttpServlet {
             /*Phone#*/
             String phonenum = request.getParameter("comp_phone");
             /*Address*/
-            String address = request.getParameter("comp_address");
+            String addressLine1 = request.getParameter("comp_addressLine1");
+            String addressLine2 = request.getParameter("comp_addressLine2");
+            String addressCity = request.getParameter("comp_city");
+            String addressProvince = request.getParameter("comp_prov");
+            String addressPostal = request.getParameter("comp_postal");
+            String addressCountry = request.getParameter("comp_country");
             /*Position*/
             String position = request.getParameter("comp_pos");
             
@@ -227,25 +236,32 @@ public class EmployeeServlet extends HttpServlet {
             }
 
         }
-        else if (action.equals("Edit"))
+        else if (action.equals("Save"))
         {
             /*Person start*/
             String firstname = request.getParameter("edcomp_firstname");
             String lastname = request.getParameter("edcomp_lastname");
             String birthdate = request.getParameter("edcomp_birthday");
+            /*
             Date dateBorn = null;
             try {
-                /*Formats the date purchased.*/
                 dateBorn = new SimpleDateFormat("yyyy-MM-dd").parse(birthdate);
             } catch (ParseException ex) {
                 Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
+            */
+            
             String gender = request.getParameter("edcomp_gender");
             
             /*Phone#*/
             String phonenum = request.getParameter("edcomp_phone");
             /*Address*/
-            String address = request.getParameter("edcomp_address");
+            String addressLine1 = request.getParameter("edcomp_addressLine1");
+            String addressLine2 = request.getParameter("edcomp_addressLine2");
+            String addressCity = request.getParameter("edcomp_city");
+            String addressProvince = request.getParameter("edcomp_prov");
+            String addressPostal = request.getParameter("edcomp_postal");
+            String addressCountry = request.getParameter("edcomp_country");
             /*Position*/
             String position = request.getParameter("edcomp_pos");
             
