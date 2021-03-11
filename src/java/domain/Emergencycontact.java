@@ -49,17 +49,17 @@ public class Emergencycontact implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "emergencyContact_ID")
+    @Column(name = "emergencyContact_ID", insertable = false)
     private Integer emergencyContactID;
     @Column(name = "dateAdded")
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
-    @Column(name = "dateRemoved")
+    @Column(name = "dateRemoved", insertable = false)
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
     @Column(name = "userAdded")
     private Integer userAdded;
-    @Column(name = "userRemoved")
+    @Column(name = "userRemoved", insertable = false)
     private Integer userRemoved;
     @Column(name = "emergencyContactFirstName")
     private String emergencyContactFirstName;
@@ -75,6 +75,19 @@ public class Emergencycontact implements Serializable {
     public Emergencycontact() {
     }
 
+    public Emergencycontact(Date dateAdded, Integer userAdded, String emergencyContactFirstName, String emergencyContactLastName, 
+            String emergencyContactNumber, String emergencyContactRelationship)
+    {
+        
+        this.dateAdded = dateAdded;
+        this.userAdded = userAdded;
+        this.emergencyContactFirstName = emergencyContactFirstName;
+        this.emergencyContactLastName = emergencyContactLastName;
+        this.emergencyContactNumber = emergencyContactNumber;
+        this.emergencyContactRelationship = emergencyContactRelationship;  
+        //this.personList = personList;
+    }
+    
     public Emergencycontact(Integer emergencyContactID) {
         this.emergencyContactID = emergencyContactID;
     }

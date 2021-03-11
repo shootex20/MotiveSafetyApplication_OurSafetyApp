@@ -68,7 +68,14 @@ public class Companypersonphone implements Serializable {
     public Companypersonphone(Integer companyPersonPhoneID) {
         this.companyPersonPhoneID = companyPersonPhoneID;
     }
-
+    
+    public Companypersonphone(Date dateAdded, Integer userAdded, Companyperson companyPersonID, Phone phoneID) {
+        this.dateAdded = dateAdded;
+        this.userAdded = userAdded;
+        this.companyPersonID = companyPersonID;
+        this.phoneID = phoneID;
+    }
+    
     public Integer getCompanyPersonPhoneID() {
         return companyPersonPhoneID;
     }

@@ -44,17 +44,17 @@ public class Companypositions implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "companyPositions_ID")
+    @Column(name = "companyPositions_ID", insertable = false)
     private Integer companyPositionsID;
     @Column(name = "dateAdded")
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
-    @Column(name = "dateRemoved")
+    @Column(name = "dateRemoved", insertable = false)
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
     @Column(name = "userAdded")
     private Integer userAdded;
-    @Column(name = "userRemoved")
+    @Column(name = "userRemoved", insertable = false)
     private Integer userRemoved;
     @Column(name = "positionTitle")
     private String positionTitle;
@@ -71,7 +71,16 @@ public class Companypositions implements Serializable {
     public Companypositions(Integer companyPositionsID) {
         this.companyPositionsID = companyPositionsID;
     }
-
+    
+    public Companypositions(Date dateAdded, Integer userAdded, String positionTitle, Companyperson companyPersonID, Company companyID) {
+        
+        this.dateAdded = dateAdded;
+        this.userAdded = userAdded;
+        this.positionTitle = positionTitle;
+        this.companyPersonID = companyPersonID;
+        this.companyID = companyID; 
+    }
+    
     public Integer getCompanyPositionsID() {
         return companyPositionsID;
     }

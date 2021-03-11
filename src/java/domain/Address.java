@@ -77,7 +77,7 @@ public class Address implements Serializable {
     private String country;
     @Column(name = "postalCode")
     private String postalCode;
-    @JoinColumn(name = "typeLibrary_ID", referencedColumnName = "typeLibrary_ID")
+    @JoinColumn(name = "typeLibrary_ID", referencedColumnName = "typeLibrary_ID",  insertable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     private Typelibrary typeLibraryID;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "addressID", fetch = FetchType.EAGER)
@@ -88,6 +88,18 @@ public class Address implements Serializable {
 
     public Address(Integer addressID) {
         this.addressID = addressID;
+    }
+    
+    public Address(Date dateAdded, Integer userAdded, String addressLine1, String addressLine2, String city, String province, String country, String postalCode, List<Companypersonaddress> companypersonaddressList) {
+        this.dateAdded = dateAdded;
+        this.userAdded = userAdded;
+        this.addressLine1 = addressLine1;
+        this.addressLine2 = addressLine2;
+        this.city = city;
+        this.province = province;
+        this.country = country;
+        this.postalCode = postalCode;
+        this.companypersonaddressList = companypersonaddressList;
     }
 
     public Integer getAddressID() {

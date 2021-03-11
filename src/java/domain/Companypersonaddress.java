@@ -68,6 +68,13 @@ public class Companypersonaddress implements Serializable {
     public Companypersonaddress(Integer companyPersonAddressID) {
         this.companyPersonAddressID = companyPersonAddressID;
     }
+    
+    public Companypersonaddress(Date dateAdded, Integer userAdded, Address addressID, Companyperson companyPersonID) {
+        this.dateAdded = dateAdded;
+        this.userAdded = userAdded;
+        this.addressID = addressID;
+        this.companyPersonID = companyPersonID;
+    }
 
     public Integer getCompanyPersonAddressID() {
         return companyPersonAddressID;

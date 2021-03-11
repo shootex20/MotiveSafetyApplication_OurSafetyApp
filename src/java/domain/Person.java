@@ -80,7 +80,17 @@ public class Person implements Serializable {
 
     public Person() {
     }
-
+    
+    public Person(Date dateAdded, Integer userAdded, String firstName, String lastName, Date dateOfBirth, Character gender, Emergencycontact emergencyContactID) {
+        this.dateAdded = dateAdded;
+        this.userAdded = userAdded;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.emergencyContactID = emergencyContactID;
+    }
+    
     public Person(Integer personID) {
         this.personID = personID;
     }

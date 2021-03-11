@@ -71,13 +71,24 @@ public class Phone implements Serializable {
     private String localNumber;
     @Column(name = "extension")
     private String extension;
-    @JoinColumn(name = "typeLibrary_ID", referencedColumnName = "typeLibrary_ID")
+    @JoinColumn(name = "typeLibrary_ID", referencedColumnName = "typeLibrary_ID", insertable=false)
     @ManyToOne(fetch = FetchType.EAGER)
     private Typelibrary typeLibraryID;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "phoneID", fetch = FetchType.EAGER)
     private List<Companypersonphone> companypersonphoneList;
 
     public Phone() {
+    }
+    
+    public Phone(Date dateAdded, Integer userAdded, String countryCode, String areaCode, String localNumber, String extension) {
+        
+        this.dateAdded = dateAdded;
+        this.userAdded = userAdded;
+        this.countryCode = countryCode;
+        this.areaCode = areaCode;
+        this.localNumber = localNumber;
+        this.extension = extension;
+        
     }
 
     public Phone(Integer phoneID) {

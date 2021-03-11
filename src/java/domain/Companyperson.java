@@ -87,11 +87,23 @@ public class Companyperson implements Serializable {
         this.companyPersonID = companyPersonID;
     }
     
-        public Companyperson(String email, boolean isEmployeeActive, Company companyID) {
+    public Companyperson(String email, boolean isEmployeeActive, Company companyID, Person personID) {
         this.dateAdded = dateAdded;
         this.email = email;
         this.isEmployeeActive = isEmployeeActive;
         this.companyID = companyID;
+        this.personID = personID;
+    }
+        public Companyperson(String email, boolean isEmployeeActive, Company companyID, Person personID, List<Companypersonaddress> companypersonaddressList, 
+                List<Companypositions> companypositionsList, List<Companypersonphone> companypersonphoneList) {
+        this.dateAdded = dateAdded;
+        this.email = email;
+        this.isEmployeeActive = isEmployeeActive;
+        this.companyID = companyID;
+        this.personID = personID;
+        this.companypersonaddressList = companypersonaddressList;
+        this.companypositionsList = companypositionsList;
+        this.companypersonphoneList = companypersonphoneList;
     }
 
     public Integer getCompanyPersonID() {
