@@ -75,8 +75,8 @@
                         </c:forEach>
                         <th>
                             <form action="employee" method="get">
-                                <input type="hidden" name="selectedUser" value="${emp.companyPersonID}">
-                                <input type="hidden" name="action" value="Edit">
+                                <input type="hidden" name="edactive" value="${emp.companyPersonID}">
+                                <input type="hidden" name="action" value="view">
                                 <input type="submit" value="Edit">
                             </form>
                         </th>
@@ -103,6 +103,7 @@
                     <th>Phone Number</th>
                     <th>Address</th>
                     <th>Position</th>
+                    <th>Edit</th>
                     <th>Activate</th>
                 </tr>
                 
@@ -143,6 +144,13 @@
                         <th>${pos.positionTitle}</th>
                         </c:forEach>
                         <th>
+                            <form action="employee" method="get">
+                                <input type="hidden" name="edinactive" value="${empInActive.companyPersonID}">
+                                <input type="hidden" name="action" value="view1">
+                                <input type="submit" value="Edit">
+                            </form>
+                        </th>
+                        <th>
                             <form action="employee" method="post">
                                 <input type="hidden" name="hidden_ra_cp" value="${empInActive.companyPersonID}">
                                 <input type="hidden" name="hidden_ra_person" value="${empInActive.personID.personID}">
@@ -158,9 +166,9 @@
             <br>
             ${message}
             <br>
-        <c:if test="${selectedUser == null}">
-        <form action="employee"  method="post" class="companyAddForm">
-            <h3>Add a new employee</h3>
+        <c:if test="${user == null}">
+        <h3>Add a new employee</h3>
+        <form method="post" class="companyAddForm">
             <input type="hidden" name="hidden_comp_emp_add" value="hiddenCompany"><br>
             <label>First Name</label><input required type="text" name="comp_firstname"><br>
             <label>Last Name</label><input required type="text" name="comp_lastname"><br>
@@ -179,9 +187,9 @@
             ${compAddMsg}
         </form>
         </c:if>
-        <c:if test="${selectedUser != null}">
-            <form action="employee"  method="post" class="companyAddForm">
+        <c:if test="${user != null}">
             <h3>Edit employee</h3>
+            <form action="employee"  method="post" class="companyAddForm">
             <input type="hidden" name="hidden_comp_emp_add" value="hiddenCompany"><br>
             <label>First Name</label><input required type="text" name="edcomp_firstname"><br>
             <label>Last Name</label><input required type="text" name="edcomp_lastname"><br>

@@ -168,9 +168,27 @@ public class EmployeeServlet extends HttpServlet {
         String action = request.getParameter("action");
         
         if (action != null && action.equals("view")) {
+        String selectedEmp = request.getParameter("edactive");
+            try {
+                Companyperson toEdit = compPersonDB.get(Integer.parseInt(selectedEmp));
+                request.setAttribute("user", toEdit);
+            } catch (Exception ex) {
+                Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
         }
-        
+//        else if (action != null && action.equals("view1")) {
+//          String selectedEmp = request.getParameter("edinactive"); 
+//          
+//            try {
+//                Companyperson toEdit = compPersonDB.get(Integer.parseInt(selectedEmp));
+//                request.setAttribute("selectedUser", toEdit);
+//            } catch (Exception ex) {
+//                Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        
+//        }
+//        else
                 
         if(action.equals("Add"))  
         {
