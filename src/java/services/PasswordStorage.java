@@ -196,14 +196,14 @@ public class PasswordStorage {
         } catch (Exception ex) {
         }
         
-        Companyperson compPerson = cpdb.getByFields(company.getCompanyID(), person.getPersonID(), email);
+        //Companyperson compPerson = cpdb.getByFields(company.getCompanyID(), person.getPersonID(), email);
         
-        if (!userName.equals(user.getUsername()) || !email.equals(compPerson.getEmail())
+        /*if (!userName.equals(user.getUsername()) || !email.equals(compPerson.getEmail())
                 || !firstName.equals(person.getFirstName()) || !lastName.equals(person.getLastName())
                 || !dob.equals(person.getDateOfBirth())) {
             throw new Exception();
         }
-
+*/
     }
     
 }

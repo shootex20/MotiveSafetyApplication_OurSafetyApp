@@ -41,8 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Companyperson.findByDateRemoved", query = "SELECT c FROM Companyperson c WHERE c.dateRemoved = :dateRemoved")
     , @NamedQuery(name = "Companyperson.findByUserAdded", query = "SELECT c FROM Companyperson c WHERE c.userAdded = :userAdded")
     , @NamedQuery(name = "Companyperson.findByUserRemoved", query = "SELECT c FROM Companyperson c WHERE c.userRemoved = :userRemoved")
-    , @NamedQuery(name = "Companyperson.findByEmail", query = "SELECT c FROM Companyperson c WHERE c.email = :email")
-    , @NamedQuery(name = "Companyperson.findByFields", query = "SELECT c FROM Companyperson c WHERE c.company_ID = :company_ID AND c.person_ID = :person_ID AND c.email = :email")})
+    , @NamedQuery(name = "Companyperson.findByEmail", query = "SELECT c FROM Companyperson c WHERE c.email = :email")})
 public class Companyperson implements Serializable {
 
     private static final long serialVersionUID = 1L;

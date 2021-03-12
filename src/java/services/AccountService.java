@@ -3,6 +3,7 @@ package services;
 import dataaccess.LoginDB;
 import dataaccess.UserDB;
 import domain.Logins;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,6 +28,12 @@ public class AccountService {
              */
             if (password.equals(user.getPassword())) {
                 Logger.getLogger(AccountService.class.getName()).log(Level.INFO, "Successful login by {0}", username);
+                
+                String to = "oursafetyapplication@gmail.com";
+                String subject = "TEST";
+                
+                EmailService.sendMail(to, subject, "testtesttest", false);
+                
                 return user;
             }
         } catch (Exception e) {
