@@ -21,6 +21,17 @@ import javax.persistence.Query;
  * @author Chelsey Coughlin
  */
 public class EmergencyContactDB {
+    
+        public Emergencycontact get(int compPerson) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        
+        try {
+            Emergencycontact add = em.find(Emergencycontact.class, compPerson);
+            return add;
+        } finally { 
+            em.close();
+        }
+    }
 
         public void update(Emergencycontact con) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

@@ -204,9 +204,11 @@
         <c:if test="${user != null}">
             <h3>Edit employee</h3>
             
-            <input type="hidden" name="userID" value="${user.companyPersonID}">
             
             <form action="employee"  method="post" class="companyAddForm">
+                
+                            <input type="hidden" name="compPerID" value="${user.companyPersonID}">
+            <input type="hidden" name="perID" value="${user.personID.personID}">
             <input type="hidden" name="hidden_comp_emp_add" value="hiddenCompany"><br>
 
             <label>First Name</label><input required type="text" name="edcomp_firstname" value="${user.personID.firstName}"><br>

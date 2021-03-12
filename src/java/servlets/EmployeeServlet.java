@@ -33,6 +33,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import services.AddressService;
+import services.CompanypersonService;
+import services.CompanypositionsService;
+import services.EmergencyContactService;
+import services.PersonService;
+import services.PhoneService;
 
 /**
  *
@@ -56,7 +62,7 @@ public class EmployeeServlet extends HttpServlet {
 
         int userID = (Integer) session.getAttribute("userID");
         Logins logins = new Logins();
-        String logout = request.getParameter("action");
+        String logout = request.getParameter("logout");
         String company = request.getParameter("company");
         String equipment = request.getParameter("equipment");
         String companyWelcome = request.getParameter("companyWelcome");
@@ -215,6 +221,7 @@ public class EmployeeServlet extends HttpServlet {
             }
             String gender = request.getParameter("comp_gender");
             
+            String email = request.getParameter("comp_email");
             /*Phone#*/
             String phonenum = request.getParameter("comp_phone");
             String phoneExt = request.getParameter("edcomp_phoneExt");
@@ -243,75 +250,34 @@ public class EmployeeServlet extends HttpServlet {
             }
 
         }
+
         else if (action.equals("Save"))
         {
-            String id = request.getParameter("userID");
+            String compPerId = request.getParameter("compPerID");
+            String perID = request.getParameter("perID");
             
-            /*
-                Companyperson compPersEdit = new Companyperson();
-                Person personEdit = new Person();
-                Emergencycontact contactEdit = new Emergencycontact();
-                Companypersonaddress cpAddEdit = new Companypersonaddress();
-                Companypersonphone cpPhoneEdit = new Companypersonphone();
-                Address addEdit = new Address();
-                Phone phoneEdit = new Phone();
-                Companypositions positionEdit = new Companypositions();
-            */
-            try {
-                Companyperson compPersEdit = compPersonDB.get(Integer.parseInt(id));
-                Person personEdit = compPersEdit.getPersonID();
-                Emergencycontact contactEdit = personEdit.getEmergencyContactID();
-                Companypersonaddress cpAddEdit = compAddressDB.get(compPersEdit);
-                Companypersonphone cpPhoneEdit = compPhoneDB.get(compPersEdit);
-                Address addEdit = cpAddEdit.getAddressID();
-                Phone phoneEdit = cpPhoneEdit.getPhoneID();
-                Companypositions positionEdit = compPosDB.get(compPersEdit);
-
-
+            PhoneService ps = new PhoneService();
+            AddressService as = new AddressService();
+            CompanypersonService cpers = new CompanypersonService();
+            CompanypositionsService cps = new CompanypositionsService();
+            EmergencyContactService ecs = new EmergencyContactService();
+            PersonService pers = new PersonService();
             
-            if(compPersEdit != null)
-            {
+
             /*Person start*/
             String firstname = request.getParameter("edcomp_firstname");
             String lastname = request.getParameter("edcomp_lastname");
             //String birthdate = request.getParameter("edcomp_birthday");
+            String genderString = request.getParameter("edcomp_gender");
+            char gender = genderString.charAt(0);
             
-            String gender = request.getParameter("edcomp_gender");
+            String email = request.getParameter("comp_email");
             
-            char genChar = gender.charAt(0);
-            
-            personEdit.setFirstName(firstname);
-            personEdit.setLastName(lastname);
-            personEdit.setGender(genChar);
-            
-                try {
-                    personDB.update(personEdit);
-                } catch (Exception ex) {
-                    Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            
+
             /*Phone#*/
             String phonenum = request.getParameter("edcomp_phone");
             String phoneExt = request.getParameter("edcomp_phoneExt");
-            
-            String[] phoneParts = phonenum.split("-");
-            String countryCode = phoneParts[0];
-            String areaCode = phoneParts[1];
-            String localNum = phoneParts[2];
-            String local = phoneParts[3];
-            
-            String fullLocal = localNum + "-" + local;
-            
-            phoneEdit.setCountryCode(countryCode);
-            phoneEdit.setAreaCode(areaCode);
-            phoneEdit.setLocalNumber(fullLocal);
-            
-                try {
-                    phoneDB.update(phoneEdit);
-                } catch (Exception ex) {
-                    Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            
+                        
             /*Address*/
             String addressLine1 = request.getParameter("edcomp_addressLine1");
             String addressLine2 = request.getParameter("edcomp_addressLine2");
@@ -320,31 +286,8 @@ public class EmployeeServlet extends HttpServlet {
             String addressPostal = request.getParameter("edcomp_postal");
             String addressCountry = request.getParameter("edcomp_country");
             
-            addEdit.setAddressLine1(addressLine1);
-            addEdit.setAddressLine2(addressLine2);
-            addEdit.setCity(addressCity);
-            addEdit.setProvince(addressProvince);
-            addEdit.setPostalCode(addressPostal);
-            addEdit.setCountry(addressCountry);
-            
-                try {
-                    addDB.update(addEdit);
-                } catch (Exception ex) {
-                    Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            
             /*Position*/
             String position = request.getParameter("edcomp_pos");
-            
-            positionEdit.setPositionTitle(position);
-            
-                try {
-                    compPosDB.update(positionEdit);
-                } catch (Exception ex) {
-                    Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            
-            
             
             /*Emergency Contact*/
             String emerFirst = request.getParameter("edemer_first");
@@ -352,30 +295,23 @@ public class EmployeeServlet extends HttpServlet {
             String emerPhone = request.getParameter("edemer_phone");
             String emerRelation = request.getParameter("edemer_relationship"); 
             
-            contactEdit.setEmergencyContactFirstName(emerFirst);
-            contactEdit.setEmergencyContactLastName(emerLast);
-            contactEdit.setEmergencyContactNumber(emerPhone);
-            contactEdit.setEmergencyContactRelationship(emerRelation);
-            
-                try {
-                    emerConDB.update(contactEdit);
-                } catch (Exception ex) {
-                    Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            
-            }
-            
-            else
-            {
-            request.setAttribute("message", "Error");
-            doGet(request, response);  
-            }
-                        } catch (Exception ex) {
+            try {
+                Companyperson compPerson = compPersonDB.get(Integer.parseInt(compPerId));
+                Person person = personDB.get(Integer.parseInt(perID));
+                
+                pers.update(person.getPersonID(), firstname, lastname, gender);
+                cpers.update(compPerson, email);
+                ps.update(compPerson, phonenum, phoneExt);
+                as.update(compPerson, addressLine1, addressLine2, addressCity, addressProvince, addressPostal, addressCountry);
+                cps.update(compPerson, position);
+                ecs.update(person, emerFirst, emerLast, emerPhone, emerRelation);
                 doGet(request, response);
+            } catch (Exception ex) {
                 Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+                                    request.setAttribute("message", ex);
+                                doGet(request, response);
             }
-            
-            
+                //doGet(request, response);
         }
         else if (action.equals("DeactivateEmployee"))
         {
