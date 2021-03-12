@@ -61,7 +61,7 @@
                      </c:forEach>                
                 </select>
                 <br>
-                <label for="datePurchased">Date Purchased: </label>
+                <label for="dateAdded">Date Added </label>
                 <input type="date" name="dateAdded"  required></date-input>
                 <br>
                 <label for="title">title: </label>
@@ -89,9 +89,6 @@
                              <option value = "${manualType.typeLibraryID}">${manualType.description}</option>
                          </c:forEach>
             </select>
-                    <br>
-                    <label for="datePurchased">Date Purchased: </label>
-                    <input type="date" name="dateAdded"  value="${selectedManual.dateAdded}" required></date-input>
                     <br>
                     <label for="title">title: </label>
                     <input type="text" name="title" value="${selectedManual.title}">
