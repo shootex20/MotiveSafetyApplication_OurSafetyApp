@@ -44,24 +44,25 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Person.findByFirstName", query = "SELECT p FROM Person p WHERE p.firstName = :firstName")
     , @NamedQuery(name = "Person.findByLastName", query = "SELECT p FROM Person p WHERE p.lastName = :lastName")
     , @NamedQuery(name = "Person.findByDateOfBirth", query = "SELECT p FROM Person p WHERE p.dateOfBirth = :dateOfBirth")
-    , @NamedQuery(name = "Person.findByGender", query = "SELECT p FROM Person p WHERE p.gender = :gender")})
+    , @NamedQuery(name = "Person.findByGender", query = "SELECT p FROM Person p WHERE p.gender = :gender")
+    , @NamedQuery(name = "Person.findByFields", query = "SELECT p FROM Person p WHERE p.firstName = :firstName AND p.lastName = :lastName AND p.dateOfBirth = :dateOfBirth")})
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "person_ID", insertable=false)
+    @Column(name = "person_ID", insertable = false)
     private Integer personID;
     @Column(name = "dateAdded")
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
-    @Column(name = "dateRemoved", insertable=false)
+    @Column(name = "dateRemoved", insertable = false)
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
     @Column(name = "userAdded")
     private Integer userAdded;
-    @Column(name = "userRemoved", insertable=false)
+    @Column(name = "userRemoved", insertable = false)
     private Integer userRemoved;
     @Column(name = "firstName")
     private String firstName;
@@ -72,7 +73,7 @@ public class Person implements Serializable {
     private Date dateOfBirth;
     @Column(name = "gender")
     private Character gender;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "personID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "personID", fetch = FetchType.EAGER)
     private List<Companyperson> companypersonList;
     @JoinColumn(name = "emergencyContact_ID", referencedColumnName = "emergencyContact_ID")
     @ManyToOne(fetch = FetchType.EAGER)
@@ -80,7 +81,7 @@ public class Person implements Serializable {
 
     public Person() {
     }
-    
+
     public Person(Date dateAdded, Integer userAdded, String firstName, String lastName, Date dateOfBirth, Character gender, Emergencycontact emergencyContactID) {
         this.dateAdded = dateAdded;
         this.userAdded = userAdded;
@@ -90,7 +91,7 @@ public class Person implements Serializable {
         this.gender = gender;
         this.emergencyContactID = emergencyContactID;
     }
-    
+
     public Person(Integer personID) {
         this.personID = personID;
     }
@@ -208,5 +209,5 @@ public class Person implements Serializable {
     public String toString() {
         return "domain.Person[ personID=" + personID + " ]";
     }
-    
+
 }

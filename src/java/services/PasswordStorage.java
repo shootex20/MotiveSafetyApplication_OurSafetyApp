@@ -1,11 +1,19 @@
 package services;
 
+import dataaccess.CompanypersonDB;
+import dataaccess.PersonDB;
+import dataaccess.UserDB;
+import domain.Company;
+import domain.Companyperson;
+import domain.Logins;
+import domain.Person;
 import java.security.SecureRandom;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.SecretKeyFactory;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Base64;
+import java.util.Properties;
 
 /**
  * Original Password hashing PBKDF2 algorithm by MicleBrick Dec 3, 2018
@@ -15,31 +23,31 @@ import java.util.Base64;
  * @author Daniel Quach
  */
 public class PasswordStorage {
-
+    
     @SuppressWarnings("serial")
     static public class InvalidHashException extends Exception {
-
+        
         public InvalidHashException(String message) {
             super(message);
         }
-
+        
         public InvalidHashException(String message, Throwable source) {
             super(message, source);
         }
     }
-
+    
     @SuppressWarnings("serial")
     static public class CannotPerformOperationException extends Exception {
-
+        
         public CannotPerformOperationException(String message) {
             super(message);
         }
-
+        
         public CannotPerformOperationException(String message, Throwable source) {
             super(message, source);
         }
     }
-
+    
     public static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";
 
     // These constants may be changed without breaking existing hashes.
@@ -54,11 +62,11 @@ public class PasswordStorage {
     public static final int HASH_SIZE_INDEX = 2;
     public static final int SALT_INDEX = 3;
     public static final int PBKDF2_INDEX = 4;
-
+    
     public static String createHash(String password) throws CannotPerformOperationException {
         return createHash(password.toCharArray());
     }
-
+    
     public static String createHash(char[] password) throws CannotPerformOperationException {
         // Generate a random salt
         SecureRandom random = new SecureRandom();
@@ -74,11 +82,11 @@ public class PasswordStorage {
                 + toBase64(hash);
         return parts;
     }
-
+    
     public static boolean verifyPassword(String password, String correctHash) throws CannotPerformOperationException, InvalidHashException {
         return verifyPassword(password.toCharArray(), correctHash);
     }
-
+    
     public static boolean verifyPassword(char[] password, String correctHash) throws CannotPerformOperationException, InvalidHashException {
         // Decode the hash into its parameters
         String[] params = correctHash.split(":");
@@ -90,39 +98,39 @@ public class PasswordStorage {
         if (!params[HASH_ALGORITHM_INDEX].equals("sha1")) {
             throw new CannotPerformOperationException("Unsupported hash type.");
         }
-
+        
         int iterations = 0;
         try {
             iterations = Integer.parseInt(params[ITERATION_INDEX]);
         } catch (NumberFormatException ex) {
             throw new InvalidHashException("Could not parse the iteration count as an integer.", ex);
         }
-
+        
         if (iterations < 1) {
             throw new InvalidHashException("Invalid number of iterations. Must be >= 1.");
         }
-
+        
         byte[] salt = null;
         try {
             salt = fromBase64(params[SALT_INDEX]);
         } catch (IllegalArgumentException ex) {
             throw new InvalidHashException("Base64 decoding of salt failed.", ex);
         }
-
+        
         byte[] hash = null;
         try {
             hash = fromBase64(params[PBKDF2_INDEX]);
         } catch (IllegalArgumentException ex) {
             throw new InvalidHashException("Base64 decoding of pbkdf2 output failed.", ex);
         }
-
+        
         int storedHashSize = 0;
         try {
             storedHashSize = Integer.parseInt(params[HASH_SIZE_INDEX]);
         } catch (NumberFormatException ex) {
             throw new InvalidHashException("Could not parse the hash size as an integer.", ex);
         }
-
+        
         if (storedHashSize != hash.length) {
             throw new InvalidHashException("Hash length doesn't match stored hash length.");
         }
@@ -135,7 +143,7 @@ public class PasswordStorage {
 
         return slowEquals(hash, testHash);
     }
-
+    
     private static boolean slowEquals(byte[] a, byte[] b) {
         int diff = a.length ^ b.length;
         for (int i = 0; i < a.length && i < b.length; i++) {
@@ -143,7 +151,7 @@ public class PasswordStorage {
         }
         return diff == 0;
     }
-
+    
     private static byte[] pbkdf2(char[] password, byte[] salt, int iterations, int bytes) throws CannotPerformOperationException {
         try {
             PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, bytes * 8);
@@ -155,12 +163,47 @@ public class PasswordStorage {
             throw new CannotPerformOperationException("Invalid key spec.", ex);
         }
     }
-
+    
     private static byte[] fromBase64(String hex) throws IllegalArgumentException {
         return Base64.getDecoder().decode(hex);
     }
-
+    
     private static String toBase64(byte[] array) {
         return Base64.getEncoder().encodeToString(array);
     }
+    
+    public String newRandomPassword() {
+        String temporary = Long.toHexString(Double.doubleToLongBits(Math.random()));
+        return temporary;
+    }
+    
+    public void passwordReset(String userName, String email, String firstName, String lastName, String dob, String phone) throws Exception {
+        
+        UserDB udb = new UserDB();
+        PersonDB pdb = new PersonDB();
+        CompanypersonDB cpdb = new CompanypersonDB();
+        final String SUBJECT = "Your password has been reset";
+        String emailContents = "Your new password is: ";
+        String from = null;
+        String to = null;
+        
+        Logins user = udb.getUser(userName);
+        Company company = user.getCompanyID();
+        Person person = null;
+        
+        try {
+            person = pdb.getWithFields(firstName, lastName, dob);
+        } catch (Exception ex) {
+        }
+        
+        Companyperson compPerson = cpdb.getByFields(company.getCompanyID(), person.getPersonID(), email);
+        
+        if (!userName.equals(user.getUsername()) || !email.equals(compPerson.getEmail())
+                || !firstName.equals(person.getFirstName()) || !lastName.equals(person.getLastName())
+                || !dob.equals(person.getDateOfBirth())) {
+            throw new Exception();
+        }
+
+    }
+    
 }

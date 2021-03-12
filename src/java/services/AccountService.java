@@ -1,7 +1,10 @@
 package services;
 
+import dataaccess.LoginDB;
 import dataaccess.UserDB;
 import domain.Logins;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,18 +20,34 @@ public class AccountService {
         try {
             Logins user = userDB.getUser(username);
             /*
-            if (ps.verifyPassword(password, user.getPassword())) {
+            if (ps.verifyPassword(password, user.getPassword()) == true) {
+            Logger.getLogger(AccountService.class.getName()).log(Level.INFO, "Successful login by {0}", username);
                 return user;
             }
              */
             if (password.equals(user.getPassword())) {
+                Logger.getLogger(AccountService.class.getName()).log(Level.INFO, "Successful login by {0}", username);
                 return user;
             }
-
         } catch (Exception e) {
         }
 
         return null;
+    }
+
+    public String updatePassword(String userName) {
+        LoginDB ldb = new LoginDB();
+        Logins user = userDB.getUser(userName);
+        String temp = ps.newRandomPassword();
+
+        try {
+            String hash = PasswordStorage.createHash(temp);
+            user.setPassword(hash);
+            ldb.update(user);
+        } catch (PasswordStorage.CannotPerformOperationException ex) {
+        } catch (Exception ex) {
+        }
+        return temp;
     }
 
 }

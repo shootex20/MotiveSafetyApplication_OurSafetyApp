@@ -18,53 +18,63 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.Query;
 
-
 /**
  *
  * @author Chelsey Coughlin
  */
 public class PersonDB {
-    
-     public List<Person> getAll() throws Exception {
+
+    public List<Person> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
             List<Person> person = em.createNamedQuery("Person.findAll", Person.class).getResultList();
-             return person;
-    
+            return person;
+
         } finally {
             em.close();
         }
-        
+
     }
-     
-         public Person get(int person_ID) throws Exception {
+
+    public Person getWithFields(String firstName, String lastName, String dob) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        
+
         try {
-            Person person = em.find(Person.class, person_ID);
+            Person person = em.createNamedQuery("Person.findByFields", Person.class).setParameter("firstName", firstName).setParameter("lastName", lastName).setParameter("dateOfBirth", dob).getSingleResult();
             return person;
-        } finally { 
+        } finally {
             em.close();
         }
     }
-         
-    public void update(Person comp) throws Exception {
-            EntityManager em = DBUtil.getEmFactory().createEntityManager();
-            EntityTransaction trans = em.getTransaction();
-            try {
-                trans.begin();
-               em.merge(comp);
-               trans.commit();
 
-            } catch (Exception ex) {
-                trans.rollback();
-            } finally {
-               em.close();
-            }
+    public Person get(int person_ID) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
+        try {
+            Person person = em.find(Person.class, person_ID);
+            return person;
+        } finally {
+            em.close();
         }
-    
-        public Person insert(Person add) throws Exception {
+    }
+
+    public void update(Person comp) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        try {
+            trans.begin();
+            em.merge(comp);
+            trans.commit();
+
+        } catch (Exception ex) {
+            trans.rollback();
+        } finally {
+            em.close();
+        }
+
+    }
+
+    public Person insert(Person add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
@@ -72,12 +82,12 @@ public class PersonDB {
             trans.begin();
             em.persist(add);
             trans.commit();
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             trans.rollback();
-        }finally {
+        } finally {
             em.close();
             return add;
         }
     }
-  
+
 }

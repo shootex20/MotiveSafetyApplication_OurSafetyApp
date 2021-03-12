@@ -12,13 +12,12 @@ import domain.Company;
 import domain.Companyperson;
 import domain.Person;
 
-
 /**
  *
  * @author Chelsey Coughlin
  */
 public class CompanypersonDB {
-    
+
     public List<Companyperson> getAll(Company companyID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
@@ -31,31 +30,41 @@ public class CompanypersonDB {
 
     public Companyperson get(int person_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        
+
         try {
             Companyperson compPer = em.find(Companyperson.class, person_ID);
             return compPer;
-        } finally { 
+        } finally {
             em.close();
         }
     }
-    
+
+    public Companyperson getByFields(int company_ID, int person_ID, String email) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            Companyperson compPer = em.createNamedQuery("Companyperson.findByFields", Companyperson.class).setParameter("company_ID", company_ID).setParameter("person_ID", person_ID).setParameter("email", email).getSingleResult();
+            return compPer;
+        } finally {
+            em.close();
+        }
+    }
+
     public void update(Companyperson comp) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         try {
-           trans.begin();
-           em.merge(comp);
-           trans.commit();
+            trans.begin();
+            em.merge(comp);
+            trans.commit();
         } catch (Exception ex) {
             trans.rollback();
         } finally {
-           em.close();
+            em.close();
         }
-        
+
     }
-    
-        public Companyperson insert(Companyperson add) throws Exception {
+
+    public Companyperson insert(Companyperson add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
@@ -63,9 +72,9 @@ public class CompanypersonDB {
             trans.begin();
             em.persist(add);
             trans.commit();
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             trans.rollback();
-        }finally {
+        } finally {
             em.close();
             return add;
         }
@@ -73,7 +82,7 @@ public class CompanypersonDB {
 
 
     /*Does not work.*/
-            /*
+ /*
         public void delete(Companyperson person) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -91,6 +100,5 @@ public class CompanypersonDB {
             em.close();
         }
     }
-*/
- 
+     */
 }

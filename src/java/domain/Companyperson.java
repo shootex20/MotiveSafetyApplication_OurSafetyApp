@@ -41,24 +41,25 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Companyperson.findByDateRemoved", query = "SELECT c FROM Companyperson c WHERE c.dateRemoved = :dateRemoved")
     , @NamedQuery(name = "Companyperson.findByUserAdded", query = "SELECT c FROM Companyperson c WHERE c.userAdded = :userAdded")
     , @NamedQuery(name = "Companyperson.findByUserRemoved", query = "SELECT c FROM Companyperson c WHERE c.userRemoved = :userRemoved")
-    , @NamedQuery(name = "Companyperson.findByEmail", query = "SELECT c FROM Companyperson c WHERE c.email = :email")})
+    , @NamedQuery(name = "Companyperson.findByEmail", query = "SELECT c FROM Companyperson c WHERE c.email = :email")
+    , @NamedQuery(name = "Companyperson.findByFields", query = "SELECT c FROM Companyperson c WHERE c.company_ID = :company_ID AND c.person_ID = :person_ID AND c.email = :email")})
 public class Companyperson implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "companyPerson_ID", insertable=false)
+    @Column(name = "companyPerson_ID", insertable = false)
     private Integer companyPersonID;
-    @Column(name = "dateAdded", insertable=false)
+    @Column(name = "dateAdded", insertable = false)
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
-    @Column(name = "dateRemoved", insertable=false)
+    @Column(name = "dateRemoved", insertable = false)
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
     @Column(name = "userAdded")
     private Integer userAdded;
-    @Column(name = "userRemoved", insertable=false)
+    @Column(name = "userRemoved", insertable = false)
     private Integer userRemoved;
     @Column(name = "email")
     private String email;
@@ -70,14 +71,14 @@ public class Companyperson implements Serializable {
     @JoinColumn(name = "company_ID", referencedColumnName = "company_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Company companyID;
-    @JoinColumn(name = "person_ID", referencedColumnName = "person_ID", insertable=false)
+    @JoinColumn(name = "person_ID", referencedColumnName = "person_ID", insertable = false)
     @ManyToOne(fetch = FetchType.EAGER)
     private Person personID;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
     private List<Companypersonaddress> companypersonaddressList;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
     private List<Companypositions> companypositionsList;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
     private List<Companypersonphone> companypersonphoneList;
 
     public Companyperson() {
@@ -86,7 +87,7 @@ public class Companyperson implements Serializable {
     public Companyperson(Integer companyPersonID) {
         this.companyPersonID = companyPersonID;
     }
-    
+
     public Companyperson(String email, boolean isEmployeeActive, Company companyID, Person personID) {
         this.dateAdded = dateAdded;
         this.email = email;
@@ -94,8 +95,9 @@ public class Companyperson implements Serializable {
         this.companyID = companyID;
         this.personID = personID;
     }
-        public Companyperson(String email, boolean isEmployeeActive, Company companyID, Person personID, List<Companypersonaddress> companypersonaddressList, 
-                List<Companypositions> companypositionsList, List<Companypersonphone> companypersonphoneList) {
+
+    public Companyperson(String email, boolean isEmployeeActive, Company companyID, Person personID, List<Companypersonaddress> companypersonaddressList,
+            List<Companypositions> companypositionsList, List<Companypersonphone> companypersonphoneList) {
         this.dateAdded = dateAdded;
         this.email = email;
         this.isEmployeeActive = isEmployeeActive;
@@ -153,7 +155,7 @@ public class Companyperson implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     public boolean getIsEmployeeActive() {
         return isEmployeeActive;
     }
@@ -161,7 +163,7 @@ public class Companyperson implements Serializable {
     public void setIsEmployeeActive(boolean isEmployeeActive) {
         this.isEmployeeActive = isEmployeeActive;
     }
-    
+
     @XmlTransient
     public List<Companynotes> getCompanynotesList() {
         return companynotesList;
@@ -238,5 +240,5 @@ public class Companyperson implements Serializable {
     public String toString() {
         return "domain.Companyperson[ companyPersonID=" + companyPersonID + " ]";
     }
-    
+
 }
