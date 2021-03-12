@@ -8,34 +8,101 @@ and open the template in the editor.
     Author     : Chels
 */
 
-table, th, td 
-{
-    border: 1px solid black;
-    text-align: center;
+.loginHeader{
+    background-color: blue;
+    color: white;
 }
+
+
 body{
     margin-top: 5%;
     text-align: center;
+    background-image: url("https://images.pexels.com/photos/5414384/pexels-photo-5414384.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
 }
+
 h1, h2, h3{
     text-align: center;
 }
-table{
-    margin-left: 27%;
-}
+
 #addbutton{
-    margin-left: 13%
-}.form-group{
-    margin-left: 40%
+    margin-left: 46%;
 }
+
+#addbutton2 {
+    margin-left: 48.5%;
+}
+
 .socialMedia{
     margin-left: 48%
 }
+
 p {
     text-align: center
 }
+
 .text-success{
     margin-left: 45%;
     font-style: oblique;
     font-weight: bold;
+}
+
+.contact{
+    text-align: center;
+    width:70%;
+    margin-left: 15%;
+}
+
+footer{
+       background-color: blue;
+    color: white;
+}
+
+.welcome, h3 {
+    color:tomato
+}
+
+.mainTable2 , .table-warning{
+  border: 1px solid black;
+  width: 80%;
+  margin-left: 10%;
+  text-align: center;
+}
+
+.mainTable, th{
+     border: 1px solid black;
+     text-align: center;
+     background-color: gainsboro;
+}
+
+th {
+    padding: 12px;
+    background-color: orange;
+    color: white;
+}
+.forms {
+     width: 55%;
+  margin-left: 25%;
+}
+
+.forms2{
+    width: 30%;
+    margin-left: 35%;
+}
+
+.type {
+  width: 100%;
+  background-color: #f1f1f1;
+}
+
+select {
+  width: 40%;
+  background-color: #f1f1f1;
+}
+
+.form-group{
+    background: #DBD1C9;
+    width: 60%;
+    margin-left: 20%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
