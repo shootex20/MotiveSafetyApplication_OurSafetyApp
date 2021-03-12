@@ -29,7 +29,7 @@
                 <td>${manual.content}</td>
                 <td>
                         <form action="manual" method="post"> 
-                            <input type="submit" name="action"  value="Delete" onclick="return confirm('Are you sure you want to delete ${manual.title} with item information ${manual.intention}?')">
+                            <input type="submit" name="action"  value="delete" onclick="return confirm('Are you sure you want to delete ${manualDelete.title} with item information ${manual.intention}?')">
                             <input type="hidden" name="manualID" value="${manual.manualID}">
                         </form>
                 </td>
@@ -64,16 +64,13 @@
                 <label for="datePurchased">Date Purchased: </label>
                 <input type="date" name="dateAdded"  required></date-input>
                 <br>
-                <label for="title">title</label>
+                <label for="title">title: </label>
                 <input type="text" name="title" >
                 <br>
-                <label for="intention">intention</label>
+                <label for="intention">intention: </label>
                 <input type="text" name="intention" >
                 <br>
-                <label for="overview">overview</label>
-                <input type="text" name="overview" >
-                <br>
-                <label for="content">content</label>
+                <label for="content">content: </label>
                 <input type="text" name="content" >
                 <br>
                 <input type="hidden" name="action" value="add">
@@ -85,15 +82,32 @@
         
         <c:if test="${selectedManual != null}">
         <h3>Edit Manual</h3>
-         <label for="manualType" id="manualType">Type of manual: </label>
-        <select name="itemType" id="manualType">
-                     <c:forEach items="${types}" var="manualType">
-                         <option value = "${manualType.typeLibraryID}">${manualType.description}</option>
-                     </c:forEach>
-        </select>
-        <br>
-        <input type="hidden" name="action" value="add">
-        <input type="submit" value="Save">
+        <form action="manual" method="post">
+            <label for="manualType" id="manualType">Type of manual: </label>
+            <select name="manualType" id="manualType">
+                         <c:forEach items="${types}" var="manualType">
+                             <option value = "${manualType.typeLibraryID}">${manualType.description}</option>
+                         </c:forEach>
+            </select>
+                    <br>
+                    <label for="datePurchased">Date Purchased: </label>
+                    <input type="date" name="dateAdded"  value="${selectedManual.dateAdded}" required></date-input>
+                    <br>
+                    <label for="title">title: </label>
+                    <input type="text" name="title" value="${selectedManual.title}">
+                    <br>
+                    <label for="intention">intention: </label>
+                    <input type="text" name="intention" value="${selectedManual.intention}">
+                    <br>
+                    <label for="content">content: </label>
+                    <input type="text" name="content" value="${selectedManual.content}">
+                    
+                     <input type="hidden" name="manualID" value="${selectedManual.manualID}">
+                    <br>
+
+            <input type="hidden" name="action" value="edit">
+            <input type="submit" value="Save">
+        </form>
         </c:if>
     </body>
 </html>

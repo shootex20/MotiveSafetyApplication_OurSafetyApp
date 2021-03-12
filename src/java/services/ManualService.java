@@ -30,20 +30,21 @@ public class ManualService {
         return manualDB.getAll();
     }
       
-    public void update(int manualID, Date dateAdded, int userAdded,Typelibrary typeLibraryID, String title, String intention, String overview, String content) throws Exception{
+    public void update(int manualID, Date dateAdded, int userAdded,Typelibrary typeLibraryID, String title, String intention, String content) throws Exception{
          Manual manual =  manualDB.get(manualID);
          manual.setDateAdded(dateAdded);
          manual.setUserAdded(userAdded);
          manual.setTypeLibraryID(typeLibraryID);
          manual.setTitle(title);
          manual.setContent(content);
-         manual.setOverview(overview);
-         manual.setIntention(intention);      
+         manual.setIntention(intention);   
+         
+         manualDB.update(manual);
       }
       
-    public int delete(int manualID) throws Exception {
-         Manual deleteManual = manualDB.get(manualID);
-        return manualDB.delete(deleteManual);
+    public void delete(int manualID) throws Exception {
+        Manual deleteManual = manualDB.get(manualID);
+        manualDB.delete(deleteManual);
     }
       
     public void insert(Date dateAdded, int userAdded,Typelibrary typeLibraryID, String title, String intention, String content) throws Exception {  

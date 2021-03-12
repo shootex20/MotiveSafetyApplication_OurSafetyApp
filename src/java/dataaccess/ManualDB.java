@@ -63,18 +63,17 @@ public class ManualDB {
         }
     }
 
-    public int delete(Manual manual) throws Exception {
+    public void delete(Manual manual) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();  
         EntityTransaction trans = em.getTransaction();
         try {
             trans.begin();
-            em.remove(manual);
+            em.remove(em.merge(manual));            
             trans.commit();
         } catch(Exception ex){
             trans.rollback();
         } finally {
             em.close();
-            return 1;
         }
     }
             

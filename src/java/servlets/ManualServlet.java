@@ -69,7 +69,7 @@ public class ManualServlet extends HttpServlet {
                 equipList.add(typeList.get(i));
             }
         }
-        
+// set equipment type for dropdown box of add manual       
         request.setAttribute("types", equipList);
 
         String action = request.getParameter("action");
@@ -84,6 +84,17 @@ public class ManualServlet extends HttpServlet {
             try {
                 Manual manual = manualDB.get(manualID);
                 request.setAttribute("selectedManual", manual);
+                List<Typelibrary> manualList = new ArrayList<Typelibrary>();
+                manualList.add(manual.getTypeLibraryID());
+                for(Typelibrary m: equipList){
+                    if(m.equals(manual.getTypeLibraryID())){
+                       
+                    }else{
+                         manualList.add(m);
+                    }
+                }
+//reset the dropdown box for edit manual view               
+                request.setAttribute("types", manualList);
             } catch (Exception ex) {
                 Logger.getLogger(ManualServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -102,14 +113,16 @@ public class ManualServlet extends HttpServlet {
         HttpSession session = request.getSession();
         int userID = (Integer) session.getAttribute("userID");
         String dateadded = request.getParameter("itemType");
-        String typeLibraryid = request.getParameter("manualType");
-        int typeLibraryID = Integer.parseInt(typeLibraryid);
         String title = request.getParameter("title");
         String intention = request.getParameter("intention");
         String content = request.getParameter("content");
         String action = request.getParameter("action");
         ManualService manualService = new ManualService();
         ManualDB manualDB = new ManualDB();
+        
+        String typeLibraryid = request.getParameter("manualType");
+        if(typeLibraryid != null){
+        int typeLibraryID = Integer.parseInt(typeLibraryid);
 //get typelibrary Object
         TypeLibraryDB typeDB = new TypeLibraryDB();    
         Typelibrary typeLibrary = new Typelibrary();
@@ -137,18 +150,45 @@ public class ManualServlet extends HttpServlet {
         if(action.equals("add")){
             try {
                 manualService.insert(dateAdded, userID, typeLibrary, title, intention, content);
-//                Manual m = new Manual(dateAdded,2,typeLibrary,"123","123","123");
-//                manualDB.insert(m);
                 doGet(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(ManualServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         else if(action.equals("edit")){
-        
+            String manualid = request.getParameter("manualID");
+            int manualID = Integer.parseInt(manualid);
+            try {               
+                manualService.update(manualID, dateAdded, userID, typeLibrary, title, intention, content);
+                doGet(request, response);
+            } catch (Exception ex) {
+                Logger.getLogger(ManualServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else if(action.equals("delete")){
-        
+            String manualid = request.getParameter("manualID");
+            int manualID = Integer.parseInt(manualid);
+            try {
+//                manualService.delete(manualID);
+                request.setAttribute("test", manualID);
+                doGet(request, response);
+            } catch (Exception ex) {
+                Logger.getLogger(ManualServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }}
+        else{
+            if(action.equals("delete")){
+                 String manualid = request.getParameter("manualID");
+                 int manualID = Integer.parseInt(manualid);
+                 
+                 
+              try {
+                manualService.delete(manualID);
+                doGet(request, response);
+            } catch (Exception ex) {
+                Logger.getLogger(ManualServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
         }
         getServletContext().getRequestDispatcher("/WEB-INF/manual.jsp").forward(request, response);
     }
