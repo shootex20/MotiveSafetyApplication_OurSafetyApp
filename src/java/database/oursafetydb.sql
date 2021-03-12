@@ -522,7 +522,7 @@ INSERT INTO `companynotes` (`companyNotes_ID`, `dateAdded`, `dateRemoved`, `user
 DELETE FROM `companyperson`;
 /*!40000 ALTER TABLE `companyperson` DISABLE KEYS */;
 INSERT INTO `companyperson` (`companyPerson_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `company_ID`, `person_ID`, `email`, `isEmployeeActive`) VALUES
-	(1, '2021-02-09', NULL, 2, NULL, NULL, NULL, 'oursafetyapplication@gmail.com', 1),
+	(1, '2021-02-09', NULL, 2, NULL, NULL, NULL, NULL, 1),
 	(2, '2021-02-09', NULL, 2, NULL, 1, 3, 'charls@gmail.com', 1),
 	(3, '2021-02-12', NULL, 2, NULL, 1, 2, 'jason@gmail.com', 1);
 /*!40000 ALTER TABLE `companyperson` ENABLE KEYS */;
@@ -610,7 +610,7 @@ DELETE FROM `logins`;
 /*!40000 ALTER TABLE `logins` DISABLE KEYS */;
 INSERT INTO `logins` (`user_id`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `username`, `password`, `company_ID`, `isActive`, `isAdmin`) VALUES
 	(1, '2021-02-09', NULL, 0, NULL, 'admin', 'password', NULL, 'T', 'T'),
-	(2, '2021-02-09', NULL, 1, NULL, 'manager1', 'password', 2, 'T', 'F'),
+	(2, '2021-02-09', NULL, 1, NULL, 'oursafetyapplication@gmail.com', 'password', 2, 'T', 'F'),
         (3, '2021-03-07', NULL, 1, NULL, 'manager2', 'password', 1, 'T', 'F');
 /*!40000 ALTER TABLE `logins` ENABLE KEYS */;
 
