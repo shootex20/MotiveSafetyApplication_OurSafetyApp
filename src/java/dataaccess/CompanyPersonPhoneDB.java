@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import domain.Companyperson;
 import domain.Companypersonphone;
+import domain.Phone;
 import javax.persistence.EntityTransaction;
 
 
@@ -18,10 +19,10 @@ import javax.persistence.EntityTransaction;
  */
 public class CompanyPersonPhoneDB {
 
-        public List<Companypersonphone> getAll(Companyperson companyper_ID) throws Exception {
+        public List<Companypersonphone> getAll(int companyper_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
-            Companyperson companyPer = em.find(Companyperson.class, companyper_ID.getCompanyPersonID());
+            Companyperson companyPer = em.find(Companyperson.class, companyper_ID);
             return companyPer.getCompanypersonphoneList();
         } finally {
             em.close();
@@ -32,8 +33,7 @@ public class CompanyPersonPhoneDB {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
-            Companypersonphone add = em.find(Companypersonphone.class, compPerson);
-            return add;
+             return em.createNamedQuery("Companypersonphone.findBycompaanyPerson_ID", Companypersonphone.class).setParameter("companyPerson_ID", compPerson).getSingleResult();
         } finally { 
             em.close();
         }

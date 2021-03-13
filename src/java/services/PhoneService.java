@@ -10,6 +10,8 @@ import dataaccess.PhoneDB;
 import domain.Companyperson;
 import domain.Companypersonphone;
 import domain.Phone;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -18,11 +20,16 @@ import domain.Phone;
 public class PhoneService {
     
     
-        public void update(Companyperson personID, String phoneNumber, String phoneExt) throws Exception {
-        CompanyPersonPhoneDB compAddDB = new CompanyPersonPhoneDB();
-        Companypersonphone cpPhoneEdit = compAddDB.get(personID);
+        public void update(int phoneID,  String phoneNumber, String phoneExt) throws Exception {
+//        CompanyPersonPhoneDB compPhoneDB = new CompanyPersonPhoneDB();
+//        Companypersonphone listPhone = null;
+//        listPhone = compPhoneDB.get(personID);
+        
         PhoneDB addDB = new PhoneDB();
-        Phone phone = cpPhoneEdit.getPhoneID();
+//        listPhone = compPhoneDB.get(personID);
+        Phone phone = addDB.get(phoneID);
+
+        
         
         String[] phoneParts = phoneNumber.split("-");
         String countryCode = phoneParts[0];

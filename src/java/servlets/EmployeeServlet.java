@@ -295,14 +295,20 @@ public class EmployeeServlet extends HttpServlet {
             String emerPhone = request.getParameter("edemer_phone");
             String emerRelation = request.getParameter("edemer_relationship"); 
             
+            String phoneID = request.getParameter("phoneID");
+            String addressID = request.getParameter("addressID");
+            
+            int phoneIDParse = Integer.parseInt(phoneID);
+            int addressIDParse = Integer.parseInt(addressID);
+            
             try {
                 Companyperson compPerson = compPersonDB.get(Integer.parseInt(compPerId));
                 Person person = personDB.get(Integer.parseInt(perID));
                 
                 pers.update(person.getPersonID(), firstname, lastname, gender);
                 cpers.update(compPerson, email);
-                ps.update(compPerson, phonenum, phoneExt);
-                as.update(compPerson, addressLine1, addressLine2, addressCity, addressProvince, addressPostal, addressCountry);
+                ps.update(phoneIDParse, phonenum, phoneExt);
+                as.update(addressIDParse, addressLine1, addressLine2, addressCity, addressProvince, addressPostal, addressCountry);
                 cps.update(compPerson, position);
                 ecs.update(person, emerFirst, emerLast, emerPhone, emerRelation);
                 doGet(request, response);

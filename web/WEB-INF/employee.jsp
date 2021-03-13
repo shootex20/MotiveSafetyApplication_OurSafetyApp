@@ -226,8 +226,9 @@
             <c:forEach  var="phone" items="${user.companypersonphoneList}">
                             <th>
                    <c:if test="${phone.companyPersonID eq user}">
-             <label>Phone Number</label><input pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" required type="tel" name="edcomp_phone" placeholder="123-456-7890" value="${phone.phoneID.countryCode}-${phone.phoneID.areaCode}-${phone.phoneID.localNumber}"><br>
+                        <label>Phone Number</label><input pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" required type="tel" name="edcomp_phone" placeholder="123-456-7890" value="${phone.phoneID.countryCode}-${phone.phoneID.areaCode}-${phone.phoneID.localNumber}"><br>
                          <label>Phone Ext</label><input type="tel" name="edcomp_phoneExt" placeholder="7890" value="${phone.phoneID.extension}"><br>
+                         <input type="hidden" name="phoneID" value="${phone.phoneID.phoneID}"><br>
                     </c:if>
                 </th>
             </c:forEach>
@@ -241,6 +242,7 @@
             <label>Province</label><input required type="text" name="edcomp_prov" value="${add.addressID.province}"><br>
             <label>Postal Code</label><input required type="text" name="edcomp_postal" value="${add.addressID.postalCode}"><br>
             <label>Country</label><input required type="text" name="edcomp_country" value="${add.addressID.country}"><br>
+            <input type="hidden" name="addressID" value="${add.addressID.addressID}"><br>
             </c:forEach>
             
             <c:forEach var="pos" items="${user.companypositionsList}">

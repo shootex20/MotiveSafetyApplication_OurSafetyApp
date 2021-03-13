@@ -23,10 +23,10 @@ import javax.persistence.Query;
  */
 public class CompanyPersonAddressDB {
     
-    public List<Companypersonaddress> getAll(Companyperson companyper_ID) throws Exception {
+    public List<Companypersonaddress> getAll(int companyper_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
-            Companyperson companyPer = em.find(Companyperson.class, companyper_ID.getCompanyPersonID());
+            Companyperson companyPer = em.find(Companyperson.class, companyper_ID);
             return companyPer.getCompanypersonaddressList();
         } finally {
             em.close();
@@ -37,8 +37,7 @@ public class CompanyPersonAddressDB {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
-            Companypersonaddress add = em.find(Companypersonaddress.class, compPerson);
-            return add;
+               return em.createNamedQuery("Companypersonaddress.findBycompaanyPerson_ID", Companypersonaddress.class).setParameter("companyPerson_ID", compPerson).getSingleResult();
         } finally { 
             em.close();
         }
