@@ -247,6 +247,7 @@
             
             <c:forEach var="pos" items="${user.companypositionsList}">
             <label>Position</label><input required type="text" name="edcomp_pos" value="${pos.positionTitle}"><br>
+            <input type="hidden" name="positionID" value="${pos.companyPositionsID}"><br>
             </c:forEach>
 
             <h3>Emergency Contact Details</h3>

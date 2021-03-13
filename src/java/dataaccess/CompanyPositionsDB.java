@@ -44,17 +44,17 @@ public class CompanyPositionsDB {
         }
     }
     
-    public Companypositions get(Companyperson personID ) throws Exception {
-     EntityManager em = DBUtil.getEmFactory().createEntityManager();
-
+    public Companypositions get(int compPos) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        
         try {
-            Companypositions comp = em.find(Companypositions.class, personID);
-            return comp;
-        } finally {
+            Companypositions pos = em.find(Companypositions.class, compPos);
+            return pos;
+        } finally { 
             em.close();
-
         }
     }
+    
     
     
      public List<Companypositions> getAll() throws Exception {

@@ -271,7 +271,7 @@ public class EmployeeServlet extends HttpServlet {
             String genderString = request.getParameter("edcomp_gender");
             char gender = genderString.charAt(0);
             
-            String email = request.getParameter("comp_email");
+            String email = request.getParameter("edcomp_email");
             
 
             /*Phone#*/
@@ -297,9 +297,12 @@ public class EmployeeServlet extends HttpServlet {
             
             String phoneID = request.getParameter("phoneID");
             String addressID = request.getParameter("addressID");
+            String posID = request.getParameter("positionID");
+            
             
             int phoneIDParse = Integer.parseInt(phoneID);
             int addressIDParse = Integer.parseInt(addressID);
+            int positionIDParse = Integer.parseInt(posID);
             
             try {
                 Companyperson compPerson = compPersonDB.get(Integer.parseInt(compPerId));
@@ -309,7 +312,7 @@ public class EmployeeServlet extends HttpServlet {
                 cpers.update(compPerson, email);
                 ps.update(phoneIDParse, phonenum, phoneExt);
                 as.update(addressIDParse, addressLine1, addressLine2, addressCity, addressProvince, addressPostal, addressCountry);
-                cps.update(compPerson, position);
+                cps.update(positionIDParse, position);
                 ecs.update(person, emerFirst, emerLast, emerPhone, emerRelation);
                 doGet(request, response);
             } catch (Exception ex) {

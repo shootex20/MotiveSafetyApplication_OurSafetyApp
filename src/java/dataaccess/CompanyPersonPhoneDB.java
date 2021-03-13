@@ -33,7 +33,7 @@ public class CompanyPersonPhoneDB {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
-             return em.createNamedQuery("Companypersonphone.findBycompaanyPerson_ID", Companypersonphone.class).setParameter("companyPerson_ID", compPerson).getSingleResult();
+             return em.createNamedQuery("Companypersonphone.findBycompanyPerson_ID", Companypersonphone.class).setParameter("companyPerson_ID", compPerson).getSingleResult();
         } finally { 
             em.close();
         }

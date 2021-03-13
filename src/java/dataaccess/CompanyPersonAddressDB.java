@@ -37,7 +37,7 @@ public class CompanyPersonAddressDB {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
-               return em.createNamedQuery("Companypersonaddress.findBycompaanyPerson_ID", Companypersonaddress.class).setParameter("companyPerson_ID", compPerson).getSingleResult();
+               return em.createNamedQuery("Companypersonaddress.findBycompanyPerson_ID", Companypersonaddress.class).setParameter("companyPerson_ID", compPerson).getSingleResult();
         } finally { 
             em.close();
         }

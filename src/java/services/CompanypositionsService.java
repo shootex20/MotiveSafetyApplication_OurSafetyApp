@@ -15,9 +15,9 @@ import domain.Companypositions;
  */
 public class CompanypositionsService {
     
-        public void update(Companyperson personID, String posTitle) throws Exception {
+        public void update(int posID, String posTitle) throws Exception {
         CompanyPositionsDB compPerDB = new CompanyPositionsDB();
-        Companypositions compPos = compPerDB.get(personID);
+        Companypositions compPos = compPerDB.get(posID);
         compPos.setPositionTitle(posTitle);
         compPerDB.update(compPos);
     }

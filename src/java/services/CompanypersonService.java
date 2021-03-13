@@ -16,7 +16,7 @@ public class CompanypersonService {
     
         public void update(Companyperson personID, String email) throws Exception {
         CompanypersonDB compPerDB = new CompanypersonDB();
-        Companyperson compPersEdit = personID;
+        Companyperson compPersEdit = compPerDB.get(personID.getCompanyPersonID());
         compPersEdit.setEmail(email);
         compPerDB.update(compPersEdit);
     }
