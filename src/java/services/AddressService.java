@@ -19,15 +19,11 @@ import java.util.List;
  */
 public class AddressService {
     
-        public void update(int addressID, String addressLine1, String addressLine2, String addressCity, String addressProvince,String addressPostal, String addressCountry) throws Exception {
-//        CompanyPersonAddressDB compAddDB = new CompanyPersonAddressDB();
-//        /*Test*/
-//        Companypersonaddress cpAddList = null;
-//        cpAddList = compAddDB.get(personID);
-        
+        public void update(int addressID, String addressLine1, String addressLine2, String addressCity, 
+                String addressProvince,String addressPostal, String addressCountry) throws Exception {
         AddressDB addDB = new AddressDB();
         Address addEdit = addDB.get(addressID);
-        //Address addEdit = new Address(addressID);
+
 
         addEdit.setAddressLine1(addressLine1);
         addEdit.setAddressLine2(addressLine2);
@@ -38,22 +34,3 @@ public class AddressService {
         addDB.update(addEdit);
     }
 }
-
-
-/*
-       CompanyPersonPhoneDB compPhoneDB = new CompanyPersonPhoneDB();
-        List<Companypersonphone> listPhone = new ArrayList<Companypersonphone>();
-        listPhone = compPhoneDB.getAll(personID);
-        
-        PhoneDB addDB = new PhoneDB();
-        Phone phoneToChange = addDB.get(phoneID);
-        Phone phone = null;
-        
-        for(int i = 0; i < listPhone.size(); i++)
-        {
-            if (phoneToChange == listPhone.get(i).getPhoneID())
-            {
-                phone = listPhone.get(i).getPhoneID();
-            }
-        }
-*/

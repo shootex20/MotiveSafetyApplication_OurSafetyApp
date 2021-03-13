@@ -577,8 +577,8 @@ DELETE FROM `emergencycontact`;
 /*!40000 ALTER TABLE `emergencycontact` DISABLE KEYS */;
 INSERT INTO `emergencycontact` (`emergencyContact_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `emergencyContactFirstName`, `emergencyContactLastName`, `emergencyContactNumber`, `emergencyContactRelationship`) VALUES
 	(1, '2021-02-09', NULL, 2, NULL, NULL, NULL, NULL, NULL),
-	(2, '2021-02-09', NULL, 2, NULL, 'Wenhao', 'Liu', '1231231234', 'father'),
-	(3, '2021-02-09', NULL, 2, NULL, 'Boxuan', 'Lu', '2332332333', 'friend');
+	(2, '2021-02-09', NULL, 2, NULL, 'Wenhao', 'Liu', '1-273-345-5647', 'father'),
+	(3, '2021-02-09', NULL, 2, NULL, 'Boxuan', 'Lu', '1-333-999-4567', 'friend');
 /*!40000 ALTER TABLE `emergencycontact` ENABLE KEYS */;
 
 -- Dumping data for table oursafetydb.item: ~2 rows (approximately)
@@ -642,9 +642,9 @@ INSERT INTO `person` (`person_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `use
 DELETE FROM `phone`;
 /*!40000 ALTER TABLE `phone` DISABLE KEYS */;
 INSERT INTO `phone` (`phone_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `typeLibrary_ID`, `countryCode`, `areaCode`, `localNumber`, `extension`) VALUES
-	(1, '2021-02-09', NULL, 2, NULL, 2, '1', '403', '333', '3333'),
-	(2, '2021-02-09', NULL, 2, NULL, 2, '1', '403', '222', '2222'),
-	(3, '2021-02-09', NULL, 2, NULL, 3, '1', '403', '111', '1111');
+	(1, '2021-02-09', NULL, 2, NULL, 2, '1', '403', '333-4356', '3333'),
+	(2, '2021-02-09', NULL, 2, NULL, 2, '1', '403', '222-3945', '2222'),
+	(3, '2021-02-09', NULL, 2, NULL, 3, '1', '403', '111-8921', '1111');
 /*!40000 ALTER TABLE `phone` ENABLE KEYS */;
 
 -- Dumping data for table oursafetydb.province: ~3 rows (approximately)

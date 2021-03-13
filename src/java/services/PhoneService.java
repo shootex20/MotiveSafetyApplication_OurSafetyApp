@@ -21,16 +21,9 @@ public class PhoneService {
     
     
         public void update(int phoneID,  String phoneNumber, String phoneExt) throws Exception {
-//        CompanyPersonPhoneDB compPhoneDB = new CompanyPersonPhoneDB();
-//        Companypersonphone listPhone = null;
-//        listPhone = compPhoneDB.get(personID);
-        
         PhoneDB addDB = new PhoneDB();
-//        listPhone = compPhoneDB.get(personID);
         Phone phone = addDB.get(phoneID);
 
-        
-        
         String[] phoneParts = phoneNumber.split("-");
         String countryCode = phoneParts[0];
         String areaCode = phoneParts[1];
