@@ -53,7 +53,7 @@
                         <c:forEach  var="phone" items="${emp.companypersonphoneList}">
                             <th>
                             <c:if test="${phone.companyPersonID eq emp}">
-                        ${phone.phoneID.countryCode}-${phone.phoneID.areaCode}-${phone.phoneID.localNumber}-${phone.phoneID.extension}
+                        ${phone.phoneID.countryCode}-${phone.phoneID.areaCode}-${phone.phoneID.localNumber} ext:${phone.phoneID.extension}
                             </c:if>
                         </th>
                         </c:forEach>
@@ -211,23 +211,30 @@
             <input type="hidden" name="perID" value="${user.personID.personID}">
             <input type="hidden" name="hidden_comp_emp_add" value="hiddenCompany"><br>
 
-            <label>First Name</label><input required type="text" name="edcomp_firstname" value="${user.personID.firstName}"><br>
-            <label>Last Name</label><input required type="text" name="edcomp_lastname" value="${user.personID.lastName}"><br>
+            <label>First Name </label><input required type="text" name="edcomp_firstname" value="${user.personID.firstName}"><br>
+            <label>Last Name </label><input required type="text" name="edcomp_lastname" value="${user.personID.lastName}"><br>
            <%-- <label>Birth Date</label><input required type="date" name="edcomp_birthday" value="${formattedDate}"><br>
                       
             <label>Gender</label><input required type="text" name="edcomp_gender" value="${user.personID.gender}">
- --%>
-        <select name="edcomp_gender" id="edcomp_gender">
+         <label>Gender </label>
+        <select name="edcomp_gender" var="gen" id="edcomp_gender">
+        <option value="F" ${user.personID.gender == 'F' ? 'selected' : ''}>Female</option>
+        <option value="M" ${user.personID.gender == 'M' ? 'selected' : ''}>Male</option>
+        <option value="O" ${user.personID.gender == 'O' ? 'selected' : ''}>Other</option>
+        </select>
+           --%>
+         <label>Gender </label>
+        <select name="edcomp_gender" var="gen" id="edcomp_gender">
         <option value="F">Female</option>
         <option value="M">Male</option>
         <option value="O">Other</option>
         </select><br>
-                       
+        
             <c:forEach  var="phone" items="${user.companypersonphoneList}">
                             <th>
                    <c:if test="${phone.companyPersonID eq user}">
-                        <label>Phone Number</label><input pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" required type="tel" name="edcomp_phone" placeholder="123-456-7890" value="${phone.phoneID.countryCode}-${phone.phoneID.areaCode}-${phone.phoneID.localNumber}"><br>
-                         <label>Phone Ext</label><input type="tel" name="edcomp_phoneExt" placeholder="7890" value="${phone.phoneID.extension}"><br>
+                        <label>Phone Number </label><input pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" required type="tel" name="edcomp_phone" placeholder="123-456-7890" value="${phone.phoneID.countryCode}-${phone.phoneID.areaCode}-${phone.phoneID.localNumber}"><br>
+                         <label>Phone Ext </label><input type="tel" name="edcomp_phoneExt" placeholder="7890" value="${phone.phoneID.extension}"><br>
                          <input type="hidden" name="phoneID" value="${phone.phoneID.phoneID}"><br>
                     </c:if>
                 </th>
@@ -236,15 +243,14 @@
             <label>Email</label><input required type="email" name="edcomp_email" placeholder="Ex: address@service.com" value="${user.email}"><br>
 
             <c:forEach  var="add" items="${user.companypersonaddressList}">
-            <label>Address Line 1</label><input required type="text" name="edcomp_addressLine1" value="${add.addressID.addressLine1}"><br>
-            <label>Address Line 2</label><input required type="text" name="edcomp_addressLine2" value="${add.addressID.addressLine2}"><br>  
-            <label>City</label><input required type="text" name="edcomp_city" value="${add.addressID.city}"><br>
-            <label>Province</label><input required type="text" name="edcomp_prov" value="${add.addressID.province}"><br>
-            <label>Postal Code</label><input required type="text" name="edcomp_postal" value="${add.addressID.postalCode}"><br>
-            <label>Country</label><input required type="text" name="edcomp_country" value="${add.addressID.country}"><br>
+            <label>Address Line 1 </label><input required type="text" name="edcomp_addressLine1" value="${add.addressID.addressLine1}"><br>
+            <label>Address Line 2 </label><input required type="text" name="edcomp_addressLine2" value="${add.addressID.addressLine2}"><br>  
+            <label>City </label><input required type="text" name="edcomp_city" value="${add.addressID.city}"><br>
+            <label>Province </label><input required type="text" name="edcomp_prov" value="${add.addressID.province}"><br>
+            <label>Postal Code </label><input required type="text" name="edcomp_postal" value="${add.addressID.postalCode}"><br>
+            <label>Country </label><input required type="text" name="edcomp_country" value="${add.addressID.country}"><br>
             <input type="hidden" name="addressID" value="${add.addressID.addressID}"><br>
             </c:forEach>
-            
             <c:forEach var="pos" items="${user.companypositionsList}">
             <label>Position</label><input required type="text" name="edcomp_pos" value="${pos.positionTitle}"><br>
             <input type="hidden" name="positionID" value="${pos.companyPositionsID}"><br>

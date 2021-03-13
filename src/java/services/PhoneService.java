@@ -35,6 +35,7 @@ public class PhoneService {
         phone.setCountryCode(countryCode);
         phone.setAreaCode(areaCode);
         phone.setLocalNumber(fullLocal);
+        phone.setExtension(phoneExt);
         addDB.update(phone);
     }
 }

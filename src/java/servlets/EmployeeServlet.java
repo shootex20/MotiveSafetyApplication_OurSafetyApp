@@ -9,17 +9,10 @@ import dataaccess.EmergencyContactDB;
 import dataaccess.LoginDB;
 import dataaccess.PersonDB;
 import dataaccess.PhoneDB;
-import domain.Address;
 import domain.Company;
 import domain.Companyperson;
-import domain.Companypersonaddress;
-import domain.Companypersonphone;
-import domain.Companypositions;
-import domain.Emergencycontact;
 import domain.Logins;
 import domain.Person;
-import domain.Phone;
-import domain.Typelibrary;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -158,7 +151,17 @@ public class EmployeeServlet extends HttpServlet {
             }
         
         }
+        List<String> genders = new ArrayList<String>();
+        genders.add("F");
+        genders.add("M");
+        genders.add("O");
+        List<String> genNames = new ArrayList<String>();
+        genders.add("Female");
+        genders.add("Male");
+        genders.add("Other");
 
+        request.setAttribute("genders", genders);
+       // request.setAttribute("genNames", genNames);
         request.setAttribute("employeeList", compPersonListActive);
         request.setAttribute("inActiveEmployeeList", compPersonListNotActive);
 
@@ -242,7 +245,7 @@ public class EmployeeServlet extends HttpServlet {
             String EmerRelation = request.getParameter("emer_relationship");        
             try {
 
-               request.setAttribute("message", "New employee added!");
+            request.setAttribute("message", "New employee added!");
              doGet(request, response);  
             } catch (Exception ex) {
                 Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -267,6 +270,7 @@ public class EmployeeServlet extends HttpServlet {
             /*Person start*/
             String firstname = request.getParameter("edcomp_firstname");
             String lastname = request.getParameter("edcomp_lastname");
+            /*Cannot update this, will not work*/
             //String birthdate = request.getParameter("edcomp_birthday");
             String genderString = request.getParameter("edcomp_gender");
             char gender = genderString.charAt(0);
@@ -298,7 +302,6 @@ public class EmployeeServlet extends HttpServlet {
             String phoneID = request.getParameter("phoneID");
             String addressID = request.getParameter("addressID");
             String posID = request.getParameter("positionID");
-            
             
             int phoneIDParse = Integer.parseInt(phoneID);
             int addressIDParse = Integer.parseInt(addressID);
