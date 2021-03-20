@@ -44,6 +44,17 @@ public class CompanyPositionsDB {
         }
     }
     
+            public Companypositions getID(int posID) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        
+        try {
+            Companypositions add = em.find(Companypositions.class, posID);
+            return add;
+        } finally { 
+            em.close();
+        }
+    }
+    
     public Companypositions get(int compPos) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         

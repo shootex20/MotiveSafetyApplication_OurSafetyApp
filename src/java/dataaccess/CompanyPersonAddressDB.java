@@ -42,7 +42,18 @@ public class CompanyPersonAddressDB {
             em.close();
         }
     }
-    
+        
+    public Companypersonaddress getID(int address_ID) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        
+        try {
+            Companypersonaddress add = em.find(Companypersonaddress.class, address_ID);
+            return add;
+        } finally { 
+            em.close();
+        }
+    }
+        
     public void update(Companypersonaddress comp) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();

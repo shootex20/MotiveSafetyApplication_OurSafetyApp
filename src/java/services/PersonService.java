@@ -43,5 +43,12 @@ public class PersonService {
         addDB.insert(add);
         return add;
     }
+        
+        public void link(int personID, Emergencycontact emergencyContactID) throws Exception {
+        PersonDB compPerDB = new PersonDB();
+        Person compPersEdit = compPerDB.get(personID);
+        compPersEdit.setEmergencyContactID(emergencyContactID);
+        compPerDB.update(compPersEdit);
+    }
     
 }

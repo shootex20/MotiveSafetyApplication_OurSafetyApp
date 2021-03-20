@@ -6,6 +6,7 @@
 package services;
 
 import dataaccess.CompanyPositionsDB;
+import dataaccess.CompanypersonDB;
 import domain.Company;
 import domain.Companyperson;
 import domain.Companypositions;
@@ -37,5 +38,12 @@ public class CompanypositionsService {
         Companypositions add = new Companypositions(dateAdded, userAdded, positionTitle, companyPersonID, companyID);
         addDB.insert(add);
         return add;
+    }
+        
+        public void link(int posID, Companyperson personID) throws Exception {
+        CompanyPositionsDB addDB = new CompanyPositionsDB();
+        Companypositions compPersEdit = addDB.get(posID);
+        compPersEdit.setCompanyPersonID(personID);
+        addDB.update(compPersEdit);
     }
 }

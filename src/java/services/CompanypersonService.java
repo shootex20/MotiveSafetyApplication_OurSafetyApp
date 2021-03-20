@@ -43,4 +43,10 @@ public class CompanypersonService {
         addDB.insert(add);
         return add;
     }
+        public void link(Companyperson personID, String email) throws Exception {
+        CompanypersonDB compPerDB = new CompanypersonDB();
+        Companyperson compPersEdit = compPerDB.get(personID.getCompanyPersonID());
+        compPersEdit.setEmail(email);
+        compPerDB.update(compPersEdit);
+    }
 }

@@ -41,4 +41,12 @@ public class EmergencyContactService {
         addDB.insert(add);
         return add;
     }
+        /*
+        public void link(int emergID, String email) throws Exception {
+        EmergencyContactDB compPerDB = new EmergencyContactDB();
+        Emergencycontact compPersEdit = compPerDB.get(emergID);
+        compPersEdit.setEmail(email);
+        compPerDB.update(compPersEdit);
+    }
+*/
 }

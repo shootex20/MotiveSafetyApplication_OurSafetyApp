@@ -90,7 +90,7 @@ public class Address implements Serializable {
         this.addressID = addressID;
     }
     
-    public Address(Date dateAdded, Integer userAdded, String addressLine1, String addressLine2, String city, String province, String country, String postalCode, List<Companypersonaddress> companypersonaddressList) {
+    public Address(Date dateAdded, Integer userAdded, String addressLine1, String addressLine2, String city, String province, String country, String postalCode) {
         this.dateAdded = dateAdded;
         this.userAdded = userAdded;
         this.addressLine1 = addressLine1;
@@ -99,7 +99,6 @@ public class Address implements Serializable {
         this.province = province;
         this.country = country;
         this.postalCode = postalCode;
-        this.companypersonaddressList = companypersonaddressList;
     }
 
     public Integer getAddressID() {

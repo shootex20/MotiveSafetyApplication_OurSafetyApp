@@ -39,6 +39,18 @@ public class CompanyPersonPhoneDB {
         }
     }
         
+        public Companypersonphone getID(int phoneID) throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        
+        try {
+            Companypersonphone add = em.find(Companypersonphone.class, phoneID);
+            return add;
+        } finally { 
+            em.close();
+        }
+    }
+      
+        
         public void update(Companypersonphone comp) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();

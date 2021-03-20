@@ -36,8 +36,7 @@ public class AddressService {
         addDB.update(addEdit);
     }
         
-        public Address insert(Integer userAdded, String addressLine1, String addressLine2, String city, String province, String country, String postalCode, 
-                List<Companypersonaddress> companypersonaddressList) throws Exception {
+        public Address insert(Integer userAdded, String addressLine1, String addressLine2, String city, String province, String country, String postalCode) throws Exception {
         AddressDB addDB = new AddressDB();
         
         Date dateAdded = new Date();
@@ -46,8 +45,20 @@ public class AddressService {
         /*Formats the created date*/
         dateAdded = new SimpleDateFormat("yyyy-MM-dd").parse(tempDate);
 
-        Address add = new Address(dateAdded, userAdded, addressLine1, addressLine2, city, province, country, postalCode, companypersonaddressList);
+        Address add = new Address(dateAdded, userAdded, addressLine1, addressLine2, city, province, country, postalCode);
         addDB.insert(add);
         return add;
     }
+        /*
+        
+        public void link (int addressID, Companypersonaddress address) throws Exception {
+        AddressDB addDB = new AddressDB();
+        Address addEdit = addDB.get(addressID);
+
+        List<Companypersonaddress> cpList = addEdit.getCompanypersonaddressList();
+        cpList.add(address);
+        addEdit.setCompanypersonaddressList(cpList);
+        addDB.update(addEdit);
+    }
+*/
 }

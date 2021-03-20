@@ -31,5 +31,14 @@ public class CompanyPersonPhoneService {
         addDB.insert(add);
         return add;
     }
+        
+        public void link (int compAddressID, Phone addressID, Companyperson companyPersonID) throws Exception {
+        CompanyPersonPhoneDB addDB = new CompanyPersonPhoneDB();
+        Companypersonphone addEdit = addDB.getID(compAddressID);
+        addEdit.setCompanyPersonID(companyPersonID);
+        addEdit.setPhoneID(addressID);
+
+        addDB.update(addEdit);
+    }
     
 }

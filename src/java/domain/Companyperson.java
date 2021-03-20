@@ -103,9 +103,6 @@ public class Companyperson implements Serializable {
         this.isEmployeeActive = isEmployeeActive;
         this.companyID = companyID;
         this.personID = personID;
-        this.companypersonaddressList = companypersonaddressList;
-        this.companypositionsList = companypositionsList;
-        this.companypersonphoneList = companypersonphoneList;
     }
 
     public Integer getCompanyPersonID() {
