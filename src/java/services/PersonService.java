@@ -5,8 +5,12 @@
  */
 package services;
 
+import dataaccess.EmergencyContactDB;
 import dataaccess.PersonDB;
+import domain.Emergencycontact;
 import domain.Person;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -21,6 +25,23 @@ public class PersonService {
         user.setLastName(lastName);
         user.setGender(gender);
         personDB.update(user);
+    }
+    
+        public Person insert(Integer userAdded, String firstName, String lastName, String dateOfBirth, Character gender, Emergencycontact emergencyContactID) throws Exception {
+        PersonDB addDB = new PersonDB();
+        
+        Date dateAdded = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String tempDate = formatter.format(dateAdded);
+        /*Formats the created date*/
+        dateAdded = new SimpleDateFormat("yyyy-MM-dd").parse(tempDate);
+        /*Converts String birthday to birthdate*/
+        Date dateOfBirthDate = null;
+        dateOfBirthDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateOfBirth);
+
+        Person add = new Person(dateAdded, userAdded, firstName, lastName, dateOfBirthDate, gender, emergencyContactID);
+        addDB.insert(add);
+        return add;
     }
     
 }

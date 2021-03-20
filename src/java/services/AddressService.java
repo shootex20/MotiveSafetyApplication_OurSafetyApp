@@ -10,7 +10,9 @@ import dataaccess.CompanyPersonAddressDB;
 import domain.Address;
 import domain.Companyperson;
 import domain.Companypersonaddress;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,5 +34,20 @@ public class AddressService {
         addEdit.setPostalCode(addressPostal);
         addEdit.setCountry(addressCountry);
         addDB.update(addEdit);
+    }
+        
+        public Address insert(Integer userAdded, String addressLine1, String addressLine2, String city, String province, String country, String postalCode, 
+                List<Companypersonaddress> companypersonaddressList) throws Exception {
+        AddressDB addDB = new AddressDB();
+        
+        Date dateAdded = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String tempDate = formatter.format(dateAdded);
+        /*Formats the created date*/
+        dateAdded = new SimpleDateFormat("yyyy-MM-dd").parse(tempDate);
+
+        Address add = new Address(dateAdded, userAdded, addressLine1, addressLine2, city, province, country, postalCode, companypersonaddressList);
+        addDB.insert(add);
+        return add;
     }
 }

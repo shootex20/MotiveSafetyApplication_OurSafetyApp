@@ -10,7 +10,9 @@ import dataaccess.PhoneDB;
 import domain.Companyperson;
 import domain.Companypersonphone;
 import domain.Phone;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,5 +39,19 @@ public class PhoneService {
         phone.setLocalNumber(fullLocal);
         phone.setExtension(phoneExt);
         addDB.update(phone);
+    }
+        
+        public Phone insert(Integer userAdded, String countryCode, String areaCode, String localNumber, String extension) throws Exception {
+        PhoneDB addDB = new PhoneDB();
+        
+        Date dateAdded = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String tempDate = formatter.format(dateAdded);
+        /*Formats the created date*/
+        dateAdded = new SimpleDateFormat("yyyy-MM-dd").parse(tempDate);
+
+        Phone add = new Phone(dateAdded, userAdded, countryCode, areaCode, localNumber, extension);
+        addDB.insert(add);
+        return add;
     }
 }

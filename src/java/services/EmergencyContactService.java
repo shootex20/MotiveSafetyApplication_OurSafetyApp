@@ -8,6 +8,8 @@ package services;
 import dataaccess.EmergencyContactDB;
 import domain.Emergencycontact;
 import domain.Person;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -23,5 +25,20 @@ public class EmergencyContactService {
         compPos.setEmergencyContactNumber(phoneNum);
         compPos.setEmergencyContactRelationship(relation);
         compPerDB.update(compPos);
+    }
+        
+        public Emergencycontact insert(Integer userAdded, String emergencyContactFirstName, String emergencyContactLastName, 
+            String emergencyContactNumber, String emergencyContactRelationship) throws Exception {
+        EmergencyContactDB addDB = new EmergencyContactDB();
+        
+        Date dateAdded = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String tempDate = formatter.format(dateAdded);
+        /*Formats the created date*/
+        dateAdded = new SimpleDateFormat("yyyy-MM-dd").parse(tempDate);
+
+        Emergencycontact add = new Emergencycontact(dateAdded, userAdded, emergencyContactFirstName, emergencyContactLastName, emergencyContactNumber, emergencyContactRelationship);
+        addDB.insert(add);
+        return add;
     }
 }

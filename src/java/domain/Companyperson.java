@@ -50,7 +50,7 @@ public class Companyperson implements Serializable {
     @Basic(optional = false)
     @Column(name = "companyPerson_ID", insertable = false)
     private Integer companyPersonID;
-    @Column(name = "dateAdded", insertable = false)
+    @Column(name = "dateAdded")
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
     @Column(name = "dateRemoved", insertable = false)
@@ -95,9 +95,10 @@ public class Companyperson implements Serializable {
         this.personID = personID;
     }
 
-    public Companyperson(String email, boolean isEmployeeActive, Company companyID, Person personID, List<Companypersonaddress> companypersonaddressList,
+    public Companyperson(Date dateAdded, Integer userAdded, String email, boolean isEmployeeActive, Company companyID, Person personID, List<Companypersonaddress> companypersonaddressList,
             List<Companypositions> companypositionsList, List<Companypersonphone> companypersonphoneList) {
         this.dateAdded = dateAdded;
+        this.userAdded = userAdded;
         this.email = email;
         this.isEmployeeActive = isEmployeeActive;
         this.companyID = companyID;
