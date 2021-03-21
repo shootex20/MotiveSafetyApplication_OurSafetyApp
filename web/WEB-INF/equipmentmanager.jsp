@@ -21,7 +21,7 @@
                         <ul>
                 <li><a href="company?company">${companyName} Page</a></li>
                 <li><a href="companyWelcome?companyWelcome">${companyName} Welcome Page</a></li>
-                <li><a href="equipmentmanager">Equipment Page</a></li>
+                <li><a href="employee">Employee Page</a></li>
                 <li><a href="manual?manual">Manual Page</a></li>
                 <li><a href="employee?logout=logout">Logout</a></li>     
             </ul>

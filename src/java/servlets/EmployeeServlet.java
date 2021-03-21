@@ -60,6 +60,7 @@ public class EmployeeServlet extends HttpServlet {
             response.sendRedirect("login");
             return;
         }
+         
 
         int userID = (Integer) session.getAttribute("userID");
         Logins logins = new Logins();
@@ -159,17 +160,7 @@ public class EmployeeServlet extends HttpServlet {
             }
         
         }
-        List<String> genders = new ArrayList<String>();
-        genders.add("F");
-        genders.add("M");
-        genders.add("O");
-        List<String> genNames = new ArrayList<String>();
-        genders.add("Female");
-        genders.add("Male");
-        genders.add("Other");
 
-        request.setAttribute("genders", genders);
-       // request.setAttribute("genNames", genNames);
         request.setAttribute("employeeList", compPersonListActive);
         request.setAttribute("inActiveEmployeeList", compPersonListNotActive);
 
@@ -228,14 +219,7 @@ public class EmployeeServlet extends HttpServlet {
             String firstname = request.getParameter("comp_firstname");
             String lastname = request.getParameter("comp_lastname");
             String birthdate = request.getParameter("comp_birthday");
-            /*
-            Date dateBorn = null;
-            try {
-                dateBorn = new SimpleDateFormat("yyyy-MM-dd").parse(birthdate);
-            } catch (ParseException ex) {
-                Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            */
+
             String gender = request.getParameter("comp_gender");
             
             String email = request.getParameter("comp_email");
@@ -268,12 +252,13 @@ public class EmployeeServlet extends HttpServlet {
                 Companypersonphone compPerPho = cpps.insert(userID, compPers, phone);
                 Companypositions compPos = cps.insert(userID, position, compPers, curr);
                 request.setAttribute("message", "New employee added!");
-             doGet(request, response);  
+                doGet(request, response);  
+                return;
             } catch (Exception ex) {
                 Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
                 doGet(request, response);  
             }
-
+             doGet(request, response); 
         }
 
         else if (action.equals("Save"))
@@ -345,7 +330,7 @@ public class EmployeeServlet extends HttpServlet {
                                     request.setAttribute("message", ex);
                                 doGet(request, response);
             }
-                //doGet(request, response);
+        doGet(request, response);
         }
         else if (action.equals("DeactivateEmployee"))
         {

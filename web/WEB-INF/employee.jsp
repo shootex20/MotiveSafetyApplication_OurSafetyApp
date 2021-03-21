@@ -23,7 +23,9 @@
         <div class="companyEmployees">
             <h1>${companyName} & OurSafety</h1>
             <h3>Current Active Employee List</h3>
+            <form method="GET">
             <table>
+
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</th>
@@ -91,8 +93,9 @@
                         </th>
                     </tr>
                 </c:forEach>
+
             </table>
-            
+                  </form>      
             <h3>Current In-Active Employee List</h3>
             <table>
                 <tr>
@@ -202,13 +205,12 @@
             ${compAddMsg}
         </form>
         </c:if>
+        
         <c:if test="${user != null}">
             <h3>Edit employee</h3>
-            
-            
+
             <form action="employee"  method="post" class="companyAddForm">
-                
-                            <input type="hidden" name="compPerID" value="${user.companyPersonID}">
+            <input type="hidden" name="compPerID" value="${user.companyPersonID}">
             <input type="hidden" name="perID" value="${user.personID.personID}">
             <input type="hidden" name="hidden_comp_emp_add" value="hiddenCompany"><br>
 
