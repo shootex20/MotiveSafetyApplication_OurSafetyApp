@@ -53,7 +53,7 @@
                         <c:forEach  var="phone" items="${emp.companypersonphoneList}">
                             <th>
                             <c:if test="${phone.companyPersonID eq emp}">
-                        ${phone.phoneID.countryCode}-${phone.phoneID.areaCode}-${phone.phoneID.localNumber} ext:${phone.phoneID.extension}
+                                ${phone.phoneID.countryCode}-${phone.phoneID.areaCode}-${phone.phoneID.localNumber} <c:if test="${not empty phone.phoneID.extension}"> ext:${phone.phoneID.extension} </c:if>
                             </c:if>
                         </th>
                         </c:forEach>
@@ -171,32 +171,33 @@
         <h3>Add a new employee</h3>
         <form method="post" class="companyAddForm">
             <input type="hidden" name="hidden_comp_emp_add" value="hiddenCompany"><br>
-            <label>First Name</label><input required type="text" name="comp_firstname"><br>
-            <label>Last Name</label><input required type="text" name="comp_lastname"><br>
-            <label>Birth Date</label><input required type="date" name="comp_birthday"><br>
+            <label>First Name </label><input required type="text" name="comp_firstname"><br>
+            <label>Last Name </label><input required type="text" name="comp_lastname"><br>
+            <label>Birth Date </label><input required type="date" name="comp_birthday"><br>
             <%--
             <label>Gender</label><input required type="text" name="comp_gender"><br>
             --%>
+            <label>Gender </label>
             <select name="comp_gender" id="comp_gender">
             <option value="F">Female</option>
             <option value="M">Male</option>
             <option value="O">Other</option>
             </select><br>
-            <label>Phone Number</label><input required pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" type="tel" name="comp_phone" placeholder="123-456-7890"><br>
-            <label>Phone Ext</label><input type="tel" name="comp_phoneExt" placeholder="7890"><br>
-            <label>Email</label><input required type="email" name="comp_email" placeholder="Ex: address@service.com"><br>
-            <label>Address Line 1</label><input required type="text" name="comp_addressLine1"><br>
-            <label>Address Line 2</label><input type="text" name="comp_addressLine2"><br>  
-            <label>City</label><input required type="text" name="comp_city"><br>
-            <label>Province</label><input required type="text" name="comp_prov"><br>
-            <label>Postal Code</label><input required type="text" name="comp_postal"><br>
-            <label>Country</label><input required type="text" name="comp_country"><br>
-            <label>Position</label><input required type="text" name="comp_pos"><br>
+            <label>Phone Number </label><input required pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" type="tel" name="comp_phone" placeholder="123-456-7890"><br>
+            <label>Phone Ext </label><input type="tel" name="comp_phoneExt" placeholder="7890"><br>
+            <label>Email </label><input required type="email" name="comp_email" placeholder="Ex: address@service.com"><br>
+            <label>Address Line 1 </label><input required type="text" name="comp_addressLine1"><br>
+            <label>Address Line 2 </label><input type="text" name="comp_addressLine2"><br>  
+            <label>City </label><input required type="text" name="comp_city"><br>
+            <label>Province </label><input required type="text" name="comp_prov"><br>
+            <label>Postal Code </label><input required type="text" name="comp_postal"><br>
+            <label>Country </label><input required type="text" name="comp_country"><br>
+            <label>Position </label><input required type="text" name="comp_pos"><br>
             <h3>Emergency Contact Details</h3>
-            <label>First name</label><input required type="text" name="emer_first"><br>
-            <label>Last name</label><input required type="text" name="emer_last"><br>
-            <label>Phone Number</label><input required type="tel" name="emer_phone" pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="1234567890"><br>
-            <label>Relationship</label><input required type="text" name="emer_relationship"><br>
+            <label>First name </label><input required type="text" name="emer_first"><br>
+            <label>Last name </label><input required type="text" name="emer_last"><br>
+            <label>Phone Number </label><input required type="tel" name="emer_phone" pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="1234567890"><br>
+            <label>Relationship </label><input required type="text" name="emer_relationship"><br>
             <input type="submit" name="action" value="Add">
             ${compAddMsg}
         </form>
@@ -223,7 +224,7 @@
         <option value="O" ${user.personID.gender == 'O' ? 'selected' : ''}>Other</option>
         </select>
            --%>
-         <label>Gender </label>
+        <label>Gender </label>
         <select name="edcomp_gender" var="gen" id="edcomp_gender">
         <option value="F">Female</option>
         <option value="M">Male</option>

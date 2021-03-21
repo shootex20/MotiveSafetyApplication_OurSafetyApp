@@ -241,7 +241,7 @@ public class EmployeeServlet extends HttpServlet {
             String email = request.getParameter("comp_email");
             /*Phone#*/
             String phonenum = request.getParameter("comp_phone");
-            String phoneExt = request.getParameter("edcomp_phoneExt");
+            String phoneExt = request.getParameter("comp_phoneExt");
             /*Address*/
             String addressLine1 = request.getParameter("comp_addressLine1");
             String addressLine2 = request.getParameter("comp_addressLine2");
