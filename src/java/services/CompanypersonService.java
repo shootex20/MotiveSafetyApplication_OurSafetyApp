@@ -29,8 +29,7 @@ public class CompanypersonService {
         compPerDB.update(compPersEdit);
     }
         
-        public Companyperson insert(Integer userAdded, String email, boolean isEmployeeActive, Company companyID, Person personID, List<Companypersonaddress> companypersonaddressList,
-            List<Companypositions> companypositionsList, List<Companypersonphone> companypersonphoneList) throws Exception {
+        public Companyperson insert(Integer userAdded, String email, boolean isEmployeeActive, Company companyID, Person personID) throws Exception {
         CompanypersonDB addDB = new CompanypersonDB();
         
         Date dateAdded = new Date();
@@ -39,7 +38,7 @@ public class CompanypersonService {
         /*Formats the created date*/
         dateAdded = new SimpleDateFormat("yyyy-MM-dd").parse(tempDate);
 
-        Companyperson add = new Companyperson(dateAdded, userAdded, email, isEmployeeActive, companyID, personID, companypersonaddressList, companypositionsList, companypersonphoneList);
+        Companyperson add = new Companyperson(dateAdded, userAdded, email, isEmployeeActive, companyID, personID);
         addDB.insert(add);
         return add;
     }

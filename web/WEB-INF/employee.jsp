@@ -186,9 +186,9 @@
             <label>Phone Ext</label><input type="tel" name="comp_phoneExt" placeholder="7890"><br>
             <label>Email</label><input required type="email" name="comp_email" placeholder="Ex: address@service.com"><br>
             <label>Address Line 1</label><input required type="text" name="comp_addressLine1"><br>
-            <label>Address Line 2</label><input required type="text" name="comp_addressLine2"><br>  
+            <label>Address Line 2</label><input type="text" name="comp_addressLine2"><br>  
             <label>City</label><input required type="text" name="comp_city"><br>
-            <label>Province</label><input required type="text" name="eomp_prov"><br>
+            <label>Province</label><input required type="text" name="comp_prov"><br>
             <label>Postal Code</label><input required type="text" name="comp_postal"><br>
             <label>Country</label><input required type="text" name="comp_country"><br>
             <label>Position</label><input required type="text" name="comp_pos"><br>
@@ -245,7 +245,7 @@
             <c:forEach  var="add" items="${user.companypersonaddressList}">
             <label>Address Line 1 </label><input required type="text" name="edcomp_addressLine1" value="${add.addressID.addressLine1}"><br>
             <label>Address Line 2 </label><input required type="text" name="edcomp_addressLine2" value="${add.addressID.addressLine2}"><br>  
-            <label>City </label><input required type="text" name="edcomp_city" value="${add.addressID.city}"><br>
+            <label>City </label><input type="text" name="edcomp_city" value="${add.addressID.city}"><br>
             <label>Province </label><input required type="text" name="edcomp_prov" value="${add.addressID.province}"><br>
             <label>Postal Code </label><input required type="text" name="edcomp_postal" value="${add.addressID.postalCode}"><br>
             <label>Country </label><input required type="text" name="edcomp_country" value="${add.addressID.country}"><br>
@@ -259,7 +259,7 @@
             <h3>Emergency Contact Details</h3>
             <label>First name</label><input required type="text" name="edemer_first" value="${user.personID.emergencyContactID.emergencyContactFirstName}"><br>
             <label>Last name</label><input required type="text" name="edemer_last" value="${user.personID.emergencyContactID.emergencyContactLastName}"><br>
-            <label>Phone Number</label><input required type="tel" name="edemer_phone" placeholder="1234567890" pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}"  value="${user.personID.emergencyContactID.emergencyContactNumber}"><br>
+            <label>Phone Number</label><input required type="tel" name="edemer_phone" placeholder="1-234-567-8900" pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}"  value="${user.personID.emergencyContactID.emergencyContactNumber}"><br>
             <label>Relationship</label><input required type="text" name="edemer_relationship"  value="${user.personID.emergencyContactID.emergencyContactRelationship}"><br>
             <input type="submit" name="action" value="Save">
             ${compAddMsg}

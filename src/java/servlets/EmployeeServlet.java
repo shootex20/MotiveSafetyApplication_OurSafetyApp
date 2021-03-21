@@ -9,10 +9,16 @@ import dataaccess.EmergencyContactDB;
 import dataaccess.LoginDB;
 import dataaccess.PersonDB;
 import dataaccess.PhoneDB;
+import domain.Address;
 import domain.Company;
 import domain.Companyperson;
+import domain.Companypersonaddress;
+import domain.Companypersonphone;
+import domain.Companypositions;
+import domain.Emergencycontact;
 import domain.Logins;
 import domain.Person;
+import domain.Phone;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,6 +33,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import services.AddressService;
+import services.CompanyPersonAddressService;
+import services.CompanyPersonPhoneService;
 import services.CompanypersonService;
 import services.CompanypositionsService;
 import services.EmergencyContactService;
@@ -202,26 +210,32 @@ public class EmployeeServlet extends HttpServlet {
         /**Database stuff, do not touch.**/
         CompanypersonDB compPersonDB = new CompanypersonDB();
         PersonDB personDB = new PersonDB();
-        CompanyPersonAddressDB compAddressDB = new CompanyPersonAddressDB();
-        CompanyPersonPhoneDB compPhoneDB = new CompanyPersonPhoneDB();
-        CompanyPositionsDB compPosDB = new CompanyPositionsDB();
-        EmergencyContactDB emerConDB = new EmergencyContactDB();
-        AddressDB addDB = new AddressDB();
-        PhoneDB phoneDB = new PhoneDB();
                 
         if(action.equals("Add"))  
         {
+            
+            PhoneService ps = new PhoneService();
+            CompanyPersonPhoneService cpps = new CompanyPersonPhoneService();
+            AddressService as = new AddressService();
+            CompanyPersonAddressService cpas = new CompanyPersonAddressService();
+            CompanypersonService cpers = new CompanypersonService();
+            CompanypositionsService cps = new CompanypositionsService();
+            EmergencyContactService ecs = new EmergencyContactService();
+            PersonService pers = new PersonService();
+            
+            
             /*Person start*/
             String firstname = request.getParameter("comp_firstname");
             String lastname = request.getParameter("comp_lastname");
             String birthdate = request.getParameter("comp_birthday");
+            /*
             Date dateBorn = null;
             try {
-                /*Formats the date purchased.*/
                 dateBorn = new SimpleDateFormat("yyyy-MM-dd").parse(birthdate);
             } catch (ParseException ex) {
                 Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
+            */
             String gender = request.getParameter("comp_gender");
             
             String email = request.getParameter("comp_email");
@@ -242,10 +256,18 @@ public class EmployeeServlet extends HttpServlet {
             String emerFirst = request.getParameter("emer_first");
             String emerLast = request.getParameter("emer_last");
             String emerPhone = request.getParameter("emer_phone");
-            String EmerRelation = request.getParameter("emer_relationship");        
-            try {
+            String emerRelation = request.getParameter("emer_relationship");
 
-            request.setAttribute("message", "New employee added!");
+            try {
+                Emergencycontact emergContact = ecs.insert(userID, emerFirst, emerLast, emerPhone, emerRelation);
+                Person persToAdd = pers.insert(userID, firstname, lastname, birthdate, gender.charAt(0), emergContact);
+                Companyperson compPers = cpers.insert(userID, email, true, curr, persToAdd);
+                Address address = as.insert(userID, addressLine1, addressLine2, addressCity, addressProvince, addressPostal, addressCountry);
+                Phone phone = ps.insert(userID, phonenum, phoneExt);
+                Companypersonaddress compPerAdd = cpas.insert(userID, address, compPers);
+                Companypersonphone compPerPho = cpps.insert(userID, compPers, phone);
+                Companypositions compPos = cps.insert(userID, position, compPers, curr);
+                request.setAttribute("message", "New employee added!");
              doGet(request, response);  
             } catch (Exception ex) {
                 Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);

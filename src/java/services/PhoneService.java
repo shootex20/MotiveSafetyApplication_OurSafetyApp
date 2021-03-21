@@ -41,7 +41,7 @@ public class PhoneService {
         addDB.update(phone);
     }
         
-        public Phone insert(Integer userAdded, String countryCode, String areaCode, String localNumber, String extension) throws Exception {
+        public Phone insert(Integer userAdded, String phoneNumber, String extension) throws Exception {
         PhoneDB addDB = new PhoneDB();
         
         Date dateAdded = new Date();
@@ -49,6 +49,14 @@ public class PhoneService {
         String tempDate = formatter.format(dateAdded);
         /*Formats the created date*/
         dateAdded = new SimpleDateFormat("yyyy-MM-dd").parse(tempDate);
+        
+        String[] phoneParts = phoneNumber.split("-");
+        String countryCode = phoneParts[0];
+        String areaCode = phoneParts[1];
+        String localNum = phoneParts[2];
+        String local = phoneParts[3];
+            
+        String localNumber = localNum + "-" + local;
 
         Phone add = new Phone(dateAdded, userAdded, countryCode, areaCode, localNumber, extension);
         addDB.insert(add);

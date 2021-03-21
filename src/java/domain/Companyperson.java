@@ -70,7 +70,7 @@ public class Companyperson implements Serializable {
     @JoinColumn(name = "company_ID", referencedColumnName = "company_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Company companyID;
-    @JoinColumn(name = "person_ID", referencedColumnName = "person_ID", insertable = false)
+    @JoinColumn(name = "person_ID", referencedColumnName = "person_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Person personID;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
@@ -95,8 +95,7 @@ public class Companyperson implements Serializable {
         this.personID = personID;
     }
 
-    public Companyperson(Date dateAdded, Integer userAdded, String email, boolean isEmployeeActive, Company companyID, Person personID, List<Companypersonaddress> companypersonaddressList,
-            List<Companypositions> companypositionsList, List<Companypersonphone> companypersonphoneList) {
+    public Companyperson(Date dateAdded, Integer userAdded, String email, boolean isEmployeeActive, Company companyID, Person personID) {
         this.dateAdded = dateAdded;
         this.userAdded = userAdded;
         this.email = email;
