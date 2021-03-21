@@ -23,7 +23,6 @@
         <div class="companyEmployees">
             <h1>${companyName} & OurSafety</h1>
             <h3>Current Active Employee List</h3>
-            <form method="GET">
             <table>
 
                 <tr>
@@ -93,9 +92,7 @@
                         </th>
                     </tr>
                 </c:forEach>
-
             </table>
-                  </form>      
             <h3>Current In-Active Employee List</h3>
             <table>
                 <tr>
