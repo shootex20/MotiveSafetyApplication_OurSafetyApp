@@ -253,12 +253,10 @@ public class EmployeeServlet extends HttpServlet {
                 Companypositions compPos = cps.insert(userID, position, compPers, curr);
                 request.setAttribute("message", "New employee added!");
                 doGet(request, response);  
-                return;
             } catch (Exception ex) {
                 Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
                 doGet(request, response);  
-            }
-             doGet(request, response); 
+            } 
         }
 
         else if (action.equals("Save"))
@@ -324,7 +322,6 @@ public class EmployeeServlet extends HttpServlet {
                 as.update(addressIDParse, addressLine1, addressLine2, addressCity, addressProvince, addressPostal, addressCountry);
                 cps.update(positionIDParse, position);
                 ecs.update(person, emerFirst, emerLast, emerPhone, emerRelation);
-                doGet(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
                                     request.setAttribute("message", ex);
@@ -401,7 +398,8 @@ public class EmployeeServlet extends HttpServlet {
                     request.setAttribute("message", ex);
                     doGet(request, response);   
                 }
-            }    
+            }
         }
+    
     }
 

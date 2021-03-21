@@ -169,7 +169,7 @@
             <br>
         <c:if test="${user == null}">
         <h3>Add a new employee</h3>
-        <form method="post" class="companyAddForm">
+        <form method="POST" class="companyAddForm">
             <input type="hidden" name="hidden_comp_emp_add" value="hiddenCompany"><br>
             <label>First Name </label><input required type="text" name="comp_firstname"><br>
             <label>Last Name </label><input required type="text" name="comp_lastname"><br>
@@ -206,7 +206,7 @@
         <c:if test="${user != null}">
             <h3>Edit employee</h3>
 
-            <form action="employee"  method="post" class="companyAddForm">
+            <form action="employee"  method="POST" class="companyAddForm">
             <input type="hidden" name="compPerID" value="${user.companyPersonID}">
             <input type="hidden" name="perID" value="${user.personID.personID}">
             <input type="hidden" name="hidden_comp_emp_add" value="hiddenCompany"><br>
