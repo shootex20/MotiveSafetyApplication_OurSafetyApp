@@ -1,14 +1,9 @@
 package servlets;
 
-import dataaccess.AddressDB;
-import dataaccess.CompanyPersonAddressDB;
-import dataaccess.CompanyPersonPhoneDB;
+import dataaccess.CompanyDB;
 import dataaccess.CompanypersonDB;
-import dataaccess.CompanyPositionsDB;
-import dataaccess.EmergencyContactDB;
 import dataaccess.LoginDB;
 import dataaccess.PersonDB;
-import dataaccess.PhoneDB;
 import domain.Address;
 import domain.Company;
 import domain.Companyperson;
@@ -20,10 +15,7 @@ import domain.Logins;
 import domain.Person;
 import domain.Phone;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -60,6 +52,7 @@ public class EmployeeServlet extends HttpServlet {
             response.sendRedirect("login");
             return;
         }
+        
          
 
         int userID = (Integer) session.getAttribute("userID");
@@ -83,6 +76,34 @@ public class EmployeeServlet extends HttpServlet {
         }
 
         Company curr = logins.getCompanyID();
+        
+        CompanypersonDB compPerDB = new CompanypersonDB();
+        
+        List<Companyperson> compPersonList = new ArrayList<Companyperson>();
+        List<Companyperson> compPersonListNotActive = new ArrayList<Companyperson>();
+        List<Companyperson> compPersonListActive = new ArrayList<Companyperson>();
+        
+        try {
+            compPersonList = (List<Companyperson>) compPerDB.getAll(curr);
+        } catch (Exception ex) {
+            Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for (int i = 0; i < compPersonList.size(); i++)
+        {
+            if(compPersonList.get(i).getIsEmployeeActive() == false)
+            {
+                compPersonListNotActive.add(compPersonList.get(i));
+            }
+            else if (compPersonList.get(i).getIsEmployeeActive() == true)
+            {
+                compPersonListActive.add(compPersonList.get(i));
+            }
+        }
+        
+        request.setAttribute("employeeList", compPersonListActive);
+        request.setAttribute("inActiveEmployeeList", compPersonListNotActive);
+        
         if(logins.getCompanyID().getCompanyID() == null)
         {
            request.setAttribute("companyName", "Welcome Motive Safety Admin!"); 
@@ -115,29 +136,6 @@ public class EmployeeServlet extends HttpServlet {
             Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        CompanypersonDB compPerDB = new CompanypersonDB();
-        
-        List<Companyperson> compPersonList = new ArrayList<Companyperson>();
-        List<Companyperson> compPersonListNotActive = new ArrayList<Companyperson>();
-        List<Companyperson> compPersonListActive = new ArrayList<Companyperson>();
-        
-        try {
-            compPersonList = (List<Companyperson>) compPerDB.getAll(curr);
-        } catch (Exception ex) {
-            Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        for (int i = 0; i < compPersonList.size(); i++)
-        {
-            if(compPersonList.get(i).getIsEmployeeActive() == false)
-            {
-                compPersonListNotActive.add(compPersonList.get(i));
-            }
-            else if (compPersonList.get(i).getIsEmployeeActive() == true)
-            {
-                compPersonListActive.add(compPersonList.get(i));
-            }
-        }
         
                 if (action != null && action.equals("view")){
                 String selectedEmp = request.getParameter("edactive");
@@ -160,9 +158,10 @@ public class EmployeeServlet extends HttpServlet {
             }
         
         }
+        
 
-        request.setAttribute("employeeList", compPersonListActive);
-        request.setAttribute("inActiveEmployeeList", compPersonListNotActive);
+       // request.setAttribute("employeeList", compPersonListActive);
+      //  request.setAttribute("inActiveEmployeeList", compPersonListNotActive);
 
         getServletContext().getRequestDispatcher("/WEB-INF/employee.jsp").forward(request, response);
 
@@ -197,14 +196,14 @@ public class EmployeeServlet extends HttpServlet {
             Logger.getLogger(companyWelcomeServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-       Company curr = logins.getCompanyID();
+        Company curr = logins.getCompanyID();
+
         /**Database stuff, do not touch.**/
         CompanypersonDB compPersonDB = new CompanypersonDB();
         PersonDB personDB = new PersonDB();
                 
         if(action.equals("Add"))  
         {
-            
             PhoneService ps = new PhoneService();
             CompanyPersonPhoneService cpps = new CompanyPersonPhoneService();
             AddressService as = new AddressService();
@@ -213,7 +212,7 @@ public class EmployeeServlet extends HttpServlet {
             CompanypositionsService cps = new CompanypositionsService();
             EmergencyContactService ecs = new EmergencyContactService();
             PersonService pers = new PersonService();
-            
+            CompanyDB company = new CompanyDB();
             
             /*Person start*/
             String firstname = request.getParameter("comp_firstname");
@@ -251,11 +250,12 @@ public class EmployeeServlet extends HttpServlet {
                 Companypersonaddress compPerAdd = cpas.insert(userID, address, compPers);
                 Companypersonphone compPerPho = cpps.insert(userID, compPers, phone);
                 Companypositions compPos = cps.insert(userID, position, compPers, curr);
+                curr.getCompanypersonList().add(compPers);
                 request.setAttribute("message", "New employee added!");
                 doGet(request, response);  
             } catch (Exception ex) {
                 Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
-                doGet(request, response);  
+
             } 
         }
 
@@ -324,8 +324,8 @@ public class EmployeeServlet extends HttpServlet {
                 ecs.update(person, emerFirst, emerLast, emerPhone, emerRelation);
             } catch (Exception ex) {
                 Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
-                                    request.setAttribute("message", ex);
-                                doGet(request, response);
+                request.setAttribute("message", ex);
+                doGet(request, response);
             }
         doGet(request, response);
         }

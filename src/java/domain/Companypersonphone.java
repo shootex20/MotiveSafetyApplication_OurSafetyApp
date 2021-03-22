@@ -56,10 +56,10 @@ public class Companypersonphone implements Serializable {
     @Column(name = "userRemoved", insertable = false)
     private Integer userRemoved;
     @JoinColumn(name = "companyPerson_ID", referencedColumnName = "companyPerson_ID")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Companyperson companyPersonID;
     @JoinColumn(name = "phone_ID", referencedColumnName = "phone_ID")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Phone phoneID;
 
     public Companypersonphone() {

@@ -65,7 +65,7 @@ public class Companyperson implements Serializable {
     @Basic(optional = false)
     @Column(name = "isEmployeeActive")
     private boolean isEmployeeActive;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "companyPersonID", fetch = FetchType.LAZY)
     private List<Companynotes> companynotesList;
     @JoinColumn(name = "company_ID", referencedColumnName = "company_ID")
     @ManyToOne(fetch = FetchType.EAGER)
@@ -73,11 +73,11 @@ public class Companyperson implements Serializable {
     @JoinColumn(name = "person_ID", referencedColumnName = "person_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Person personID;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
+    @OneToMany(orphanRemoval = true, mappedBy = "companyPersonID", fetch = FetchType.LAZY)
     private List<Companypersonaddress> companypersonaddressList;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
+    @OneToMany(orphanRemoval = true, mappedBy = "companyPersonID", fetch = FetchType.LAZY)
     private List<Companypositions> companypositionsList;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
+    @OneToMany(orphanRemoval = true, mappedBy = "companyPersonID", fetch = FetchType.LAZY)
     private List<Companypersonphone> companypersonphoneList;
 
     public Companyperson() {

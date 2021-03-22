@@ -75,19 +75,19 @@ public class Company implements Serializable {
     private String account;
     @Column(name = "industry")
     private String industry;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
+    @OneToMany(orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.LAZY)
     private List<Item> itemList;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
+    @OneToMany(orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.LAZY)
     private List<Companyperson> companypersonList;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
+    @OneToMany(orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.LAZY)
     private List<Url> urlList;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
+    @OneToMany(orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.LAZY)
     private List<Companypositions> companypositionsList;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
+    @OneToMany(orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.LAZY)
     private List<Companytype> companytypeList;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
+    @OneToMany(orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.LAZY)
     private List<Logins> loginsList;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
+    @OneToMany(orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.LAZY)
     private List<Companyrelationship> companyrelationshipList;
 
     public Company() {

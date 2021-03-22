@@ -59,10 +59,10 @@ public class Companypositions implements Serializable {
     @Column(name = "positionTitle")
     private String positionTitle;
     @JoinColumn(name = "companyPerson_ID", referencedColumnName = "companyPerson_ID")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Companyperson companyPersonID;
     @JoinColumn(name = "company_ID", referencedColumnName = "company_ID")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Company companyID;
 
     public Companypositions() {

@@ -72,9 +72,9 @@ public class Phone implements Serializable {
     @Column(name = "extension")
     private String extension;
     @JoinColumn(name = "typeLibrary_ID", referencedColumnName = "typeLibrary_ID", insertable=false)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Typelibrary typeLibraryID;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "phoneID", fetch = FetchType.EAGER)
+    @OneToMany(orphanRemoval=true, mappedBy = "phoneID", fetch = FetchType.LAZY)
     private List<Companypersonphone> companypersonphoneList;
 
     public Phone() {

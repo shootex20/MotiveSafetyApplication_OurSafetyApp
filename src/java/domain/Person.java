@@ -73,10 +73,10 @@ public class Person implements Serializable {
     private Date dateOfBirth;
     @Column(name = "gender")
     private Character gender;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "personID", fetch = FetchType.EAGER)
+    @OneToMany(orphanRemoval = true, mappedBy = "personID", fetch = FetchType.LAZY)
     private List<Companyperson> companypersonList;
     @JoinColumn(name = "emergencyContact_ID", referencedColumnName = "emergencyContact_ID")
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Emergencycontact emergencyContactID;
 
     public Person() {
