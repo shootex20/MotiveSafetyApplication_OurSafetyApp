@@ -1,0 +1,54 @@
+.main {
+    background-image: url("https://images.pexels.com/photos/38070/pexels-photo-38070.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+}
+
+.mainDiv{
+    background-color: #e8e8e1;
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.slideshow{
+    margin-left: 17%;
+}
+
+.options{
+    width: 80%;
+    margin-left: 10%;
+}
+
+footer{
+       background-color: blue;
+    color: white;
+}
+
+.contact{
+    text-align: center;
+    width: 70%;
+    margin-left: 15%;
+}
+
+.loginHeader{
+    background-color: blue;
+    color: white;
+}
+
+img {
+  transition: opacity .5s ease-in;
+}
+
+header{
+    text-align: center;
+}
+
+.socialMedia{
+    margin-left: 48%
+}
+
+svg:hover{
+    width: 25px;
+    height: 25px;
+}
