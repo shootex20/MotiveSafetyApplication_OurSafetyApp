@@ -33,28 +33,20 @@ public class ForgotServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String userName = request.getParameter("usern_input");
-        String email = request.getParameter("email_input");
-        String firstName = request.getParameter("firstn_input");
-        String lastName = request.getParameter("lastn_input");
-        String dob = request.getParameter("dob_input");
-        String phone = request.getParameter("phone_input");
+        String userName = request.getParameter("username_input");
 
-        if (userName == null || userName.isEmpty() || email == null || email.isEmpty() || firstName == null
-                || firstName.isEmpty() || lastName == null || lastName.isEmpty() || dob == null || dob.isEmpty()
-                || phone == null || phone.isEmpty()) {
+        if (userName == null || userName.isEmpty()) {
 
-            request.setAttribute("resetMsg", "Be sure to fill in all of your information");
+            request.setAttribute("resetMsg", "Be sure to fill in your information");
             getServletContext().getRequestDispatcher("/WEB-INF/forgot.jsp").forward(request, response);
             return;
         }
-        
+
         PasswordStorage ps = new PasswordStorage();
-        
+
         try {
-        ps.passwordReset(userName, email, firstName, lastName, dob, phone);
+            ps.passwordReset(userName);
         } catch (Exception e) {
-            response.sendRedirect("login");
             request.setAttribute("resetMsg", "Be sure to fill your correct information");
             getServletContext().getRequestDispatcher("/WEB-INF/forgot.jsp").forward(request, response);
             return;

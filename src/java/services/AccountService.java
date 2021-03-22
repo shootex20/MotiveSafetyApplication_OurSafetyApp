@@ -1,9 +1,7 @@
 package services;
 
-import dataaccess.LoginDB;
 import dataaccess.UserDB;
 import domain.Logins;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,41 +18,23 @@ public class AccountService {
 
         try {
             Logins user = userDB.getUser(username);
-            /*
-            if (ps.verifyPassword(password, user.getPassword()) == true) {
-            Logger.getLogger(AccountService.class.getName()).log(Level.INFO, "Successful login by {0}", username);
-                return user;
-            }
-             */
-            if (password.equals(user.getPassword())) {
+            final String TO = "oursafetyapplication@gmail.com";
+            final String SUBJECT = "Recent Login";
+            String body = user.getUsername() + " has just logged in.";
+
+            if ((password.equals(user.getPassword()) && user.getUsername().equals("admin")) || (password.equals(user.getPassword()) && user.getUsername().equals("manager2"))) {
                 Logger.getLogger(AccountService.class.getName()).log(Level.INFO, "Successful login by {0}", username);
-                
-                String to = "oursafetyapplication@gmail.com";
-                String subject = "TEST";
-                
-                EmailService.sendMail(to, subject, "testtesttest", false);
-                
+                EmailService.sendMail(TO, SUBJECT, body, false);
+                return user;
+
+            } else if (ps.verifyPassword(password, user.getPassword()) == true) {
+                Logger.getLogger(AccountService.class.getName()).log(Level.INFO, "Successful login by {0}", username);
+                EmailService.sendMail(TO, SUBJECT, body, false);
                 return user;
             }
         } catch (Exception e) {
         }
-
         return null;
-    }
-
-    public String updatePassword(String userName) {
-        LoginDB ldb = new LoginDB();
-        Logins user = userDB.getUser(userName);
-        String temp = ps.newRandomPassword();
-
-        try {
-            String hash = PasswordStorage.createHash(temp);
-            user.setPassword(hash);
-            ldb.update(user);
-        } catch (PasswordStorage.CannotPerformOperationException ex) {
-        } catch (Exception ex) {
-        }
-        return temp;
     }
 
 }
