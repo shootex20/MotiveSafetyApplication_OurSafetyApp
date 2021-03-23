@@ -179,7 +179,35 @@ public class AdminServlet extends HttpServlet {
         try {
             if (actionM.equals("deleteM")) {
                 Integer selectedManager = Integer.parseInt(request.getParameter("selectedMan"));
-                ls.delete(selectedManager);
+                //Integer selectedManagerCompanyID = Integer.parseInt(request.getParameter("selectedManagerCompany"));
+
+                Logins userToDelete = new Logins(); //child object
+                Company compToDelete = new Company(); //parent object
+
+                try {
+                    LoginDB loginDB = new LoginDB();
+                    CompanyDB companyDB = new CompanyDB();
+                    
+                    
+                    userToDelete = loginDB.get(selectedManager);
+                    //compToDSelete = companyDB.get(selectedManagerCompanyID);
+                    char notActive = 'F';
+                    char isActiveTrue = 'T';
+                    
+
+                    if (userToDelete == null) {
+                        request.setAttribute("errorMessage", "Error, could not deactivate user.");
+                        doGet(request, response);
+                    } else   {
+                        userToDelete.setIsActive(notActive);
+                       loginDB.delete(userToDelete);
+                       
+                    }
+
+                } catch (Exception ex) {
+                    Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    
+                }
             } else if (actionM.equals("addUser") & (admin != null && active != null)) {
                 int ss = Integer.parseInt(request.getParameter("userCompanyID"));
                 Company cc = new Company();

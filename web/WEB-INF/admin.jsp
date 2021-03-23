@@ -111,8 +111,8 @@
                     <td>${user.isAdmin}</td>
                     <td>
                     <form action="admin" method="post" >
-                            <input type="submit" value="Delete">
-                            <input type="hidden" name="action" value="deleteM">
+                            <input type="submit" value="Deactivate" onClick="return confirm('Are you sure you want to deactivate ${user.username}?')">
+                            <input type="hidden" name="actionM" value="deleteM">
                             <input type="hidden" name="selectedMan" value="${user.userId}">
                         </form>
                     </td>
@@ -151,8 +151,8 @@
                 </select> <br>
                      <label for="isAdmin" name="isAdmin"> Is Admin?: </label>
                 <select name="isAdmin" var="isAdmin">  
-                     <option value="T">True</option>
-                    <option value="F">False</option>
+                     <option value="F">False</option>
+                    <option value="T">True</option>
                 </select> 
            
                     <br>

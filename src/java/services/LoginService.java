@@ -39,11 +39,22 @@ public class LoginService {
         return loginDB.insert(user);
     }
 
-    public int delete(Integer userID) throws Exception {
+  /**  public int delete(Integer userID) throws Exception {
         Logins user = loginDB.get(userID);
         loginDB.delete(user);
         return loginDB.delete(user);
+    }**/
+    
+        
+     public void delete(Logins userID, String username) throws Exception {
+      Logins person = userID;
+      person.setUsername(username);
+        loginDB.delete(person);  
+        
     }
+
+    
+    
 
     public Company getCompanyID(int categoryID) throws Exception {
         return companyDB.get(categoryID);
