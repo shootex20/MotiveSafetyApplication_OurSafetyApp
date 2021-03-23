@@ -31,6 +31,17 @@ public class AdminServlet extends HttpServlet {
         CompanyDB cs = new CompanyDB();
         CompanyService compservice = new CompanyService();
         String action = request.getParameter("action");
+        HttpSession session = request.getSession();
+        
+         String logout = request.getParameter("logout");
+        
+        
+        if (logout != null) {
+                session.invalidate();
+                session = request.getSession();
+                response.sendRedirect("login");
+                return;
+            }
 
         if (action != null && action.equals("view")) {
             Integer selectedCompany = Integer.parseInt(request.getParameter("selectedCompany"));

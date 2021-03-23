@@ -12,6 +12,7 @@
     </head>
     <body>
         <h1>MotiveSafety OurSafety Application</h1>
+        <p><a href="admin?logout=logout">Logout</a></p>
         <h2>Manage Companies</h2>
         <table>
             <tr>
