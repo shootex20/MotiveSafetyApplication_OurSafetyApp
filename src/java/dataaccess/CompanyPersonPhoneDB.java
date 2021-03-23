@@ -11,6 +11,7 @@ import domain.Companyperson;
 import domain.Companypersonphone;
 import domain.Phone;
 import javax.persistence.EntityTransaction;
+import servlets.EmployeeServlet;
 
 
 /**
@@ -72,8 +73,11 @@ public class CompanyPersonPhoneDB {
         EntityTransaction trans = em.getTransaction();
 
         try {
+            Phone address = add.getPhoneID();
+            address.getCompanypersonphoneList().add(add);
             trans.begin();
             em.persist(add);
+            em.merge(address);
             trans.commit();
         }catch (Exception ex) {
             trans.rollback();
@@ -90,7 +94,7 @@ public class CompanyPersonPhoneDB {
             try
             {
                 Companyperson cPerson = add.getCompanyPersonID();
-                cPerson.getCompanypersonphoneList();
+                cPerson.getCompanypersonphoneList().add(add);
                 trans.begin();
                 em.merge(cPerson);
                 trans.commit();        
@@ -114,11 +118,13 @@ public class CompanyPersonPhoneDB {
             trans.commit();       
             }catch (Exception ex) {
                 trans.rollback();
+                return;
             }finally {
                 em.close();
             }
         }
-*/
+        */
+
         
     public void delete(Companypersonphone add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();  
