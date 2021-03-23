@@ -79,30 +79,6 @@ public class EmployeeServlet extends HttpServlet {
         
         CompanypersonDB compPerDB = new CompanypersonDB();
         
-        List<Companyperson> compPersonList = new ArrayList<Companyperson>();
-        List<Companyperson> compPersonListNotActive = new ArrayList<Companyperson>();
-        List<Companyperson> compPersonListActive = new ArrayList<Companyperson>();
-        
-        try {
-            compPersonList = (List<Companyperson>) compPerDB.getAll(curr);
-        } catch (Exception ex) {
-            Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        for (int i = 0; i < compPersonList.size(); i++)
-        {
-            if(compPersonList.get(i).getIsEmployeeActive() == false)
-            {
-                compPersonListNotActive.add(compPersonList.get(i));
-            }
-            else if (compPersonList.get(i).getIsEmployeeActive() == true)
-            {
-                compPersonListActive.add(compPersonList.get(i));
-            }
-        }
-        
-        request.setAttribute("employeeList", compPersonListActive);
-        request.setAttribute("inActiveEmployeeList", compPersonListNotActive);
         
         if(logins.getCompanyID().getCompanyID() == null)
         {
@@ -159,9 +135,30 @@ public class EmployeeServlet extends HttpServlet {
         
         }
         
-
-       // request.setAttribute("employeeList", compPersonListActive);
-      //  request.setAttribute("inActiveEmployeeList", compPersonListNotActive);
+        List<Companyperson> compPersonList = new ArrayList<Companyperson>();
+        List<Companyperson> compPersonListNotActive = new ArrayList<Companyperson>();
+        List<Companyperson> compPersonListActive = new ArrayList<Companyperson>();
+        
+        try {
+            compPersonList = (List<Companyperson>) compPerDB.getAll(curr);
+        } catch (Exception ex) {
+            Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        for (int i = 0; i < compPersonList.size(); i++)
+        {
+            if(compPersonList.get(i).getIsEmployeeActive() == false)
+            {
+                compPersonListNotActive.add(compPersonList.get(i));
+            }
+            else if (compPersonList.get(i).getIsEmployeeActive() == true)
+            {
+                compPersonListActive.add(compPersonList.get(i));
+            }
+        }
+        
+        request.setAttribute("employeeList", compPersonListActive);
+        request.setAttribute("inActiveEmployeeList", compPersonListNotActive);
 
         getServletContext().getRequestDispatcher("/WEB-INF/employee.jsp").forward(request, response);
 
