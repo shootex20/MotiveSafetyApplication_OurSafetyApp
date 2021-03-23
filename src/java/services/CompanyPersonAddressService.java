@@ -29,6 +29,7 @@ public class CompanyPersonAddressService {
 
         Companypersonaddress add = new Companypersonaddress(dateAdded, userAdded, addressID, companyPersonID);
         addDB.insert(add);
+        addDB.updatePerson(add);
         return add;
     }
         public void link (int compAddressID, Address addressID, Companyperson companyPersonID) throws Exception {

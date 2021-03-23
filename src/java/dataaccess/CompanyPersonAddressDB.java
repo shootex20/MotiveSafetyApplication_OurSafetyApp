@@ -24,6 +24,11 @@ import javax.persistence.Query;
  */
 public class CompanyPersonAddressDB {
     
+    public CompanyPersonAddressDB()
+    {
+        
+    }
+    
     public List<Companypersonaddress> getAll(int companyper_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
@@ -79,12 +84,9 @@ public class CompanyPersonAddressDB {
         try {
             Address address = add.getAddressID();
             address.getCompanypersonaddressList().add(add);
-            Companyperson cPerson = add.getCompanyPersonID();
-            cPerson.getCompanypersonaddressList();
             trans.begin();
             em.persist(add);
             em.merge(address);
-            em.merge(cPerson);
             trans.commit();
         }catch (Exception ex) {
             trans.rollback();
@@ -94,5 +96,23 @@ public class CompanyPersonAddressDB {
         }
     }
         
+        public void updatePerson (Companypersonaddress add) throws Exception
+        {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+            try
+            {
+            Companyperson cperson = add.getCompanyPersonID();
+            cperson.getCompanypersonaddressList().add(add);
+            trans.begin();
+            em.persist(add);
+            em.merge(cperson);
+            trans.commit();         
+        }catch (Exception ex) {
+            trans.rollback();
+        }finally {
+            em.close();
+        }
+        } 
   
 }

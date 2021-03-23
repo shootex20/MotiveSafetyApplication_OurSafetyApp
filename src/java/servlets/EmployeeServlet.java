@@ -250,7 +250,6 @@ public class EmployeeServlet extends HttpServlet {
                 Companypersonaddress compPerAdd = cpas.insert(userID, address, compPers);
                 Companypersonphone compPerPho = cpps.insert(userID, compPers, phone);
                 Companypositions compPos = cps.insert(userID, position, compPers, curr);
-                curr.getCompanypersonList().add(compPers);
                 request.setAttribute("message", "New employee added!");
                 doGet(request, response);  
             } catch (Exception ex) {

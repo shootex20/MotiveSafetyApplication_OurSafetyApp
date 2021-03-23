@@ -66,7 +66,7 @@ public class Companynotes implements Serializable {
     @Column(name = "note")
     private String note;
     @JoinColumn(name = "companyPerson_ID", referencedColumnName = "companyPerson_ID")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Companyperson companyPersonID;
 
     public Companynotes() {
