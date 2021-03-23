@@ -11,6 +11,7 @@ import javax.persistence.EntityTransaction;
 import domain.Company;
 import domain.Companyperson;
 import domain.Person;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -20,6 +21,7 @@ public class CompanypersonDB {
 
     public List<Companyperson> getAll(Company companyID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        em.clear();
         try {
             Company company = em.find(Company.class, companyID.getCompanyID());
             return company.getCompanypersonList();
@@ -69,8 +71,11 @@ public class CompanypersonDB {
         EntityTransaction trans = em.getTransaction();
 
         try {
+            Company comp = add.getCompanyID();
+            comp.getCompanypersonList().add(add);
             trans.begin();
             em.persist(add);
+            em.merge(comp);
             trans.commit();
         } catch (Exception ex) {
             trans.rollback();

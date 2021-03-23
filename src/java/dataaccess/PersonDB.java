@@ -13,6 +13,7 @@ import domain.Itemclass;
 import domain.Itemclassfields;
 import domain.Company;
 import domain.Companyperson;
+import domain.Emergencycontact;
 import domain.Person;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -79,8 +80,11 @@ public class PersonDB {
         EntityTransaction trans = em.getTransaction();
 
         try {
+            Emergencycontact contact = add.getEmergencyContactID();
+            contact.getPersonList().add(add);
             trans.begin();
             em.persist(add);
+            em.merge(contact);
             trans.commit();
         } catch (Exception ex) {
             trans.rollback();

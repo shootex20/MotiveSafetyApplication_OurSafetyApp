@@ -5,6 +5,7 @@
  */
 package dataaccess;
 
+import domain.Address;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -76,8 +77,14 @@ public class CompanyPersonAddressDB {
         EntityTransaction trans = em.getTransaction();
 
         try {
+            Address address = add.getAddressID();
+            address.getCompanypersonaddressList().add(add);
+            Companyperson cPerson = add.getCompanyPersonID();
+            cPerson.getCompanypersonaddressList();
             trans.begin();
             em.persist(add);
+            em.merge(address);
+            em.merge(cPerson);
             trans.commit();
         }catch (Exception ex) {
             trans.rollback();

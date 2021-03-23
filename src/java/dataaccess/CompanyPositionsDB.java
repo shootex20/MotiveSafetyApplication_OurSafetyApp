@@ -101,8 +101,11 @@ public class CompanyPositionsDB {
         EntityTransaction trans = em.getTransaction();
 
         try {
+            Companyperson person = add.getCompanyPersonID();
+            person.getCompanypositionsList().add(add);
             trans.begin();
             em.persist(add);
+            em.merge(person);
             trans.commit();
         }catch (Exception ex) {
             trans.rollback();

@@ -72,8 +72,11 @@ public class CompanyPersonPhoneDB {
         EntityTransaction trans = em.getTransaction();
 
         try {
+            Phone phone = add.getPhoneID();
+            phone.getCompanypersonphoneList().add(add);
             trans.begin();
             em.persist(add);
+            em.merge(phone);
             trans.commit();
         }catch (Exception ex) {
             trans.rollback();
