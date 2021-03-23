@@ -37,14 +37,14 @@
                     <td>${companys.industry}</td>
                     <td>
                         <form action="admin" method="post" >
-                            <input type="submit" value="Delete">
+                            <input type="submit" value="Delete" onClick="return confirm('Are you sure you want to delete ${companys.name}?')">
                             <input type="hidden" name="action" value="delete">
                             <input type="hidden" name="selectedCompany" value="${companys.companyID}">
                         </form>
                     </td>
                     <td>
                         <form action="admin" method="get">
-                            <input type="submit" value="edit">
+                            <input type="submit" value="Edit">
                             <input type="hidden" name="action" value="view">
                             <input type="hidden" name="selectedCompany" value="${companys.companyID}">
                         </form>
