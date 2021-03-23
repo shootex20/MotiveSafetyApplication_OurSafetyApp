@@ -55,12 +55,12 @@ public class Companypersonphone implements Serializable {
     private Integer userAdded;
     @Column(name = "userRemoved", insertable = false)
     private Integer userRemoved;
-    @JoinColumn(name = "companyPerson_ID", referencedColumnName = "companyPerson_ID")
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Companyperson companyPersonID;
     @JoinColumn(name = "phone_ID", referencedColumnName = "phone_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Phone phoneID;
+    @JoinColumn(name = "companyPerson_ID", referencedColumnName = "companyPerson_ID")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Companyperson companyPersonID;
 
     public Companypersonphone() {
     }

@@ -29,6 +29,8 @@ public class CompanyPersonPhoneService {
 
         Companypersonphone add = new Companypersonphone(dateAdded, userAdded, companyPersonID, phoneID);
         addDB.insert(add);
+        addDB.updatePerson(add);
+//        addDB.updatePhone(add);
         return add;
     }
         

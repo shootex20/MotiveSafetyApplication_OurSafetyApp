@@ -72,11 +72,8 @@ public class CompanyPersonPhoneDB {
         EntityTransaction trans = em.getTransaction();
 
         try {
-            //Phone phone = add.getPhoneID();
-            //phone.getCompanypersonphoneList().add(add);
             trans.begin();
             em.persist(add);
-            //em.merge(phone);
             trans.commit();
         }catch (Exception ex) {
             trans.rollback();
@@ -103,7 +100,26 @@ public class CompanyPersonPhoneDB {
                 em.close();
             }
         } 
-
+        /*
+        public void updatePhone (Companypersonphone add) throws Exception
+        {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+            try
+            {
+            Phone ph = add.getPhoneID();
+            ph.getCompanypersonphoneList().add(add);
+            trans.begin();
+            em.merge(ph);
+            trans.commit();       
+            }catch (Exception ex) {
+                trans.rollback();
+            }finally {
+                em.close();
+            }
+        }
+*/
+        
     public void delete(Companypersonphone add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();  
         EntityTransaction trans = em.getTransaction();
