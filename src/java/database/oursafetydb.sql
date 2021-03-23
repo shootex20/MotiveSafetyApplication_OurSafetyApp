@@ -539,7 +539,7 @@ INSERT INTO `companypersonaddress` (`companyPersonAddress_ID`, `dateAdded`, `dat
 DELETE FROM `companypersonphone`;
 /*!40000 ALTER TABLE `companypersonphone` DISABLE KEYS */;
 INSERT INTO `companypersonphone` (`companyPersonPhone_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `companyPerson_ID`, `phone_ID`) VALUES
-	(1, NULL, NULL, 2, NULL, 2, 1);
+	(1, NULL, NULL, 2, NULL, 2, 1),
         (2, NULL, NULL, 2, NULL, 3, 2);
 /*!40000 ALTER TABLE `companypersonphone` ENABLE KEYS */;
 
