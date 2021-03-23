@@ -106,3 +106,22 @@ select {
     border-radius: 8px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+
+.navi{
+    width: 70%;
+    text-align: center;
+    margin-left: 12%;
+    color: white;
+    background-color: darkblue;
+}
+
+a {
+    color: white !important;
+}
+
+.roll{
+    width: 25% !important;
+    padding: 15px !important;
+}
+

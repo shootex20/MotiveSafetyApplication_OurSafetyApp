@@ -48,7 +48,12 @@ header{
     margin-left: 48%
 }
 
-svg:hover{
-    width: 25px;
-    height: 25px;
+svg {
+    width: 30px;
+    height: 30px;
+}
+
+svg:hover {
+    width: 40px;
+    height: 40px;
 }

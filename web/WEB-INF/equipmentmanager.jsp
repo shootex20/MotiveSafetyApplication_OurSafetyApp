@@ -18,22 +18,24 @@
     <body>
 
         <div class="bg">
-                        <ul>
-                <li><a href="company?company">${companyName} Page</a></li>
-                <li><a href="companyWelcome?companyWelcome">${companyName} Welcome Page</a></li>
-                <li><a href="employee">Employee Page</a></li>
-                <li><a href="manual?manual">Manual Page</a></li>
-                <li><a href="employee?logout=logout">Logout</a></li>     
-            </ul>
             <header class="loginHeader">
                 <br>
                 <h1>Equipment Manager</h1>
+                <br>
+                <table class="navi">
+                    <tr>
+                        <td class="roll"><a href="companyWelcome?companyWelcome">Welcome Page</a></td>
+                        <td class="roll"><a href="employee">Employee Page</a></td>
+                        <td class="roll"><a href="manual?manual">Manual Page</a></td>
+                        <td class="roll"><a href="employee?logout=logout">Logout</a> </td>
+                    </tr>
+                </table>
                 <br>
             </header>
             <br>
             <h3 class="welcome"><strong>Manage Current Equipment</strong></h3>
             <br>
-            
+
             <table class="mainTable2">
                 <tr>
                     <th>DB ID </th>
