@@ -3,8 +3,6 @@ package servlets;
 import dataaccess.CompanyDB;
 import dataaccess.LoginDB;
 import domain.Company;
-import domain.Person;
-import dataaccess.PersonDB;
 import domain.Logins;
 import java.io.IOException;
 import java.text.ParseException;
@@ -54,6 +52,7 @@ public class AdminServlet extends HttpServlet {
         }
 
         List<Company> comp = new ArrayList<Company>();
+        
         try {
             comp = cs.getAll();
         } catch (Exception ex) {
@@ -63,11 +62,30 @@ public class AdminServlet extends HttpServlet {
 
         // for logins 
         LoginDB pdb = new LoginDB();
+    
         String actionM = request.getParameter("actionM");
+        /**
+       if ((actionM != null && actionM.equals("view"))) {
+            Integer selectedManager = Integer.parseInt(request.getParameter("selectedMan"));
+
+            try {
+                Logins login = pdb.get(selectedManager);
+               
+                request.setAttribute("selectedMan", login);
+
+              
+            } catch (Exception ex) {
+                Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }**/
+        
 
         //  List<Person> personUser = new ArrayList<Person>();
         List<Logins> loginUser = new ArrayList<Logins>();
 
+        List<Logins> activeUsers = new ArrayList<Logins>();
+        List<Logins> inactiveUsers = new ArrayList<Logins>();
+        
         try {
 
             loginUser = pdb.getAll();
@@ -76,22 +94,24 @@ public class AdminServlet extends HttpServlet {
         }
 
         request.setAttribute("logins", loginUser);
-
-        if ((actionM != null && actionM.equals("view"))) {
-            Integer selectedManager = Integer.parseInt(request.getParameter("selectedMan"));
-
-            try {
-                Logins login = pdb.get(selectedManager);
-                // Company compsel = cs.get(selectedCompany);
-                // Company comp = cs.get(selectedCompany);
-                request.setAttribute("selectedMan", login);
-
-                //request.setAttribute("selectedComp", compsel);
-            } catch (Exception ex) {
-                Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+        Character activeUser = 'T';
+        Character inActiveUser = 'F';
+        
+        for (int i = 0; i < loginUser.size(); i++) {
+        
+            if (loginUser.get(i).getIsActive().equals(inActiveUser)) {
+            inactiveUsers.add(loginUser.get(i));
             }
+            else if (loginUser.get(i).getIsActive().equals(activeUser)) {
+            activeUsers.add(loginUser.get(i));
+            }
+    
         }
-
+        
+        
+        request.setAttribute("inActiveManagers", inactiveUsers);
+        request.setAttribute("activeManagers", activeUsers);
+        
         getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
 
     }
@@ -151,6 +171,8 @@ public class AdminServlet extends HttpServlet {
         Logins logins = new Logins();
         Company compM = logins.getCompanyID();
         String actionM = request.getParameter("actionM");
+        LoginDB loginDB = new LoginDB();
+
 
         // variables
         String username = request.getParameter("username");
@@ -179,26 +201,23 @@ public class AdminServlet extends HttpServlet {
         try {
             if (actionM.equals("deleteM")) {
                 Integer selectedManager = Integer.parseInt(request.getParameter("selectedMan"));
-                //Integer selectedManagerCompanyID = Integer.parseInt(request.getParameter("selectedManagerCompany"));
+             
 
                 Logins userToDelete = new Logins(); //child object
-                Company compToDelete = new Company(); //parent object
+               
 
                 try {
-                    LoginDB loginDB = new LoginDB();
-                    CompanyDB companyDB = new CompanyDB();
-                    
-                    
+             
                     userToDelete = loginDB.get(selectedManager);
-                    //compToDSelete = companyDB.get(selectedManagerCompanyID);
                     char notActive = 'F';
                     char isActiveTrue = 'T';
-                    
+                    char status = userToDelete.getIsActive();
+                    String st = Character.toString(status);
 
                     if (userToDelete == null) {
                         request.setAttribute("errorMessage", "Error, could not deactivate user.");
                         doGet(request, response);
-                    } else   {
+                    } else if (userToDelete != null && !st.isEmpty())  {
                         userToDelete.setIsActive(notActive);
                        loginDB.delete(userToDelete);
                        
@@ -208,7 +227,41 @@ public class AdminServlet extends HttpServlet {
                     Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
                     
                 }
-            } else if (actionM.equals("addUser") & (admin != null && active != null)) {
+            } else if (actionM.equals("Reactivate") ) {
+                Integer selectedManagerReactivate = Integer.parseInt(request.getParameter("selectedManReactivate"));
+               
+
+                Logins userToReactivate = new Logins(); //child object
+                
+
+                try {
+           
+                    userToReactivate = loginDB.get(selectedManagerReactivate);
+                    
+                    
+                    char isActiveTrue = 'T';
+                    char status = userToReactivate.getIsActive();
+                    String st = Character.toString(status);
+
+                    if (userToReactivate == null) {
+                        request.setAttribute("errorMessage", "Error, could not deactivate user.");
+                        doGet(request, response);
+                    } else if (userToReactivate != null && !st.isEmpty())  {
+                        userToReactivate.setIsActive(isActiveTrue);
+                       loginDB.delete(userToReactivate);
+                       
+                    }
+
+                } catch (Exception ex) {
+                    Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    
+                }
+            
+            
+            }
+            
+            
+            else if (actionM.equals("addUser") & (admin != null && active != null)) {
                 int ss = Integer.parseInt(request.getParameter("userCompanyID"));
                 Company cc = new Company();
 
@@ -240,7 +293,7 @@ public class AdminServlet extends HttpServlet {
             request.setAttribute("errorMessage", "An error occured.");
         }
 
-        LoginDB loginDB = new LoginDB();
+    
 
         List<Logins> user = new ArrayList<Logins>();
 

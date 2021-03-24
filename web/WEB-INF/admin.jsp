@@ -83,8 +83,7 @@
         </c:if>
             
            <!--for managers-->
-        <h2>Manage Managers</h2>
-        
+        <h2>Manage Active Managers</h2>
         <table>
             <tr>
                 <th>User Id</th>
@@ -95,10 +94,10 @@
                 <th>Is Active?</th>
                 <th>Is Admin</th>
           
-                <th>Delete</th>
+                <th>Deactivate</th>
   
             </tr>
-             <c:forEach var="user"  items="${logins}">
+             <c:forEach var="user"  items="${activeManagers}">
                 
                     <tr>
                     <td>${user.userId}</td>
@@ -119,6 +118,47 @@
                     </tr>
             </c:forEach>
         </table>
+        
+        <h2>Manage In-Active Managers</h2>
+        <table>
+            <tr>
+                <th>User Id</th>
+                <th>Date Added</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Company Name</th>
+                <th>Is Active?</th>
+                <th>Is Admin</th>
+          
+                <th>Reactivate</th>
+  
+            </tr>
+             <c:forEach var="inActiveUser"  items="${inActiveManagers}">
+                
+                    <tr>
+                    <td>${inActiveUser.userId}</td>
+                    <td>${inActiveUser.dateAdded}</td>
+                    <td>${inActiveUser.username}</td>
+                    <td>${inActiveUser.password}</td>
+                    <td>${inActiveUser.companyID.name}</td>
+                    
+                    <td>${inActiveUser.isActive}</td>
+                    <td>${inActiveUser.isAdmin}</td>
+                    <td>
+                    <form action="admin" method="post" >
+                            <input type="submit" value="Reactivate" onClick="return confirm('Are you sure you want to reactivate ${inActiveUser.username}?')">
+                            <input type="hidden" name="actionM" value="Reactivate">
+                            <input type="hidden" name="selectedManReactivate" value="${inActiveUser.userId}">
+                        </form>
+                    </td>
+                    </tr>
+            </c:forEach>
+        </table>
+       
+        
+        
+        
+        
        
              <c:if test="${selectedManager == null}">
             <h3>Add Manager</h3>
