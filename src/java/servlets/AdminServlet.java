@@ -1,5 +1,4 @@
 package servlets;
-
 import dataaccess.CompanyDB;
 import dataaccess.LoginDB;
 import domain.Company;

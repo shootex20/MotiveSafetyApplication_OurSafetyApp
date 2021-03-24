@@ -52,8 +52,8 @@
                         <td class="mainTable">${equipmentItem.itemID}</td>
                         <td class="mainTable">${equipmentItem.model}</td>
                         <td class="mainTable">${equipmentItem.serialNumber}</td>
-                        <td class="mainTable"><fmt:formatDate value="${equipmentItem.dateAdded}" pattern="YYYY MMM dd"/></td>
-                        <td class="mainTable"><fmt:formatDate value="${equipmentItem.purchaseDate}" pattern="YYYY MMM dd"/></td>
+                        <td class="mainTable"><fmt:formatDate value="${equipmentItem.dateAdded}" pattern="dd/MMM/YYYY"/></td>
+                        <td class="mainTable"><fmt:formatDate value="${equipmentItem.purchaseDate}" pattern="dd/MMM/YYYY"/></td>
                         <td class="mainTable">${equipmentItem.itemClassInformation}</td>
                         <td class="mainTable">
                             <form method="post"> 

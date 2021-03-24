@@ -41,7 +41,7 @@
                     <tr>
                         <th>${emp.personID.firstName}</th>
                         <th>${emp.personID.lastName}</th>
-                        <th><fmt:formatDate value="${emp.personID.dateOfBirth}" pattern="YYYY MMM dd"/></th>
+                        <th><fmt:formatDate value="${emp.personID.dateOfBirth}" pattern="dd/MMM/YYYY"/></th>
                         <th>${emp.personID.gender}</th>
                         <th>${emp.email}</th>
 
@@ -111,7 +111,7 @@
                     <tr>
                         <th>${empInActive.personID.firstName}</th>
                         <th>${empInActive.personID.lastName}</th>
-                        <th><fmt:formatDate value="${empInActive.personID.dateOfBirth}" pattern="YYYY MMM dd"/></th>
+                        <th><fmt:formatDate value="${empInActive.personID.dateOfBirth}" pattern="dd/MMM/YYYY"/></th>
                         <th>${empInActive.personID.gender}</th>
                         <th>${empInActive.email}</th>
 
