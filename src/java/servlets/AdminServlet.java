@@ -145,18 +145,21 @@ public class AdminServlet extends HttpServlet {
             if (action.equals("delete")) {
                 Integer selectedCompany = Integer.parseInt(request.getParameter("selectedCompany"));
                 cs.delete(selectedCompany);
+                request.setAttribute("message", "Company Deleted.");
                 doGet(request, response);
             } else if (action.equals("edit")) {
 
                 Integer id = Integer.parseInt(request.getParameter("id"));
                 cs.update(id, compname, shortname, description, account, industry);
+                request.setAttribute("message", "Changes Saved.");
                 doGet(request, response);
             } else if (action.equals("add")) {
                 cs.insert(dateAdded, compname, shortname, description, account, industry);
+                request.setAttribute("message", "Company Added.");
                 doGet(request, response);
             }
         } catch (Exception ex) {
-            request.setAttribute("errorMessage", "An error occured.");
+            request.setAttribute("Errormessage", "An error occured.");
         }
 
         CompanyDB compID = new CompanyDB();
@@ -217,10 +220,11 @@ public class AdminServlet extends HttpServlet {
                     String st = Character.toString(status);
 
                     if (userToDelete == null) {
-                        request.setAttribute("errorMessage", "Error, could not deactivate user.");
+                       request.setAttribute("messageManager", "Error, could not deactivate user.");
                     } else if (userToDelete != null && !st.isEmpty())  {
                         userToDelete.setIsActive(notActive);
                        loginDB.delete(userToDelete);
+                       request.setAttribute("messageManager", "Manager Deactivated.");
 
                     }
                        doGet(request, response);
@@ -245,10 +249,11 @@ public class AdminServlet extends HttpServlet {
                     String st = Character.toString(status);
 
                     if (userToReactivate == null) {
-                        request.setAttribute("errorMessage", "Error, could not deactivate user.");
+                        request.setAttribute("messageManager", "Error, could not reactivate user.");
                     } else if (userToReactivate != null && !st.isEmpty())  {
                         userToReactivate.setIsActive(isActiveTrue);
                        loginDB.delete(userToReactivate);
+                       request.setAttribute("messageManager", "Manager Reactivated.");
                     }
                        doGet(request, response);
                 } catch (Exception ex) {
@@ -287,10 +292,11 @@ public class AdminServlet extends HttpServlet {
                 }
 
                 ls.insert(dateAdded, username, hash, cc, isActive, isAdmin);
+                request.setAttribute("messageManager", "Manager Added.");
                 doGet(request, response);
             }
         } catch (Exception ex) {
-            request.setAttribute("errorMessage", "An error occured.");
+            request.setAttribute("messageManager", "An error occured.");
         }
 
     

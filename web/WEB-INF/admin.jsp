@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-                <style type="text/css">
-            <%@include file="css/equipmentCSS.css" %>
+        <style type="text/css">
+            <%@include file="css/adminCSS.css" %>
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>MotiveSafety OurSafety Admin Functionality</title>
@@ -29,7 +29,7 @@
             <c:forEach var="companys" items="${company}">
                 <tr>
                     <td>${companys.companyID}</td>
-                   <td>${companys.dateAdded}</td>
+                    <td>${companys.dateAdded}</td>
                     <td>${companys.name}</td>
                     <td>${companys.shortname}</td>
                     <td>${companys.description}</td>
@@ -52,12 +52,15 @@
                 </tr>
             </c:forEach>
         </table>
+        <br>
+        ${message}
+        <br>
 
         <c:if test="${selectedComp == null}">
             <h3>Add Company</h3>
             <form action="admin" method="POST">
-                Name: <input type="text" name="compname"><br>
-                Short Name: <input type="text" name="shortname"><br>
+                Name: <input type="text" name="compname" required placeholder="AAA_Company"><br>
+                Short Name: <input type="text" name="shortname" required placeholder="AAA_Company"><br>
                 Description: <input type="text" name="description"><br>
 
                 Account: <input type="text" name="account"><br>
@@ -69,9 +72,9 @@
         <c:if test="${selectedComp != null}">
             <h3>Edit Company</h3>
             <form action="admin" method="POST">
-             
+
                 Company ID: <input type="text" name="id" value="${selectedComp.companyID}" readonly=""><br> 
-               Date Added: <input type="date" name="dateAdded" value="${selectedComp.dateAdded}" readonly=""><br> 
+                Date Added: <input type="date" name="dateAdded" value="${selectedComp.dateAdded}" readonly=""><br> 
                 Name: <input type="text" name="compname" value="${selectedComp.name}" ><br>
                 Short Name: <input type="text" name="shortname" value="${selectedComp.shortname}"><br>
                 Description: <input type="text" name="description" value="${selectedComp.description}"><br>
@@ -81,8 +84,8 @@
                 <input type="submit" value="Save Edit">
             </form>
         </c:if>
-            
-           <!--for managers-->
+
+        <!--for managers-->
         <h2>Manage Active Managers</h2>
         <table>
             <tr>
@@ -93,32 +96,34 @@
                 <th>Company Name</th>
                 <th>Is Active?</th>
                 <th>Is Admin</th>
-          
+
                 <th>Deactivate</th>
-  
+
             </tr>
-             <c:forEach var="user"  items="${activeManagers}">
-                
-                    <tr>
+            <c:forEach var="user"  items="${activeManagers}">
+
+                <tr>
                     <td>${user.userId}</td>
                     <td>${user.dateAdded}</td>
                     <td>${user.username}</td>
                     <td>${user.password}</td>
                     <td>${user.companyID.name}</td>
-                    
+
                     <td>${user.isActive}</td>
                     <td>${user.isAdmin}</td>
                     <td>
-                    <form action="admin" method="post" >
+                        <form action="admin" method="post" >
                             <input type="submit" value="Deactivate" onClick="return confirm('Are you sure you want to deactivate ${user.username}?')">
                             <input type="hidden" name="actionM" value="deleteM">
                             <input type="hidden" name="selectedMan" value="${user.userId}">
                         </form>
                     </td>
-                    </tr>
+                </tr>
             </c:forEach>
         </table>
-        
+        <br>
+         ${messageManager}
+         <br>
         <h2>Manage In-Active Managers</h2>
         <table>
             <tr>
@@ -129,47 +134,47 @@
                 <th>Company Name</th>
                 <th>Is Active?</th>
                 <th>Is Admin</th>
-          
+
                 <th>Reactivate</th>
-  
+
             </tr>
-             <c:forEach var="inActiveUser"  items="${inActiveManagers}">
-                
-                    <tr>
+            <c:forEach var="inActiveUser"  items="${inActiveManagers}">
+
+                <tr>
                     <td>${inActiveUser.userId}</td>
                     <td>${inActiveUser.dateAdded}</td>
                     <td>${inActiveUser.username}</td>
                     <td>${inActiveUser.password}</td>
                     <td>${inActiveUser.companyID.name}</td>
-                    
+
                     <td>${inActiveUser.isActive}</td>
                     <td>${inActiveUser.isAdmin}</td>
                     <td>
-                    <form action="admin" method="post" >
+                        <form action="admin" method="post" >
                             <input type="submit" value="Reactivate" onClick="return confirm('Are you sure you want to reactivate ${inActiveUser.username}?')">
                             <input type="hidden" name="actionM" value="Reactivate">
                             <input type="hidden" name="selectedManReactivate" value="${inActiveUser.userId}">
                         </form>
                     </td>
-                    </tr>
+                </tr>
             </c:forEach>
         </table>
 
-             <c:if test="${selectedManager == null}">
+        <c:if test="${selectedManager == null}">
             <h3>Add Manager</h3>
             <form action="admin" method="POST">
-                
-                
-                 Username: <input type="text" name="username"><br>
-                 Password: <input type="password" name="password"><br>
-                       
-                  <label for="userCompanyID">Company Name: </label>
+
+
+                Username: <input type="text" name="username" placeholder="manager1" name="username" required ><br>
+                Password: <input type="password" minlength="8" name="password" required title="Must be at least 8 characters long"><br>
+
+                <label for="userCompanyID">Company Name: </label>
                 <select name="userCompanyID" id="userCompanyID">
                     <c:forEach var="logincompanyID" items="${company}">
                         <c:choose>
                             <c:when test="${not empty selectedComp && selectedComp eq company.companyID}">
                                 <option value="${logincompanyID.companyID}" selected="true">${logincompanyID.name} </option>
-                                
+
                             </c:when>
                             <c:otherwise>
                                 <option value="${logincompanyID.companyID}">${logincompanyID.name}</option>
@@ -177,44 +182,27 @@
                         </c:choose>
                     </c:forEach>
                 </select>
-                    
-                    <br>
-                    <label for="isActive" name="isActive"> Is Active?: </label>
+
+                <br>
+                <label for="isActive" name="isActive"> Is Active?: </label>
                 <select name="isActive" var="isActive">  
-                     <option value="T">True</option>
+                    <option value="T">True</option>
                     <option value="F">False</option>
                 </select> <br>
-                     <label for="isAdmin" name="isAdmin"> Is Admin?: </label>
+                <label for="isAdmin" name="isAdmin"> Is Admin?: </label>
                 <select name="isAdmin" var="isAdmin">  
-                     <option value="F">False</option>
+                    <option value="F">False</option>
                     <option value="T">True</option>
                 </select> 
-           
-                    <br>
-           
+
+                <br>
+
                 <input type="hidden" name="actionM" value="addUser">
                 <input type="submit" value="Add User" class="btn btn-primary"> 
             </form>
         </c:if>
-            
-              
-            <%--
-        <c:if test="${selectedManager != null}">
-            <h3>Edit Manager</h3>
-            <form action="admin" method="POST">
-                Manager Id: <input type="number" name="managerID" value="${selectedManager.managerID}" readonly><br>
-                Date Added: <input type="date" name="dateAdded" value="${selectedManager.dateAdded}"><br>
-                Date Removed: <input type="date" name="dateRemoved" value="${selectedManager.dateRemoved}"><br>
-                First Name: <input type="text" name="firstname" value="${selectedManager.firstname}"><br>
-                Last Name: <input type="text" name="lastname" value="${selectedManager.lastname}"><br>
-                Email: <input type="email" name="email" value="${selectedManager.email}"><br>
-                Company ID: <input type="number" name="account" value="${selectedManager.account}"><br>
-                Industry: <input type="text" name="companyID" value="${selectedManager.companyID}" readonly><br>
-                <input type="hidden" name="action" value="edit">
-                <input type="submit" value="Save">
-            </form>
-        </c:if>
-            --%>
+
+
 
     </body>
 </html>
