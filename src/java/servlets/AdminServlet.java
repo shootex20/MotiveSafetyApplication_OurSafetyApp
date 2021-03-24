@@ -146,12 +146,15 @@ public class AdminServlet extends HttpServlet {
             if (action.equals("delete")) {
                 Integer selectedCompany = Integer.parseInt(request.getParameter("selectedCompany"));
                 cs.delete(selectedCompany);
+                doGet(request, response);
             } else if (action.equals("edit")) {
 
                 Integer id = Integer.parseInt(request.getParameter("id"));
                 cs.update(id, compname, shortname, description, account, industry);
+                doGet(request, response);
             } else if (action.equals("add")) {
                 cs.insert(dateAdded, compname, shortname, description, account, industry);
+                doGet(request, response);
             }
         } catch (Exception ex) {
             request.setAttribute("errorMessage", "An error occured.");
@@ -216,13 +219,12 @@ public class AdminServlet extends HttpServlet {
 
                     if (userToDelete == null) {
                         request.setAttribute("errorMessage", "Error, could not deactivate user.");
-                        doGet(request, response);
                     } else if (userToDelete != null && !st.isEmpty())  {
                         userToDelete.setIsActive(notActive);
                        loginDB.delete(userToDelete);
-                       
-                    }
 
+                    }
+                       doGet(request, response);
                 } catch (Exception ex) {
                     Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
                     
@@ -245,13 +247,11 @@ public class AdminServlet extends HttpServlet {
 
                     if (userToReactivate == null) {
                         request.setAttribute("errorMessage", "Error, could not deactivate user.");
-                        doGet(request, response);
                     } else if (userToReactivate != null && !st.isEmpty())  {
                         userToReactivate.setIsActive(isActiveTrue);
                        loginDB.delete(userToReactivate);
-                       
                     }
-
+                       doGet(request, response);
                 } catch (Exception ex) {
                     Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
                     
@@ -288,6 +288,7 @@ public class AdminServlet extends HttpServlet {
                 }
 
                 ls.insert(dateAdded, username, hash, cc, isActive, isAdmin);
+                doGet(request, response);
             }
         } catch (Exception ex) {
             request.setAttribute("errorMessage", "An error occured.");
@@ -306,7 +307,7 @@ public class AdminServlet extends HttpServlet {
 
         request.setAttribute("logins", user);
 
-        getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
+        //getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
 
     }
 

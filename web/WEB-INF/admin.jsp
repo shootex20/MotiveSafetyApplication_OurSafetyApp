@@ -154,12 +154,7 @@
                     </tr>
             </c:forEach>
         </table>
-       
-        
-        
-        
-        
-       
+
              <c:if test="${selectedManager == null}">
             <h3>Add Manager</h3>
             <form action="admin" method="POST">
