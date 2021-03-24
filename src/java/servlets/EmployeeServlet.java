@@ -15,8 +15,11 @@ import domain.Logins;
 import domain.Person;
 import domain.Phone;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -118,6 +121,14 @@ public class EmployeeServlet extends HttpServlet {
             try {
                 Companyperson toEdit = compPerDB.get(Integer.parseInt(selectedEmp));
                 request.setAttribute("user", toEdit);
+                char gen = toEdit.getPersonID().getGender();
+                String gender = Character.toString(gen);
+                request.setAttribute("gender", gender);
+                
+                java.util.Date date = toEdit.getPersonID().getDateOfBirth();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                String format = formatter.format(date);
+                request.setAttribute("birthday", format);
             } catch (Exception ex) {
                 Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -129,6 +140,14 @@ public class EmployeeServlet extends HttpServlet {
             try {
                 Companyperson toEdit = compPerDB.get(Integer.parseInt(selectedEmp));
                 request.setAttribute("user", toEdit);
+                char gen = toEdit.getPersonID().getGender();
+                String gender = Character.toString(gen);
+                request.setAttribute("gender", gender);
+                //Formats the date
+                java.util.Date date = toEdit.getPersonID().getDateOfBirth();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                String format = formatter.format(date);
+                request.setAttribute("birthday", format);
             } catch (Exception ex) {
                 Logger.getLogger(EmployeeServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
