@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -51,8 +52,8 @@
                         <td class="mainTable">${equipmentItem.itemID}</td>
                         <td class="mainTable">${equipmentItem.model}</td>
                         <td class="mainTable">${equipmentItem.serialNumber}</td>
-                        <td class="mainTable">${equipmentItem.dateAdded}</td>
-                        <td class="mainTable">${equipmentItem.purchaseDate}</td>
+                        <td class="mainTable"><fmt:formatDate value="${equipmentItem.dateAdded}" pattern="YYYY MMM dd"/></td>
+                        <td class="mainTable"><fmt:formatDate value="${equipmentItem.purchaseDate}" pattern="YYYY MMM dd"/></td>
                         <td class="mainTable">${equipmentItem.itemClassInformation}</td>
                         <td class="mainTable">
                             <form method="post"> 

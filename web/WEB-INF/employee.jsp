@@ -41,7 +41,7 @@
                     <tr>
                         <th>${emp.personID.firstName}</th>
                         <th>${emp.personID.lastName}</th>
-                        <th>${emp.personID.dateOfBirth}</th>
+                        <th><fmt:formatDate value="${emp.personID.dateOfBirth}" pattern="YYYY MMM dd"/></th>
                         <th>${emp.personID.gender}</th>
                         <th>${emp.email}</th>
 
@@ -111,7 +111,7 @@
                     <tr>
                         <th>${empInActive.personID.firstName}</th>
                         <th>${empInActive.personID.lastName}</th>
-                        <th>${empInActive.personID.dateOfBirth}</th>
+                        <th><fmt:formatDate value="${empInActive.personID.dateOfBirth}" pattern="YYYY MMM dd"/></th>
                         <th>${empInActive.personID.gender}</th>
                         <th>${empInActive.email}</th>
 
@@ -212,25 +212,38 @@
 
             <label>First Name </label><input required type="text" name="edcomp_firstname" value="${user.personID.firstName}"><br>
             <label>Last Name </label><input required type="text" name="edcomp_lastname" value="${user.personID.lastName}"><br>
-           <%-- <label>Birth Date</label><input required type="date" name="edcomp_birthday" value="${formattedDate}"><br>
-                      
-            <label>Gender</label><input required type="text" name="edcomp_gender" value="${user.personID.gender}">
-         <label>Gender </label>
-        <select name="edcomp_gender" var="gen" id="edcomp_gender">
-        <option value="F" ${user.personID.gender == 'F' ? 'selected' : ''}>Female</option>
-        <option value="M" ${user.personID.gender == 'M' ? 'selected' : ''}>Male</option>
-        <option value="O" ${user.personID.gender == 'O' ? 'selected' : ''}>Other</option>
-        </select>
-           --%>
-        <label>Gender </label>
-        <select name="edcomp_gender" var="gen" id="edcomp_gender">
-        <option value="F">Female</option>
-        <option value="M">Male</option>
-        <option value="O">Other</option>
-        </select><br>
-        
+            <label>Birth Date </label><input required type="date" name="edcomp_birthday" value="${birthday}"><br>
+           
+            <input type="hidden" name="gender" value="${genderOfPerson}">
+
+            <c:if test="${gender == 'F'}">
+            <label>Gender</label>
+            <select name="edcomp_gender" var="gen" id="edcomp_gender">
+            <option value="F" selected>Female</option>
+            <option value="M">Male</option>
+            <option value="O">Other</option>
+            </select><br>
+            </c:if>
+
+            <c:if test="${gender == 'M'}">
+            <label>Gender</label>
+            <select name="edcomp_gender" var="gen" id="edcomp_gender">
+            <option value="F">Female</option>
+            <option value="M" selected>Male</option>
+            <option value="O">Other</option>
+            </select><br>
+            </c:if>
+
+            <c:if test="${gender == 'O'}">
+            <label>Gender</label>
+            <select name="edcomp_gender" var="gen" id="edcomp_gender">
+            <option value="F">Female</option>
+            <option value="M">Male</option>
+            <option value="O" selected>Other</option>
+            </select><br>
+            </c:if>
             <c:forEach  var="phone" items="${user.companypersonphoneList}">
-                            <th>
+                <th>
                    <c:if test="${phone.companyPersonID eq user}">
                         <label>Phone Number </label><input pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" required type="tel" name="edcomp_phone" placeholder="123-456-7890" value="${phone.phoneID.countryCode}-${phone.phoneID.areaCode}-${phone.phoneID.localNumber}"><br>
                          <label>Phone Ext </label><input type="tel" name="edcomp_phoneExt" placeholder="7890" value="${phone.phoneID.extension}"><br>
