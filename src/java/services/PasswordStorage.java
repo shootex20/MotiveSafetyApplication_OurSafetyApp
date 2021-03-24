@@ -176,8 +176,6 @@ public class PasswordStorage {
 
         UserDB udb = new UserDB();
         final String SUBJECT = "Your password has been reset";
-        String emailContents = "Your new password is: ";
-        final String FROM = "oursafetyapplication@gmail.com";
         String to = username;
 
         Logins user = udb.getUser(username);
@@ -188,12 +186,11 @@ public class PasswordStorage {
 
         LoginService ls = new LoginService();
         String tempPassword = newRandomPassword();
+        String body = "Your new temporary password is: " + tempPassword;
 
         ls.updatePassword(username, tempPassword);
 
-        EmailService es = new EmailService();
-        
-
+        EmailService.sendMail(to, SUBJECT, body, false);
     }
 
 }

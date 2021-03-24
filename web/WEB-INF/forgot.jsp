@@ -13,7 +13,7 @@
         <h1>Have you forgotten your password?</h1>
         <h3>Enter your email to reset it</h3>
         <form action="forgot" method="post" class="">
-            <label>Email: </label><br><input type="email" name="username_input">
+            <label>Email: </label><input type="email" name="username_input"><br><br>
             <input type="submit" value="Reset password" class="">
             <br>
             <span>${resetMsg}</span>

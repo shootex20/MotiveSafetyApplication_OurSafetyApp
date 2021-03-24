@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
         }
 
         if (user == null) {
-            request.setAttribute("loginMsg", "There is no such account");
+            request.setAttribute("loginMsg", "Login unsuccessful.");
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
             return;
         }
