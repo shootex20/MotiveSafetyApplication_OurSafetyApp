@@ -7,11 +7,16 @@
         <style type="text/css">
             <%@include file="css/employee.css" %>
         </style>
-        <script src="js/employeeJS.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Employee JSP</title>
     </head>
-    <body>    
+    <body>  
+        <script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+        </script>
+
         <header class="employeeHeader">
             <ul>
                 <li><a href="companyWelcome?companyWelcome">${companyName} Welcome Page</a></li>

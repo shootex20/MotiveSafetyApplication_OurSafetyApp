@@ -17,7 +17,11 @@
         <link href="equipmentCSS.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-
+        <script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+        </script>
         <div class="bg">
             <header class="loginHeader">
                 <br>
