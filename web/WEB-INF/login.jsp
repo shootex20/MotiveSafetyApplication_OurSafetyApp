@@ -30,11 +30,11 @@
             <p class="invalid-feedback">${loginMsg}</p>
 
             <form action="login" method="post" class="form-group">
-                <label>Username:</label><br><input type="text" name="username_input"><br>
-                <label>Password:</label><br><input type="password" name="password_input"><br><br>
-                <input type="submit" value="Log in" class="btn btn-primary">
-                <br><br><br><br>
-                <a href="<c:url value='/forgot'/>">Forgot your password?</a>
+                <label>Username:</label><br><input type="text" name="username_input" <c:out value=""></c:out>><br>
+                <label>Password:</label><br><input type="password" name="password_input" <c:out value=""></c:out>><br><br>
+                    <input type="submit" value="Log in" class="btn btn-primary">
+                    <br><br><br><br>
+                    <a href="<c:url value='/forgot'/>">Forgot your password?</a>
             </form>
         </div>
         <footer>

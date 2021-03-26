@@ -50,14 +50,6 @@ public class EmployeeServlet extends HttpServlet {
         
         String action = request.getParameter("action");
 
-        // DQ: This segment will probably be replaced by a filter
-        if (session.getAttribute("userName") == null) {
-            response.sendRedirect("login");
-            return;
-        }
-        
-         
-
         int userID = (Integer) session.getAttribute("userID");
         Logins logins = new Logins();
         String logout = request.getParameter("logout");
@@ -189,13 +181,6 @@ public class EmployeeServlet extends HttpServlet {
         
         HttpSession session = request.getSession();
         String action = request.getParameter("action");
-
-
-        // DQ: This segment will probably be replaced by a filter
-        if (session.getAttribute("userName") == null) {
-            response.sendRedirect("login");
-            return;
-        }
 
         int userID = (Integer) session.getAttribute("userID");
         Logins logins = new Logins();

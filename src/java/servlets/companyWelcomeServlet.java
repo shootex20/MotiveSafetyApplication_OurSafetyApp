@@ -35,14 +35,10 @@ public class companyWelcomeServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-        // DQ: This segment will probably be replaced by a filter
-//        if (session.getAttribute("userName") == null) {
-//            response.sendRedirect("login");
-//            return;
-//        }
-
-    /**Minor change here, removes hard coding on userID.**/
-       // int userID = 2;
+        /**
+         * Minor change here, removes hard coding on userID.*
+         */
+        // int userID = 2;
         int userID = (Integer) session.getAttribute("userID");
         Logins logins = new Logins();
         Company company = logins.getCompanyID();

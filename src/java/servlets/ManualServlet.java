@@ -26,11 +26,6 @@ public class ManualServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-//        if (session.getAttribute("userName") == null) {
-//            response.sendRedirect("login");
-//            return;
-//        }
-        
         
         ManualDB manualDB = new ManualDB();         
         int userID = (Integer) session.getAttribute("userID");
@@ -49,7 +44,7 @@ public class ManualServlet extends HttpServlet {
         
         request.setAttribute("manualList", currentManual);
         
- // set type librart list       
+ // set type library list       
          TypeLibraryDB typeDB = new TypeLibraryDB();
         
         List<Typelibrary> typeList = new ArrayList<Typelibrary>();

@@ -8,10 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import services.PasswordStorage;
 
-/**
- *
- * @author Daniel Quach
- */
 public class ForgotServlet extends HttpServlet {
 
     @Override
