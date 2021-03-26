@@ -10,7 +10,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Employee JSP</title>
     </head>
-    <body>    
+    <body>  
+        <script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+        </script>
+
         <header class="employeeHeader">
             <ul>
                 <li><a href="companyWelcome?companyWelcome">${companyName} Welcome Page</a></li>
@@ -35,6 +41,7 @@
                     <th>Position</th>
                     <th>Edit</th>
                     <th>Deactivate</th>
+                    <th>Emergency Contact</th>
                 </tr>
                 
                 <c:forEach  var="emp" items="${employeeList}">
@@ -89,6 +96,9 @@
                                 <input type="submit" value="Deactivate" onclick="return confirm('Are you sure you want to deactivate ${emp.personID.firstName} ${emp.personID.lastName}?')">
                             </form>
                         </th>
+                        <th>
+                        <input type="button" value="Emergency Contact" onclick="alert('Firstname: ${emp.personID.emergencyContactID.emergencyContactFirstName}\nLastname: ${emp.personID.emergencyContactID.emergencyContactLastName}\nContact Number: ${emp.personID.emergencyContactID.emergencyContactNumber}\nRelationship: ${emp.personID.emergencyContactID.emergencyContactRelationship}')">
+                        </th>
                     </tr>
                 </c:forEach>
             </table>
@@ -105,6 +115,7 @@
                     <th>Position</th>
                     <th>Edit</th>
                     <th>Activate</th>
+                    <th>Emergency Contact</th>
                 </tr>
                 
                 <c:forEach  var="empInActive" items="${inActiveEmployeeList}">
@@ -158,11 +169,13 @@
                                 <input type="submit" value="Activate" onclick="return confirm('Are you sure you want to reactivate ${empInActive.personID.firstName} ${empInActive.personID.lastName}?')">
                             </form>
                         </th>
+                        <th>
+                                <input type="button" value="Emergency Contact" onclick="alert('Firstname: ${empInActive.personID.emergencyContactID.emergencyContactFirstName}\nLastname: ${empInActive.personID.emergencyContactID.emergencyContactLastName}\nContact Number: ${empInActive.personID.emergencyContactID.emergencyContactNumber}\nRelationship: ${empInActive.personID.emergencyContactID.emergencyContactRelationship}')">
+                        </th>
                     </tr>
                 </c:forEach>
             </table>
         </div>
-            
             <br>
             ${message}
             <br>
