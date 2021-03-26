@@ -182,6 +182,7 @@ public class AdminServlet extends HttpServlet {
         // variables
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String confirmPassword = request.getParameter("confirmPassword");
 
         /**
          * int ss = Integer.parseInt(request.getParameter("userCompanyID"));
@@ -290,6 +291,7 @@ public class AdminServlet extends HttpServlet {
                 } catch (PasswordStorage.CannotPerformOperationException ex) {
                     Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                
 
                 ls.insert(dateAdded, username, hash, cc, isActive, isAdmin);
                 request.setAttribute("messageManager", "Manager Added.");
