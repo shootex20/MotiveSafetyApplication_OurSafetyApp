@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,28 +9,35 @@
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>MotiveSafety OurSafety Admin Functionality</title>
-        <link href="CSS-MEDIA/Index.css" rel="stylesheet" type="text/css">
-    </head>
-    <body>
-        <h1>MotiveSafety OurSafety Application</h1>
-        <p><a href="admin?logout=logout">Logout</a></p>
-        <h2>Manage Companies</h2>
-        <table>
-            <tr>
-                <th>Company Id</th>
-                <th>Date Added</th>
-                <th>Name</th>
-                <th>Short Name</th>
-                <th>Description</th>
-                <th>Account</th>
-                <th>Industry</th>
-                <th>Delete</th>
-                <th>Edit</th>
-            </tr>
+        <%-- <link href="CSS-MEDIA/Index.css" rel="stylesheet" type="text/css"> --%>
+      
+      
+        </head>
+        <body>
+            <h1>MotiveSafety OurSafety Application</h1>
+            <p><a href="admin?logout=logout">Logout</a></p>
+            <h2>Manage Companies</h2>
+            <%--
+            <div class="search_box">
+                <input type="text" id="searchbycompname" placeholder="search by name">
+            </div>
+            --%>
+            <table id="companyTable">
+                <tr>
+                    <th>Company Id</th>
+                    <th>Date Added</th>
+                    <th>Name</th>
+                    <th>Short Name</th>
+                    <th>Description</th>
+                    <th>Account</th>
+                    <th>Industry</th>
+                    <th>Delete</th>
+                    <th>Edit</th>
+                </tr>
             <c:forEach var="companys" items="${company}">
                 <tr>
                     <td>${companys.companyID}</td>
-                    <td>${companys.dateAdded}</td>
+                    <td><fmt:formatDate value="${companys.dateAdded}" pattern="dd/MMM/YYYY"/></td>
                     <td>${companys.name}</td>
                     <td>${companys.shortname}</td>
                     <td>${companys.description}</td>
@@ -104,7 +112,7 @@
 
                 <tr>
                     <td>${user.userId}</td>
-                    <td>${user.dateAdded}</td>
+                    <td><fmt:formatDate value="${user.dateAdded}" pattern="dd/MMM/YYYY"/></td>
                     <td>${user.username}</td>
                     <td>${user.password}</td>
                     <td>${user.companyID.name}</td>
@@ -122,8 +130,8 @@
             </c:forEach>
         </table>
         <br>
-         ${messageManager}
-         <br>
+        ${messageManager}
+        <br>
         <h2>Manage In-Active Managers</h2>
         <table>
             <tr>
@@ -142,7 +150,7 @@
 
                 <tr>
                     <td>${inActiveUser.userId}</td>
-                    <td>${inActiveUser.dateAdded}</td>
+                    <td><fmt:formatDate  value="${inActiveUser.dateAdded}" pattern="dd/MMM/YYYY"/></td>
                     <td>${inActiveUser.username}</td>
                     <td>${inActiveUser.password}</td>
                     <td>${inActiveUser.companyID.name}</td>
@@ -166,7 +174,16 @@
 
 
                 Username: <input type="text" name="username" placeholder="manager1" name="username" required ><br>
-                Password: <input type="password" minlength="8" name="password" required title="Must be at least 8 characters long"><br>
+                Password: <input type="password" minlength="8" name="password" id="password"
+                                 required title="Must be at least 8 characters long"><br>
+                <%--
+                Confirm Password: <input type="password" required name="confirmPassword" 
+                                 id="confirmPassword"><br> --%>
+                
+                <div>
+                    <div class="passwordMessage" id="doPasswordsMatch">
+                    
+                </div>
 
                 <label for="userCompanyID">Company Name: </label>
                 <select name="userCompanyID" id="userCompanyID">
