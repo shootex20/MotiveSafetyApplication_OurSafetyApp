@@ -189,8 +189,8 @@ public class PasswordStorage {
         String body = "Your new temporary password is: " + tempPassword;
 
         ls.updatePassword(username, tempPassword);
-
-        EmailService.sendMail(to, SUBJECT, body, false);
+        EmailService es = new EmailService();        
+        es.sendMail(to, SUBJECT, body, false);
     }
 
 }

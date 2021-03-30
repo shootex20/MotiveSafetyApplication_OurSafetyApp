@@ -9,6 +9,14 @@
         <link href="CSS-MEDIA/Index.css" rel="stylesheet" type="text/css">
     </head>
     <body>
+            <ul>
+                <li><a href="companyWelcome?companyWelcome">${companyName} Welcome Page</a></li>
+                <li><a href="equipmentmanager">Equipment Page</a></li>
+                <li><a href="employee?employee">Employee Page</a></li>
+                <li><a href="employee?logout=logout">Logout</a></li>     
+            </ul>
+        
+        
         <h1>Manual Pages for OurSafety Application</h1>
         <h1>${test}</h1>
  <!--Load data from database-->        
@@ -18,7 +26,7 @@
                 <th>Date Added</th>
                 <th>Title</th>
                 <th>Intention</th>
-                <th>Content</th> would have links to the actual manuals
+                <th>Content</th> 
             </tr>
             <c:forEach var="manual" items="${manualList}">
             <tr>
@@ -40,6 +48,13 @@
                             <input type="hidden" name="manualID" value="${manual.manualID}">
                         </form>
                 </td>
+                
+                <td>                           
+                        <form action="manual "method="get"> 
+                            <input type="submit" name="action" value="addSendForm">
+                             <input type="hidden" name="manualID" value="${manual.manualID}">
+                        </form>
+                </td>
             </tr>
             </c:forEach>
         </table>
@@ -47,8 +62,8 @@
         <form action="manual "method="get"> 
             <input type="submit" name="action" value="addform">
         </form>
-
         <br>
+
          <c:if test="${selectedManual == null}">
               <c:if test="${selectedAdd != null}">
         <h3>Add Manual</h3>
@@ -106,5 +121,39 @@
             <input type="submit" value="Save">
         </form>
         </c:if>
+    <c:if test="${selectedSend != null}">    
+    <h3>Send manual</h3>
+    
+    <form action="manual" method="post">
+        
+        <label for="employeeList">Employee list: </label>          
+        <select name="emailSendTo" id="employeeList">
+            <c:forEach items="${employees}" var="employee">
+                <option value = "$${employee.email}">${employee.email}</option>
+            </c:forEach>                
+        </select><br>
+        
+        <label for="title">Selected manual: </label>  
+        <input type="text" name="title" value="${selectedManual2.title}" readonly="true"><br>
+        <input type="hidden" name="manualid" value="${selectedManual2.manualID}">
+        
+        <label for="fileName"> File Name: </label>
+        <input type="text" name="fileName" value="" required="ture"><br>
+        
+        <input type="hidden" name="action" value="sendManual">
+        <input type="submit" value="Send">       
+            
+            
+     
+<!--manual list-->       
+<!--        <label for="employeeList">Employee list: </label>         
+        <select name="employeeList" id="employeeList">
+            <c:forEach var="manual" items="${manualList}">
+                <option value = "${manual.manualID}">${manual.title}</option>
+            </c:forEach>               
+        </select>-->
+
+    </form>
+    </c:if>
     </body>
 </html>
