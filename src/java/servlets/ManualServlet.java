@@ -267,7 +267,6 @@ public class ManualServlet extends HttpServlet {
                 String id = Integer.toString(manualID);
                 String manualTitle = currManual.getTitle();
                 fileName = id + manualTitle + ".pdf";
-                request.setAttribute("test", fileName);
                 path = performTask(request, response, fileName, title, content);  
                 doGet(request, response);
             } catch (Exception ex) {
@@ -354,9 +353,9 @@ public class ManualServlet extends HttpServlet {
                  path = performTask(request, response, fileName, currTitle, currContent);                
 //                request.setAttribute("test", employeeEmail);
                 try { 
-//                    es.sendMailWithAttachments(employeeEmail, "hello", "hello", path, false);
+                    es.sendMailWithAttachments(employeeEmail, "hello", "hello", path, false);
 //to do the test change the email to your test email                    
-                    es.sendMailWithAttachments("dsijnvsd@gmail.com", "hello", "hello", path, false);
+//                    es.sendMailWithAttachments("dsijnvsd@gmail.com", "hello", "hello", path, false);
                 } catch (MessagingException ex) {
                     Logger.getLogger(ManualServlet.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (NamingException ex) {
