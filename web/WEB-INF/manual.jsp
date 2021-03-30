@@ -137,8 +137,8 @@
         <input type="text" name="title" value="${selectedManual2.title}" readonly="true"><br>
         <input type="hidden" name="manualid" value="${selectedManual2.manualID}">
         
-        <label for="fileName"> File Name: </label>
-        <input type="text" name="fileName" value="" required="ture"><br>
+<!--        <label for="fileName"> File Name: </label>
+        <input type="text" name="fileName" value="" required="ture"><br>-->
         
         <input type="hidden" name="action" value="sendManual">
         <input type="submit" value="Send">       

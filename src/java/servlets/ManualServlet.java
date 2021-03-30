@@ -208,6 +208,8 @@ public class ManualServlet extends HttpServlet {
         String intention = request.getParameter("intention");
         String content = request.getParameter("content");
         String action = request.getParameter("action");
+        String path = "";
+        String fileName = "";
         ManualService manualService = new ManualService();
         ManualDB manualDB = new ManualDB();
         
@@ -240,7 +242,33 @@ public class ManualServlet extends HttpServlet {
        
         if(action.equals("add")){
             try {
+                int count = 0;
+                Manual currManual = new Manual();
                 manualService.insert(dateAdded, userID, typeLibrary, title, intention, content);
+                ArrayList <Manual> currentManual = new ArrayList();
+        
+                try {
+                    List <Manual> manual = manualDB.getAll();
+                    for (Manual m: manual){
+                        if (m.getUserAdded() == userID) {
+                            currentManual.add(m);
+                        }
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(ManualServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                 for (Manual m: currentManual){
+                        if (m.getManualID() > count) {
+                           currManual = m;
+                           count = m.getManualID();
+                        }
+                    }
+                int manualID = currManual.getManualID();
+                String id = Integer.toString(manualID);
+                String manualTitle = currManual.getTitle();
+                fileName = id + manualTitle + ".pdf";
+                request.setAttribute("test", fileName);
+                path = performTask(request, response, fileName, title, content);  
                 doGet(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(ManualServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -260,7 +288,7 @@ public class ManualServlet extends HttpServlet {
             String manualid = request.getParameter("manualID");
             int manualID = Integer.parseInt(manualid);
             try {
-//                manualService.delete(manualID);
+                manualService.delete(manualID);
                 doGet(request, response);
             } catch (Exception ex) {
                 Logger.getLogger(ManualServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -291,10 +319,10 @@ public class ManualServlet extends HttpServlet {
             else if(action.equals("sendManual")){
 // Send Email                
                  String employeeEmail = request.getParameter("emailSendTo");
-                 String fileName = request.getParameter("fileName");
                  String currTitle = "";
                  String currContent = "";
                  Manual manual = new Manual();
+                
                  EmailService es = new EmailService();
           
                  
@@ -320,9 +348,14 @@ public class ManualServlet extends HttpServlet {
                  
                 
 // Create PDF
-                String path = performTask(request, response, fileName, currTitle, currContent);                
-                request.setAttribute("test", employeeEmail);
+                 String id = Integer.toString(manualID);
+                 String manualTitle = manual.getTitle();
+                 fileName = id + manualTitle + ".pdf";
+                 path = performTask(request, response, fileName, currTitle, currContent);                
+//                request.setAttribute("test", employeeEmail);
                 try { 
+//                    es.sendMailWithAttachments(employeeEmail, "hello", "hello", path, false);
+//to do the test change the email to your test email                    
                     es.sendMailWithAttachments("dsijnvsd@gmail.com", "hello", "hello", path, false);
                 } catch (MessagingException ex) {
                     Logger.getLogger(ManualServlet.class.getName()).log(Level.SEVERE, null, ex);
