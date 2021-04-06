@@ -1,0 +1,97 @@
+.loginHeader{
+    background-color: blue;
+    color: white;
+}
+
+
+body{
+    margin-top: 5%;
+    text-align: center;
+    background-image: url("https://images.pexels.com/photos/1029141/pexels-photo-1029141.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+h1, h2, h3{
+    text-align: center;
+}
+
+.contact{
+    text-align: center;
+    width:70%;
+    margin-left: 15%;
+}
+
+footer{
+    position: fixed;
+    background-color: blue;
+    width: 100%;
+    bottom: 0;
+    color: white;
+}
+
+.navi{
+    width: 70%;
+    text-align: center;
+    margin-left: 12%;
+    color: white;
+    background-color: darkblue;
+}
+
+a {
+    color: white !important;
+}
+
+.form{
+    width: 30%;
+    margin-left: 35%;
+}
+
+.roll{
+    width: 25% !important;
+    padding: 15px !important;
+}
+
+.socialMedia{
+    margin-left: 48%
+}
+
+.mainTable, th{
+     border: 1px solid black;
+     text-align: center;
+     background-color: gainsboro;
+}
+
+.main{
+  border: 1px solid black;
+  width: 80%;
+  margin-left: 10%;
+  text-align: center;
+}
+
+th {
+    padding: 12px;
+    background-color: orange;
+    color: white;
+}
+
+.welcome, h3 {
+    color:tomato
+}
+
+#centerBTN{
+    margin-left: 48.6%;
+}
+
+#centerBTN1{
+    margin-left: 48%;
+}
+
+.blocks{
+    background: #DBD1C9;
+    width: 60%;
+    margin-left: 20%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
