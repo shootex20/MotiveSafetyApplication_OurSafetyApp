@@ -57,6 +57,7 @@
                         <form action="manual" method="post"> 
                             <input type="submit" name="action"  class="btn btn-danger" value="delete" onclick="return confirm('Are you sure you want to delete ${manualDelete.title} with item information ${manual.intention}?')">
                             <input type="hidden" name="manualID" value="${manual.manualID}">
+                            <input type="hidden" name="token" value="<c:out value="${token}"/>">
                         </form>
                     </td>
 
@@ -116,6 +117,7 @@
                             </tr>
                         </table>
                         <input type="hidden" name="action" value="add">
+                        <input type="hidden" name="token" value="<c:out value="${token}"/>">
                         <input type="submit" id="centerBTN" class="btn btn-primary" value="Add">
                     </form>
                     <br>
@@ -150,9 +152,10 @@
                         </tr>
                     </table>
                     <input type="hidden" name="action" value="edit">
+                    <input type="hidden" name="token" value="<c:out value="${token}"/>">
                     <input type="submit"  id="centerBTN" class="btn btn-primary" value="Save">
                 </form>
-                        <br>
+                <br>
             </c:if>
             <c:if test="${selectedSend != null}">    
                 <br>
@@ -178,6 +181,7 @@
                             <input type="text" name="fileName" value="" required="ture"><br>-->
 
                     <input type="hidden" name="action" value="sendManual">
+                    <input type="hidden" name="token" value="<c:out value="${token}"/>">
                     <input type="submit" id="centerBTN" class="btn btn-primary"  value="Send">       
 
                     <!--manual list-->       
@@ -190,7 +194,7 @@
 
                 </form>
             </c:if>
-                <br>
+            <br>
         </div>
 
         <footer>

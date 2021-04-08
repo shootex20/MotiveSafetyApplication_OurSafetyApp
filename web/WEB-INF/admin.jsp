@@ -62,6 +62,7 @@
                                 <input type="submit" value="Delete" onClick="return confirm('Are you sure you want to delete ${companys.name}?')">
                                 <input type="hidden" name="action" value="delete">
                                 <input type="hidden" name="selectedCompany" value="${companys.companyID}">
+                                <input type="hidden" name="token" value="<c:out value="${token}"/>">
                             </form>
                         </td>
                         <td>
@@ -69,16 +70,17 @@
                                 <input type="submit" value="Edit">
                                 <input type="hidden" name="action" value="view">
                                 <input type="hidden" name="selectedCompany" value="${companys.companyID}">
+                                <input type="hidden" name="token" value="<c:out value="${token}"/>">
                             </form>
                         </td>
                     </tr>
                 </c:forEach>
             </table>
-            ${message}
+            <c:out value="${message}"></c:out>
+                <br>
+            </div>
             <br>
-        </div>
-        <br>
-        <br>
+            <br>
 
         <c:if test="${selectedComp == null}">
             <div class="outline">
@@ -110,6 +112,7 @@
                     <br>
                     <input type="hidden" name="action" value="add">
                     <input type="submit" value="Add Company" class="btn btn-primary">
+                    <input type="hidden" name="token" value="<c:out value="${token}"/>">
                 </form>
                 <br>
             </div>
@@ -152,6 +155,7 @@
                     </table>
                     <input type="hidden" name="action" value="edit">
                     <input type="submit" value="Save Edit" class="btn btn-primary">
+                    <input type="hidden" name="token" value="<c:out value="${token}"/>">
                 </form>
                 <br>       
             </div>
@@ -198,6 +202,7 @@
                                 <input type="submit" value="Deactivate" onClick="return confirm('Are you sure you want to deactivate ${user.username}?')">
                                 <input type="hidden" name="actionM" value="deleteM">
                                 <input type="hidden" name="selectedMan" value="${user.userId}">
+                                <input type="hidden" name="token" value="<c:out value="${token}"/>">
                             </form>
                         </td>
                     </tr>
@@ -216,6 +221,7 @@
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                 </svg>
                 <input type="text" id="searchInActiveManagers" placeholder="search active managers table">
+                <input type="hidden" name="token" value="<c:out value="${token}"/>">
             </div>
             <br>
             <table id="inActiveManagersTable" class="mains">
@@ -247,6 +253,7 @@
                                 <input type="submit" value="Reactivate" onClick="return confirm('Are you sure you want to reactivate ${inActiveUser.username}?')">
                                 <input type="hidden" name="actionM" value="Reactivate">
                                 <input type="hidden" name="selectedManReactivate" value="${inActiveUser.userId}">
+                                <input type="hidden" name="token" value="<c:out value="${token}"/>">
                             </form>
                         </td>
                     </tr>
@@ -309,7 +316,8 @@
                         </tr>
                     </table>
                     <input type="hidden" name="actionM" value="addUser">
-                    <input type="submit" value="Add User" onclick="return passwordmatch()" class="btn btn-primary"> 
+                    <input type="submit" value="Add User" onclick="return passwordmatch()" class="btn btn-primary">
+                    <input type="hidden" name="token" value="<c:out value="${token}"/>">
                     <br>
                     <br>
                     </div>

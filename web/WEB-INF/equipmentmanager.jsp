@@ -18,9 +18,9 @@
     </head>
     <body>
         <script>
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
-    }
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
         </script>
         <div class="bg">
             <header class="loginHeader">
@@ -63,6 +63,7 @@
                             <form method="post"> 
                                 <input type="submit" name="action" class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure you want to delete ${equipmentItem.model} with item information ${equipmentItem.itemClassInformation}?')">
                                 <input type="hidden" name="itemID" value="${equipmentItem.itemID}">
+                                <input type="hidden" name="token" value="<c:out value="${token}"/>">
                             </form>
                         </td>
                     </tr>
@@ -105,13 +106,15 @@
                     </table>
                     <br>
                     <input type="hidden" name="selectedType" value="">
+                    <input type="hidden" name="token" value="<c:out value="${token}"/>">
                     <input type="submit" id="addbutton" class="btn btn-primary" value="Add Equipment">
                     <br>
                     <br>
                 </form>
 
                 <c:if test="${selectedType != null}">
-                    <form method="post"> 
+                    <form method="post">
+                        <input type="hidden" name="token" value="<c:out value="${token}"/>">
                         <table class="forms">
                             <tr>
                                 <td>
