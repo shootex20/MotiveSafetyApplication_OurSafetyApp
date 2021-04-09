@@ -43,22 +43,7 @@ public class LoginDB {
         }
         
        }
-    
-  /**  public int delete(Logins user) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
-        try {
-            trans.begin();
-            em.remove(user);
-            trans.commit();
-        } catch (Exception ex) {
-            trans.rollback();
-        } finally {
-            em.close();
-            return 1;
-        }
-    }
-**/
+
     public int insert(Logins user) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();

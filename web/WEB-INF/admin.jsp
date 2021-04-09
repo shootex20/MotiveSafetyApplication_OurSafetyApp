@@ -80,8 +80,8 @@
                 </c:forEach>
             </table>
             </div>
-            <c:out value="${message}"></c:out>
-                <br>
+            <p><c:out value="${message}"></c:out></p>
+               
             </div>
             <br>
             <br>
@@ -217,7 +217,9 @@
                     </tr>
                 </c:forEach>
             </table>
+                <p>
             ${messageManager}
+            </p>
         </div>
             <br>
         </div>
@@ -376,6 +378,7 @@
 
 
             <script>
+                //checks if passwords entered match
                 function passwordmatch() {
                     var password = document.getElementById("password").value;
                     var conPassword = document.getElementById("confirmPassword").value;

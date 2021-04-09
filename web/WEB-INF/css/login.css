@@ -39,3 +39,8 @@ footer{
     bottom: 0;
     color: white;
 }
+
+p{
+    color: red;
+    font-style: oblique;
+}

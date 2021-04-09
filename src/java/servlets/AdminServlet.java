@@ -32,6 +32,7 @@ public class AdminServlet extends HttpServlet {
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
 
+        //Synchronizer Token Pattern used to lower the risk of being attacked through CSRF.
         UUID uuid = UUID.randomUUID();
         String token = uuid.toString();
         request.getSession().setAttribute("token", token);
@@ -39,6 +40,7 @@ public class AdminServlet extends HttpServlet {
 
         String logout = request.getParameter("logout");
 
+        //sends user to logout page 
         if (logout != null) {
             session.invalidate();
             session = request.getSession();
@@ -46,6 +48,7 @@ public class AdminServlet extends HttpServlet {
             return;
         }
 
+        //hides edit section until its clicked.
         if (action != null && action.equals("view")) {
             Integer selectedCompany = Integer.parseInt(request.getParameter("selectedCompany"));
             try {
@@ -69,22 +72,7 @@ public class AdminServlet extends HttpServlet {
         LoginDB pdb = new LoginDB();
 
         String actionM = request.getParameter("actionM");
-        /**
-         * if ((actionM != null && actionM.equals("view"))) { Integer
-         * selectedManager =
-         * Integer.parseInt(request.getParameter("selectedMan"));
-         *
-         * try { Logins login = pdb.get(selectedManager);
-         *
-         * request.setAttribute("selectedMan", login);
-         *
-         *
-         * } catch (Exception ex) {
-         * Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE,
-         * null, ex); } }*
-         */
-
-        //  List<Person> personUser = new ArrayList<Person>();
+        
         List<Logins> loginUser = new ArrayList<Logins>();
 
         List<Logins> activeUsers = new ArrayList<Logins>();
@@ -101,6 +89,7 @@ public class AdminServlet extends HttpServlet {
         Character activeUser = 'T';
         Character inActiveUser = 'F';
 
+        //this is to update the active and inactive tables
         for (int i = 0; i < loginUser.size(); i++) {
 
             if (loginUser.get(i).getIsActive().equals(inActiveUser)) {
@@ -134,7 +123,6 @@ public class AdminServlet extends HttpServlet {
 
                 String action = request.getParameter("action");
 
-                // Integer companyid = Integer.parseInt(request.getParameter("compid"));
                 Date dateAdded = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String tempDate = sdf.format(dateAdded);
@@ -152,18 +140,22 @@ public class AdminServlet extends HttpServlet {
                 String industry = request.getParameter("industry");
 
                 try {
+                    //to delete companies
                     if (action.equals("delete")) {
                         Integer selectedCompany = Integer.parseInt(request.getParameter("selectedCompany"));
                         cs.delete(selectedCompany);
                         request.setAttribute("message", "Company Deleted.");
                         doGet(request, response);
-                    } else if (action.equals("edit")) {
+                    } 
+                    //to edit companies
+                    else if (action.equals("edit")) {
 
                         Integer id = Integer.parseInt(request.getParameter("id"));
                         cs.update(id, compname, shortname, description, account, industry);
                         request.setAttribute("message", "Changes Saved.");
                         doGet(request, response);
-                    } else if (action.equals("add")) {
+                    } // to add companies
+                    else if (action.equals("add")) {
                         cs.insert(dateAdded, compname, shortname, description, account, industry);
                         request.setAttribute("message", "Company Added.");
                         doGet(request, response);
@@ -193,22 +185,6 @@ public class AdminServlet extends HttpServlet {
                 String password = request.getParameter("password");
                 String confirmPassword = request.getParameter("confirmPassword");
 
-                /**
-                 * int ss =
-                 * Integer.parseInt(request.getParameter("userCompanyID"));
-                 * Company cc = new Company();
-                 *
-                 * CompanyDB companydb = new CompanyDB(); try { cc =
-                 * companydb.get(ss);
-                 *
-                 * // Integer companySelectedId =
-                 * Integer.parseInt(request.getParameter("userCompanyID")); }
-                 * catch (Exception ex) {
-                 * Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE,
-                 * null, ex); }
-                 *
-                 */
-                // System.out.print(companySelectedId);
                 String active = request.getParameter("isActive");
                 String admin = request.getParameter("isAdmin");
                 // if statement if active/admin is null
@@ -216,6 +192,7 @@ public class AdminServlet extends HttpServlet {
                 Character isAdmin;
 
                 try {
+                    //to delete managers
                     if (actionM.equals("deleteM")) {
                         Integer selectedManager = Integer.parseInt(request.getParameter("selectedMan"));
 
@@ -242,7 +219,8 @@ public class AdminServlet extends HttpServlet {
                             Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
 
                         }
-                    } else if (actionM.equals("Reactivate")) {
+                    } //to reactivate managers
+                    else if (actionM.equals("Reactivate")) {
                         Integer selectedManagerReactivate = Integer.parseInt(request.getParameter("selectedManReactivate"));
 
                         Logins userToReactivate = new Logins(); //child object
@@ -268,7 +246,8 @@ public class AdminServlet extends HttpServlet {
 
                         }
 
-                    } else if (actionM.equals("addUser") & (admin != null && active != null)) {
+                    } //to add managers
+                    else if (actionM.equals("addUser") & (admin != null && active != null)) {
                         int ss = Integer.parseInt(request.getParameter("userCompanyID"));
                         Company cc = new Company();
 
@@ -276,7 +255,6 @@ public class AdminServlet extends HttpServlet {
                         try {
                             cc = companydb.get(ss);
 
-                            // Integer companySelectedId = Integer.parseInt(request.getParameter("userCompanyID"));
                         } catch (Exception ex) {
                             Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -286,6 +264,7 @@ public class AdminServlet extends HttpServlet {
 
                         String hash = null;
 
+                        //To hash the passwords.
                         PasswordStorage ps = new PasswordStorage();
 
                         try {
@@ -313,7 +292,6 @@ public class AdminServlet extends HttpServlet {
 
                 request.setAttribute("logins", user);
 
-                //getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request, response);
             }
         }
     }

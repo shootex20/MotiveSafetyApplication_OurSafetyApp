@@ -104,3 +104,12 @@ th {
 #BTNS{
     margin-left: 48%
 }
+
+/*hidden messages*/
+p{
+    color: green;
+    text-align: center;
+    background-color: gainsboro;
+    width: 20%;
+    margin-left: 40%;
+}

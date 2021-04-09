@@ -199,7 +199,7 @@
                 </div>
             </div>
             <br>
-            ${message}
+            <p><strong><i>${message}</i></strong></p>
             <br>
             <c:if test="${user == null}">
                 <h3 class="welcome"><strong>Add a new employee</strong></h3>

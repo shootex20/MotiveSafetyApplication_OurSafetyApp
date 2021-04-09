@@ -79,3 +79,10 @@ th{
 .responsive {
     overflow-x: auto;
 }
+
+
+p{
+    color: green;
+    text-align: center;
+    font-style: oblique;
+}
