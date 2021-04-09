@@ -51,9 +51,24 @@ public class AdminServlet extends HttpServlet {
         //hides edit section until its clicked.
         if (action != null && action.equals("view")) {
             Integer selectedCompany = Integer.parseInt(request.getParameter("selectedCompany"));
+           
             try {
                 Company comp = cs.get(selectedCompany);
+                String account = comp.getAccount();
+                String industry = comp.getIndustry();
+                 if(account == null || industry == null){
+                            if(account == null){
+                                account = "N/A";
+                            }
+                            if(industry == null){
+                                industry = "N/A";
+                            }               
                 request.setAttribute("selectedComp", comp);
+                 }
+                 else{
+                     request.setAttribute("selectedComp", comp);
+                 }
+                
             } catch (Exception ex) {
                 Logger.getLogger(AdminServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
