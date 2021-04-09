@@ -280,8 +280,10 @@ public class ManualServlet extends HttpServlet {
                     } else if (action.equals("edit")) {
                         String manualid = request.getParameter("manualID");
                         int manualID = Integer.parseInt(manualid);
+                        fileName = manualid + title + ".pdf";
                         try {
                             manualService.update(manualID, dateAdded, userID, typeLibrary, title, intention, content);
+                            path = performTask(request, response, fileName, title, content);
                             request.setAttribute("message", "Manual is successufully updated");
                             doGet(request, response);
                         } catch (Exception ex) {
