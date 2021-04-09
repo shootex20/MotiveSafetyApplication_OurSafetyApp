@@ -1,6 +1,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -52,7 +53,8 @@
                 <c:forEach var="manual" items="${manualList}">
                     <tr>
                         <td  class="mainTable">${manual.manualID}</td>
-                        <td class="mainTable">${manual.dateAdded}</td>
+                        <td class="mainTable"><fmt:formatDate value="${manual.dateAdded}" pattern="dd/MMM/YYYY"/></td>
+                        
                         <td class="mainTable">${manual.title}</td>
                         <td class="mainTable">${manual.intention}</td>
                         <td class="mainTable">${manual.content}</td>
@@ -82,11 +84,12 @@
             </table>
         </div>
         <br>
+        <div class="blocks">        
         <form action="manual "method="get"> 
             <input type="submit" name="action" id="centerBTN1" class="btn btn-primary" value="Add Form">
         </form>
         <br>
-        <div class="blocks">
+
             <c:if test="${selectedManual == null}">
                 <c:if test="${selectedAdd != null}">
                     <br>
