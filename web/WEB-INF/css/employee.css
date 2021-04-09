@@ -1,13 +1,106 @@
-body {
-    
+/* The body and header tags */
+.loginHeader{
+    background-color: blue;
+    color: white;
 }
 
-.employeeHeader {
-    
+/* fixing footer at bottom*/
+.content {
+    flex: 1;
 }
 
-table, th, td 
-{
+body{
+    margin-top: 5%;
+    text-align: center;
+    background-image: url("https://images.pexels.com/photos/585418/pexels-photo-585418.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+h1, h2, h3{
+    text-align: center;
+}
+
+.navi{
+    width: 70%;
+    text-align: center;
+    margin-left: 12%;
+    color: white;
+    background-color: darkblue;
+}
+
+a {
+    color: white !important;
+}
+
+.roll{
+    width: 25% !important;
+    padding: 15px !important;
+}
+
+/*Footer css */
+.socialMedia{
+    margin-left: 48%
+}
+
+.contact{
+    text-align: center;
+    width:70%;
+    margin-left: 15%;
+}
+
+footer{
+    background-color: blue;
+    color: white;
+}
+
+/* headings*/
+.welcome {
+    color:tomato
+}
+
+/* table formatting*/
+th {
+    padding: 12px;
+    background-color: orange;
+    color: white;
     border: 1px solid black;
     text-align: center;
+}
+
+.main, .maint{
+    border: 1px solid black;
+    text-align: center;
+    background-color: gainsboro;
+}
+
+.maint{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.responsive-table{
+    overflow-x: auto;
+}
+
+/* form as table formatting*/
+.responsive-form{
+    overflow-x: auto;
+    background: #DBD1C9;
+    width: 60%;
+    margin-left: 20%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.mainf{
+    margin: 0 auto;
+}
+
+#BTNS{
+    margin-left: 48%
 }

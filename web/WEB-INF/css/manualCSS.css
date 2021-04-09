@@ -3,6 +3,9 @@
     color: white;
 }
 
+.content {
+    flex: 1;
+}
 
 body{
     margin-top: 5%;
@@ -11,6 +14,9 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
 h1, h2, h3{
@@ -24,10 +30,7 @@ h1, h2, h3{
 }
 
 footer{
-    position: fixed;
     background-color: blue;
-    width: 100%;
-    bottom: 0;
     color: white;
 }
 
@@ -45,7 +48,7 @@ a {
 
 .form{
     width: 30%;
-    margin-left: 35%;
+    margin: 0 auto;
 }
 
 .roll{
@@ -58,16 +61,16 @@ a {
 }
 
 .mainTable, th{
-     border: 1px solid black;
-     text-align: center;
-     background-color: gainsboro;
+    border: 1px solid black;
+    text-align: center;
+    background-color: gainsboro;
 }
 
 .main{
-  border: 1px solid black;
-  width: 80%;
-  margin-left: 10%;
-  text-align: center;
+    border: 1px solid black;
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
 }
 
 th {
@@ -94,4 +97,10 @@ th {
     margin-left: 20%;
     border-radius: 8px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow-x: auto;
+}
+
+.responsive{
+    overflow-x: auto;
+    margin: 0 auto;
 }

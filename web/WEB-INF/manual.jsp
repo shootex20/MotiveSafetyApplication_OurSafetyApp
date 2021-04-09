@@ -31,52 +31,55 @@
             </table>
             <br>
         </header>
+        <div class="content">
         <h1>${test}</h1>
         <h3 class="welcome"><strong>Manage Manuals</strong></h3>
         <br>
-        <!--Load data from database-->        
-        <table class="main">
-            <tr>
-                <th>Manual Id</th>
-                <th>Date Added</th>
-                <th>Title</th>
-                <th>Intention</th>
-                <th>Content</th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-            <c:forEach var="manual" items="${manualList}">
+        <!--Load data from database-->   
+        <div class="responsive">
+            <table class="main">
                 <tr>
-                    <td  class="mainTable">${manual.manualID}</td>
-                    <td class="mainTable">${manual.dateAdded}</td>
-                    <td class="mainTable">${manual.title}</td>
-                    <td class="mainTable">${manual.intention}</td>
-                    <td class="mainTable">${manual.content}</td>
-                    <td class="mainTable">
-                        <form action="manual" method="post"> 
-                            <input type="submit" name="action"  class="btn btn-danger" value="delete" onclick="return confirm('Are you sure you want to delete ${manualDelete.title} with item information ${manual.intention}?')">
-                            <input type="hidden" name="manualID" value="${manual.manualID}">
-                            <input type="hidden" name="token" value="<c:out value="${token}"/>">
-                        </form>
-                    </td>
-
-                    <td class="mainTable">
-                        <form action="manual" method="get"> 
-                            <input type="submit" name="action"  class="btn btn-primary" value="view">
-                            <input type="hidden" name="manualID" value="${manual.manualID}">
-                        </form>
-                    </td>
-
-                    <td class="mainTable">                           
-                        <form action="manual "method="get"> 
-                            <input type="submit" name="action" class="btn btn-primary" value="addSendForm">
-                            <input type="hidden" name="manualID" value="${manual.manualID}">
-                        </form>
-                    </td>
+                    <th>Manual Id</th>
+                    <th>Date Added</th>
+                    <th>Title</th>
+                    <th>Intention</th>
+                    <th>Content</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
-            </c:forEach>
-        </table>
+                <c:forEach var="manual" items="${manualList}">
+                    <tr>
+                        <td  class="mainTable">${manual.manualID}</td>
+                        <td class="mainTable">${manual.dateAdded}</td>
+                        <td class="mainTable">${manual.title}</td>
+                        <td class="mainTable">${manual.intention}</td>
+                        <td class="mainTable">${manual.content}</td>
+                        <td class="mainTable">
+                            <form action="manual" method="post"> 
+                                <input type="submit" name="action"  class="btn btn-danger" value="delete" onclick="return confirm('Are you sure you want to delete ${manualDelete.title} with item information ${manual.intention}?')">
+                                <input type="hidden" name="manualID" value="${manual.manualID}">
+                                <input type="hidden" name="token" value="<c:out value="${token}"/>">
+                            </form>
+                        </td>
+
+                        <td class="mainTable">
+                            <form action="manual" method="get"> 
+                                <input type="submit" name="action"  class="btn btn-primary" value="view">
+                                <input type="hidden" name="manualID" value="${manual.manualID}">
+                            </form>
+                        </td>
+
+                        <td class="mainTable">                           
+                            <form action="manual "method="get"> 
+                                <input type="submit" name="action" class="btn btn-primary" value="addSendForm">
+                                <input type="hidden" name="manualID" value="${manual.manualID}">
+                            </form>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
         <br>
         <form action="manual "method="get"> 
             <input type="submit" name="action" id="centerBTN1" class="btn btn-primary" value="addform">
@@ -196,7 +199,8 @@
             </c:if>
             <br>
         </div>
-
+        <br>
+        </div>
         <footer>
             <br>
             <table class="contact">

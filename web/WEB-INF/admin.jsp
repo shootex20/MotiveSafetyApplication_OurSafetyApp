@@ -25,6 +25,8 @@
             <br>
         </header>
         <br>
+        <div class="content">
+            <br>
         <div class="outline">
             <br>
             <h3 class="welcome"><strong>Manage Companies</strong></h3>
@@ -36,6 +38,7 @@
                 <input type="text" id="searchcomp" placeholder="search company table">
             </div>
             <br>
+            <div class="responsive">
             <table id="company_table" class="mains">
                 <tr>
                     <th>Company Id</th>
@@ -59,7 +62,7 @@
                         <td>${companys.industry}</td>
                         <td>
                             <form action="admin" method="post" >
-                                <input type="submit" value="Delete" onClick="return confirm('Are you sure you want to delete ${companys.name}?')">
+                                <input type="submit" class="btn btn-danger" value="Delete" onClick="return confirm('Are you sure you want to delete ${companys.name}?')">
                                 <input type="hidden" name="action" value="delete">
                                 <input type="hidden" name="selectedCompany" value="${companys.companyID}">
                                 <input type="hidden" name="token" value="<c:out value="${token}"/>">
@@ -67,7 +70,7 @@
                         </td>
                         <td>
                             <form action="admin" method="get">
-                                <input type="submit" value="Edit">
+                                <input type="submit"  class="btn btn-primary" value="Edit">
                                 <input type="hidden" name="action" value="view">
                                 <input type="hidden" name="selectedCompany" value="${companys.companyID}">
                                 <input type="hidden" name="token" value="<c:out value="${token}"/>">
@@ -76,6 +79,7 @@
                     </tr>
                 </c:forEach>
             </table>
+            </div>
             <c:out value="${message}"></c:out>
                 <br>
             </div>
@@ -87,6 +91,7 @@
                 <br>
                 <h3 class="welcome"><strong>Add Company</strong></h3>
                 <form action="admin" method="POST">
+                    <div class="responsive">
                     <table class="formS">
                         <tr class="formrow">
                             <td  class="formrow">Name: </td>
@@ -109,6 +114,7 @@
                             <td class="formrow"><input type="text" name="industry"><br></td>
                         </tr>
                     </table>
+                    </div>
                     <br>
                     <input type="hidden" name="action" value="add">
                     <input type="submit" value="Add Company" class="btn btn-primary">
@@ -123,6 +129,7 @@
                 <br>
                 <h3 class="welcome"><strong>Edit Company</strong></h3>
                 <form action="admin" method="POST">
+                    <div class="responsive">
                     <table class="formS">
                         <tr class="formrow">
                             <td class="formrow">Company ID: </td>
@@ -153,6 +160,7 @@
                             <td class="formrow"><input type="text" name="industry" value="${selectedComp.industry}"></td>
                         </tr>
                     </table>
+                    </div>
                     <input type="hidden" name="action" value="edit">
                     <input type="submit" value="Save Edit" class="btn btn-primary">
                     <input type="hidden" name="token" value="<c:out value="${token}"/>">
@@ -173,6 +181,7 @@
                 <input type="text" id="searchActiveManagers" placeholder="search active managers table">
             </div>
             <br>
+            <div class="responsive">
             <table id="activeManagersTable" class="mains">
                 <tr>
                     <th>User Id</th>
@@ -199,7 +208,7 @@
                         <td>${user.isAdmin}</td>
                         <td>
                             <form action="admin" method="post" >
-                                <input type="submit" value="Deactivate" onClick="return confirm('Are you sure you want to deactivate ${user.username}?')">
+                                <input type="submit" class="btn btn-danger" value="Deactivate" onClick="return confirm('Are you sure you want to deactivate ${user.username}?')">
                                 <input type="hidden" name="actionM" value="deleteM">
                                 <input type="hidden" name="selectedMan" value="${user.userId}">
                                 <input type="hidden" name="token" value="<c:out value="${token}"/>">
@@ -209,6 +218,7 @@
                 </c:forEach>
             </table>
             ${messageManager}
+        </div>
             <br>
         </div>
         <br>
@@ -224,6 +234,7 @@
                 <input type="hidden" name="token" value="<c:out value="${token}"/>">
             </div>
             <br>
+            <div class="responsive">
             <table id="inActiveManagersTable" class="mains">
                 <tr>
                     <th>User Id</th>
@@ -250,7 +261,7 @@
                         <td>${inActiveUser.isAdmin}</td>
                         <td>
                             <form action="admin" method="post" >
-                                <input type="submit" value="Reactivate" onClick="return confirm('Are you sure you want to reactivate ${inActiveUser.username}?')">
+                                <input type="submit"  class="btn btn-primary" value="Reactivate" onClick="return confirm('Are you sure you want to reactivate ${inActiveUser.username}?')">
                                 <input type="hidden" name="actionM" value="Reactivate">
                                 <input type="hidden" name="selectedManReactivate" value="${inActiveUser.userId}">
                                 <input type="hidden" name="token" value="<c:out value="${token}"/>">
@@ -260,6 +271,7 @@
                 </c:forEach>
             </table>
             <br>
+            </div>
         </div>
         <br>
         <br>
@@ -268,7 +280,7 @@
             <c:if test="${selectedManager == null}">
                 <h3 class="welcome"><strong>Add Manager</strong></h3>
                 <form action="admin" method="POST">
-
+                    <div class="responsive">
                     <table class="formS">
                         <tr class="formrow">
                             <td class="formrow">Username: </td>
@@ -315,6 +327,7 @@
                             </td>
                         </tr>
                     </table>
+                    </div>
                     <input type="hidden" name="actionM" value="addUser">
                     <input type="submit" value="Add User" onclick="return passwordmatch()" class="btn btn-primary">
                     <input type="hidden" name="token" value="<c:out value="${token}"/>">
@@ -376,6 +389,8 @@
                 }
             </script>
 
+        </div>
+            
             <footer>
                 <br>
                 <table class="contact">

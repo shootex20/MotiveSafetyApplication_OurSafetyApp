@@ -12,7 +12,7 @@
 }
 
 .slideshow{
-    margin-left: 17%;
+    margin: 0 auto;
 }
 
 .options{
@@ -45,7 +45,7 @@ header{
 }
 
 .socialMedia{
-    margin-left: 48%
+    margin-left: 45%;
 }
 
 svg {

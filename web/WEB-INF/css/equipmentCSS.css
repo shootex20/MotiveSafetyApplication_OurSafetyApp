@@ -13,15 +13,40 @@ and open the template in the editor.
     color: white;
 }
 
+.content {
+    flex: 1;
+}
 
 body{
     margin-top: 5%;
     text-align: center;
     background-image: url("https://images.pexels.com/photos/5414384/pexels-photo-5414384.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.socialMedia{
+    margin-left: 48%
 }
 
 h1, h2, h3{
     text-align: center;
+}
+
+.contact{
+    text-align: center;
+    width:70%;
+    margin-left: 15%;
+}
+
+footer{
+    background-color: blue;
+    color: white;
+}
+
+.welcome, h3 {
+    color:tomato
 }
 
 #addbutton{
@@ -30,10 +55,6 @@ h1, h2, h3{
 
 #addbutton2 {
     margin-left: 48.5%;
-}
-
-.socialMedia{
-    margin-left: 48%
 }
 
 p {
@@ -46,32 +67,17 @@ p {
     font-weight: bold;
 }
 
-.contact{
-    text-align: center;
-    width:70%;
-    margin-left: 15%;
-}
-
-footer{
-       background-color: blue;
-    color: white;
-}
-
-.welcome, h3 {
-    color:tomato
-}
-
 .mainTable2 , .table-warning{
-  border: 1px solid black;
-  width: 80%;
-  margin-left: 10%;
-  text-align: center;
+    border: 1px solid black;
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
 }
 
 .mainTable, th{
-     border: 1px solid black;
-     text-align: center;
-     background-color: gainsboro;
+    border: 1px solid black;
+    text-align: center;
+    background-color: gainsboro;
 }
 
 th {
@@ -80,8 +86,8 @@ th {
     color: white;
 }
 .forms {
-     width: 55%;
-  margin-left: 25%;
+    width: 55%;
+    margin-left: 25%;
 }
 
 .forms2{
@@ -90,13 +96,13 @@ th {
 }
 
 .type {
-  width: 100%;
-  background-color: #f1f1f1;
+    width: 100%;
+    background-color: #f1f1f1;
 }
 
 select {
-  width: 40%;
-  background-color: #f1f1f1;
+    width: 40%;
+    background-color: #f1f1f1;
 }
 
 .form-group{
@@ -123,5 +129,9 @@ a {
 .roll{
     width: 25% !important;
     padding: 15px !important;
+}
+
+.responsive{
+    overflow-x: auto;
 }
 

@@ -3,20 +3,23 @@
     color: white;
 }
 
+.content {
+    flex: 1;
+}
+
 body{
     text-align: center !important;
     background-image: url("https://images.pexels.com/photos/265125/pexels-photo-265125.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
 a{
     color: #ffffff !important;
-}
-
-.welcome, h3 {
-    color:tomato
 }
 
 .contact{
@@ -26,18 +29,22 @@ a{
     border: 1px solid blue;
 } 
 
-.noborder{
-    border: 1px solid blue;
-}
-
 footer{
     background-color: blue;
     color: white;
 }
 
+.welcome, h3 {
+    color:tomato
+}
+
+.noborder{
+    border: 1px solid blue;
+}
+
 .mains{
     width: 80%;
-    margin-left: 10%;
+    margin: 0 auto;
     border: 1px solid black;
 }
 
@@ -52,7 +59,7 @@ th{
 .formS{
     border: 1px solid #DBD1C9;
     width: 30%;
-    margin-left: 38%;
+    margin: 0 auto;
 }
 
 .formrow{
@@ -67,4 +74,8 @@ th{
     background-color: #DBD1C9;
     border-radius: 8px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.responsive {
+    overflow-x: auto;
 }

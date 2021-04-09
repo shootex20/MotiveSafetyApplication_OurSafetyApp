@@ -1,0 +1,33 @@
+body{
+    text-align: center !important;
+}
+
+.box1{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 30%;
+    margin: 0 auto;
+}
+
+#BTNS{
+    width: 80%;
+    margin-left: 10%;
+}
+
+.loginHeader{
+    background-color: blue;
+    color: white;
+}
+
+.contact{
+    text-align: center;
+    width:70%;
+    margin-left: 15%
+}
+
+footer{
+    position: fixed;
+    background-color: blue;
+    width: 100%;
+    bottom: 0;
+    color: white;
+}
