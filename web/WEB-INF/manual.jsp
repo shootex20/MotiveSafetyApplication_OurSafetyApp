@@ -32,8 +32,9 @@
             <br>
         </header>
         <div class="content">
-        <h1>${test}</h1>
+        
         <h3 class="welcome"><strong>Manage Manuals</strong></h3>
+        <h3 class="welcome">${message}</h3>
         <br>
         <!--Load data from database-->   
         <div class="responsive">
@@ -57,7 +58,7 @@
                         <td class="mainTable">${manual.content}</td>
                         <td class="mainTable">
                             <form action="manual" method="post"> 
-                                <input type="submit" name="action"  class="btn btn-danger" value="delete" onclick="return confirm('Are you sure you want to delete ${manualDelete.title} with item information ${manual.intention}?')">
+                                <input type="submit" name="action"  class="btn btn-danger" value="Delete" onclick="return confirm('Are you sure you want to delete ${manualDelete.title} with item information ${manual.intention}?')">
                                 <input type="hidden" name="manualID" value="${manual.manualID}">
                                 <input type="hidden" name="token" value="<c:out value="${token}"/>">
                             </form>
@@ -65,14 +66,14 @@
 
                         <td class="mainTable">
                             <form action="manual" method="get"> 
-                                <input type="submit" name="action"  class="btn btn-primary" value="view">
+                                <input type="submit" name="action"  class="btn btn-primary" value="Edit">
                                 <input type="hidden" name="manualID" value="${manual.manualID}">
                             </form>
                         </td>
 
                         <td class="mainTable">                           
                             <form action="manual "method="get"> 
-                                <input type="submit" name="action" class="btn btn-primary" value="addSendForm">
+                                <input type="submit" name="action" class="btn btn-primary" value="Send to Employee">
                                 <input type="hidden" name="manualID" value="${manual.manualID}">
                             </form>
                         </td>
@@ -82,10 +83,9 @@
         </div>
         <br>
         <form action="manual "method="get"> 
-            <input type="submit" name="action" id="centerBTN1" class="btn btn-primary" value="addform">
+            <input type="submit" name="action" id="centerBTN1" class="btn btn-primary" value="Add Form">
         </form>
         <br>
-
         <div class="blocks">
             <c:if test="${selectedManual == null}">
                 <c:if test="${selectedAdd != null}">
@@ -160,7 +160,7 @@
                 </form>
                 <br>
             </c:if>
-            <c:if test="${selectedSend != null}">    
+              <c:if test="${selectedSend != null}">    
                 <br>
                 <h3 class="welcome"><strong>Send manual</strong></h3>
 
@@ -170,7 +170,7 @@
                             <td><label for="employeeList">Employee list: </label></td>
                             <td><select name="emailSendTo" id="employeeList">
                                     <c:forEach items="${employees}" var="employee">
-                                        <option value = "$${employee.email}">${employee.email}</option>
+                                        <option value = "${employee.email}">${employee.email}</option>
                                     </c:forEach>                
                                 </select></td>
                         </tr>
@@ -180,20 +180,10 @@
                                 <input type="hidden" name="manualid" value="${selectedManual2.manualID}"></td>
                         </tr>
                     </table>
-                    <!--        <label for="fileName"> File Name: </label>
-                            <input type="text" name="fileName" value="" required="ture"><br>-->
 
                     <input type="hidden" name="action" value="sendManual">
                     <input type="hidden" name="token" value="<c:out value="${token}"/>">
                     <input type="submit" id="centerBTN" class="btn btn-primary"  value="Send">       
-
-                    <!--manual list-->       
-                    <!--        <label for="employeeList">Employee list: </label>         
-                            <select name="employeeList" id="employeeList">
-                    <c:forEach var="manual" items="${manualList}">
-                        <option value = "${manual.manualID}">${manual.title}</option>
-                    </c:forEach>               
-                </select>-->
 
                 </form>
             </c:if>

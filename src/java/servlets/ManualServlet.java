@@ -149,9 +149,9 @@ public class ManualServlet extends HttpServlet {
 
 // set equipment type for dropdown box of add manual       
         request.setAttribute("types", equipList);
-        if (action != null && action.equals("addform")) {
+        if (action != null && action.equals("Add Form")) {
             request.setAttribute("selectedAdd", "clicked");
-        } else if (action != null && action.equals("addSendForm")) {
+        } else if (action != null && action.equals("Send to Employee")) {
             request.setAttribute("selectedSend", "clicked");
 
             String manualid = request.getParameter("manualID");
@@ -166,7 +166,7 @@ public class ManualServlet extends HttpServlet {
 
         }
 
-        if (action != null && action.equals("view")) {
+        if (action != null && action.equals("Edit")) {
 
             String manualid = request.getParameter("manualID");
             int manualID = Integer.parseInt(manualid);
@@ -272,6 +272,7 @@ public class ManualServlet extends HttpServlet {
                             String manualTitle = currManual.getTitle();
                             fileName = id + manualTitle + ".pdf";
                             path = performTask(request, response, fileName, title, content);
+                            request.setAttribute("message", "Manual is successufully created");
                             doGet(request, response);
                         } catch (Exception ex) {
                             Logger.getLogger(ManualServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -281,11 +282,12 @@ public class ManualServlet extends HttpServlet {
                         int manualID = Integer.parseInt(manualid);
                         try {
                             manualService.update(manualID, dateAdded, userID, typeLibrary, title, intention, content);
+                            request.setAttribute("message", "Manual is successufully updated");
                             doGet(request, response);
                         } catch (Exception ex) {
                             Logger.getLogger(ManualServlet.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    } else if (action.equals("delete")) {
+                    } else if (action.equals("Delete")) {
                         String manualid = request.getParameter("manualID");
                         int manualID = Integer.parseInt(manualid);
                         try {
@@ -303,52 +305,58 @@ public class ManualServlet extends HttpServlet {
                         }
                     }
                 } else {
-                    if (action.equals("delete")) {
+                    if (action.equals("Delete")) {
                         String manualid = request.getParameter("manualID");
                         int manualID = Integer.parseInt(manualid);
 
                         try {
                             manualService.delete(manualID);
+                            request.setAttribute("message", "Manual is successufully deleted");
                             doGet(request, response);
                         } catch (Exception ex) {
                             Logger.getLogger(ManualServlet.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else if (action.equals("sendManual")) {
 // Send Email                
-                        String employeeEmail = request.getParameter("emailSendTo");
-                        String currTitle = "";
-                        String currContent = "";
-                        Manual manual = new Manual();
-
-                        EmailService es = new EmailService();
-
-                        String manualid = request.getParameter("manualid");
-                        int manualID = Integer.parseInt(manualid);
-
-                        try {
-                            manual = manualDB.get(manualID);
-                            currTitle = manual.getTitle();
-                            currContent = manual.getContent();
-                        } catch (Exception ex) {
-                            Logger.getLogger(ManualServlet.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-
+                 String employeeEmail = request.getParameter("emailSendTo");
+                 String currTitle = "";
+                 String currContent = "";
+                 Manual manual = new Manual();
+                
+                 EmailService es = new EmailService();
+          
+                 
+                 
+                 
+                 
+            String manualid = request.getParameter("manualid");
+            int manualID = Integer.parseInt(manualid);
+            
+            try {
+                manual = manualDB.get(manualID);
+                currTitle = manual.getTitle();
+                currContent = manual.getContent();
+            } catch (Exception ex) {
+                Logger.getLogger(ManualServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
 // Create PDF
-                        String id = Integer.toString(manualID);
-                        String manualTitle = manual.getTitle();
-                        fileName = id + manualTitle + ".pdf";
-                        path = performTask(request, response, fileName, currTitle, currContent);
+                 String id = Integer.toString(manualID);
+                 String manualTitle = manual.getTitle();
+                 fileName = id + manualTitle + ".pdf";
+                 path = performTask(request, response, fileName, currTitle, currContent);                
 //                request.setAttribute("test", employeeEmail);
-                        try {
-                            es.sendMailWithAttachments(employeeEmail, "hello", "hello", path, false);
+                try { 
+                    es.sendMailWithAttachments(employeeEmail, "hello", "hello", path, false);
+                    request.setAttribute("test", employeeEmail);
 //to do the test change the email to your test email                    
 //                    es.sendMailWithAttachments("dsijnvsd@gmail.com", "hello", "hello", path, false);
-                        } catch (MessagingException ex) {
-                            Logger.getLogger(ManualServlet.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (NamingException ex) {
-                            Logger.getLogger(ManualServlet.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        doGet(request, response);
+                    request.setAttribute("message", "Manual is successufully send to email " + employeeEmail);
+                } catch (MessagingException ex) {
+                    Logger.getLogger(ManualServlet.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NamingException ex) {
+                    Logger.getLogger(ManualServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                doGet(request, response);
                     }
                 }
             }
