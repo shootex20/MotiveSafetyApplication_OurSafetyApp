@@ -22,20 +22,22 @@
             <h1>MotiveSafety OurSafety Application</h1>
             <br>
         </header>
-        <br>
-        <br>
-        <div class="mains">
-            <h2 class="welcome"><strong>WELCOME TO JOIN OUR APP</strong></h2>
+        <div class="content">
             <br>
-            <p><strong>${loginMsg}</strong></p>
+            <br>
+            <div class="mains">
+                <h2 class="welcome"><strong>WELCOME TO JOIN OUR APP</strong></h2>
+                <br>
+                <p><strong>${loginMsg}</strong></p>
 
-            <form action="login" method="post" class="form-group">
-                <label>Username:</label><br><input type="text" name="username_input" <c:out value=""></c:out>><br>
-                <label>Password:</label><br><input type="password" name="password_input" <c:out value=""></c:out>><br><br>
-                    <input type="submit" value="Log in" class="btn btn-primary">
-                    <br><br><br><br>
-                    <a href="<c:url value='/forgot'/>">Forgot your password?</a>
-            </form>
+                <form action="login" method="post" class="form-group">
+                    <label>Username:</label><br><input type="text" name="username_input" <c:out value=""></c:out>><br>
+                    <label>Password:</label><br><input type="password" name="password_input" <c:out value=""></c:out>><br><br>
+                        <input type="submit" value="Log in" class="btn btn-primary">
+                        <br><br><br><br>
+                        <a href="<c:url value='/forgot'/>">Forgot your password?</a>
+                </form>
+            </div>
         </div>
         <footer>
             <br>

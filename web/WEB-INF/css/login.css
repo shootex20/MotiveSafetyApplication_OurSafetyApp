@@ -3,6 +3,16 @@
     color: white;
 }
 
+body{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.content{
+    flex: 1;
+}
+
 .socialMedia{
     margin-left: 48%
 }
@@ -13,13 +23,6 @@ p,h1,h2,h3,h4,h5,h6 {
 
 .form-group{
     text-align: center;
-}
-
-.mains {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
 }
 
 .welcome {
@@ -33,10 +36,7 @@ p,h1,h2,h3,h4,h5,h6 {
 }
 
 footer{
-    position: fixed;
     background-color: blue;
-    width: 100%;
-    bottom: 0;
     color: white;
 }
 

@@ -1,16 +1,25 @@
 body{
     text-align: center !important;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.content{
+    flex: 1;
 }
 
 .box1{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     width: 30%;
     margin: 0 auto;
+    overflow-x: auto;
 }
 
 #BTNS{
     width: 80%;
     margin-left: 10%;
+    overflow-wrap: initial;
 }
 
 .loginHeader{
@@ -25,9 +34,12 @@ body{
 }
 
 footer{
-    position: fixed;
     background-color: blue;
-    width: 100%;
-    bottom: 0;
     color: white;
+}
+
+@media only screen and (max-width: 700px) {
+  #BTNS {
+    font-size: 10px;
+  }
 }

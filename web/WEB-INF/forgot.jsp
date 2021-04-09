@@ -21,6 +21,7 @@
             <h1>MotiveSafety OurSafety Application</h1>
             <br>
         </header>
+        <div class="content">
         <br><br><br>
         <h1><strong>Have you forgotten your password?</strong></h1>
         <br><br>
@@ -37,6 +38,7 @@
             <span>${resetMsg}</span>
         </form>
         <br>
+        </div>
         </div>
         <footer>
             <br>
