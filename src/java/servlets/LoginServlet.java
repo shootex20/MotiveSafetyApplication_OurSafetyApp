@@ -36,7 +36,6 @@ public class LoginServlet extends HttpServlet {
 
         String username = request.getParameter("username_input");
         String password = request.getParameter("password_input");
-
         Logins user = acctServ.login(username, password);
 
         if (username == null || username.isEmpty() || password == null || password.isEmpty()) {

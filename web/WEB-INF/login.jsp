@@ -27,7 +27,7 @@
         <div class="mains">
             <h2 class="welcome"><strong>WELCOME TO JOIN OUR APP</strong></h2>
             <br>
-            <p class="invalid-feedback">${loginMsg}</p>
+            <p>${loginMsg}</p>
 
             <form action="login" method="post" class="form-group">
                 <label>Username:</label><br><input type="text" name="username_input" <c:out value=""></c:out>><br>
