@@ -208,14 +208,14 @@
                     <input type="hidden" name="token" value="<c:out value="${token}"/>">
                     <div class="responsive-form">
                         <br>
-                        <table class="mainf">
+ <table class="mainf">
                             <tr>
                                 <td><label>First Name </label></td>
-                                <td><input required type="text" name="comp_firstname"></td>
+                                <td><input required type="text" name="comp_firstname" placeholder="John"></td>
                             </tr>
                             <tr>
                                 <td><label>Last Name </label></td>
-                                <td><input required type="text" name="comp_lastname"></td>
+                                <td><input required type="text" name="comp_lastname" placeholder="Doe"></td>
                             </tr>
                             <tr>
                                 <td><label>Birth Date </label></td>
@@ -231,7 +231,7 @@
                             </tr>
                             <tr>
                                 <td><label>Phone Number </label></td>
-                                <td><input required pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" type="tel" name="comp_phone" placeholder="123-456-7890"></td>
+                                <td><input required pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" type="tel" name="comp_phone" placeholder="1-123-456-7890"></td>
                             </tr>
                             <tr>
                                 <td><label>Phone Ext </label></td>
@@ -239,11 +239,11 @@
                             </tr>
                             <tr>
                                 <td><label>Email </label></td>
-                                <td><input required type="email" name="comp_email" placeholder="Ex: address@service.com"></td>
+                                <td><input required type="email" name="comp_email" placeholder="address@service.com"></td>
                             </tr>
                             <tr>
                                 <td> <label>Address Line 1 </label></td>
-                                <td><input required type="text" name="comp_addressLine1"></td>
+                                <td><input required type="text" name="comp_addressLine1" placeholder="32 Test Ave."></td>
                             </tr>
                             <tr>
                                 <td><label>Address Line 2 </label></td>
@@ -267,7 +267,7 @@
                             </tr>
                             <tr>
                                 <td><label>Position </label></td>
-                                <td><input required type="text" name="comp_pos"></td>
+                                <td><input required type="text" name="comp_pos" placeholder="CEO"></td>
                             </tr>
                         </table>
                         <br>
@@ -291,7 +291,7 @@
                             </tr>
                             <tr>
                                 <td><label>Phone Number </label></td>
-                                <td><input required type="tel" name="emer_phone" pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="1234567890"></td>
+                                <td><input required type="tel" name="emer_phone" pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="1-623-456-7890"></td>
                             </tr>
                             <tr>
                                 <td><label>Relationship </label></td>
@@ -365,7 +365,7 @@
 
 
                                             <label>Phone Number </label></td>
-                                        <td><input pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" required type="tel" name="edcomp_phone" placeholder="123-456-7890" value="${phone.phoneID.countryCode}-${phone.phoneID.areaCode}-${phone.phoneID.localNumber}"></td>
+                                        <td><input pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{4}" required type="tel" name="edcomp_phone" placeholder="1-123-456-7890" value="${phone.phoneID.countryCode}-${phone.phoneID.areaCode}-${phone.phoneID.localNumber}"></td>
                                     </tr>
                                     <tr>
                                         <td><label>Phone Ext </label></td>
