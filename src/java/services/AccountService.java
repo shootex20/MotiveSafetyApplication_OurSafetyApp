@@ -6,14 +6,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * The service class that interacts with the database for the login process
  *
- * @author 844817
+ * @author Dan Quach
  */
 public class AccountService {
 
     UserDB userDB = new UserDB();
     PasswordStorage ps = new PasswordStorage();
 
+    /**
+     * Validates some inputs then compares the stored and input credentials
+     *
+     * @param username the username input by the user
+     * @param password the password input by the user
+     * @return either a Logins user object or null
+     */
     public Logins login(String username, String password) {
 
         try {

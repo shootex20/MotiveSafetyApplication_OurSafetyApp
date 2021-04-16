@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dataaccess;
 
 import domain.Logins;
@@ -28,6 +23,10 @@ public class LoginDB {
 
     }
 
+    /**
+     * 
+     * @param user 
+     */
     public void delete(Logins user) {
        EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -44,6 +43,12 @@ public class LoginDB {
         
        }
 
+    /**
+     * 
+     * @param user
+     * @return
+     * @throws Exception 
+     */
     public int insert(Logins user) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -62,6 +67,11 @@ public class LoginDB {
         }
     }
 
+    /**
+     * 
+     * @param userID
+     * @return 
+     */
     public Logins get(Integer userID) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
@@ -74,6 +84,11 @@ public class LoginDB {
         }
     }
 
+    /**
+     * 
+     * @param user
+     * @throws Exception 
+     */
     public void update(Logins user) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();

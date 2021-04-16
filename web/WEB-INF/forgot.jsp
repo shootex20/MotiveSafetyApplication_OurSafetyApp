@@ -1,6 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+<%--This is the forgot password page that users go to when they forget their accounts--%>
+
 <html>
     <head>
         <style type="text/css">

@@ -25,16 +25,30 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+/**
+ * The JavaMail class used to send emails
+ *
+ * @author Dan Quach & Wenhao Liu
+ */
 public class EmailService {
-    
-    public EmailService(){
-    
+
+    /**
+     * No argument constructor
+     */
+    public EmailService() {
+
     }
-    
-    // Send a template email
+
+    /**
+     * Sends an email with using an HTML template
+     *
+     * @param to recipient email address
+     * @param subject email subject
+     * @param template HTML template
+     * @param tags HTML tags
+     * @throws Exception if there is an error in the process
+     */
     public void sendMail(String to, String subject, String template, HashMap<String, String> tags) throws Exception {
-        // {{firstname}} -> Anne
-        // {{date}} -> Oct. 28
         String body = "";
         try {
             // read whole template into a single variable (body)
@@ -58,7 +72,16 @@ public class EmailService {
         sendMail(to, subject, body, true);
     }
 
-    // Send a simple email
+    /**
+     *
+     * @param to recipient email address
+     * @param subject email subject
+     * @param body text body of email
+     * @param bodyIsHTML if body uses a template call the other overloaded
+     * method
+     * @throws MessagingException if an error occurs when sending
+     * @throws NamingException if an error occurs with names of email addresses
+     */
     public void sendMail(String to, String subject, String body, boolean bodyIsHTML) throws MessagingException, NamingException {
         Context env = (Context) new InitialContext().lookup("java:comp/env");
         String username = (String) env.lookup("webmail-username");
@@ -93,7 +116,17 @@ public class EmailService {
         transport.sendMessage(message, message.getAllRecipients());
         transport.close();
     }
-    
+
+    /**
+     *
+     * @param to recipient email address
+     * @param subject email subject
+     * @param body text body of email
+     * @param filePath the path to retrieve attachments
+     * @param bodyIsHTML
+     * @throws MessagingException if an error occurs when sending
+     * @throws NamingException if an error occurs with names of email addresses
+     */
     public void sendMailWithAttachments(String to, String subject, String body, String filePath, boolean bodyIsHTML) throws MessagingException, NamingException {
         Context env = (Context) new InitialContext().lookup("java:comp/env");
         String username = (String) env.lookup("webmail-username");
@@ -116,40 +149,34 @@ public class EmailService {
             message.setText(body);
         }
 
-        
-                //3) create MimeBodyPart object and set your message text     
-        BodyPart messageBodyPart1 = new MimeBodyPart();  
-        messageBodyPart1.setText("Hi there, please view the attached file to learn what you should know during the work.");  
+        //3) create MimeBodyPart object and set your message text     
+        BodyPart messageBodyPart1 = new MimeBodyPart();
+        messageBodyPart1.setText("Hi there, please view the attached file to learn what you should know during the work.");
 
         //4) create new MimeBodyPart object and set DataHandler object to this object      
-        MimeBodyPart messageBodyPart2 = new MimeBodyPart();  
+        MimeBodyPart messageBodyPart2 = new MimeBodyPart();
 
-        DataSource source = new FileDataSource(filePath);  
-        messageBodyPart2.setDataHandler(new DataHandler(source));  
-        messageBodyPart2.setFileName(filePath);  
+        DataSource source = new FileDataSource(filePath);
+        messageBodyPart2.setDataHandler(new DataHandler(source));
+        messageBodyPart2.setFileName(filePath);
 
-         //5) create Multipart object and add MimeBodyPart objects to this object      
-        Multipart multipart = new MimeMultipart();  
-        multipart.addBodyPart(messageBodyPart1);  
-        multipart.addBodyPart(messageBodyPart2);  
-        
-        
-         message.setContent(multipart );  
-        
-        
-        
-        
+        //5) create Multipart object and add MimeBodyPart objects to this object      
+        Multipart multipart = new MimeMultipart();
+        multipart.addBodyPart(messageBodyPart1);
+        multipart.addBodyPart(messageBodyPart2);
+
+        message.setContent(multipart);
+
         // address the message
         Address fromAddress = new InternetAddress(username);
         Address toAddress = new InternetAddress(to);
         message.setFrom(fromAddress);
         message.setRecipient(Message.RecipientType.TO, toAddress);
 
-
         // send the message
         Transport transport = session.getTransport();
         transport.connect(username, password);
         transport.sendMessage(message, message.getAllRecipients());
-        transport.close();    
+        transport.close();
     }
 }

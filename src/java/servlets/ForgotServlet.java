@@ -9,8 +9,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import services.PasswordStorage;
 
+/**
+ * The forgotten password servlet for handling the routing to and from the
+ * forgot.jsp
+ *
+ * @author Dan Quach
+ */
 public class ForgotServlet extends HttpServlet {
 
+    /**
+     * When an action is GET will route to the forgot.jsp page
+     *
+     * @param request HTTP request object
+     * @param response HTTP response object
+     * @throws IOException When there is an error with input/output operations
+     * @throws ServletException When there is an error with the servlets
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,6 +45,14 @@ public class ForgotServlet extends HttpServlet {
         return;
     }
 
+    /**
+     * When the action is POST this will perform the forgotten password process
+     *
+     * @param request HTTP request object
+     * @param response HTTP response object
+     * @throws IOException When there is an error with input/output operations
+     * @throws ServletException When there is an error with the servlets
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

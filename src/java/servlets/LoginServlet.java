@@ -10,9 +10,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import services.AccountService;
 
+/**
+ * The login servlet for handling the routing to and from the login.jsp
+ *
+ * @author Dan Quach
+ */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
+    /**
+     * When an action is GET will route to the login.jsp page
+     *
+     * @param request HTTP request object
+     * @param response HTTP response object
+     * @throws IOException When there is an error with input/output operations
+     * @throws ServletException When there is an error with the servlets
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -28,6 +41,14 @@ public class LoginServlet extends HttpServlet {
         return;
     }
 
+    /**
+     * When the action is POST this will perform the login process
+     *
+     * @param request HTTP request object
+     * @param response HTTP response object
+     * @throws IOException When there is an error with input/output operations
+     * @throws ServletException When there is an error with the servlets
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

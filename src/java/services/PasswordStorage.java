@@ -11,7 +11,8 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.Base64;
 
 /**
- * Original Password hashing PBKDF2 algorithm by MicleBrick Dec 3, 2018
+ * Original Password hashing PBKDF2 algorithm by MicleBrick Dec 3, 2018 contains
+ * salting and hashing algorithm as well other password methods
  * https://github.com/defuse/password-hashing
  * https://github.com/defuse/password-hashing/blob/master/PasswordStorage.java
  *
@@ -19,25 +20,54 @@ import java.util.Base64;
  */
 public class PasswordStorage {
 
+    /**
+     * Internal class to define a user defined exception for bad hashes
+     */
     @SuppressWarnings("serial")
     static public class InvalidHashException extends Exception {
 
+        /**
+         * Custom exception for invalid hashes
+         *
+         * @param message the message to be displayed
+         */
         public InvalidHashException(String message) {
             super(message);
         }
 
+        /**
+         * Custom exception for invalid hashes
+         *
+         * @param message the message to be displayed
+         * @param source the source of the issue
+         */
         public InvalidHashException(String message, Throwable source) {
             super(message, source);
         }
     }
 
+    /**
+     * Internal class to define a user defined exception for operations that are
+     * not possible
+     */
     @SuppressWarnings("serial")
     static public class CannotPerformOperationException extends Exception {
 
+        /**
+         * Custom exception for invalid operations
+         *
+         * @param message the message to be displayed
+         */
         public CannotPerformOperationException(String message) {
             super(message);
         }
 
+        /**
+         * Custom exception for invalid operations
+         *
+         * @param message the message to be displayed
+         * @param source the source of the issue
+         */
         public CannotPerformOperationException(String message, Throwable source) {
             super(message, source);
         }
@@ -58,10 +88,26 @@ public class PasswordStorage {
     public static final int SALT_INDEX = 3;
     public static final int PBKDF2_INDEX = 4;
 
+    /**
+     * Method for creating hashes
+     *
+     * @param password password created by administrators
+     * @return recursive call to the other overloaded method
+     * @throws services.PasswordStorage.CannotPerformOperationException if an
+     * invalid operation error occurs
+     */
     public static String createHash(String password) throws CannotPerformOperationException {
         return createHash(password.toCharArray());
     }
 
+    /**
+     * Creates a secure random salt with a PBKDF2 hash and combines the parts
+     *
+     * @param password the password created but casted to a char array
+     * @return the salted and hashed password
+     * @throws services.PasswordStorage.CannotPerformOperationException if an
+     * invalid operation error occurs
+     */
     public static String createHash(char[] password) throws CannotPerformOperationException {
         // Generate a random salt
         SecureRandom random = new SecureRandom();
@@ -78,10 +124,33 @@ public class PasswordStorage {
         return parts;
     }
 
+    /**
+     * Uses to verify if a password matches the stored value
+     *
+     * @param password a string input during login
+     * @param correctHash the value stored in the database
+     * @return a recursive call to the other overloaded method
+     * @throws services.PasswordStorage.CannotPerformOperationException if an
+     * invalid operation error occurs
+     * @throws services.PasswordStorage.InvalidHashException if an invalid hash
+     * error occurs
+     */
     public boolean verifyPassword(String password, String correctHash) throws CannotPerformOperationException, InvalidHashException {
         return verifyPassword(password.toCharArray(), correctHash);
     }
 
+    /**
+     * Hashes the string password and compares it with the stored value to
+     * determine if there is a match
+     *
+     * @param password the string password converted to a char array
+     * @param correctHash the correct password in the database
+     * @return true or false if both hashes are equal
+     * @throws services.PasswordStorage.CannotPerformOperationException if an
+     * invalid operation error occurs
+     * @throws services.PasswordStorage.InvalidHashException if an invalid hash
+     * error occurs
+     */
     public boolean verifyPassword(char[] password, String correctHash) throws CannotPerformOperationException, InvalidHashException {
         // Decode the hash into its parameters
         String[] params = correctHash.split(":");
@@ -139,6 +208,13 @@ public class PasswordStorage {
         return slowEquals(hash, testHash);
     }
 
+    /**
+     * Compares each password character by character
+     *
+     * @param a byte array of password input
+     * @param b byte array of of stored password
+     * @return true or false if there is a difference
+     */
     private static boolean slowEquals(byte[] a, byte[] b) {
         int diff = a.length ^ b.length;
         for (int i = 0; i < a.length && i < b.length; i++) {
@@ -147,6 +223,17 @@ public class PasswordStorage {
         return diff == 0;
     }
 
+    /**
+     * The pbkdf2 hashing algorithm with a salt
+     *
+     * @param password the original password string converted to a char array
+     * @param salt the passed salt byte array
+     * @param iterations total number of passes
+     * @param bytes the size of the hash
+     * @return a salted and hashed password
+     * @throws services.PasswordStorage.CannotPerformOperationException if an
+     * invalid operation error occurs
+     */
     private static byte[] pbkdf2(char[] password, byte[] salt, int iterations, int bytes) throws CannotPerformOperationException {
         try {
             PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, bytes * 8);
@@ -159,19 +246,44 @@ public class PasswordStorage {
         }
     }
 
+    /**
+     * For decoding from base64
+     *
+     * @param hex a hexadecimal string
+     * @return the decoded byte array
+     * @throws IllegalArgumentException if there is an error with the passed
+     * argument
+     */
     private static byte[] fromBase64(String hex) throws IllegalArgumentException {
         return Base64.getDecoder().decode(hex);
     }
 
+    /**
+     * For encoding to base64
+     *
+     * @param array an array of bytes
+     * @return a string encoded to base64
+     */
     private static String toBase64(byte[] array) {
         return Base64.getEncoder().encodeToString(array);
     }
 
+    /**
+     * Used for replacing a forgotten password with a new randomized one
+     *
+     * @return a securely randomized password string
+     */
     public String newRandomPassword() {
         String temporary = Long.toHexString(Double.doubleToLongBits(Math.random()));
         return temporary;
     }
 
+    /**
+     * Used to reset the password for an account
+     *
+     * @param username the string of an existing accounts username
+     * @throws Exception if there is any issue during the process
+     */
     public void passwordReset(String username) throws Exception {
 
         UserDB udb = new UserDB();
@@ -189,7 +301,7 @@ public class PasswordStorage {
         String body = "Your new temporary password is: " + tempPassword;
 
         ls.updatePassword(username, tempPassword);
-        EmailService es = new EmailService();        
+        EmailService es = new EmailService();
         es.sendMail(to, SUBJECT, body, false);
     }
 
