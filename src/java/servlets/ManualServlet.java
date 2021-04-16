@@ -34,8 +34,20 @@ import services.CompanypersonService;
 import services.EmailService;
 import services.ManualService;
 
+/**
+ * Manual management
+ * @author 809968
+ * @version 1.0
+ */
 public class ManualServlet extends HttpServlet {
 
+    /**
+     * In charge of fetching data to the page
+     * @param request HttpServletRequest
+     * @param response HttpServletResponse
+     * @throws ServletException Servlet Exception
+     * @throws IOException Input/Output Exception
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -193,6 +205,13 @@ public class ManualServlet extends HttpServlet {
 
     }
 
+    /**
+     * In charge of all the activities when user click buttons
+     * @param request Http Servlet Request
+     * @param response Http Servlet Response
+     * @throws ServletException Servlet Exception
+     * @throws IOException Input/output exception
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -366,6 +385,17 @@ public class ManualServlet extends HttpServlet {
         getServletContext().getRequestDispatcher("/WEB-INF/manual.jsp").forward(request, response);
     }
 
+/**
+ * Creating new PDF file with format and return file path
+ * @param request HttpServletRequest
+ * @param response HttpServletResponse
+ * @param fileName Name of the PDF file
+ * @param currTitle Title of the PDF file
+ * @param currContent Content of the PDF file
+ * @return file path
+ * @throws ServletException
+ * @throws IOException 
+ */
     private String performTask(HttpServletRequest request, HttpServletResponse response, String fileName, String currTitle, String currContent) throws ServletException,
             IOException {
 
@@ -374,7 +404,6 @@ public class ManualServlet extends HttpServlet {
         String path = AbsolutePath + quote + fileName;
         String escaped = path.replace("\\", "\\\\");
 
-//               String useable_path = "C:\\Users\\809968\\Desktop\\PROJ-354 _Capstone\\Project\\Version_03_25\\MotiveSafetyApplication_OurSafetyApp\\web\\WEB-INF\\pdfFiles\\" + fileName;
         //Create pdf
         PDDocument document = new PDDocument();
 

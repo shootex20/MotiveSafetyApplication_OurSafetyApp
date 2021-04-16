@@ -24,11 +24,19 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
+ * Company welcome page management
  * @author 809968
+ * @version 1.0
  */
 public class companyWelcomeServlet extends HttpServlet {
 
+/**
+ * In charge of fetching data to the page
+ * @param request Http Servlet Request
+ * @param response Http Servlet Response
+ * @throws ServletException Servlet Exception
+ * @throws IOException  Input/Output Exception
+ */   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -88,6 +96,13 @@ public class companyWelcomeServlet extends HttpServlet {
 
     }
 
+/**
+ * In charge of actions in welcome page
+ * @param request Http Servlet Request
+ * @param response Http Servlet Response
+ * @throws ServletException Servlet Exception
+ * @throws IOException  Input/Output Exception
+ */    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
