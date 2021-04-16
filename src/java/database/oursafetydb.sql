@@ -586,8 +586,11 @@ INSERT INTO `emergencycontact` (`emergencyContact_ID`, `dateAdded`, `dateRemoved
 DELETE FROM `item`;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
 INSERT INTO `item` (`item_ID`, `dateAdded`, `DateRemoved`, `userAdded`, `userRemoved`, `itemClass_ID`, `model`, `company_ID`, `isChargeableType`, `isDepletingType`, `isDepreactiationType`, `itemClassInformation`, `serialNumber`, `purchaseDate`) VALUES
-	(1, '2021-02-09', NULL, 1, NULL, 1, 'F150', 1, 1, 1, 1, 'car infor', '123456', '2021-02-12'),
-	(2, '2021-02-12', NULL, 1, NULL, 2, 'Milwaukee', 2, 1, 1, 1, 'screwdriver infor', '123457', '2021-02-12');
+(2, '2021-02-12', NULL, 1, NULL, 2, 'Milwaukee', 2, 1, 1, 1, 'screwdriver infor', '123457', '2021-02-12'),
+(3, '2021-04-16', NULL, 3, NULL, NULL, 'Honda Civic', 1, 1, 1, 1, '2007, Blue', 'JH4KA3140HC006995', '2021-04-01'),
+(4, '2021-04-16', NULL, 3, NULL, NULL, 'Motormaster Drill', 1, 1, 1, 1, 'Motomaster Drill, Blue', '2', '2021-03-02'),
+(5, '2021-04-16', NULL, 3, NULL, NULL, 'Husky Lawn Mower', 1, 1, 1, 1, 'Push Mower', '345365342', '2021-03-30'),
+(6, '2021-04-16', NULL, 3, NULL, NULL, 'John Deer Tractor Trailer', 1, 1, 1, 1, '2021, Green', 'FD45Z7HJKQ', '2020-11-04');
 
 
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
