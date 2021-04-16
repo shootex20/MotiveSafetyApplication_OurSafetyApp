@@ -24,7 +24,12 @@ import javax.persistence.EntityTransaction;
  */
 public class ManualDB {
     
-    
+/**
+ * get manual by id
+ * @param id manual id
+ * @return manual
+ * @throws Exception Exception
+ */   
    public Manual get(int id) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -36,7 +41,11 @@ public class ManualDB {
         }
     }
     
-        
+/**
+ * get manuals
+ * @return all the manual
+ * @throws Exception Exception
+ */        
     public List<Manual> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
@@ -47,7 +56,12 @@ public class ManualDB {
             em.close();
         }
     }
-    
+
+/**
+ * insert manual
+ * @param manual manual
+ * @throws Exception Exception
+ */    
     public void insert(Manual manual) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -63,6 +77,11 @@ public class ManualDB {
         }
     }
 
+/**
+ * delete manual form database
+ * @param manual manual
+ * @throws Exception 
+ */    
     public void delete(Manual manual) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();  
         EntityTransaction trans = em.getTransaction();
@@ -76,7 +95,12 @@ public class ManualDB {
             em.close();
         }
     }
-            
+ 
+/**
+ * update manual from database
+ * @param manual manual
+ * @throws Exception  exception
+ */    
     public void update(Manual manual) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
