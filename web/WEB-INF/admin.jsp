@@ -30,7 +30,6 @@
         <div class="outline">
             <br>
             <h3 class="welcome"><strong>Manage Companies</strong></h3>
-
             <div class="search_box">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -85,7 +84,6 @@
             </div>
             <br>
             <br>
-
         <c:if test="${selectedComp == null}">
             <div class="outline">
                 <br>
@@ -95,23 +93,23 @@
                     <table class="formS">
                         <tr class="formrow">
                             <td  class="formrow">Name: </td>
-                            <td class="formrow"><input type="text" name="compname" required placeholder="AAA_Company"></td>
+                            <td class="formrow"><input type="text" required name="compname" required placeholder="AAA_Company"></td>
                         </tr>
                         <tr class="formrow">
                             <td class="formrow">Short Name: </td>
-                            <td class="formrow"><input type="text" name="shortname" required placeholder="AAA_Company"></td>
+                            <td class="formrow"><input type="text" required name="shortname" required placeholder="AAA_Company"></td>
                         </tr>
                         <tr class="formrow">
                             <td class="formrow">Description: </td>
-                            <td class="formrow"><input type="text" name="description"></td>
+                            <td class="formrow"><input type="text" required name="description"></td>
                         </tr>
                         <tr class="formrow">
                             <td class="formrow">Account: </td>
-                            <td class="formrow"><input type="text" name="account"></td>
+                            <td class="formrow"><input type="text" required name="account"></td>
                         </tr>
                         <tr class="formrow">
                             <td class="formrow">Industry: </td>
-                            <td class="formrow"><input type="text" name="industry"><br></td>
+                            <td class="formrow"><input type="text" required name="industry"><br></td>
                         </tr>
                     </table>
                     </div>
@@ -124,7 +122,6 @@
             </div>
         </c:if>
         <c:if test="${selectedComp != null}">
-
             <div class="outline">
                 <br>
                 <h3 class="welcome"><strong>Edit Company</strong></h3>
@@ -133,31 +130,31 @@
                     <table class="formS">
                         <tr class="formrow">
                             <td class="formrow">Company ID: </td>
-                            <td class="formrow"><input type="text" name="id" value="${selectedComp.companyID}" readonly=""></td>
+                            <td class="formrow"><input type="text" name="id" required value="${selectedComp.companyID}" readonly=""></td>
                         </tr>
                         <tr class="formrow">
                             <td class="formrow">Date Added:</td>
-                            <td class="formrow"><input type="date" name="dateAdded" value="${selectedComp.dateAdded}" readonly=""></td>
+                            <td class="formrow"><input type="date" name="dateAdded" required value="${selectedComp.dateAdded}" readonly=""></td>
                         </tr>
                         <tr class="formrow">
                             <td class="formrow">Name: </td>
-                            <td class="formrow"><input type="text" name="compname" value="${selectedComp.name}" ></td>
+                            <td class="formrow"><input type="text" name="compname" required value="${selectedComp.name}" ></td>
                         </tr>
                         <tr class="formrow">
                             <td class="formrow">Short Name: </td>
-                            <td class="formrow"><input type="text" name="shortname" value="${selectedComp.shortname}"></td>
+                            <td class="formrow"><input type="text" name="shortname" required value="${selectedComp.shortname}"></td>
                         </tr>
                         <tr class="formrow">
                             <td class="formrow">Description: </td>
-                            <td class="formrow"><input type="text" name="description" value="${selectedComp.description}"></td>
+                            <td class="formrow"><input type="text" name="description" required value="${selectedComp.description}"></td>
                         </tr>
                         <tr class="formrow">
                             <td class="formrow">Account: </td>
-                            <td class="formrow"><input type="text" name="account" value="${selectedComp.account}"></td>
+                            <td class="formrow"><input type="text" name="account" required value="${selectedComp.account}"></td>
                         </tr>
                         <tr class="formrow">
                             <td class="formrow">Industry: </td>
-                            <td class="formrow"><input type="text" name="industry" value="${selectedComp.industry}"></td>
+                            <td class="formrow"><input type="text" name="industry" required value="${selectedComp.industry}"></td>
                         </tr>
                     </table>
                     </div>
@@ -191,19 +188,15 @@
                     <th>Company Name</th>
                     <th>Is Active?</th>
                     <th>Is Admin</th>
-
                     <th>Deactivate</th>
-
                 </tr>
                 <c:forEach var="user"  items="${activeManagers}">
-
                     <tr>
                         <td>${user.userId}</td>
                         <td><fmt:formatDate value="${user.dateAdded}" pattern="dd/MM/YYYY"/></td>
                         <td>${user.username}</td>
                         <td>${user.password}</td>
                         <td>${user.companyID.name}</td>
-
                         <td>${user.isActive}</td>
                         <td>${user.isAdmin}</td>
                         <td>
@@ -246,19 +239,15 @@
                     <th>Company Name</th>
                     <th>Is Active?</th>
                     <th>Is Admin</th>
-
                     <th>Reactivate</th>
-
                 </tr>
                 <c:forEach var="inActiveUser"  items="${inActiveManagers}">
-
                     <tr>
                         <td>${inActiveUser.userId}</td>
                         <td><fmt:formatDate  value="${inActiveUser.dateAdded}" pattern="dd/MM/YYYY"/></td>
                         <td>${inActiveUser.username}</td>
                         <td>${inActiveUser.password}</td>
                         <td>${inActiveUser.companyID.name}</td>
-
                         <td>${inActiveUser.isActive}</td>
                         <td>${inActiveUser.isAdmin}</td>
                         <td>
@@ -305,7 +294,6 @@
                                         <c:choose>
                                             <c:when test="${not empty selectedComp && selectedComp eq company.companyID}">
                                                 <option value="${logincompanyID.companyID}" selected="true">${logincompanyID.name} </option>
-
                                             </c:when>
                                             <c:otherwise>
                                                 <option value="${logincompanyID.companyID}">${logincompanyID.name}</option>
@@ -340,9 +328,6 @@
                     <br>
                 </form>
             </c:if>
-
-
-
             <script>
                 $(document).ready(function () {
                     // for company table
@@ -352,8 +337,6 @@
                             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                         });
                     });
-
-
                     // for active managers table 
                     $("#searchActiveManagers").on("keyup", function () {
                         var value = $(this).val().toLowerCase();
@@ -361,9 +344,6 @@
                             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                         });
                     });
-
-
-
                     // for inactive managers table 
                     $("#searchInActiveManagers").on("keyup", function () {
                         var value = $(this).val().toLowerCase();
@@ -371,19 +351,13 @@
                             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                         });
                     });
-
-
                 });
             </script>
-
-
             <script>
                 //checks if passwords entered match
                 function passwordmatch() {
                     var password = document.getElementById("password").value;
                     var conPassword = document.getElementById("confirmPassword").value;
-
-
                     if (password != conPassword) {
                         alert("Passwords do not match.");
                         return false;
@@ -391,7 +365,6 @@
                     return true;
                 }
             </script>
-
         </div>
             
             <footer>
