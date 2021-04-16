@@ -83,13 +83,31 @@ public class Address implements Serializable {
     @OneToMany(orphanRemoval=true, mappedBy = "addressID", fetch = FetchType.EAGER)
     private List<Companypersonaddress> companypersonaddressList;
 
+    /**
+     *
+     */
     public Address() {
     }
 
+    /**
+     *
+     * @param addressID
+     */
     public Address(Integer addressID) {
         this.addressID = addressID;
     }
     
+    /**
+     *
+     * @param dateAdded
+     * @param userAdded
+     * @param addressLine1
+     * @param addressLine2
+     * @param city
+     * @param province
+     * @param country
+     * @param postalCode
+     */
     public Address(Date dateAdded, Integer userAdded, String addressLine1, String addressLine2, String city, String province, String country, String postalCode) {
         this.dateAdded = dateAdded;
         this.userAdded = userAdded;
@@ -101,107 +119,211 @@ public class Address implements Serializable {
         this.postalCode = postalCode;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getAddressID() {
         return addressID;
     }
 
+    /**
+     *
+     * @param addressID
+     */
     public void setAddressID(Integer addressID) {
         this.addressID = addressID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDateAdded() {
         return dateAdded;
     }
 
+    /**
+     *
+     * @param dateAdded
+     */
     public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDateRemoved() {
         return dateRemoved;
     }
 
+    /**
+     *
+     * @param dateRemoved
+     */
     public void setDateRemoved(Date dateRemoved) {
         this.dateRemoved = dateRemoved;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getUserAdded() {
         return userAdded;
     }
 
+    /**
+     *
+     * @param userAdded
+     */
     public void setUserAdded(Integer userAdded) {
         this.userAdded = userAdded;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getUserRemoved() {
         return userRemoved;
     }
 
+    /**
+     *
+     * @param userRemoved
+     */
     public void setUserRemoved(Integer userRemoved) {
         this.userRemoved = userRemoved;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getAddressLine1() {
         return addressLine1;
     }
 
+    /**
+     *
+     * @param addressLine1
+     */
     public void setAddressLine1(String addressLine1) {
         this.addressLine1 = addressLine1;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getAddressLine2() {
         return addressLine2;
     }
 
+    /**
+     *
+     * @param addressLine2
+     */
     public void setAddressLine2(String addressLine2) {
         this.addressLine2 = addressLine2;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCity() {
         return city;
     }
 
+    /**
+     *
+     * @param city
+     */
     public void setCity(String city) {
         this.city = city;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getProvince() {
         return province;
     }
 
+    /**
+     *
+     * @param province
+     */
     public void setProvince(String province) {
         this.province = province;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCountry() {
         return country;
     }
 
+    /**
+     *
+     * @param country
+     */
     public void setCountry(String country) {
         this.country = country;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPostalCode() {
         return postalCode;
     }
 
+    /**
+     *
+     * @param postalCode
+     */
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
 
+    /**
+     *
+     * @return
+     */
     public Typelibrary getTypeLibraryID() {
         return typeLibraryID;
     }
 
+    /**
+     *
+     * @param typeLibraryID
+     */
     public void setTypeLibraryID(Typelibrary typeLibraryID) {
         this.typeLibraryID = typeLibraryID;
     }
 
+    /**
+     *
+     * @return
+     */
     @XmlTransient
     public List<Companypersonaddress> getCompanypersonaddressList() {
         return companypersonaddressList;
     }
 
+    /**
+     *
+     * @param companypersonaddressList
+     */
     public void setCompanypersonaddressList(List<Companypersonaddress> companypersonaddressList) {
         this.companypersonaddressList = companypersonaddressList;
     }

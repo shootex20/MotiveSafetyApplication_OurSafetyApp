@@ -17,7 +17,16 @@ import java.util.Date;
  */
 public class EmergencyContactService {
     
-        public void update(Person personID, String firstName, String lastName, String phoneNum, String relation) throws Exception {
+    /**
+     *
+     * @param personID
+     * @param firstName
+     * @param lastName
+     * @param phoneNum
+     * @param relation
+     * @throws Exception
+     */
+    public void update(Person personID, String firstName, String lastName, String phoneNum, String relation) throws Exception {
         EmergencyContactDB compPerDB = new EmergencyContactDB();
         Emergencycontact compPos = compPerDB.get(personID.getEmergencyContactID().getEmergencyContactID());
         compPos.setEmergencyContactFirstName(firstName);
@@ -27,7 +36,17 @@ public class EmergencyContactService {
         compPerDB.update(compPos);
     }
         
-        public Emergencycontact insert(Integer userAdded, String emergencyContactFirstName, String emergencyContactLastName, 
+    /**
+     *
+     * @param userAdded
+     * @param emergencyContactFirstName
+     * @param emergencyContactLastName
+     * @param emergencyContactNumber
+     * @param emergencyContactRelationship
+     * @return
+     * @throws Exception
+     */
+    public Emergencycontact insert(Integer userAdded, String emergencyContactFirstName, String emergencyContactLastName, 
             String emergencyContactNumber, String emergencyContactRelationship) throws Exception {
         EmergencyContactDB addDB = new EmergencyContactDB();
         

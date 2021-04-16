@@ -84,13 +84,33 @@ public class Item implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     private Itemclass itemClassID;
 
+    /**
+     *
+     */
     public Item() {
     }
 
+    /**
+     *
+     * @param itemID
+     */
     public Item(Integer itemID) {
         this.itemID = itemID;
     }
     
+    /**
+     *
+     * @param dateAdded
+     * @param userAdded
+     * @param model
+     * @param isChargeableType
+     * @param isDepletingType
+     * @param isDepreactiationType
+     * @param itemClassInformation
+     * @param serialNumber
+     * @param purchaseDate
+     * @param companyID
+     */
     public Item(Date dateAdded, int userAdded, String model, boolean isChargeableType, 
     boolean isDepletingType, boolean isDepreactiationType, 
     String itemClassInformation, String serialNumber, Date purchaseDate, Company companyID) {
@@ -107,6 +127,19 @@ public class Item implements Serializable {
         this.companyID = companyID;
     }
     
+    /**
+     *
+     * @param itemID
+     * @param dateAdded
+     * @param model
+     * @param isChargeableType
+     * @param isDepletingType
+     * @param isDepreactiationType
+     * @param itemClassInformation
+     * @param serialNumber
+     * @param purchaseDate
+     * @param companyID
+     */
     public Item(Integer itemID, Date dateAdded ,String model, boolean isChargeableType, 
     boolean isDepletingType, boolean isDepreactiationType, 
     String itemClassInformation, String serialNumber, Date purchaseDate, Company companyID) {
@@ -123,114 +156,226 @@ public class Item implements Serializable {
         this.companyID = companyID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getItemID() {
         return itemID;
     }
 
+    /**
+     *
+     * @param itemID
+     */
     public void setItemID(Integer itemID) {
         this.itemID = itemID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDateAdded() {
         return dateAdded;
     }
 
+    /**
+     *
+     * @param dateAdded
+     */
     public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDateRemoved() {
         return dateRemoved;
     }
 
+    /**
+     *
+     * @param dateRemoved
+     */
     public void setDateRemoved(Date dateRemoved) {
         this.dateRemoved = dateRemoved;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getUserAdded() {
         return userAdded;
     }
 
+    /**
+     *
+     * @param userAdded
+     */
     public void setUserAdded(Integer userAdded) {
         this.userAdded = userAdded;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getUserRemoved() {
         return userRemoved;
     }
 
+    /**
+     *
+     * @param userRemoved
+     */
     public void setUserRemoved(Integer userRemoved) {
         this.userRemoved = userRemoved;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getModel() {
         return model;
     }
 
+    /**
+     *
+     * @param model
+     */
     public void setModel(String model) {
         this.model = model;
     }
 
+    /**
+     *
+     * @return
+     */
     public Boolean getIsChargeableType() {
         return isChargeableType;
     }
 
+    /**
+     *
+     * @param isChargeableType
+     */
     public void setIsChargeableType(Boolean isChargeableType) {
         this.isChargeableType = isChargeableType;
     }
 
+    /**
+     *
+     * @return
+     */
     public Boolean getIsDepletingType() {
         return isDepletingType;
     }
 
+    /**
+     *
+     * @param isDepletingType
+     */
     public void setIsDepletingType(Boolean isDepletingType) {
         this.isDepletingType = isDepletingType;
     }
 
+    /**
+     *
+     * @return
+     */
     public Boolean getIsDepreactiationType() {
         return isDepreactiationType;
     }
 
+    /**
+     *
+     * @param isDepreactiationType
+     */
     public void setIsDepreactiationType(Boolean isDepreactiationType) {
         this.isDepreactiationType = isDepreactiationType;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getItemClassInformation() {
         return itemClassInformation;
     }
 
+    /**
+     *
+     * @param itemClassInformation
+     */
     public void setItemClassInformation(String itemClassInformation) {
         this.itemClassInformation = itemClassInformation;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSerialNumber() {
         return serialNumber;
     }
 
+    /**
+     *
+     * @param serialNumber
+     */
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getPurchaseDate() {
         return purchaseDate;
     }
 
+    /**
+     *
+     * @param purchaseDate
+     */
     public void setPurchaseDate(Date purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public Company getCompanyID() {
         return companyID;
     }
 
+    /**
+     *
+     * @param companyID
+     */
     public void setCompanyID(Company companyID) {
         this.companyID = companyID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Itemclass getItemClassID() {
         return itemClassID;
     }
 
+    /**
+     *
+     * @param itemClassID
+     */
     public void setItemClassID(Itemclass itemClassID) {
         this.itemClassID = itemClassID;
     }

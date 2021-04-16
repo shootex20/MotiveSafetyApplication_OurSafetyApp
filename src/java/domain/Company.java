@@ -90,13 +90,29 @@ public class Company implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Companyrelationship> companyrelationshipList;
 
+    /**
+     *
+     */
     public Company() {
     }
 
+    /**
+     *
+     * @param companyID
+     */
     public Company(Integer companyID) {
         this.companyID = companyID;
     }
 
+    /**
+     *
+     * @param dateAdded
+     * @param name
+     * @param shortname
+     * @param description
+     * @param account
+     * @param industry
+     */
     public Company(Date dateAdded, String name, String shortname, String description, String account, String industry) {
         this.dateAdded = dateAdded;
         this.name = name;
@@ -107,153 +123,297 @@ public class Company implements Serializable {
                
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getCompanyID() {
         return companyID;
     }
 
+    /**
+     *
+     * @param companyID
+     */
     public void setCompanyID(Integer companyID) {
         this.companyID = companyID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDateAdded() {
         return dateAdded;
     }
 
+    /**
+     *
+     * @param dateAdded
+     */
     public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDateRemoved() {
         return dateRemoved;
     }
 
+    /**
+     *
+     * @param dateRemoved
+     */
     public void setDateRemoved(Date dateRemoved) {
         this.dateRemoved = dateRemoved;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getUserAdded() {
         return userAdded;
     }
 
+    /**
+     *
+     * @param userAdded
+     */
     public void setUserAdded(Integer userAdded) {
         this.userAdded = userAdded;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getUserRemoved() {
         return userRemoved;
     }
 
+    /**
+     *
+     * @param userRemoved
+     */
     public void setUserRemoved(Integer userRemoved) {
         this.userRemoved = userRemoved;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getShortname() {
         return shortname;
     }
 
+    /**
+     *
+     * @param shortname
+     */
     public void setShortname(String shortname) {
         this.shortname = shortname;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     *
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSaltHash() {
         return saltHash;
     }
 
+    /**
+     *
+     * @param saltHash
+     */
     public void setSaltHash(String saltHash) {
         this.saltHash = saltHash;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getAccount() {
         return account;
     }
 
+    /**
+     *
+     * @param account
+     */
     public void setAccount(String account) {
         this.account = account;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getIndustry() {
         return industry;
     }
 
+    /**
+     *
+     * @param industry
+     */
     public void setIndustry(String industry) {
         this.industry = industry;
     }
 
+    /**
+     *
+     * @return
+     */
     @XmlTransient
     public List<Item> getItemList() {
         return itemList;
     }
 
+    /**
+     *
+     * @param itemList
+     */
     public void setItemList(List<Item> itemList) {
         this.itemList = itemList;
     }
 
+    /**
+     *
+     * @return
+     */
     @XmlTransient
     public List<Companyperson> getCompanypersonList() {
         return companypersonList;
     }
 
+    /**
+     *
+     * @param companypersonList
+     */
     public void setCompanypersonList(List<Companyperson> companypersonList) {
         this.companypersonList = companypersonList;
     }
 
+    /**
+     *
+     * @return
+     */
     @XmlTransient
     public List<Url> getUrlList() {
         return urlList;
     }
 
+    /**
+     *
+     * @param urlList
+     */
     public void setUrlList(List<Url> urlList) {
         this.urlList = urlList;
     }
 
+    /**
+     *
+     * @return
+     */
     @XmlTransient
     public List<Companypositions> getCompanypositionsList() {
         return companypositionsList;
     }
 
+    /**
+     *
+     * @param companypositionsList
+     */
     public void setCompanypositionsList(List<Companypositions> companypositionsList) {
         this.companypositionsList = companypositionsList;
     }
 
+    /**
+     *
+     * @return
+     */
     @XmlTransient
     public List<Companytype> getCompanytypeList() {
         return companytypeList;
     }
 
+    /**
+     *
+     * @param companytypeList
+     */
     public void setCompanytypeList(List<Companytype> companytypeList) {
         this.companytypeList = companytypeList;
     }
 
+    /**
+     *
+     * @return
+     */
     @XmlTransient
     public List<Logins> getLoginsList() {
         return loginsList;
     }
 
+    /**
+     *
+     * @param loginsList
+     */
     public void setLoginsList(List<Logins> loginsList) {
         this.loginsList = loginsList;
     }
 
+    /**
+     *
+     * @return
+     */
     @XmlTransient
     public List<Companyrelationship> getCompanyrelationshipList() {
         return companyrelationshipList;
     }
 
+    /**
+     *
+     * @param companyrelationshipList
+     */
     public void setCompanyrelationshipList(List<Companyrelationship> companyrelationshipList) {
         this.companyrelationshipList = companyrelationshipList;
     }

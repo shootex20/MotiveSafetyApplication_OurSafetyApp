@@ -21,6 +21,12 @@ import javax.persistence.Query;
  */
 public class ItemClassFieldsDB {
     
+    /**
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
     public Itemclassfields get(int id) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -32,7 +38,11 @@ public class ItemClassFieldsDB {
         }
     }
     
-        
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
     public List<Itemclassfields> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {

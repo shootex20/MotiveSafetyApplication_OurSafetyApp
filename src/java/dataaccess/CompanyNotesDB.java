@@ -19,14 +19,24 @@ import javax.persistence.TypedQuery;
  */
 public class CompanyNotesDB {
     
-    
-        public List<Companynotes> getAll() throws Exception {
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
+    public List<Companynotes> getAll() throws Exception {
          EntityManager em = DBUtil.getEmFactory().createEntityManager();
           TypedQuery<Companynotes> query = em.createNamedQuery("Companynotes.findAll", Companynotes.class);
          List<Companynotes> results = query.getResultList();
             return results;
     }
    
+    /**
+     *
+     * @param compNotesID
+     * @return
+     * @throws Exception
+     */
     public Companynotes get(int compNotesID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -38,7 +48,11 @@ public class CompanyNotesDB {
         }
     }
 
-    
+    /**
+     *
+     * @param note
+     * @throws Exception
+     */
     public void insert(Companynotes note) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -54,6 +68,11 @@ public class CompanyNotesDB {
         }
     }
 
+    /**
+     *
+     * @param note
+     * @throws Exception
+     */
     public void update(Companynotes note) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -69,6 +88,11 @@ public class CompanyNotesDB {
         }
     }
 
+    /**
+     *
+     * @param note
+     * @throws Exception
+     */
     public void delete(Companynotes note) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();  
         EntityTransaction trans = em.getTransaction();

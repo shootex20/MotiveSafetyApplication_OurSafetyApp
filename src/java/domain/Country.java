@@ -45,34 +45,65 @@ public class Country implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "countryID")
     private List<Province> provinceList;
 
+    /**
+     *
+     */
     public Country() {
     }
 
+    /**
+     *
+     * @param countryID
+     */
     public Country(Integer countryID) {
         this.countryID = countryID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getCountryID() {
         return countryID;
     }
 
+    /**
+     *
+     * @param countryID
+     */
     public void setCountryID(Integer countryID) {
         this.countryID = countryID;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCountryName() {
         return countryName;
     }
 
+    /**
+     *
+     * @param countryName
+     */
     public void setCountryName(String countryName) {
         this.countryName = countryName;
     }
 
+    /**
+     *
+     * @return
+     */
     @XmlTransient
     public List<Province> getProvinceList() {
         return provinceList;
     }
 
+    /**
+     *
+     * @param provinceList
+     */
     public void setProvinceList(List<Province> provinceList) {
         this.provinceList = provinceList;
     }

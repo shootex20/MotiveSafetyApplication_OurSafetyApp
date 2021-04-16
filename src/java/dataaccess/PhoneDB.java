@@ -15,6 +15,12 @@ import domain.Phone;
  */
 public class PhoneDB {
            
+    /**
+     *
+     * @param phone_ID
+     * @return
+     * @throws Exception
+     */
     public Phone get(int phone_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -26,7 +32,13 @@ public class PhoneDB {
         }
     }
     
-        public Phone insert(Phone add) throws Exception {
+    /**
+     *
+     * @param add
+     * @return
+     * @throws Exception
+     */
+    public Phone insert(Phone add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
@@ -42,6 +54,11 @@ public class PhoneDB {
         }
     }
 
+    /**
+     *
+     * @param phone
+     * @throws Exception
+     */
     public void update(Phone phone) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -57,6 +74,11 @@ public class PhoneDB {
         }
     }
 
+    /**
+     *
+     * @param phone
+     * @throws Exception
+     */
     public void delete(Phone phone) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();  
         EntityTransaction trans = em.getTransaction();

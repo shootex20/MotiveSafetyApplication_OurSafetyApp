@@ -19,7 +19,9 @@ import java.util.List;
 public class ManualService {
     ManualDB manualDB;
  
-  
+    /**
+     *
+     */
     public ManualService(){
         manualDB = new ManualDB();
     }

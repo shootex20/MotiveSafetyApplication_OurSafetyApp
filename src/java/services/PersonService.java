@@ -18,6 +18,14 @@ import java.util.Date;
  */
 public class PersonService {
     
+    /**
+     *
+     * @param personID
+     * @param firstName
+     * @param lastName
+     * @param gender
+     * @throws Exception
+     */
     public void update(Integer personID, String firstName, String lastName, char gender) throws Exception {
         PersonDB personDB = new PersonDB();
         Person user = personDB.get(personID);
@@ -27,7 +35,18 @@ public class PersonService {
         personDB.update(user);
     }
     
-        public Person insert(Integer userAdded, String firstName, String lastName, String dateOfBirth, Character gender, Emergencycontact emergencyContactID) throws Exception {
+    /**
+     *
+     * @param userAdded
+     * @param firstName
+     * @param lastName
+     * @param dateOfBirth
+     * @param gender
+     * @param emergencyContactID
+     * @return
+     * @throws Exception
+     */
+    public Person insert(Integer userAdded, String firstName, String lastName, String dateOfBirth, Character gender, Emergencycontact emergencyContactID) throws Exception {
         PersonDB addDB = new PersonDB();
         
         Date dateAdded = new Date();
@@ -44,7 +63,13 @@ public class PersonService {
         return add;
     }
         
-        public void link(int personID, Emergencycontact emergencyContactID) throws Exception {
+    /**
+     *
+     * @param personID
+     * @param emergencyContactID
+     * @throws Exception
+     */
+    public void link(int personID, Emergencycontact emergencyContactID) throws Exception {
         PersonDB compPerDB = new PersonDB();
         Person compPersEdit = compPerDB.get(personID);
         compPersEdit.setEmergencyContactID(emergencyContactID);

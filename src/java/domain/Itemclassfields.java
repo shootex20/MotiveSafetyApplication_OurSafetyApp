@@ -71,13 +71,29 @@ public class Itemclassfields implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     private Typelibrary typeLibraryID;
 
+    /**
+     *
+     */
     public Itemclassfields() {
     }
 
+    /**
+     *
+     * @param itemClassFieldsID
+     */
     public Itemclassfields(Integer itemClassFieldsID) {
         this.itemClassFieldsID = itemClassFieldsID;
     }
     
+    /**
+     *
+     * @param itemClassFieldsID
+     * @param dateAdded
+     * @param userAdded
+     * @param fieldDescr
+     * @param fieldDescrType
+     * @param typeLibraryID
+     */
     public Itemclassfields(Integer itemClassFieldsID, Date dateAdded, Integer userAdded, 
             String fieldDescr, String fieldDescrType, Typelibrary typeLibraryID) {
       
@@ -90,75 +106,147 @@ public class Itemclassfields implements Serializable {
        
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getItemClassFieldsID() {
         return itemClassFieldsID;
     }
 
+    /**
+     *
+     * @param itemClassFieldsID
+     */
     public void setItemClassFieldsID(Integer itemClassFieldsID) {
         this.itemClassFieldsID = itemClassFieldsID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDateAdded() {
         return dateAdded;
     }
 
+    /**
+     *
+     * @param dateAdded
+     */
     public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDateRemoved() {
         return dateRemoved;
     }
 
+    /**
+     *
+     * @param dateRemoved
+     */
     public void setDateRemoved(Date dateRemoved) {
         this.dateRemoved = dateRemoved;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getUserAdded() {
         return userAdded;
     }
 
+    /**
+     *
+     * @param userAdded
+     */
     public void setUserAdded(Integer userAdded) {
         this.userAdded = userAdded;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getUserRemoved() {
         return userRemoved;
     }
 
+    /**
+     *
+     * @param userRemoved
+     */
     public void setUserRemoved(Integer userRemoved) {
         this.userRemoved = userRemoved;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getFieldDescr() {
         return fieldDescr;
     }
 
+    /**
+     *
+     * @param fieldDescr
+     */
     public void setFieldDescr(String fieldDescr) {
         this.fieldDescr = fieldDescr;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getFieldDescrType() {
         return fieldDescrType;
     }
 
+    /**
+     *
+     * @param fieldDescrType
+     */
     public void setFieldDescrType(String fieldDescrType) {
         this.fieldDescrType = fieldDescrType;
     }
 
+    /**
+     *
+     * @return
+     */
     @XmlTransient
     public List<Itemclass> getItemclassList() {
         return itemclassList;
     }
 
+    /**
+     *
+     * @param itemclassList
+     */
     public void setItemclassList(List<Itemclass> itemclassList) {
         this.itemclassList = itemclassList;
     }
 
+    /**
+     *
+     * @return
+     */
     public Typelibrary getTypeLibraryID() {
         return typeLibraryID;
     }
 
+    /**
+     *
+     * @param typeLibraryID
+     */
     public void setTypeLibraryID(Typelibrary typeLibraryID) {
         this.typeLibraryID = typeLibraryID;
     }

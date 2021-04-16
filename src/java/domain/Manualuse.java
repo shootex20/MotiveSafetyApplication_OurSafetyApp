@@ -68,81 +68,160 @@ public class Manualuse implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     private Manual manualID;
 
+    /**
+     *
+     */
     public Manualuse() {
     }
 
+    /**
+     *
+     * @param manualUseID
+     */
     public Manualuse(Integer manualUseID) {
         this.manualUseID = manualUseID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getManualUseID() {
         return manualUseID;
     }
 
+    /**
+     *
+     * @param manualUseID
+     */
     public void setManualUseID(Integer manualUseID) {
         this.manualUseID = manualUseID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDateAdded() {
         return dateAdded;
     }
 
+    /**
+     *
+     * @param dateAdded
+     */
     public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDateRemoved() {
         return dateRemoved;
     }
 
+    /**
+     *
+     * @param dateRemoved
+     */
     public void setDateRemoved(Date dateRemoved) {
         this.dateRemoved = dateRemoved;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getUserAdded() {
         return userAdded;
     }
 
+    /**
+     *
+     * @param userAdded
+     */
     public void setUserAdded(Integer userAdded) {
         this.userAdded = userAdded;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getUserRemoved() {
         return userRemoved;
     }
 
+    /**
+     *
+     * @param userRemoved
+     */
     public void setUserRemoved(Integer userRemoved) {
         this.userRemoved = userRemoved;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getCompanyID() {
         return companyID;
     }
 
+    /**
+     *
+     * @param companyID
+     */
     public void setCompanyID(Integer companyID) {
         this.companyID = companyID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getCompanyRole() {
         return companyRole;
     }
 
+    /**
+     *
+     * @param companyRole
+     */
     public void setCompanyRole(Integer companyRole) {
         this.companyRole = companyRole;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getJob() {
         return job;
     }
 
+    /**
+     *
+     * @param job
+     */
     public void setJob(Integer job) {
         this.job = job;
     }
 
+    /**
+     *
+     * @return
+     */
     public Manual getManualID() {
         return manualID;
     }
 
+    /**
+     *
+     * @param manualID
+     */
     public void setManualID(Manual manualID) {
         this.manualID = manualID;
     }

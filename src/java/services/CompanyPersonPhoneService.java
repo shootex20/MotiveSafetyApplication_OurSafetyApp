@@ -18,7 +18,15 @@ import java.util.Date;
  */
 public class CompanyPersonPhoneService {
     
-        public Companypersonphone insert(Integer userAdded, Companyperson companyPersonID, Phone phoneID) throws Exception {
+    /**
+     *
+     * @param userAdded
+     * @param companyPersonID
+     * @param phoneID
+     * @return
+     * @throws Exception
+     */
+    public Companypersonphone insert(Integer userAdded, Companyperson companyPersonID, Phone phoneID) throws Exception {
         CompanyPersonPhoneDB addDB = new CompanyPersonPhoneDB();
         
         Date dateAdded = new Date();

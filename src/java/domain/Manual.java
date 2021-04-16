@@ -80,9 +80,21 @@ public class Manual implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "manualID", fetch = FetchType.EAGER)
     private List<Manualuse> manualuseList;
 
+    /**
+     *
+     */
     public Manual() {
     }
 
+    /**
+     *
+     * @param dateAdded
+     * @param userAdded
+     * @param typeLibraryID
+     * @param title
+     * @param intention
+     * @param content
+     */
     public Manual(Date dateAdded, int userAdded,Typelibrary typeLibraryID, String title, String intention, String content ){
         this.dateAdded = dateAdded;
         this.userAdded = userAdded;
@@ -92,103 +104,203 @@ public class Manual implements Serializable {
         this.content = content;
     }
     
+    /**
+     *
+     * @param manualID
+     */
     public Manual(Integer manualID) {
         this.manualID = manualID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getManualID() {
         return manualID;
     }
 
+    /**
+     *
+     * @param manualID
+     */
     public void setManualID(Integer manualID) {
         this.manualID = manualID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDateAdded() {
         return dateAdded;
     }
 
+    /**
+     *
+     * @param dateAdded
+     */
     public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDateRemoved() {
         return dateRemoved;
     }
 
+    /**
+     *
+     * @param dateRemoved
+     */
     public void setDateRemoved(Date dateRemoved) {
         this.dateRemoved = dateRemoved;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getUserAdded() {
         return userAdded;
     }
 
+    /**
+     *
+     * @param userAdded
+     */
     public void setUserAdded(Integer userAdded) {
         this.userAdded = userAdded;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getUserRemoved() {
         return userRemoved;
     }
 
+    /**
+     *
+     * @param userRemoved
+     */
     public void setUserRemoved(Integer userRemoved) {
         this.userRemoved = userRemoved;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getParent() {
         return parent;
     }
 
+    /**
+     *
+     * @param parent
+     */
     public void setParent(Integer parent) {
         this.parent = parent;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     *
+     * @param title
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getIntention() {
         return intention;
     }
 
+    /**
+     *
+     * @param intention
+     */
     public void setIntention(String intention) {
         this.intention = intention;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getOverview() {
         return overview;
     }
 
+    /**
+     *
+     * @param overview
+     */
     public void setOverview(String overview) {
         this.overview = overview;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getContent() {
         return content;
     }
 
+    /**
+     *
+     * @param content
+     */
     public void setContent(String content) {
         this.content = content;
     }
 
+    /**
+     *
+     * @return
+     */
     public Typelibrary getTypeLibraryID() {
         return typeLibraryID;
     }
 
+    /**
+     *
+     * @param typeLibraryID
+     */
     public void setTypeLibraryID(Typelibrary typeLibraryID) {
         this.typeLibraryID = typeLibraryID;
     }
 
+    /**
+     *
+     * @return
+     */
     @XmlTransient
     public List<Manualuse> getManualuseList() {
         return manualuseList;
     }
 
+    /**
+     *
+     * @param manualuseList
+     */
     public void setManualuseList(List<Manualuse> manualuseList) {
         this.manualuseList = manualuseList;
     }

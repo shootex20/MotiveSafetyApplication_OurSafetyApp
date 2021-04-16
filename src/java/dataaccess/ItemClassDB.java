@@ -21,8 +21,12 @@ import javax.persistence.Query;
  */
 public class ItemClassDB {
 
-
- 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
     public Itemclass get(int id) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -34,7 +38,12 @@ public class ItemClassDB {
         }
     }
     
-         public List<Itemclass> getAll() throws Exception {
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
+    public List<Itemclass> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
             List<Itemclass> item = em.createNamedQuery("Itemclass.findAll", Itemclass.class).getResultList();

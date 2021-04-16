@@ -49,42 +49,81 @@ public class Province implements Serializable {
     @ManyToOne
     private Country countryID;
 
+    /**
+     *
+     */
     public Province() {
     }
 
+    /**
+     *
+     * @param provinceID
+     */
     public Province(Integer provinceID) {
         this.provinceID = provinceID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getProvinceID() {
         return provinceID;
     }
 
+    /**
+     *
+     * @param provinceID
+     */
     public void setProvinceID(Integer provinceID) {
         this.provinceID = provinceID;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getProvinceName() {
         return provinceName;
     }
 
+    /**
+     *
+     * @param provinceName
+     */
     public void setProvinceName(String provinceName) {
         this.provinceName = provinceName;
     }
 
+    /**
+     *
+     * @return
+     */
     @XmlTransient
     public List<City> getCityList() {
         return cityList;
     }
 
+    /**
+     *
+     * @param cityList
+     */
     public void setCityList(List<City> cityList) {
         this.cityList = cityList;
     }
 
+    /**
+     *
+     * @return
+     */
     public Country getCountryID() {
         return countryID;
     }
 
+    /**
+     *
+     * @param countryID
+     */
     public void setCountryID(Country countryID) {
         this.countryID = countryID;
     }

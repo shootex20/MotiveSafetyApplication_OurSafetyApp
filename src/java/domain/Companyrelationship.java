@@ -68,81 +68,160 @@ public class Companyrelationship implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     private Typelibrary typeLibraryID;
 
+    /**
+     *
+     */
     public Companyrelationship() {
     }
 
+    /**
+     *
+     * @param companyRelationshipID
+     */
     public Companyrelationship(Integer companyRelationshipID) {
         this.companyRelationshipID = companyRelationshipID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getCompanyRelationshipID() {
         return companyRelationshipID;
     }
 
+    /**
+     *
+     * @param companyRelationshipID
+     */
     public void setCompanyRelationshipID(Integer companyRelationshipID) {
         this.companyRelationshipID = companyRelationshipID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDateAdded() {
         return dateAdded;
     }
 
+    /**
+     *
+     * @param dateAdded
+     */
     public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDateRemoved() {
         return dateRemoved;
     }
 
+    /**
+     *
+     * @param dateRemoved
+     */
     public void setDateRemoved(Date dateRemoved) {
         this.dateRemoved = dateRemoved;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getUserAdded() {
         return userAdded;
     }
 
+    /**
+     *
+     * @param userAdded
+     */
     public void setUserAdded(Integer userAdded) {
         this.userAdded = userAdded;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getUserRemoved() {
         return userRemoved;
     }
 
+    /**
+     *
+     * @param userRemoved
+     */
     public void setUserRemoved(Integer userRemoved) {
         this.userRemoved = userRemoved;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getParent() {
         return parent;
     }
 
+    /**
+     *
+     * @param parent
+     */
     public void setParent(Integer parent) {
         this.parent = parent;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getChild() {
         return child;
     }
 
+    /**
+     *
+     * @param child
+     */
     public void setChild(Integer child) {
         this.child = child;
     }
 
+    /**
+     *
+     * @return
+     */
     public Company getCompanyID() {
         return companyID;
     }
 
+    /**
+     *
+     * @param companyID
+     */
     public void setCompanyID(Company companyID) {
         this.companyID = companyID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Typelibrary getTypeLibraryID() {
         return typeLibraryID;
     }
 
+    /**
+     *
+     * @param typeLibraryID
+     */
     public void setTypeLibraryID(Typelibrary typeLibraryID) {
         this.typeLibraryID = typeLibraryID;
     }

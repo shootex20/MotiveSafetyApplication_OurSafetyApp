@@ -53,13 +53,29 @@ public class Logins implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     private Company companyID;
 
+    /**
+     *
+     */
     public Logins() {
     }
 
+    /**
+     *
+     * @param userId
+     */
     public Logins(Integer userId) {
         this.userId = userId;
     }
 
+    /**
+     *
+     * @param dateAdded
+     * @param username
+     * @param password
+     * @param companyID
+     * @param isActive
+     * @param isAdmin
+     */
     public Logins(Date dateAdded, String username, String password, Company companyID, Character isActive, Character isAdmin) {
         this.dateAdded = dateAdded;
         this.username = username;
@@ -70,8 +86,15 @@ public class Logins implements Serializable {
                
     }
     
-    
-      public Logins(Date dateAdded, String username, String password, Character isActive, Character isAdmin) {
+    /**
+     *
+     * @param dateAdded
+     * @param username
+     * @param password
+     * @param isActive
+     * @param isAdmin
+     */
+    public Logins(Date dateAdded, String username, String password, Character isActive, Character isAdmin) {
         this.dateAdded = dateAdded;
         this.username = username;
         this.password = password;
@@ -81,90 +104,175 @@ public class Logins implements Serializable {
                
     }
 
+    /**
+     *
+     * @param dateAdded
+     * @param username
+     * @param password
+     * @param companyID
+     */
     public Logins(Date dateAdded, String username, String password, Company companyID) {
          this.dateAdded = dateAdded;
         this.username = username;
         this.password = password;
     }
 
-    
-
+    /**
+     *
+     * @return
+     */
     public Integer getUserId() {
         return userId;
     }
 
+    /**
+     *
+     * @param userId
+     */
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDateAdded() {
         return dateAdded;
     }
 
+    /**
+     *
+     * @param dateAdded
+     */
     public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDateRemoved() {
         return dateRemoved;
     }
 
+    /**
+     *
+     * @param dateRemoved
+     */
     public void setDateRemoved(Date dateRemoved) {
         this.dateRemoved = dateRemoved;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getUserAdded() {
         return userAdded;
     }
 
+    /**
+     *
+     * @param userAdded
+     */
     public void setUserAdded(Integer userAdded) {
         this.userAdded = userAdded;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getUserRemoved() {
         return userRemoved;
     }
 
+    /**
+     *
+     * @param userRemoved
+     */
     public void setUserRemoved(Integer userRemoved) {
         this.userRemoved = userRemoved;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     *
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     *
+     * @return
+     */
     public Character getIsActive() {
         return isActive;
     }
 
+    /**
+     *
+     * @param isActive
+     */
     public void setIsActive(Character isActive) {
         this.isActive = isActive;
     }
 
+    /**
+     *
+     * @return
+     */
     public Character getIsAdmin() {
         return isAdmin;
     }
 
+    /**
+     *
+     * @param isAdmin
+     */
     public void setIsAdmin(Character isAdmin) {
         this.isAdmin = isAdmin;
     }
 
+    /**
+     *
+     * @return
+     */
     public Company getCompanyID() {
         return companyID;
     }
 
+    /**
+     *
+     * @param companyID
+     */
     public void setCompanyID(Company companyID) {
         this.companyID = companyID;
     }

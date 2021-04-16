@@ -44,7 +44,13 @@ public class CompanyPositionsDB {
         }
     }
     
-            public Companypositions getID(int posID) throws Exception {
+    /**
+     *
+     * @param posID
+     * @return
+     * @throws Exception
+     */
+    public Companypositions getID(int posID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
@@ -55,6 +61,12 @@ public class CompanyPositionsDB {
         }
     }
     
+    /**
+     *
+     * @param compPos
+     * @return
+     * @throws Exception
+     */
     public Companypositions get(int compPos) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -66,9 +78,12 @@ public class CompanyPositionsDB {
         }
     }
     
-    
-    
-     public List<Companypositions> getAll() throws Exception {
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
+    public List<Companypositions> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
         try {
@@ -81,7 +96,12 @@ public class CompanyPositionsDB {
         
     }
      
-         public void update(Companypositions pos) throws Exception {
+    /**
+     *
+     * @param pos
+     * @throws Exception
+     */
+    public void update(Companypositions pos) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         
@@ -96,7 +116,13 @@ public class CompanyPositionsDB {
         }
     }
      
-        public Companypositions insert(Companypositions add) throws Exception {
+    /**
+     *
+     * @param add
+     * @return
+     * @throws Exception
+     */
+    public Companypositions insert(Companypositions add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 

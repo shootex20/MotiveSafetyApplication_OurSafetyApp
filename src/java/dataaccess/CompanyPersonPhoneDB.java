@@ -20,7 +20,13 @@ import servlets.EmployeeServlet;
  */
 public class CompanyPersonPhoneDB {
 
-        public List<Companypersonphone> getAll(int companyper_ID) throws Exception {
+    /**
+     *
+     * @param companyper_ID
+     * @return
+     * @throws Exception
+     */
+    public List<Companypersonphone> getAll(int companyper_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
             Companyperson companyPer = em.find(Companyperson.class, companyper_ID);
@@ -30,7 +36,13 @@ public class CompanyPersonPhoneDB {
         }
     }
         
-        public Companypersonphone get(Companyperson compPerson) throws Exception {
+    /**
+     *
+     * @param compPerson
+     * @return
+     * @throws Exception
+     */
+    public Companypersonphone get(Companyperson compPerson) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
@@ -40,7 +52,13 @@ public class CompanyPersonPhoneDB {
         }
     }
         
-        public Companypersonphone getID(int phoneID) throws Exception {
+    /**
+     *
+     * @param phoneID
+     * @return
+     * @throws Exception
+     */
+    public Companypersonphone getID(int phoneID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
@@ -51,8 +69,12 @@ public class CompanyPersonPhoneDB {
         }
     }
       
-        
-        public void update(Companypersonphone comp) throws Exception {
+    /**
+     *
+     * @param comp
+     * @throws Exception
+     */
+    public void update(Companypersonphone comp) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         try {
@@ -68,7 +90,13 @@ public class CompanyPersonPhoneDB {
         
     }
         
-        public Companypersonphone insert(Companypersonphone add) throws Exception {
+    /**
+     *
+     * @param add
+     * @return
+     * @throws Exception
+     */
+    public Companypersonphone insert(Companypersonphone add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
@@ -87,7 +115,12 @@ public class CompanyPersonPhoneDB {
         }
     }
         
-        public void updatePerson (Companypersonphone add) throws Exception
+    /**
+     *
+     * @param add
+     * @throws Exception
+     */
+    public void updatePerson (Companypersonphone add) throws Exception
         {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -125,7 +158,11 @@ public class CompanyPersonPhoneDB {
         }
         */
 
-        
+    /**
+     *
+     * @param add
+     * @throws Exception
+     */
     public void delete(Companypersonphone add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();  
         EntityTransaction trans = em.getTransaction();

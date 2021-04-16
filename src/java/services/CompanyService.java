@@ -25,39 +25,72 @@ public class CompanyService {
     
     private CompanyDB companyDB;
     
-    
+    /**
+     *
+     */
     public CompanyService() {
         companyDB = new CompanyDB();
     }
     
-    
-    
+    /**
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
     public Company get(Integer id) throws Exception  {
     return companyDB.get(id);
     }
     
-    
-     public List<Company> getAll() throws Exception {
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
+    public List<Company> getAll() throws Exception {
         return companyDB.getAll();
     }
      
-       
-     public int insert(Date dateAdded, String name, String shortname, String description, String account,  String industry) throws Exception {
+    /**
+     *
+     * @param dateAdded
+     * @param name
+     * @param shortname
+     * @param description
+     * @param account
+     * @param industry
+     * @return
+     * @throws Exception
+     */
+    public int insert(Date dateAdded, String name, String shortname, String description, String account,  String industry) throws Exception {
          Company comp = new Company ( dateAdded, name, shortname, description, account, industry);
          return companyDB.insert(comp);
     }
      
-     
-    
-    
-     public int delete(Integer id) throws Exception {
+    /**
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public int delete(Integer id) throws Exception {
         Company comp = companyDB.get(id);
         companyDB.delete(comp);  
         return companyDB.delete(comp);
     }
      
-     
-      public int update2( Date dateAdded, String name, String shortname, String description, String account,  String industry) throws Exception {
+    /**
+     *
+     * @param dateAdded
+     * @param name
+     * @param shortname
+     * @param description
+     * @param account
+     * @param industry
+     * @return
+     * @throws Exception
+     */
+    public int update2( Date dateAdded, String name, String shortname, String description, String account,  String industry) throws Exception {
        // Company comp = getCompanyID(Id);
        Integer id = null;
         Company comp = getCompanyID(id);
@@ -72,9 +105,18 @@ public class CompanyService {
        
     }
 
-      
-      
-        public int update( Integer id, String name, String shortname, String description, String account,  String industry) throws Exception {
+    /**
+     *
+     * @param id
+     * @param name
+     * @param shortname
+     * @param description
+     * @param account
+     * @param industry
+     * @return
+     * @throws Exception
+     */
+    public int update( Integer id, String name, String shortname, String description, String account,  String industry) throws Exception {
         Company comp = getCompanyID(id);
        
         comp.setName(name);

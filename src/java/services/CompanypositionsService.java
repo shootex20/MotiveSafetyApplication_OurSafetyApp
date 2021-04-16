@@ -19,14 +19,29 @@ import java.util.Date;
  */
 public class CompanypositionsService {
     
-        public void update(int posID, String posTitle) throws Exception {
+    /**
+     *
+     * @param posID
+     * @param posTitle
+     * @throws Exception
+     */
+    public void update(int posID, String posTitle) throws Exception {
         CompanyPositionsDB compPerDB = new CompanyPositionsDB();
         Companypositions compPos = compPerDB.get(posID);
         compPos.setPositionTitle(posTitle);
         compPerDB.update(compPos);
     }
         
-        public Companypositions insert(Integer userAdded, String positionTitle, Companyperson companyPersonID, Company companyID) throws Exception {
+    /**
+     *
+     * @param userAdded
+     * @param positionTitle
+     * @param companyPersonID
+     * @param companyID
+     * @return
+     * @throws Exception
+     */
+    public Companypositions insert(Integer userAdded, String positionTitle, Companyperson companyPersonID, Company companyID) throws Exception {
         CompanyPositionsDB addDB = new CompanyPositionsDB();
         
         Date dateAdded = new Date();
@@ -40,7 +55,13 @@ public class CompanypositionsService {
         return add;
     }
         
-        public void link(int posID, Companyperson personID) throws Exception {
+    /**
+     *
+     * @param posID
+     * @param personID
+     * @throws Exception
+     */
+    public void link(int posID, Companyperson personID) throws Exception {
         CompanyPositionsDB addDB = new CompanyPositionsDB();
         Companypositions compPersEdit = addDB.get(posID);
         compPersEdit.setCompanyPersonID(personID);

@@ -24,11 +24,20 @@ import javax.persistence.Query;
  */
 public class CompanyPersonAddressDB {
     
+    /**
+     *
+     */
     public CompanyPersonAddressDB()
     {
         
     }
     
+    /**
+     *
+     * @param companyper_ID
+     * @return
+     * @throws Exception
+     */
     public List<Companypersonaddress> getAll(int companyper_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
@@ -39,7 +48,13 @@ public class CompanyPersonAddressDB {
         }
     }
     
-        public Companypersonaddress get(Companyperson compPerson) throws Exception {
+    /**
+     *
+     * @param compPerson
+     * @return
+     * @throws Exception
+     */
+    public Companypersonaddress get(Companyperson compPerson) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
@@ -49,6 +64,12 @@ public class CompanyPersonAddressDB {
         }
     }
         
+    /**
+     *
+     * @param address_ID
+     * @return
+     * @throws Exception
+     */
     public Companypersonaddress getID(int address_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -60,6 +81,11 @@ public class CompanyPersonAddressDB {
         }
     }
         
+    /**
+     *
+     * @param comp
+     * @throws Exception
+     */
     public void update(Companypersonaddress comp) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -77,7 +103,13 @@ public class CompanyPersonAddressDB {
         
     }
     
-        public Companypersonaddress insert(Companypersonaddress add) throws Exception {
+    /**
+     *
+     * @param add
+     * @return
+     * @throws Exception
+     */
+    public Companypersonaddress insert(Companypersonaddress add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
 
@@ -96,7 +128,12 @@ public class CompanyPersonAddressDB {
         }
     }
         
-        public void updatePerson (Companypersonaddress add) throws Exception
+    /**
+     *
+     * @param add
+     * @throws Exception
+     */
+    public void updatePerson (Companypersonaddress add) throws Exception
         {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();

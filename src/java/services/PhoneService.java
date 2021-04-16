@@ -21,8 +21,14 @@ import java.util.List;
  */
 public class PhoneService {
     
-    
-        public void update(int phoneID,  String phoneNumber, String phoneExt) throws Exception {
+    /**
+     *
+     * @param phoneID
+     * @param phoneNumber
+     * @param phoneExt
+     * @throws Exception
+     */
+    public void update(int phoneID,  String phoneNumber, String phoneExt) throws Exception {
         PhoneDB addDB = new PhoneDB();
         Phone phone = addDB.get(phoneID);
 
@@ -41,7 +47,15 @@ public class PhoneService {
         addDB.update(phone);
     }
         
-        public Phone insert(Integer userAdded, String phoneNumber, String extension) throws Exception {
+    /**
+     *
+     * @param userAdded
+     * @param phoneNumber
+     * @param extension
+     * @return
+     * @throws Exception
+     */
+    public Phone insert(Integer userAdded, String phoneNumber, String extension) throws Exception {
         PhoneDB addDB = new PhoneDB();
         
         Date dateAdded = new Date();

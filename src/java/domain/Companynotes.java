@@ -69,81 +69,160 @@ public class Companynotes implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     private Companyperson companyPersonID;
 
+    /**
+     *
+     */
     public Companynotes() {
     }
 
+    /**
+     *
+     * @param companyNotesID
+     */
     public Companynotes(Integer companyNotesID) {
         this.companyNotesID = companyNotesID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getCompanyNotesID() {
         return companyNotesID;
     }
 
+    /**
+     *
+     * @param companyNotesID
+     */
     public void setCompanyNotesID(Integer companyNotesID) {
         this.companyNotesID = companyNotesID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDateAdded() {
         return dateAdded;
     }
 
+    /**
+     *
+     * @param dateAdded
+     */
     public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDateRemoved() {
         return dateRemoved;
     }
 
+    /**
+     *
+     * @param dateRemoved
+     */
     public void setDateRemoved(Date dateRemoved) {
         this.dateRemoved = dateRemoved;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getUserAdded() {
         return userAdded;
     }
 
+    /**
+     *
+     * @param userAdded
+     */
     public void setUserAdded(Integer userAdded) {
         this.userAdded = userAdded;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getUserRemoved() {
         return userRemoved;
     }
 
+    /**
+     *
+     * @param userRemoved
+     */
     public void setUserRemoved(Integer userRemoved) {
         this.userRemoved = userRemoved;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getNoteDate() {
         return noteDate;
     }
 
+    /**
+     *
+     * @param noteDate
+     */
     public void setNoteDate(Date noteDate) {
         this.noteDate = noteDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getNoteIndex() {
         return noteIndex;
     }
 
+    /**
+     *
+     * @param noteIndex
+     */
     public void setNoteIndex(Integer noteIndex) {
         this.noteIndex = noteIndex;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNote() {
         return note;
     }
 
+    /**
+     *
+     * @param note
+     */
     public void setNote(String note) {
         this.note = note;
     }
 
+    /**
+     *
+     * @return
+     */
     public Companyperson getCompanyPersonID() {
         return companyPersonID;
     }
 
+    /**
+     *
+     * @param companyPersonID
+     */
     public void setCompanyPersonID(Companyperson companyPersonID) {
         this.companyPersonID = companyPersonID;
     }

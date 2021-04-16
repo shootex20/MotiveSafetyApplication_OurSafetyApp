@@ -72,9 +72,21 @@ public class Emergencycontact implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "emergencyContactID", fetch = FetchType.EAGER)
     private List<Person> personList;
 
+    /**
+     *
+     */
     public Emergencycontact() {
     }
 
+    /**
+     *
+     * @param dateAdded
+     * @param userAdded
+     * @param emergencyContactFirstName
+     * @param emergencyContactLastName
+     * @param emergencyContactNumber
+     * @param emergencyContactRelationship
+     */
     public Emergencycontact(Date dateAdded, Integer userAdded, String emergencyContactFirstName, String emergencyContactLastName, 
             String emergencyContactNumber, String emergencyContactRelationship)
     {
@@ -88,87 +100,171 @@ public class Emergencycontact implements Serializable {
         //this.personList = personList;
     }
     
+    /**
+     *
+     * @param emergencyContactID
+     */
     public Emergencycontact(Integer emergencyContactID) {
         this.emergencyContactID = emergencyContactID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getEmergencyContactID() {
         return emergencyContactID;
     }
 
+    /**
+     *
+     * @param emergencyContactID
+     */
     public void setEmergencyContactID(Integer emergencyContactID) {
         this.emergencyContactID = emergencyContactID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDateAdded() {
         return dateAdded;
     }
 
+    /**
+     *
+     * @param dateAdded
+     */
     public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getDateRemoved() {
         return dateRemoved;
     }
 
+    /**
+     *
+     * @param dateRemoved
+     */
     public void setDateRemoved(Date dateRemoved) {
         this.dateRemoved = dateRemoved;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getUserAdded() {
         return userAdded;
     }
 
+    /**
+     *
+     * @param userAdded
+     */
     public void setUserAdded(Integer userAdded) {
         this.userAdded = userAdded;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getUserRemoved() {
         return userRemoved;
     }
 
+    /**
+     *
+     * @param userRemoved
+     */
     public void setUserRemoved(Integer userRemoved) {
         this.userRemoved = userRemoved;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEmergencyContactFirstName() {
         return emergencyContactFirstName;
     }
 
+    /**
+     *
+     * @param emergencyContactFirstName
+     */
     public void setEmergencyContactFirstName(String emergencyContactFirstName) {
         this.emergencyContactFirstName = emergencyContactFirstName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEmergencyContactLastName() {
         return emergencyContactLastName;
     }
 
+    /**
+     *
+     * @param emergencyContactLastName
+     */
     public void setEmergencyContactLastName(String emergencyContactLastName) {
         this.emergencyContactLastName = emergencyContactLastName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEmergencyContactNumber() {
         return emergencyContactNumber;
     }
 
+    /**
+     *
+     * @param emergencyContactNumber
+     */
     public void setEmergencyContactNumber(String emergencyContactNumber) {
         this.emergencyContactNumber = emergencyContactNumber;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEmergencyContactRelationship() {
         return emergencyContactRelationship;
     }
 
+    /**
+     *
+     * @param emergencyContactRelationship
+     */
     public void setEmergencyContactRelationship(String emergencyContactRelationship) {
         this.emergencyContactRelationship = emergencyContactRelationship;
     }
 
+    /**
+     *
+     * @return
+     */
     @XmlTransient
     public List<Person> getPersonList() {
         return personList;
     }
 
+    /**
+     *
+     * @param personList
+     */
     public void setPersonList(List<Person> personList) {
         this.personList = personList;
     }

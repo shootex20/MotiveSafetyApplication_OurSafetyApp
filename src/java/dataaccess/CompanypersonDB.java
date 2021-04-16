@@ -19,6 +19,12 @@ import javax.persistence.TypedQuery;
  */
 public class CompanypersonDB {
 
+    /**
+     *
+     * @param companyID
+     * @return
+     * @throws Exception
+     */
     public List<Companyperson> getAll(Company companyID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         em.clear();
@@ -30,6 +36,12 @@ public class CompanypersonDB {
         }
     }
 
+    /**
+     *
+     * @param person_ID
+     * @return
+     * @throws Exception
+     */
     public Companyperson get(int person_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
@@ -41,6 +53,13 @@ public class CompanypersonDB {
         }
     }
 
+    /**
+     *
+     * @param company_ID
+     * @param person_ID
+     * @param email
+     * @return
+     */
     public Companyperson getByFields(int company_ID, int person_ID, String email) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
@@ -51,6 +70,11 @@ public class CompanypersonDB {
         }
     }
 
+    /**
+     *
+     * @param comp
+     * @throws Exception
+     */
     public void update(Companyperson comp) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -66,6 +90,12 @@ public class CompanypersonDB {
 
     }
 
+    /**
+     *
+     * @param add
+     * @return
+     * @throws Exception
+     */
     public Companyperson insert(Companyperson add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();

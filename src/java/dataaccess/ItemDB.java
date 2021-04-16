@@ -21,7 +21,13 @@ import javax.persistence.Query;
  */
 public class ItemDB {
     
-        public List<Item> getAll(Company companyID) throws Exception {
+    /**
+     *
+     * @param companyID
+     * @return
+     * @throws Exception
+     */
+    public List<Item> getAll(Company companyID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
             Company company = em.find(Company.class, companyID.getCompanyID());
@@ -31,6 +37,12 @@ public class ItemDB {
         }
     }
    
+    /**
+     *
+     * @param item_ID
+     * @return
+     * @throws Exception
+     */
     public Item get(int item_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
@@ -42,7 +54,12 @@ public class ItemDB {
         }
     }
     
-        public void insert(Item item) throws Exception {
+    /**
+     *
+     * @param item
+     * @throws Exception
+     */
+    public void insert(Item item) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         
@@ -60,6 +77,11 @@ public class ItemDB {
         }
     }
 
+    /**
+     *
+     * @param item
+     * @throws Exception
+     */
     public void update(Item item) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -75,6 +97,11 @@ public class ItemDB {
         }
     }
 
+    /**
+     *
+     * @param item
+     * @throws Exception
+     */
     public void delete(Item item) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();

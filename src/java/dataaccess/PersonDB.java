@@ -25,6 +25,11 @@ import javax.persistence.Query;
  */
 public class PersonDB {
 
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
     public List<Person> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
@@ -37,6 +42,14 @@ public class PersonDB {
 
     }
 
+    /**
+     *
+     * @param firstName
+     * @param lastName
+     * @param dob
+     * @return
+     * @throws Exception
+     */
     public Person getWithFields(String firstName, String lastName, String dob) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
@@ -48,6 +61,12 @@ public class PersonDB {
         }
     }
 
+    /**
+     *
+     * @param person_ID
+     * @return
+     * @throws Exception
+     */
     public Person get(int person_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
 
@@ -59,6 +78,11 @@ public class PersonDB {
         }
     }
 
+    /**
+     *
+     * @param comp
+     * @throws Exception
+     */
     public void update(Person comp) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -75,6 +99,12 @@ public class PersonDB {
 
     }
 
+    /**
+     *
+     * @param add
+     * @return
+     * @throws Exception
+     */
     public Person insert(Person add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();

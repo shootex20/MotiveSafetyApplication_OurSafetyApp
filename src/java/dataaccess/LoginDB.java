@@ -11,6 +11,11 @@ import javax.persistence.EntityTransaction;
  */
 public class LoginDB {
 
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
     public List<Logins> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {

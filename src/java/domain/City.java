@@ -44,33 +44,64 @@ public class City implements Serializable {
     @ManyToOne
     private Province provinceID;
 
+    /**
+     *
+     */
     public City() {
     }
 
+    /**
+     *
+     * @param cityID
+     */
     public City(Integer cityID) {
         this.cityID = cityID;
     }
 
+    /**
+     *
+     * @return
+     */
     public Integer getCityID() {
         return cityID;
     }
 
+    /**
+     *
+     * @param cityID
+     */
     public void setCityID(Integer cityID) {
         this.cityID = cityID;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCityName() {
         return cityName;
     }
 
+    /**
+     *
+     * @param cityName
+     */
     public void setCityName(String cityName) {
         this.cityName = cityName;
     }
 
+    /**
+     *
+     * @return
+     */
     public Province getProvinceID() {
         return provinceID;
     }
 
+    /**
+     *
+     * @param provinceID
+     */
     public void setProvinceID(Province provinceID) {
         this.provinceID = provinceID;
     }

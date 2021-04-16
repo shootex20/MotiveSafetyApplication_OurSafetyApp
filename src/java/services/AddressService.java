@@ -21,7 +21,18 @@ import java.util.List;
  */
 public class AddressService {
     
-        public void update(int addressID, String addressLine1, String addressLine2, String addressCity, 
+    /**
+     *
+     * @param addressID
+     * @param addressLine1
+     * @param addressLine2
+     * @param addressCity
+     * @param addressProvince
+     * @param addressPostal
+     * @param addressCountry
+     * @throws Exception
+     */
+    public void update(int addressID, String addressLine1, String addressLine2, String addressCity, 
                 String addressProvince,String addressPostal, String addressCountry) throws Exception {
         AddressDB addDB = new AddressDB();
         Address addEdit = addDB.get(addressID);
@@ -36,7 +47,19 @@ public class AddressService {
         addDB.update(addEdit);
     }
         
-        public Address insert(Integer userAdded, String addressLine1, String addressLine2, String city, String province, String country, String postalCode) throws Exception {
+    /**
+     *
+     * @param userAdded
+     * @param addressLine1
+     * @param addressLine2
+     * @param city
+     * @param province
+     * @param country
+     * @param postalCode
+     * @return
+     * @throws Exception
+     */
+    public Address insert(Integer userAdded, String addressLine1, String addressLine2, String city, String province, String country, String postalCode) throws Exception {
         AddressDB addDB = new AddressDB();
         
         Date dateAdded = new Date();

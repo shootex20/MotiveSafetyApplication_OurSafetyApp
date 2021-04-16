@@ -22,7 +22,13 @@ import javax.persistence.Query;
  */
 public class EmergencyContactDB {
     
-        public Emergencycontact get(int compPerson) throws Exception {
+    /**
+     *
+     * @param compPerson
+     * @return
+     * @throws Exception
+     */
+    public Emergencycontact get(int compPerson) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
@@ -33,7 +39,12 @@ public class EmergencyContactDB {
         }
     }
 
-        public void update(Emergencycontact con) throws Exception {
+    /**
+     *
+     * @param con
+     * @throws Exception
+     */
+    public void update(Emergencycontact con) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         
@@ -48,6 +59,12 @@ public class EmergencyContactDB {
         }
     }
         
+    /**
+     *
+     * @param add
+     * @return
+     * @throws Exception
+     */
     public Emergencycontact insert(Emergencycontact add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
