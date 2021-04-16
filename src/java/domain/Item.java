@@ -58,7 +58,7 @@ public class Item implements Serializable {
     @Column(name = "DateRemoved", insertable=false)
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
-    @Column(name = "userAdded", insertable=false)
+    @Column(name = "userAdded")
     private Integer userAdded;
     @Column(name = "userRemoved", insertable=false)
     private Integer userRemoved;
@@ -91,11 +91,12 @@ public class Item implements Serializable {
         this.itemID = itemID;
     }
     
-    public Item(Date dateAdded, String model, boolean isChargeableType, 
+    public Item(Date dateAdded, int userAdded, String model, boolean isChargeableType, 
     boolean isDepletingType, boolean isDepreactiationType, 
     String itemClassInformation, String serialNumber, Date purchaseDate, Company companyID) {
         
         this.dateAdded = dateAdded;
+        this.userAdded = userAdded;
         this.purchaseDate = purchaseDate;
         this.itemClassInformation = itemClassInformation;
         this.model = model;

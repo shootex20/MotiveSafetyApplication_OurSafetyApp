@@ -588,22 +588,36 @@ DELETE FROM `item`;
 INSERT INTO `item` (`item_ID`, `dateAdded`, `DateRemoved`, `userAdded`, `userRemoved`, `itemClass_ID`, `model`, `company_ID`, `isChargeableType`, `isDepletingType`, `isDepreactiationType`, `itemClassInformation`, `serialNumber`, `purchaseDate`) VALUES
 	(1, '2021-02-09', NULL, 1, NULL, 1, 'F150', 1, 1, 1, 1, 'car infor', '123456', '2021-02-12'),
 	(2, '2021-02-12', NULL, 1, NULL, 2, 'Milwaukee', 2, 1, 1, 1, 'screwdriver infor', '123457', '2021-02-12');
+
+
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 
 -- Dumping data for table oursafetydb.itemclass: ~2 rows (approximately)
 DELETE FROM `itemclass`;
 /*!40000 ALTER TABLE `itemclass` DISABLE KEYS */;
 INSERT INTO `itemclass` (`itemClass_ID`, `DateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `itemType`, `itemClassFields_ID`, `itemClassInformation`) VALUES
-	(1, '2021-02-09', NULL, 1, NULL, NULL, 1, 'What is the type of the car?'),
-	(2, '2021-02-09', NULL, 1, NULL, NULL, 2, 'What is the type of the screwdriver header ?');
+	(1, '2021-02-09', NULL, 1, NULL, NULL, 1, 'Make / Year and color of the Vehicle'),
+	(2, '2021-02-09', NULL, 1, NULL, NULL, 2, 'Trailer size and type'),
+	(3, '2021-02-09', NULL, 1, NULL, NULL, 3, 'Model and hardware brand'),
+	(4, '2021-02-09', NULL, 1, NULL, NULL, 4, 'Make / Year and color of the Heavy Machinery'),
+	(5, '2021-02-09', NULL, 1, NULL, NULL, 5, 'Make / Year and color of the Light Machinery'),
+	(6, '2021-02-09', NULL, 1, NULL, NULL, 6, 'Power Tool brand'),
+	(7, '2021-02-09', NULL, 1, NULL, NULL, 7, 'Hand Tool brand'),
+	(8, '2021-02-09', NULL, 1, NULL, NULL, 8, 'Make and type of Agriculture Tool');
 /*!40000 ALTER TABLE `itemclass` ENABLE KEYS */;
 
 -- Dumping data for table oursafetydb.itemclassfields: ~2 rows (approximately)
 DELETE FROM `itemclassfields`;
 /*!40000 ALTER TABLE `itemclassfields` DISABLE KEYS */;
 INSERT INTO `itemclassfields` (`itemClassFields_ID`, `dateAdded`, `dateRemoved`, `userAdded`, `userRemoved`, `typeLibrary_ID`, `fieldDescr`, `fieldDescrType`) VALUES
-	(1, '2021-02-09', NULL, 1, NULL, 201, 'car', 'car'),
-	(2, '2021-02-09', NULL, 1, NULL, 202, 'screwdriver', 'screwdriver');
+	(1, '2021-02-09', NULL, 1, NULL, 201, 'Vehicle', 'Vehicle'),
+	(2, '2021-02-09', NULL, 1, NULL, 202, 'Trailer', 'Trailer'),
+	(3, '2021-02-09', NULL, 1, NULL, 203, 'Hardware', 'Hardware'),
+	(4, '2021-02-09', NULL, 1, NULL, 204, 'Heavy Machinery', 'Heavy Machinery'),
+	(5, '2021-02-09', NULL, 1, NULL, 205, 'Light Machinery', 'Light Machinery'),
+	(6, '2021-02-09', NULL, 1, NULL, 206, 'Power Tools', 'Power Tools'),
+	(7, '2021-02-09', NULL, 1, NULL, 207, 'Hand Tools', 'Hand Tools'),
+	(8, '2021-02-09', NULL, 1, NULL, 208, 'Agriculture', 'Agriculture');
 /*!40000 ALTER TABLE `itemclassfields` ENABLE KEYS */;
 
 -- Dumping data for table oursafetydb.logins: ~2 rows (approximately)
@@ -670,8 +684,14 @@ INSERT INTO `typelibrary` (`typeLibrary_ID`, `dateAdded`, `dateRemoved`, `userAd
 	(102, '2021-02-09', NULL, 1, NULL, 'manual', 'equipment manual', 'F'),
 	(103, '2021-02-09', NULL, 1, NULL, 'manual', 'construction manual', 'F'),
 	(200, '2021-02-09', NULL, 1, NULL, 'equipment', 'equipment', 'T'),
-	(201, '2021-02-09', NULL, 1, NULL, 'equipment', 'car', 'F'),
-	(202, '2021-02-09', NULL, 1, NULL, 'equipment', 'screwdriver', 'F'),
+	(201, '2021-02-09', NULL, 1, NULL, 'equipment', 'Vehicle', 'F'),
+	(202, '2021-02-09', NULL, 1, NULL, 'equipment', 'Trailer', 'F'),
+	(203, '2021-02-09', NULL, 1, NULL, 'equipment', 'Hardware', 'F'),
+	(204, '2021-02-09', NULL, 1, NULL, 'equipment', 'Heavy Machinery', 'F'),
+	(205, '2021-02-09', NULL, 1, NULL, 'equipment', 'Light Machinery', 'F'),
+	(206, '2021-02-09', NULL, 1, NULL, 'equipment', 'Power Tool', 'F'),
+	(207, '2021-02-09', NULL, 1, NULL, 'equipment', 'Hand Tool', 'F'),
+	(208, '2021-02-09', NULL, 1, NULL, 'equipment', 'Agriculture', 'F'),
 	(300, '2021-02-09', NULL, 1, NULL, 'companyRelationship', 'company relationship', 'T'),
 	(301, '2021-02-09', NULL, 1, NULL, 'companyRelationship', 'cooperate', 'F'),
 	(302, '2021-02-09', NULL, 1, NULL, 'companyRelationship', 'sponsor', 'F'),
