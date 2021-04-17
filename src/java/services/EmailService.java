@@ -29,7 +29,7 @@ import javax.naming.NamingException;
 /**
  * The JavaMail class used to send emails.
  *
- * @author Dan Quach & Wenhao Liu
+ * @author Dan Quach, Wenhao Liu
  */
 public class EmailService {
 
