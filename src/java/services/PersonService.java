@@ -12,19 +12,22 @@ import domain.Person;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class PersonService.
  *
- * @author Chels
+ * @author Chelsey Coughlin
  */
 public class PersonService {
     
     /**
+     * Update.
      *
-     * @param personID
-     * @param firstName
-     * @param lastName
-     * @param gender
-     * @throws Exception
+     * @param personID the person ID
+     * @param firstName the first name
+     * @param lastName the last name
+     * @param gender the gender
+     * @throws Exception the exception
      */
     public void update(Integer personID, String firstName, String lastName, char gender) throws Exception {
         PersonDB personDB = new PersonDB();
@@ -36,15 +39,16 @@ public class PersonService {
     }
     
     /**
+     * Insert.
      *
-     * @param userAdded
-     * @param firstName
-     * @param lastName
-     * @param dateOfBirth
-     * @param gender
-     * @param emergencyContactID
-     * @return
-     * @throws Exception
+     * @param userAdded the user added
+     * @param firstName the first name
+     * @param lastName the last name
+     * @param dateOfBirth the date of birth
+     * @param gender the gender
+     * @param emergencyContactID the emergency contact ID
+     * @return the person
+     * @throws Exception the exception
      */
     public Person insert(Integer userAdded, String firstName, String lastName, String dateOfBirth, Character gender, Emergencycontact emergencyContactID) throws Exception {
         PersonDB addDB = new PersonDB();
@@ -64,10 +68,11 @@ public class PersonService {
     }
         
     /**
+     * Link.
      *
-     * @param personID
-     * @param emergencyContactID
-     * @throws Exception
+     * @param personID the person ID
+     * @param emergencyContactID the emergency contact ID
+     * @throws Exception the exception
      */
     public void link(int personID, Emergencycontact emergencyContactID) throws Exception {
         PersonDB compPerDB = new PersonDB();

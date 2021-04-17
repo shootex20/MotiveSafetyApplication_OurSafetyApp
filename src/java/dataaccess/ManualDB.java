@@ -27,7 +27,7 @@ public class ManualDB {
 /**
  * get manual by id
  * @param id manual id
- * @return manual
+ * @return manual returns manual
  * @throws Exception Exception
  */   
    public Manual get(int id) throws Exception {
@@ -80,7 +80,7 @@ public class ManualDB {
 /**
  * delete manual form database
  * @param manual manual
- * @throws Exception 
+ * @throws Exception Exception
  */    
     public void delete(Manual manual) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();  

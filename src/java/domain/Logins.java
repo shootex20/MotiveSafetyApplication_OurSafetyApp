@@ -15,7 +15,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class Logins.
  *
  * @author Chels
  */
@@ -26,55 +28,78 @@ import javax.persistence.TemporalType;
     , @NamedQuery(name = "Logins.getUser", query = "SELECT l FROM Logins l WHERE l.username = :username")})
 public class Logins implements Serializable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
+    
+    /** The user id. */
     @Id
     @Basic(optional = false)
     @Column(name = "user_id")
     private Integer userId;
+    
+    /** The date added. */
     @Column(name = "dateAdded")
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
+    
+    /** The date removed. */
     @Column(name = "dateRemoved")
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
+    
+    /** The user added. */
     @Column(name = "userAdded")
     private Integer userAdded;
+    
+    /** The user removed. */
     @Column(name = "userRemoved")
     private Integer userRemoved;
+    
+    /** The username. */
     @Column(name = "username")
     private String username;
+    
+    /** The password. */
     @Column(name = "password")
     private String password;
+    
+    /** The is active. */
     @Column(name = "isActive")
     private Character isActive;
+    
+    /** The is admin. */
     @Column(name = "isAdmin")
     private Character isAdmin;
+    
+    /** The company ID. */
     @JoinColumn(name = "company_ID", referencedColumnName = "company_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Company companyID;
 
     /**
-     *
+     * Instantiates a new logins.
      */
     public Logins() {
     }
 
     /**
+     * Instantiates a new logins.
      *
-     * @param userId
+     * @param userId takes in user id
      */
     public Logins(Integer userId) {
         this.userId = userId;
     }
 
     /**
+     * Instantiates a new logins.
      *
-     * @param dateAdded
-     * @param username
-     * @param password
-     * @param companyID
-     * @param isActive
-     * @param isAdmin
+     * @param dateAdded takes in useradded
+     * @param username takes in username
+     * @param password takes in password
+     * @param companyID takes in company id
+     * @param isActive takes in is active
+     * @param isAdmin takes is isAdmin
      */
     public Logins(Date dateAdded, String username, String password, Company companyID, Character isActive, Character isAdmin) {
         this.dateAdded = dateAdded;
@@ -87,12 +112,13 @@ public class Logins implements Serializable {
     }
     
     /**
+     * Instantiates a new logins.
      *
-     * @param dateAdded
-     * @param username
-     * @param password
-     * @param isActive
-     * @param isAdmin
+     * @param dateAdded takes in dateAdded
+     * @param username takes in username
+     * @param password takes in password
+     * @param isActive takes in active
+     * @param isAdmin takes in admin
      */
     public Logins(Date dateAdded, String username, String password, Character isActive, Character isAdmin) {
         this.dateAdded = dateAdded;
@@ -105,11 +131,12 @@ public class Logins implements Serializable {
     }
 
     /**
+     * Instantiates a new logins.
      *
-     * @param dateAdded
-     * @param username
-     * @param password
-     * @param companyID
+     * @param dateAdded t
+     * @param username the username
+     * @param password the password
+     * @param companyID the company ID
      */
     public Logins(Date dateAdded, String username, String password, Company companyID) {
          this.dateAdded = dateAdded;
@@ -118,165 +145,190 @@ public class Logins implements Serializable {
     }
 
     /**
+     * Gets the user id.
      *
-     * @return
+     * @return Integer returns a integer
      */
     public Integer getUserId() {
         return userId;
     }
 
     /**
+     * Sets the user id.
      *
-     * @param userId
+     * @param userId the new user id
      */
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
     /**
+     * Gets the date added.
      *
-     * @return
+     * @return Date returns a date
      */
     public Date getDateAdded() {
         return dateAdded;
     }
 
     /**
+     * Sets the date added.
      *
-     * @param dateAdded
+     * @param dateAdded the new date added
      */
     public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 
     /**
+     * Gets the date removed.
      *
-     * @return
+     * @return Date returns a date
      */
     public Date getDateRemoved() {
         return dateRemoved;
     }
 
     /**
+     * Sets the date removed.
      *
-     * @param dateRemoved
+     * @param dateRemoved takes in a date
      */
     public void setDateRemoved(Date dateRemoved) {
         this.dateRemoved = dateRemoved;
     }
 
     /**
+     * Gets the user added.
      *
-     * @return
+     * @return Integer returns a integer
      */
     public Integer getUserAdded() {
         return userAdded;
     }
 
     /**
+     * Sets the user added.
      *
-     * @param userAdded
+     * @param userAdded takes in a integer
      */
     public void setUserAdded(Integer userAdded) {
         this.userAdded = userAdded;
     }
 
     /**
+     * Gets the user removed.
      *
-     * @return
+     * @return UserRemoved returns a integer
      */
     public Integer getUserRemoved() {
         return userRemoved;
     }
 
     /**
+     * Sets the user removed.
      *
-     * @param userRemoved
+     * @param userRemoved takes in integer
      */
     public void setUserRemoved(Integer userRemoved) {
         this.userRemoved = userRemoved;
     }
 
     /**
+     * Gets the username.
      *
-     * @return
+     * @return String returns a string
      */
     public String getUsername() {
         return username;
     }
 
     /**
+     * Sets the username.
      *
-     * @param username
+     * @param username the new username
      */
     public void setUsername(String username) {
         this.username = username;
     }
 
     /**
+     * Gets the password.
      *
-     * @return
+     * @return String returns a string
      */
     public String getPassword() {
         return password;
     }
 
     /**
+     * Sets the password.
      *
-     * @param password
+     * @param password takes in a string
      */
     public void setPassword(String password) {
         this.password = password;
     }
 
     /**
+     * Gets the checks if is active.
      *
-     * @return
+     * @return Character returns a character
      */
     public Character getIsActive() {
         return isActive;
     }
 
     /**
+     * Sets the checks if is active.
      *
-     * @param isActive
+     * @param isActive takes in a character
      */
     public void setIsActive(Character isActive) {
         this.isActive = isActive;
     }
 
     /**
+     * Gets the checks if is admin.
      *
-     * @return
+     * @return Character returns a character
      */
     public Character getIsAdmin() {
         return isAdmin;
     }
 
     /**
+     * Sets the checks if is admin.
      *
-     * @param isAdmin
+     * @param isAdmin takes in a character
      */
     public void setIsAdmin(Character isAdmin) {
         this.isAdmin = isAdmin;
     }
 
     /**
+     * Gets the company ID.
      *
-     * @return
+     * @return Company returns a company
      */
     public Company getCompanyID() {
         return companyID;
     }
 
     /**
+     * Sets the company ID.
      *
-     * @param companyID
+     * @param companyID takes in a company
      */
     public void setCompanyID(Company companyID) {
         this.companyID = companyID;
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -284,6 +336,12 @@ public class Logins implements Serializable {
         return hash;
     }
 
+    /**
+     * Equals.
+     *
+     * @param object the object
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -297,6 +355,11 @@ public class Logins implements Serializable {
         return true;
     }
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     @Override
     public String toString() {
         return "domain.Logins[ userId=" + userId + " ]";

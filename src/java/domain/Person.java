@@ -27,7 +27,9 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class Person.
  *
  * @author Chels
  */
@@ -48,52 +50,76 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Person.findByFields", query = "SELECT p FROM Person p WHERE p.firstName = :firstName AND p.lastName = :lastName AND p.dateOfBirth = :dateOfBirth")})
 public class Person implements Serializable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
+    
+    /** The person ID. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "person_ID", insertable = false)
     private Integer personID;
+    
+    /** The date added. */
     @Column(name = "dateAdded")
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
+    
+    /** The date removed. */
     @Column(name = "dateRemoved", insertable = false)
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
+    
+    /** The user added. */
     @Column(name = "userAdded")
     private Integer userAdded;
+    
+    /** The user removed. */
     @Column(name = "userRemoved", insertable = false)
     private Integer userRemoved;
+    
+    /** The first name. */
     @Column(name = "firstName")
     private String firstName;
+    
+    /** The last name. */
     @Column(name = "lastName")
     private String lastName;
+    
+    /** The date of birth. */
     @Column(name = "dateOfBirth")
     @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
+    
+    /** The gender. */
     @Column(name = "gender")
     private Character gender;
+    
+    /** The companyperson list. */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "personID", fetch = FetchType.EAGER)
     private List<Companyperson> companypersonList;
+    
+    /** The emergency contact ID. */
     @JoinColumn(name = "emergencyContact_ID", referencedColumnName = "emergencyContact_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Emergencycontact emergencyContactID;
 
     /**
-     *
+     * Instantiates a new person.
      */
     public Person() {
     }
 
     /**
+     * Instantiates a new person.
      *
-     * @param dateAdded
-     * @param userAdded
-     * @param firstName
-     * @param lastName
-     * @param dateOfBirth
-     * @param gender
-     * @param emergencyContactID
+     * @param dateAdded the date added
+     * @param userAdded the user added
+     * @param firstName the first name
+     * @param lastName the last name
+     * @param dateOfBirth the date of birth
+     * @param gender the gender
+     * @param emergencyContactID the emergency contact ID
      */
     public Person(Date dateAdded, Integer userAdded, String firstName, String lastName, Date dateOfBirth, Character gender, Emergencycontact emergencyContactID) {
         this.dateAdded = dateAdded;
@@ -106,160 +132,180 @@ public class Person implements Serializable {
     }
 
     /**
+     * Instantiates a new person.
      *
-     * @param personID
+     * @param personID the person ID
      */
     public Person(Integer personID) {
         this.personID = personID;
     }
 
     /**
+     * Gets the person ID.
      *
-     * @return
+     * @return the person ID
      */
     public Integer getPersonID() {
         return personID;
     }
 
     /**
+     * Sets the person ID.
      *
-     * @param personID
+     * @param personID the new person ID
      */
     public void setPersonID(Integer personID) {
         this.personID = personID;
     }
 
     /**
+     * Gets the date added.
      *
-     * @return
+     * @return the date added
      */
     public Date getDateAdded() {
         return dateAdded;
     }
 
     /**
+     * Sets the date added.
      *
-     * @param dateAdded
+     * @param dateAdded the new date added
      */
     public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 
     /**
+     * Gets the date removed.
      *
-     * @return
+     * @return the date removed
      */
     public Date getDateRemoved() {
         return dateRemoved;
     }
 
     /**
+     * Sets the date removed.
      *
-     * @param dateRemoved
+     * @param dateRemoved the new date removed
      */
     public void setDateRemoved(Date dateRemoved) {
         this.dateRemoved = dateRemoved;
     }
 
     /**
+     * Gets the user added.
      *
-     * @return
+     * @return the user added
      */
     public Integer getUserAdded() {
         return userAdded;
     }
 
     /**
+     * Sets the user added.
      *
-     * @param userAdded
+     * @param userAdded the new user added
      */
     public void setUserAdded(Integer userAdded) {
         this.userAdded = userAdded;
     }
 
     /**
+     * Gets the user removed.
      *
-     * @return
+     * @return the user removed
      */
     public Integer getUserRemoved() {
         return userRemoved;
     }
 
     /**
+     * Sets the user removed.
      *
-     * @param userRemoved
+     * @param userRemoved the new user removed
      */
     public void setUserRemoved(Integer userRemoved) {
         this.userRemoved = userRemoved;
     }
 
     /**
+     * Gets the first name.
      *
-     * @return
+     * @return the first name
      */
     public String getFirstName() {
         return firstName;
     }
 
     /**
+     * Sets the first name.
      *
-     * @param firstName
+     * @param firstName the new first name
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
     /**
+     * Gets the last name.
      *
-     * @return
+     * @return the last name
      */
     public String getLastName() {
         return lastName;
     }
 
     /**
+     * Sets the last name.
      *
-     * @param lastName
+     * @param lastName the new last name
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
     /**
+     * Gets the date of birth.
      *
-     * @return
+     * @return the date of birth
      */
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
     /**
+     * Sets the date of birth.
      *
-     * @param dateOfBirth
+     * @param dateOfBirth the new date of birth
      */
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
     /**
+     * Gets the gender.
      *
-     * @return
+     * @return the gender
      */
     public Character getGender() {
         return gender;
     }
 
     /**
+     * Sets the gender.
      *
-     * @param gender
+     * @param gender the new gender
      */
     public void setGender(Character gender) {
         this.gender = gender;
     }
 
     /**
+     * Gets the companyperson list.
      *
-     * @return
+     * @return the companyperson list
      */
     @XmlTransient
     public List<Companyperson> getCompanypersonList() {
@@ -267,29 +313,37 @@ public class Person implements Serializable {
     }
 
     /**
+     * Sets the companyperson list.
      *
-     * @param companypersonList
+     * @param companypersonList the new companyperson list
      */
     public void setCompanypersonList(List<Companyperson> companypersonList) {
         this.companypersonList = companypersonList;
     }
 
     /**
+     * Gets the emergency contact ID.
      *
-     * @return
+     * @return the emergency contact ID
      */
     public Emergencycontact getEmergencyContactID() {
         return emergencyContactID;
     }
 
     /**
+     * Sets the emergency contact ID.
      *
-     * @param emergencyContactID
+     * @param emergencyContactID the new emergency contact ID
      */
     public void setEmergencyContactID(Emergencycontact emergencyContactID) {
         this.emergencyContactID = emergencyContactID;
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -297,6 +351,12 @@ public class Person implements Serializable {
         return hash;
     }
 
+    /**
+     * Equals.
+     *
+     * @param object the object
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -310,6 +370,11 @@ public class Person implements Serializable {
         return true;
     }
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     @Override
     public String toString() {
         return "domain.Person[ personID=" + personID + " ]";

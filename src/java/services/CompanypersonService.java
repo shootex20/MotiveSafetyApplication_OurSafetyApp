@@ -16,17 +16,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class CompanypersonService.
  *
- * @author Chels
+ * @author Chelsey Coughlin
  */
 public class CompanypersonService {
     
     /**
+     * Update.
      *
-     * @param personID
-     * @param email
-     * @throws Exception
+     * @param personID the person ID
+     * @param email the email
+     * @throws Exception the exception
      */
     public void update(Companyperson personID, String email) throws Exception {
         CompanypersonDB compPerDB = new CompanypersonDB();
@@ -36,14 +39,15 @@ public class CompanypersonService {
     }
         
     /**
+     * Insert.
      *
-     * @param userAdded
-     * @param email
-     * @param isEmployeeActive
-     * @param companyID
-     * @param personID
-     * @return
-     * @throws Exception
+     * @param userAdded the user added
+     * @param email the email
+     * @param isEmployeeActive the is employee active
+     * @param companyID the company ID
+     * @param personID the person ID
+     * @return the companyperson
+     * @throws Exception the exception
      */
     public Companyperson insert(Integer userAdded, String email, boolean isEmployeeActive, Company companyID, Person personID) throws Exception {
         CompanypersonDB addDB = new CompanypersonDB();
@@ -60,10 +64,11 @@ public class CompanypersonService {
     }
 
     /**
+     * Link.
      *
-     * @param personID
-     * @param email
-     * @throws Exception
+     * @param personID the person ID
+     * @param email the email
+     * @throws Exception the exception
      */
     public void link(Companyperson personID, String email) throws Exception {
         CompanypersonDB compPerDB = new CompanypersonDB();

@@ -22,9 +22,9 @@ public class CompanyPersonPhoneDB {
 
     /**
      *
-     * @param companyper_ID
-     * @return
-     * @throws Exception
+     * @param companyper_ID takes in company person id
+     * @return Companypersonphone list
+     * @throws Exception throws an exception
      */
     public List<Companypersonphone> getAll(int companyper_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -38,9 +38,9 @@ public class CompanyPersonPhoneDB {
         
     /**
      *
-     * @param compPerson
-     * @return
-     * @throws Exception
+     * @param compPerson takes in company person.
+     * @return Companypersonphone list
+     * @throws Exception throws an exception
      */
     public Companypersonphone get(Companyperson compPerson) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -54,9 +54,9 @@ public class CompanyPersonPhoneDB {
         
     /**
      *
-     * @param phoneID
-     * @return
-     * @throws Exception
+     * @param phoneID takes in phoneID
+     * @return Companypersonphone returns company person phone
+     * @throws Exception throws an exception.
      */
     public Companypersonphone getID(int phoneID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -71,8 +71,8 @@ public class CompanyPersonPhoneDB {
       
     /**
      *
-     * @param comp
-     * @throws Exception
+     * @param comp takes in Comapny person phone
+     * @throws Exception throws an exception.
      */
     public void update(Companypersonphone comp) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -92,9 +92,9 @@ public class CompanyPersonPhoneDB {
         
     /**
      *
-     * @param add
-     * @return
-     * @throws Exception
+     * @param add takes in company person phone
+     * @return Companypersonphone returns company person phone
+     * @throws Exception throws an exception 
      */
     public Companypersonphone insert(Companypersonphone add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -117,8 +117,8 @@ public class CompanyPersonPhoneDB {
         
     /**
      *
-     * @param add
-     * @throws Exception
+     * @param add takes in company person phone
+     * @throws Exception throws an exception
      */
     public void updatePerson (Companypersonphone add) throws Exception
         {
@@ -160,8 +160,8 @@ public class CompanyPersonPhoneDB {
 
     /**
      *
-     * @param add
-     * @throws Exception
+     * @param add takes in company person phone
+     * @throws Exception throws an exception
      */
     public void delete(Companypersonphone add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();  

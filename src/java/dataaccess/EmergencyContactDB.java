@@ -24,9 +24,9 @@ public class EmergencyContactDB {
     
     /**
      *
-     * @param compPerson
-     * @return
-     * @throws Exception
+     * @param compPerson takes in company person id
+     * @return Emergencycontact return emergency contact
+     * @throws Exception throws an exception
      */
     public Emergencycontact get(int compPerson) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -41,8 +41,8 @@ public class EmergencyContactDB {
 
     /**
      *
-     * @param con
-     * @throws Exception
+     * @param con takes in emergency contact
+     * @throws Exception throws an exception
      */
     public void update(Emergencycontact con) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -61,9 +61,9 @@ public class EmergencyContactDB {
         
     /**
      *
-     * @param add
-     * @return
-     * @throws Exception
+     * @param add takes in emergency contact
+     * @return Emergencycontact return emergency contact
+     * @throws Exception throws an exception
      */
     public Emergencycontact insert(Emergencycontact add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

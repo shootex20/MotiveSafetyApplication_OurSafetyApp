@@ -14,7 +14,7 @@ public class DBUtil {
 
     /**
      * 
-     * @return 
+     * @return EntityManagerFactory returns emf
      */
     public static EntityManagerFactory getEmFactory() {
         return emf;
@@ -22,7 +22,7 @@ public class DBUtil {
 
     /**
      * 
-     * @param result 
+     * @param result returns result
      */
     static void closeResultSet(ResultSet result) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

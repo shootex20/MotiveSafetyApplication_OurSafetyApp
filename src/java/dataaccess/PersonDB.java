@@ -27,8 +27,8 @@ public class PersonDB {
 
     /**
      *
-     * @return
-     * @throws Exception
+     * @return Person list
+     * @throws Exception throws an exception
      */
     public List<Person> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -44,11 +44,11 @@ public class PersonDB {
 
     /**
      *
-     * @param firstName
-     * @param lastName
-     * @param dob
-     * @return
-     * @throws Exception
+     * @param firstName takes in first name
+     * @param lastName takes in last name
+     * @param dob takes in date of birth
+     * @return Person returns person
+     * @throws Exception throws an exception
      */
     public Person getWithFields(String firstName, String lastName, String dob) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -63,9 +63,9 @@ public class PersonDB {
 
     /**
      *
-     * @param person_ID
-     * @return
-     * @throws Exception
+     * @param person_ID takes in person id
+     * @return Person returns person
+     * @throws Exception throws an exception
      */
     public Person get(int person_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -80,8 +80,8 @@ public class PersonDB {
 
     /**
      *
-     * @param comp
-     * @throws Exception
+     * @param comp takes in company person
+     * @throws Exception throws an exception
      */
     public void update(Person comp) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -101,9 +101,9 @@ public class PersonDB {
 
     /**
      *
-     * @param add
-     * @return
-     * @throws Exception
+     * @param add takes in a person
+     * @return Person returns a person
+     * @throws Exception throws an exception
      */
     public Person insert(Person add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

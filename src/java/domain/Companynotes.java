@@ -23,7 +23,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class Companynotes.
  *
  * @author Chels
  */
@@ -42,191 +44,234 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Companynotes.findByNote", query = "SELECT c FROM Companynotes c WHERE c.note = :note")})
 public class Companynotes implements Serializable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
+    
+    /** The company notes ID. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "companyNotes_ID")
     private Integer companyNotesID;
+    
+    /** The date added. */
     @Column(name = "dateAdded")
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
+    
+    /** The date removed. */
     @Column(name = "dateRemoved")
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
+    
+    /** The user added. */
     @Column(name = "userAdded")
     private Integer userAdded;
+    
+    /** The user removed. */
     @Column(name = "userRemoved")
     private Integer userRemoved;
+    
+    /** The note date. */
     @Column(name = "noteDate")
     @Temporal(TemporalType.DATE)
     private Date noteDate;
+    
+    /** The note index. */
     @Column(name = "noteIndex")
     private Integer noteIndex;
+    
+    /** The note. */
     @Column(name = "note")
     private String note;
+    
+    /** The company person ID. */
     @JoinColumn(name = "companyPerson_ID", referencedColumnName = "companyPerson_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Companyperson companyPersonID;
 
     /**
-     *
+     * Instantiates a new companynotes.
      */
     public Companynotes() {
     }
 
     /**
+     * Instantiates a new companynotes.
      *
-     * @param companyNotesID
+     * @param companyNotesID the company notes ID
      */
     public Companynotes(Integer companyNotesID) {
         this.companyNotesID = companyNotesID;
     }
 
     /**
+     * Gets the company notes ID.
      *
-     * @return
+     * @return the company notes ID
      */
     public Integer getCompanyNotesID() {
         return companyNotesID;
     }
 
     /**
+     * Sets the company notes ID.
      *
-     * @param companyNotesID
+     * @param companyNotesID the new company notes ID
      */
     public void setCompanyNotesID(Integer companyNotesID) {
         this.companyNotesID = companyNotesID;
     }
 
     /**
+     * Gets the date added.
      *
-     * @return
+     * @return the date added
      */
     public Date getDateAdded() {
         return dateAdded;
     }
 
     /**
+     * Sets the date added.
      *
-     * @param dateAdded
+     * @param dateAdded the new date added
      */
     public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 
     /**
+     * Gets the date removed.
      *
-     * @return
+     * @return the date removed
      */
     public Date getDateRemoved() {
         return dateRemoved;
     }
 
     /**
+     * Sets the date removed.
      *
-     * @param dateRemoved
+     * @param dateRemoved the new date removed
      */
     public void setDateRemoved(Date dateRemoved) {
         this.dateRemoved = dateRemoved;
     }
 
     /**
+     * Gets the user added.
      *
-     * @return
+     * @return the user added
      */
     public Integer getUserAdded() {
         return userAdded;
     }
 
     /**
+     * Sets the user added.
      *
-     * @param userAdded
+     * @param userAdded the new user added
      */
     public void setUserAdded(Integer userAdded) {
         this.userAdded = userAdded;
     }
 
     /**
+     * Gets the user removed.
      *
-     * @return
+     * @return the user removed
      */
     public Integer getUserRemoved() {
         return userRemoved;
     }
 
     /**
+     * Sets the user removed.
      *
-     * @param userRemoved
+     * @param userRemoved the new user removed
      */
     public void setUserRemoved(Integer userRemoved) {
         this.userRemoved = userRemoved;
     }
 
     /**
+     * Gets the note date.
      *
-     * @return
+     * @return the note date
      */
     public Date getNoteDate() {
         return noteDate;
     }
 
     /**
+     * Sets the note date.
      *
-     * @param noteDate
+     * @param noteDate the new note date
      */
     public void setNoteDate(Date noteDate) {
         this.noteDate = noteDate;
     }
 
     /**
+     * Gets the note index.
      *
-     * @return
+     * @return the note index
      */
     public Integer getNoteIndex() {
         return noteIndex;
     }
 
     /**
+     * Sets the note index.
      *
-     * @param noteIndex
+     * @param noteIndex the new note index
      */
     public void setNoteIndex(Integer noteIndex) {
         this.noteIndex = noteIndex;
     }
 
     /**
+     * Gets the note.
      *
-     * @return
+     * @return the note
      */
     public String getNote() {
         return note;
     }
 
     /**
+     * Sets the note.
      *
-     * @param note
+     * @param note the new note
      */
     public void setNote(String note) {
         this.note = note;
     }
 
     /**
+     * Gets the company person ID.
      *
-     * @return
+     * @return the company person ID
      */
     public Companyperson getCompanyPersonID() {
         return companyPersonID;
     }
 
     /**
+     * Sets the company person ID.
      *
-     * @param companyPersonID
+     * @param companyPersonID the new company person ID
      */
     public void setCompanyPersonID(Companyperson companyPersonID) {
         this.companyPersonID = companyPersonID;
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -234,6 +279,12 @@ public class Companynotes implements Serializable {
         return hash;
     }
 
+    /**
+     * Equals.
+     *
+     * @param object the object
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -247,6 +298,11 @@ public class Companynotes implements Serializable {
         return true;
     }
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     @Override
     public String toString() {
         return "domain.Companynotes[ companyNotesID=" + companyNotesID + " ]";

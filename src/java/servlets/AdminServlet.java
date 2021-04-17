@@ -30,10 +30,10 @@ public class AdminServlet extends HttpServlet {
 
     /**
      *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
+     * @param request takes in request
+     * @param response takes in response.
+     * @throws ServletException throws ServletException 
+     * @throws IOException throws IOException
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -135,10 +135,10 @@ public class AdminServlet extends HttpServlet {
 
     /**
      *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
+     * @param request takes in request
+     * @param response takes in response.
+     * @throws ServletException throws ServletException 
+     * @throws IOException throws IOException
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

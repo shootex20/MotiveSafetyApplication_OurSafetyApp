@@ -50,8 +50,8 @@ public class AuthenticationFilter implements Filter {
     /**
      * Required for filters but no code body
      *
-     * @param filterConfig
-     * @throws ServletException
+     * @param filterConfig takes filterConfig
+     * @throws ServletException throws ServletException
      */
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

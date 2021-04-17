@@ -15,22 +15,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class AddressService.
  *
  * @author Chels
  */
 public class AddressService {
     
     /**
+     * Update.
      *
-     * @param addressID
-     * @param addressLine1
-     * @param addressLine2
-     * @param addressCity
-     * @param addressProvince
-     * @param addressPostal
-     * @param addressCountry
-     * @throws Exception
+     * @param addressID the address ID
+     * @param addressLine1 the address line 1
+     * @param addressLine2 the address line 2
+     * @param addressCity the address city
+     * @param addressProvince the address province
+     * @param addressPostal the address postal
+     * @param addressCountry the address country
+     * @throws Exception the exception
      */
     public void update(int addressID, String addressLine1, String addressLine2, String addressCity, 
                 String addressProvince,String addressPostal, String addressCountry) throws Exception {
@@ -48,16 +51,17 @@ public class AddressService {
     }
         
     /**
+     * Insert.
      *
-     * @param userAdded
-     * @param addressLine1
-     * @param addressLine2
-     * @param city
-     * @param province
-     * @param country
-     * @param postalCode
-     * @return
-     * @throws Exception
+     * @param userAdded the user added
+     * @param addressLine1 the address line 1
+     * @param addressLine2 the address line 2
+     * @param city the city
+     * @param province the province
+     * @param country the country
+     * @param postalCode the postal code
+     * @return the address
+     * @throws Exception the exception
      */
     public Address insert(Integer userAdded, String addressLine1, String addressLine2, String city, String province, String country, String postalCode) throws Exception {
         AddressDB addDB = new AddressDB();

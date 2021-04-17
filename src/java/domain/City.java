@@ -19,7 +19,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class City.
  *
  * @author Chels
  */
@@ -32,80 +34,99 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "City.findByCityName", query = "SELECT c FROM City c WHERE c.cityName = :cityName")})
 public class City implements Serializable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
+    
+    /** The city ID. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "city_ID")
     private Integer cityID;
+    
+    /** The city name. */
     @Column(name = "cityName")
     private String cityName;
+    
+    /** The province ID. */
     @JoinColumn(name = "province_ID", referencedColumnName = "province_ID")
     @ManyToOne
     private Province provinceID;
 
     /**
-     *
+     * Instantiates a new city.
      */
     public City() {
     }
 
     /**
+     * Instantiates a new city.
      *
-     * @param cityID
+     * @param cityID the city ID
      */
     public City(Integer cityID) {
         this.cityID = cityID;
     }
 
     /**
+     * Gets the city ID.
      *
-     * @return
+     * @return the city ID
      */
     public Integer getCityID() {
         return cityID;
     }
 
     /**
+     * Sets the city ID.
      *
-     * @param cityID
+     * @param cityID the new city ID
      */
     public void setCityID(Integer cityID) {
         this.cityID = cityID;
     }
 
     /**
+     * Gets the city name.
      *
-     * @return
+     * @return the city name
      */
     public String getCityName() {
         return cityName;
     }
 
     /**
+     * Sets the city name.
      *
-     * @param cityName
+     * @param cityName the new city name
      */
     public void setCityName(String cityName) {
         this.cityName = cityName;
     }
 
     /**
+     * Gets the province ID.
      *
-     * @return
+     * @return the province ID
      */
     public Province getProvinceID() {
         return provinceID;
     }
 
     /**
+     * Sets the province ID.
      *
-     * @param provinceID
+     * @param provinceID the new province ID
      */
     public void setProvinceID(Province provinceID) {
         this.provinceID = provinceID;
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -113,6 +134,12 @@ public class City implements Serializable {
         return hash;
     }
 
+    /**
+     * Equals.
+     *
+     * @param object the object
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -126,6 +153,11 @@ public class City implements Serializable {
         return true;
     }
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     @Override
     public String toString() {
         return "domain.City[ cityID=" + cityID + " ]";

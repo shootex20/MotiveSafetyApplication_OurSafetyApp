@@ -25,9 +25,9 @@ public class TypeLibraryDB {
     
     /**
      *
-     * @param type_ID
-     * @return
-     * @throws Exception
+     * @param type_ID takes in type id
+     * @return Typelibrary return type library
+     * @throws Exception throws an exception
      */
     public Typelibrary get(int type_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -42,8 +42,8 @@ public class TypeLibraryDB {
 
     /**
      *
-     * @return
-     * @throws Exception
+     * @return Typelibrary list
+     * @throws Exception throws an exception
      */
     public List<Typelibrary> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

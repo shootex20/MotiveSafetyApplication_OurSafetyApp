@@ -27,7 +27,9 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class Phone.
  *
  * @author Chels
  */
@@ -47,50 +49,74 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Phone.findByExtension", query = "SELECT p FROM Phone p WHERE p.extension = :extension")})
 public class Phone implements Serializable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
+    
+    /** The phone ID. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "phone_ID", insertable=false)
     private Integer phoneID;
+    
+    /** The date added. */
     @Column(name = "dateAdded")
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
+    
+    /** The date removed. */
     @Column(name = "dateRemoved", insertable=false)
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
+    
+    /** The user added. */
     @Column(name = "userAdded")
     private Integer userAdded;
+    
+    /** The user removed. */
     @Column(name = "userRemoved", insertable=false)
     private Integer userRemoved;
+    
+    /** The country code. */
     @Column(name = "countryCode")
     private String countryCode;
+    
+    /** The area code. */
     @Column(name = "areaCode")
     private String areaCode;
+    
+    /** The local number. */
     @Column(name = "localNumber")
     private String localNumber;
+    
+    /** The extension. */
     @Column(name = "extension")
     private String extension;
+    
+    /** The type library ID. */
     @JoinColumn(name = "typeLibrary_ID", referencedColumnName = "typeLibrary_ID", insertable=false)
     @ManyToOne(fetch = FetchType.EAGER)
     private Typelibrary typeLibraryID;
+    
+    /** The companypersonphone list. */
     @OneToMany(orphanRemoval=true, mappedBy = "phoneID", fetch = FetchType.EAGER)
     private List<Companypersonphone> companypersonphoneList;
 
     /**
-     *
+     * Instantiates a new phone.
      */
     public Phone() {
     }
     
     /**
+     * Instantiates a new phone.
      *
-     * @param dateAdded
-     * @param userAdded
-     * @param countryCode
-     * @param areaCode
-     * @param localNumber
-     * @param extension
+     * @param dateAdded the date added
+     * @param userAdded the user added
+     * @param countryCode the country code
+     * @param areaCode the area code
+     * @param localNumber the local number
+     * @param extension the extension
      */
     public Phone(Date dateAdded, Integer userAdded, String countryCode, String areaCode, String localNumber, String extension) {
         
@@ -104,176 +130,198 @@ public class Phone implements Serializable {
     }
 
     /**
+     * Instantiates a new phone.
      *
-     * @param phoneID
+     * @param phoneID the phone ID
      */
     public Phone(Integer phoneID) {
         this.phoneID = phoneID;
     }
 
     /**
+     * Gets the phone ID.
      *
-     * @return
+     * @return the phone ID
      */
     public Integer getPhoneID() {
         return phoneID;
     }
 
     /**
+     * Sets the phone ID.
      *
-     * @param phoneID
+     * @param phoneID the new phone ID
      */
     public void setPhoneID(Integer phoneID) {
         this.phoneID = phoneID;
     }
 
     /**
+     * Gets the date added.
      *
-     * @return
+     * @return the date added
      */
     public Date getDateAdded() {
         return dateAdded;
     }
 
     /**
+     * Sets the date added.
      *
-     * @param dateAdded
+     * @param dateAdded the new date added
      */
     public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 
     /**
+     * Gets the date removed.
      *
-     * @return
+     * @return the date removed
      */
     public Date getDateRemoved() {
         return dateRemoved;
     }
 
     /**
+     * Sets the date removed.
      *
-     * @param dateRemoved
+     * @param dateRemoved the new date removed
      */
     public void setDateRemoved(Date dateRemoved) {
         this.dateRemoved = dateRemoved;
     }
 
     /**
+     * Gets the user added.
      *
-     * @return
+     * @return the user added
      */
     public Integer getUserAdded() {
         return userAdded;
     }
 
     /**
+     * Sets the user added.
      *
-     * @param userAdded
+     * @param userAdded the new user added
      */
     public void setUserAdded(Integer userAdded) {
         this.userAdded = userAdded;
     }
 
     /**
+     * Gets the user removed.
      *
-     * @return
+     * @return the user removed
      */
     public Integer getUserRemoved() {
         return userRemoved;
     }
 
     /**
+     * Sets the user removed.
      *
-     * @param userRemoved
+     * @param userRemoved the new user removed
      */
     public void setUserRemoved(Integer userRemoved) {
         this.userRemoved = userRemoved;
     }
 
     /**
+     * Gets the country code.
      *
-     * @return
+     * @return the country code
      */
     public String getCountryCode() {
         return countryCode;
     }
 
     /**
+     * Sets the country code.
      *
-     * @param countryCode
+     * @param countryCode the new country code
      */
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
     }
 
     /**
+     * Gets the area code.
      *
-     * @return
+     * @return the area code
      */
     public String getAreaCode() {
         return areaCode;
     }
 
     /**
+     * Sets the area code.
      *
-     * @param areaCode
+     * @param areaCode the new area code
      */
     public void setAreaCode(String areaCode) {
         this.areaCode = areaCode;
     }
 
     /**
+     * Gets the local number.
      *
-     * @return
+     * @return the local number
      */
     public String getLocalNumber() {
         return localNumber;
     }
 
     /**
+     * Sets the local number.
      *
-     * @param localNumber
+     * @param localNumber the new local number
      */
     public void setLocalNumber(String localNumber) {
         this.localNumber = localNumber;
     }
 
     /**
+     * Gets the extension.
      *
-     * @return
+     * @return the extension
      */
     public String getExtension() {
         return extension;
     }
 
     /**
+     * Sets the extension.
      *
-     * @param extension
+     * @param extension the new extension
      */
     public void setExtension(String extension) {
         this.extension = extension;
     }
 
     /**
+     * Gets the type library ID.
      *
-     * @return
+     * @return the type library ID
      */
     public Typelibrary getTypeLibraryID() {
         return typeLibraryID;
     }
 
     /**
+     * Sets the type library ID.
      *
-     * @param typeLibraryID
+     * @param typeLibraryID the new type library ID
      */
     public void setTypeLibraryID(Typelibrary typeLibraryID) {
         this.typeLibraryID = typeLibraryID;
     }
 
     /**
+     * Gets the companypersonphone list.
      *
-     * @return
+     * @return the companypersonphone list
      */
     @XmlTransient
     public List<Companypersonphone> getCompanypersonphoneList() {
@@ -281,13 +329,19 @@ public class Phone implements Serializable {
     }
 
     /**
+     * Sets the companypersonphone list.
      *
-     * @param companypersonphoneList
+     * @param companypersonphoneList the new companypersonphone list
      */
     public void setCompanypersonphoneList(List<Companypersonphone> companypersonphoneList) {
         this.companypersonphoneList = companypersonphoneList;
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -295,6 +349,12 @@ public class Phone implements Serializable {
         return hash;
     }
 
+    /**
+     * Equals.
+     *
+     * @param object the object
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -308,6 +368,11 @@ public class Phone implements Serializable {
         return true;
     }
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     @Override
     public String toString() {
         return "domain.Phone[ phoneID=" + phoneID + " ]";

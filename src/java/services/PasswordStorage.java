@@ -10,6 +10,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Base64;
 
+// TODO: Auto-generated Javadoc
 /**
  * Original Password hashing PBKDF2 algorithm by MicleBrick Dec 3, 2018 contains
  * salting and hashing algorithm as well other password methods
@@ -21,13 +22,13 @@ import java.util.Base64;
 public class PasswordStorage {
 
     /**
-     * Internal class to define a user defined exception for bad hashes
+     * Internal class to define a user defined exception for bad hashes.
      */
     @SuppressWarnings("serial")
     static public class InvalidHashException extends Exception {
 
         /**
-         * Custom exception for invalid hashes
+         * Custom exception for invalid hashes.
          *
          * @param message the message to be displayed
          */
@@ -36,7 +37,7 @@ public class PasswordStorage {
         }
 
         /**
-         * Custom exception for invalid hashes
+         * Custom exception for invalid hashes.
          *
          * @param message the message to be displayed
          * @param source the source of the issue
@@ -48,13 +49,13 @@ public class PasswordStorage {
 
     /**
      * Internal class to define a user defined exception for operations that are
-     * not possible
+     * not possible.
      */
     @SuppressWarnings("serial")
     static public class CannotPerformOperationException extends Exception {
 
         /**
-         * Custom exception for invalid operations
+         * Custom exception for invalid operations.
          *
          * @param message the message to be displayed
          */
@@ -63,7 +64,7 @@ public class PasswordStorage {
         }
 
         /**
-         * Custom exception for invalid operations
+         * Custom exception for invalid operations.
          *
          * @param message the message to be displayed
          * @param source the source of the issue
@@ -73,79 +74,57 @@ public class PasswordStorage {
         }
     }
 
-    /**
-     *
-     */
+    /** The Constant PBKDF2_ALGORITHM. */
     public static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";
 
     // These constants may be changed without breaking existing hashes.
 
-    /**
-     *
-     */
+    /** The Constant SALT_BYTE_SIZE. */
     public static final int SALT_BYTE_SIZE = 24;
 
-    /**
-     *
-     */
+    /** The Constant HASH_BYTE_SIZE. */
     public static final int HASH_BYTE_SIZE = 18;
 
-    /**
-     *
-     */
+    /** The Constant PBKDF2_ITERATIONS. */
     public static final int PBKDF2_ITERATIONS = 64000;
 
     // These constants define the encoding and may not be changed.
 
-    /**
-     *
-     */
+    /** The Constant HASH_SECTIONS. */
     public static final int HASH_SECTIONS = 5;
 
-    /**
-     *
-     */
+    /** The Constant HASH_ALGORITHM_INDEX. */
     public static final int HASH_ALGORITHM_INDEX = 0;
 
-    /**
-     *
-     */
+    /** The Constant ITERATION_INDEX. */
     public static final int ITERATION_INDEX = 1;
 
-    /**
-     *
-     */
+    /** The Constant HASH_SIZE_INDEX. */
     public static final int HASH_SIZE_INDEX = 2;
 
-    /**
-     *
-     */
+    /** The Constant SALT_INDEX. */
     public static final int SALT_INDEX = 3;
 
-    /**
-     *
-     */
+    /** The Constant PBKDF2_INDEX. */
     public static final int PBKDF2_INDEX = 4;
 
     /**
-     * Method for creating hashes
+     * Method for creating hashes.
      *
      * @param password password created by administrators
      * @return recursive call to the other overloaded method
-     * @throws services.PasswordStorage.CannotPerformOperationException if an
-     * invalid operation error occurs
+     * @throws CannotPerformOperationException the cannot perform operation exception
      */
     public static String createHash(String password) throws CannotPerformOperationException {
         return createHash(password.toCharArray());
     }
 
     /**
-     * Creates a secure random salt with a PBKDF2 hash and combines the parts
+     * Creates a secure random salt with a PBKDF2 hash and combines the parts.
      *
      * @param password the password created but casted to a char array
      * @return the salted and hashed password
-     * @throws services.PasswordStorage.CannotPerformOperationException if an
-     * invalid operation error occurs
+     * @throws CannotPerformOperationException the cannot perform operation exception
      */
     public static String createHash(char[] password) throws CannotPerformOperationException {
         // Generate a random salt
@@ -164,15 +143,13 @@ public class PasswordStorage {
     }
 
     /**
-     * Uses to verify if a password matches the stored value
+     * Uses to verify if a password matches the stored value.
      *
      * @param password a string input during login
      * @param correctHash the value stored in the database
      * @return a recursive call to the other overloaded method
-     * @throws services.PasswordStorage.CannotPerformOperationException if an
-     * invalid operation error occurs
-     * @throws services.PasswordStorage.InvalidHashException if an invalid hash
-     * error occurs
+     * @throws CannotPerformOperationException the cannot perform operation exception
+     * @throws InvalidHashException the invalid hash exception
      */
     public boolean verifyPassword(String password, String correctHash) throws CannotPerformOperationException, InvalidHashException {
         return verifyPassword(password.toCharArray(), correctHash);
@@ -180,15 +157,13 @@ public class PasswordStorage {
 
     /**
      * Hashes the string password and compares it with the stored value to
-     * determine if there is a match
+     * determine if there is a match.
      *
      * @param password the string password converted to a char array
      * @param correctHash the correct password in the database
      * @return true or false if both hashes are equal
-     * @throws services.PasswordStorage.CannotPerformOperationException if an
-     * invalid operation error occurs
-     * @throws services.PasswordStorage.InvalidHashException if an invalid hash
-     * error occurs
+     * @throws CannotPerformOperationException the cannot perform operation exception
+     * @throws InvalidHashException the invalid hash exception
      */
     public boolean verifyPassword(char[] password, String correctHash) throws CannotPerformOperationException, InvalidHashException {
         // Decode the hash into its parameters
@@ -248,7 +223,7 @@ public class PasswordStorage {
     }
 
     /**
-     * Compares each password character by character
+     * Compares each password character by character.
      *
      * @param a byte array of password input
      * @param b byte array of of stored password
@@ -263,15 +238,14 @@ public class PasswordStorage {
     }
 
     /**
-     * The pbkdf2 hashing algorithm with a salt
+     * The pbkdf2 hashing algorithm with a salt.
      *
      * @param password the original password string converted to a char array
      * @param salt the passed salt byte array
      * @param iterations total number of passes
      * @param bytes the size of the hash
      * @return a salted and hashed password
-     * @throws services.PasswordStorage.CannotPerformOperationException if an
-     * invalid operation error occurs
+     * @throws CannotPerformOperationException the cannot perform operation exception
      */
     private static byte[] pbkdf2(char[] password, byte[] salt, int iterations, int bytes) throws CannotPerformOperationException {
         try {
@@ -286,7 +260,7 @@ public class PasswordStorage {
     }
 
     /**
-     * For decoding from base64
+     * For decoding from base64.
      *
      * @param hex a hexadecimal string
      * @return the decoded byte array
@@ -298,7 +272,7 @@ public class PasswordStorage {
     }
 
     /**
-     * For encoding to base64
+     * For encoding to base64.
      *
      * @param array an array of bytes
      * @return a string encoded to base64
@@ -308,7 +282,7 @@ public class PasswordStorage {
     }
 
     /**
-     * Used for replacing a forgotten password with a new randomized one
+     * Used for replacing a forgotten password with a new randomized one.
      *
      * @return a securely randomized password string
      */
@@ -318,7 +292,7 @@ public class PasswordStorage {
     }
 
     /**
-     * Used to reset the password for an account
+     * Used to reset the password for an account.
      *
      * @param username the string of an existing accounts username
      * @throws Exception if there is any issue during the process

@@ -17,7 +17,7 @@ import javax.persistence.metamodel.SingularAttribute;
 
 /**
  *
- * @author 813017, 844817
+ * @author Chelsey, Azeb
  */
 public class CompanyDB {
 
@@ -26,7 +26,7 @@ public class CompanyDB {
      *
      * @param companyID The unique username.
      * @return A Company object if found, null otherwise.
-     * @throws Exception
+     * @throws Exception throws an exception
      *
      */
     public Company get(int companyID) throws Exception {
@@ -43,8 +43,8 @@ public class CompanyDB {
 
     /**
      *
-     * @return
-     * @throws Exception
+     * @return Company list
+     * @throws Exception throws an exception
      */
     public List<Company> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -61,9 +61,9 @@ public class CompanyDB {
 
     /**
      *
-     * @param comp
-     * @return
-     * @throws Exception
+     * @param comp company
+     * @return Integer an integer
+     * @throws Exception throws exception
      */
     public int insert(Company comp) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -84,9 +84,9 @@ public class CompanyDB {
 
     /**
      *
-     * @param comp
-     * @return
-     * @throws Exception
+     * @param comp company
+     * @return integer for update
+     * @throws Exception throws an exception
      */
     public int update(Company comp) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -107,9 +107,9 @@ public class CompanyDB {
 
     /**
      *
-     * @param comp
-     * @return
-     * @throws Exception
+     * @param comp a company
+     * @return integer for delete
+     * @throws Exception throws an exception
      */
     public int delete(Company comp) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -133,8 +133,8 @@ public class CompanyDB {
 
     /**
      *
-     * @param companyID
-     * @return
+     * @param companyID takes in company id
+     * @return Company returns a company
      */
     public Company get(SingularAttribute<Company, Integer> companyID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -142,8 +142,8 @@ public class CompanyDB {
 
     /**
      *
-     * @param companyID
-     * @return
+     * @param companyID takes in company id
+     * @return Company returns a company
      */
     public Company get(Company companyID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

@@ -11,23 +11,28 @@ import domain.Typelibrary;
 import java.util.Date;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
 /**
- * Data management
- * @version 1.0
+ * Data management.
+ *
  * @author 809968
+ * @version 1.0
  */
 public class ManualService {
+    
+    /** The manual DB. */
     ManualDB manualDB;
  
     /**
-     *
+     * Instantiates a new manual service.
      */
     public ManualService(){
         manualDB = new ManualDB();
     }
 
 /**
- * get Manual by id
+ * get Manual by id.
+ *
  * @param manualID id of the manual
  * @return return manual object
  * @throws Exception Exception
@@ -37,7 +42,8 @@ public class ManualService {
     }
 
 /**
- * get all the manual in the database return as a list
+ * get all the manual in the database return as a list.
+ *
  * @return manual list
  * @throws Exception Exception
  */    
@@ -46,7 +52,8 @@ public class ManualService {
     }
 
 /**
- * update manual information
+ * update manual information.
+ *
  * @param manualID manual id
  * @param dateAdded manual dateAdded
  * @param userAdded manual userAdded
@@ -69,7 +76,8 @@ public class ManualService {
       }
 
 /**
- * delete manual by id
+ * delete manual by id.
+ *
  * @param manualID manual id
  * @throws Exception  Exception
  */    
@@ -79,7 +87,8 @@ public class ManualService {
     }
 
 /**
- * insert new manual
+ * insert new manual.
+ *
  * @param dateAdded manual dateAdded
  * @param userAdded manual userAdded
  * @param typeLibraryID manual typeLibraryID

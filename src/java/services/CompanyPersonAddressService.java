@@ -12,19 +12,22 @@ import domain.Companypersonaddress;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class CompanyPersonAddressService.
  *
- * @author Chels
+ * @author Chelsey Coughlin
  */
 public class CompanyPersonAddressService {
     
     /**
+     * Insert.
      *
-     * @param userAdded
-     * @param addressID
-     * @param companyPersonID
-     * @return
-     * @throws Exception
+     * @param userAdded the user added
+     * @param addressID the address ID
+     * @param companyPersonID the company person ID
+     * @return the companypersonaddress
+     * @throws Exception the exception
      */
     public Companypersonaddress insert(Integer userAdded, Address addressID, Companyperson companyPersonID) throws Exception {
         CompanyPersonAddressDB addDB = new CompanyPersonAddressDB();
@@ -42,11 +45,12 @@ public class CompanyPersonAddressService {
     }
 
     /**
+     * Link.
      *
-     * @param compAddressID
-     * @param addressID
-     * @param companyPersonID
-     * @throws Exception
+     * @param compAddressID the comp address ID
+     * @param addressID the address ID
+     * @param companyPersonID the company person ID
+     * @throws Exception the exception
      */
     public void link (int compAddressID, Address addressID, Companyperson companyPersonID) throws Exception {
         CompanyPersonAddressDB addDB = new CompanyPersonAddressDB();

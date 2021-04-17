@@ -91,7 +91,7 @@ public class Address implements Serializable {
 
     /**
      *
-     * @param addressID
+     * @param addressID takes in address id
      */
     public Address(Integer addressID) {
         this.addressID = addressID;
@@ -121,7 +121,7 @@ public class Address implements Serializable {
 
     /**
      *
-     * @return
+     * @return integer returns integer
      */
     public Integer getAddressID() {
         return addressID;
@@ -129,7 +129,7 @@ public class Address implements Serializable {
 
     /**
      *
-     * @param addressID
+     * @param addressID takes in address id
      */
     public void setAddressID(Integer addressID) {
         this.addressID = addressID;
@@ -137,7 +137,7 @@ public class Address implements Serializable {
 
     /**
      *
-     * @return
+     * @return returns date
      */
     public Date getDateAdded() {
         return dateAdded;
@@ -145,7 +145,7 @@ public class Address implements Serializable {
 
     /**
      *
-     * @param dateAdded
+     * @param dateAdded takes in date
      */
     public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
@@ -153,7 +153,7 @@ public class Address implements Serializable {
 
     /**
      *
-     * @return
+     * @return Date returns a date
      */
     public Date getDateRemoved() {
         return dateRemoved;
@@ -161,7 +161,7 @@ public class Address implements Serializable {
 
     /**
      *
-     * @param dateRemoved
+     * @param dateRemoved takes in date removed
      */
     public void setDateRemoved(Date dateRemoved) {
         this.dateRemoved = dateRemoved;
@@ -169,7 +169,7 @@ public class Address implements Serializable {
 
     /**
      *
-     * @return
+     * @return Integer returns user integer
      */
     public Integer getUserAdded() {
         return userAdded;
@@ -177,7 +177,7 @@ public class Address implements Serializable {
 
     /**
      *
-     * @param userAdded
+     * @param userAdded takes in date added
      */
     public void setUserAdded(Integer userAdded) {
         this.userAdded = userAdded;
@@ -185,7 +185,7 @@ public class Address implements Serializable {
 
     /**
      *
-     * @return
+     * @return Integer returns a integer
      */
     public Integer getUserRemoved() {
         return userRemoved;
@@ -193,23 +193,27 @@ public class Address implements Serializable {
 
     /**
      *
-     * @param userRemoved
+     * @param userRemoved takes in a integer
      */
     public void setUserRemoved(Integer userRemoved) {
         this.userRemoved = userRemoved;
     }
 
+    
+    //THIS ONE IN THE STARS AND SLASHES
     /**
      *
-     * @return
+     * @return String returns a string
      */
+    
+     //not these
     public String getAddressLine1() {
         return addressLine1;
     }
-
+ //THIS ONE IN THE STARS AND SLASHES
     /**
      *
-     * @param addressLine1
+     * @param addressLine1 returns a address line 1
      */
     public void setAddressLine1(String addressLine1) {
         this.addressLine1 = addressLine1;

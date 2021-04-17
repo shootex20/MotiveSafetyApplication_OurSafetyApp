@@ -17,9 +17,9 @@ public class PhoneDB {
            
     /**
      *
-     * @param phone_ID
-     * @return
-     * @throws Exception
+     * @param phone_ID takes in phone id
+     * @return Phone returns a phone
+     * @throws Exception throws an exception
      */
     public Phone get(int phone_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -34,9 +34,9 @@ public class PhoneDB {
     
     /**
      *
-     * @param add
-     * @return
-     * @throws Exception
+     * @param add takes in phone
+     * @return Phone returns a phone
+     * @throws Exception throws an exception
      */
     public Phone insert(Phone add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -56,8 +56,8 @@ public class PhoneDB {
 
     /**
      *
-     * @param phone
-     * @throws Exception
+     * @param phone takes in phone
+     * @throws Exception throws an exception
      */
     public void update(Phone phone) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -76,8 +76,8 @@ public class PhoneDB {
 
     /**
      *
-     * @param phone
-     * @throws Exception
+     * @param phone takes in phone
+     * @throws Exception throws an exception
      */
     public void delete(Phone phone) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();  

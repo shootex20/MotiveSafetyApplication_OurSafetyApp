@@ -21,9 +21,9 @@ public class CompanypersonDB {
 
     /**
      *
-     * @param companyID
-     * @return
-     * @throws Exception
+     * @param companyID takes in company id
+     * @return Companyperson returns company person list.
+     * @throws Exception throws an exception
      */
     public List<Companyperson> getAll(Company companyID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -38,9 +38,9 @@ public class CompanypersonDB {
 
     /**
      *
-     * @param person_ID
-     * @return
-     * @throws Exception
+     * @param person_ID takes in company id
+     * @return Companyperson returns company person list.
+     * @throws Exception throws an exception
      */
     public Companyperson get(int person_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -55,10 +55,10 @@ public class CompanypersonDB {
 
     /**
      *
-     * @param company_ID
-     * @param person_ID
-     * @param email
-     * @return
+     * @param company_ID takes in company id
+     * @param person_ID takes in company id
+     * @param email takes in email
+     * @return Companyperson returns company person
      */
     public Companyperson getByFields(int company_ID, int person_ID, String email) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -72,8 +72,8 @@ public class CompanypersonDB {
 
     /**
      *
-     * @param comp
-     * @throws Exception
+     * @param comp takes in company person 
+     * @throws Exception throws an exception
      */
     public void update(Companyperson comp) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -92,9 +92,9 @@ public class CompanypersonDB {
 
     /**
      *
-     * @param add
-     * @return
-     * @throws Exception
+     * @param add takes in address
+     * @return Companyperson returns company person
+     * @throws Exception throws an exception
      */
     public Companyperson insert(Companyperson add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

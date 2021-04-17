@@ -23,9 +23,9 @@ public class ItemClassFieldsDB {
     
     /**
      *
-     * @param id
-     * @return
-     * @throws Exception
+     * @param id takes in id
+     * @return Itemclassfields an item class field 
+     * @throws Exception throws an exception
      */
     public Itemclassfields get(int id) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -40,8 +40,8 @@ public class ItemClassFieldsDB {
     
     /**
      *
-     * @return
-     * @throws Exception
+     * @return Itemclassfields list
+     * @throws Exception throws an exception
      */
     public List<Itemclassfields> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

@@ -35,17 +35,17 @@ import services.Equipment;
 
 /**
  *
- * @author Chels
+ * @author Chelsey Coughlin
  */
 @WebServlet(name = "InventoryServlet", urlPatterns = {"/InventoryServlet"})
 public class EquipmentManagerServlet extends HttpServlet {
 
     /**
      *
-     * @param request
-     * @param response
-     * @throws ServletException
-     * @throws IOException
+     * @param request takes in request
+     * @param response takes in response.
+     * @throws ServletException throws ServletException 
+     * @throws IOException throws IOException
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

@@ -21,8 +21,8 @@ public class CompanyNotesDB {
     
     /**
      *
-     * @return
-     * @throws Exception
+     * @return Companynotes list
+     * @throws Exception throws an exception
      */
     public List<Companynotes> getAll() throws Exception {
          EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -33,9 +33,9 @@ public class CompanyNotesDB {
    
     /**
      *
-     * @param compNotesID
-     * @return
-     * @throws Exception
+     * @param compNotesID takes in company notes id
+     * @return Companynotes --returns a companynotes
+     * @throws Exception throws an exception
      */
     public Companynotes get(int compNotesID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -50,8 +50,8 @@ public class CompanyNotesDB {
 
     /**
      *
-     * @param note
-     * @throws Exception
+     * @param note takes in Note
+     * @throws Exception throws an exception
      */
     public void insert(Companynotes note) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -70,8 +70,8 @@ public class CompanyNotesDB {
 
     /**
      *
-     * @param note
-     * @throws Exception
+     * @param note takes in Note
+     * @throws Exception throws an exception
      */
     public void update(Companynotes note) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -90,9 +90,9 @@ public class CompanyNotesDB {
 
     /**
      *
-     * @param note
-     * @throws Exception
-     */
+     * @param note takes in Note
+     * @throws Exception throws an exception
+     */ 
     public void delete(Companynotes note) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();  
         EntityTransaction trans = em.getTransaction();

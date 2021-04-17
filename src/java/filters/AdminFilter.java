@@ -47,8 +47,8 @@ public class AdminFilter implements Filter {
     /**
      * Required for filters but no code body
      *
-     * @param filterConfig
-     * @throws ServletException
+     * @param filterConfig the filter config
+     * @throws ServletException throws servlet exception
      */
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

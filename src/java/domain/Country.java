@@ -21,7 +21,9 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class Country.
  *
  * @author Chels
  */
@@ -34,66 +36,79 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Country.findByCountryName", query = "SELECT c FROM Country c WHERE c.countryName = :countryName")})
 public class Country implements Serializable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
+    
+    /** The country ID. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "country_ID")
     private Integer countryID;
+    
+    /** The country name. */
     @Column(name = "countryName")
     private String countryName;
+    
+    /** The province list. */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "countryID")
     private List<Province> provinceList;
 
     /**
-     *
+     * Instantiates a new country.
      */
     public Country() {
     }
 
     /**
+     * Instantiates a new country.
      *
-     * @param countryID
+     * @param countryID the country ID
      */
     public Country(Integer countryID) {
         this.countryID = countryID;
     }
 
     /**
+     * Gets the country ID.
      *
-     * @return
+     * @return the country ID
      */
     public Integer getCountryID() {
         return countryID;
     }
 
     /**
+     * Sets the country ID.
      *
-     * @param countryID
+     * @param countryID the new country ID
      */
     public void setCountryID(Integer countryID) {
         this.countryID = countryID;
     }
 
     /**
+     * Gets the country name.
      *
-     * @return
+     * @return the country name
      */
     public String getCountryName() {
         return countryName;
     }
 
     /**
+     * Sets the country name.
      *
-     * @param countryName
+     * @param countryName the new country name
      */
     public void setCountryName(String countryName) {
         this.countryName = countryName;
     }
 
     /**
+     * Gets the province list.
      *
-     * @return
+     * @return the province list
      */
     @XmlTransient
     public List<Province> getProvinceList() {
@@ -101,13 +116,19 @@ public class Country implements Serializable {
     }
 
     /**
+     * Sets the province list.
      *
-     * @param provinceList
+     * @param provinceList the new province list
      */
     public void setProvinceList(List<Province> provinceList) {
         this.provinceList = provinceList;
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -115,6 +136,12 @@ public class Country implements Serializable {
         return hash;
     }
 
+    /**
+     * Equals.
+     *
+     * @param object the object
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -128,6 +155,11 @@ public class Country implements Serializable {
         return true;
     }
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     @Override
     public String toString() {
         return "domain.Country[ countryID=" + countryID + " ]";

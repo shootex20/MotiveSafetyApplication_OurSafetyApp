@@ -25,7 +25,9 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class Typelibrary.
  *
  * @author Chels
  */
@@ -44,188 +46,237 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Typelibrary.findByIsCategory", query = "SELECT t FROM Typelibrary t WHERE t.isCategory = :isCategory")})
 public class Typelibrary implements Serializable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
+    
+    /** The type library ID. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "typeLibrary_ID")
     private Integer typeLibraryID;
+    
+    /** The date added. */
     @Column(name = "dateAdded")
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
+    
+    /** The date removed. */
     @Column(name = "dateRemoved")
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
+    
+    /** The user added. */
     @Column(name = "userAdded")
     private Integer userAdded;
+    
+    /** The user removed. */
     @Column(name = "userRemoved")
     private Integer userRemoved;
+    
+    /** The type. */
     @Column(name = "type")
     private String type;
+    
+    /** The description. */
     @Column(name = "description")
     private String description;
+    
+    /** The is category. */
     @Column(name = "isCategory")
     private Character isCategory;
+    
+    /** The address list. */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Address> addressList;
+    
+    /** The manual list. */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Manual> manualList;
+    
+    /** The url list. */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Url> urlList;
+    
+    /** The phone list. */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Phone> phoneList;
+    
+    /** The companytype list. */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Companytype> companytypeList;
+    
+    /** The itemclassfields list. */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Itemclassfields> itemclassfieldsList;
+    
+    /** The companyrelationship list. */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "typeLibraryID", fetch = FetchType.EAGER)
     private List<Companyrelationship> companyrelationshipList;
 
     /**
-     *
+     * Instantiates a new typelibrary.
      */
     public Typelibrary() {
     }
 
     /**
+     * Instantiates a new typelibrary.
      *
-     * @param typeLibraryID
+     * @param typeLibraryID the type library ID
      */
     public Typelibrary(Integer typeLibraryID) {
         this.typeLibraryID = typeLibraryID;
     }
 
     /**
+     * Gets the type library ID.
      *
-     * @return
+     * @return the type library ID
      */
     public Integer getTypeLibraryID() {
         return typeLibraryID;
     }
 
     /**
+     * Sets the type library ID.
      *
-     * @param typeLibraryID
+     * @param typeLibraryID the new type library ID
      */
     public void setTypeLibraryID(Integer typeLibraryID) {
         this.typeLibraryID = typeLibraryID;
     }
 
     /**
+     * Gets the date added.
      *
-     * @return
+     * @return the date added
      */
     public Date getDateAdded() {
         return dateAdded;
     }
 
     /**
+     * Sets the date added.
      *
-     * @param dateAdded
+     * @param dateAdded the new date added
      */
     public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 
     /**
+     * Gets the date removed.
      *
-     * @return
+     * @return the date removed
      */
     public Date getDateRemoved() {
         return dateRemoved;
     }
 
     /**
+     * Sets the date removed.
      *
-     * @param dateRemoved
+     * @param dateRemoved the new date removed
      */
     public void setDateRemoved(Date dateRemoved) {
         this.dateRemoved = dateRemoved;
     }
 
     /**
+     * Gets the user added.
      *
-     * @return
+     * @return the user added
      */
     public Integer getUserAdded() {
         return userAdded;
     }
 
     /**
+     * Sets the user added.
      *
-     * @param userAdded
+     * @param userAdded the new user added
      */
     public void setUserAdded(Integer userAdded) {
         this.userAdded = userAdded;
     }
 
     /**
+     * Gets the user removed.
      *
-     * @return
+     * @return the user removed
      */
     public Integer getUserRemoved() {
         return userRemoved;
     }
 
     /**
+     * Sets the user removed.
      *
-     * @param userRemoved
+     * @param userRemoved the new user removed
      */
     public void setUserRemoved(Integer userRemoved) {
         this.userRemoved = userRemoved;
     }
 
     /**
+     * Gets the type.
      *
-     * @return
+     * @return the type
      */
     public String getType() {
         return type;
     }
 
     /**
+     * Sets the type.
      *
-     * @param type
+     * @param type the new type
      */
     public void setType(String type) {
         this.type = type;
     }
 
     /**
+     * Gets the description.
      *
-     * @return
+     * @return the description
      */
     public String getDescription() {
         return description;
     }
 
     /**
+     * Sets the description.
      *
-     * @param description
+     * @param description the new description
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
+     * Gets the checks if is category.
      *
-     * @return
+     * @return the checks if is category
      */
     public Character getIsCategory() {
         return isCategory;
     }
 
     /**
+     * Sets the checks if is category.
      *
-     * @param isCategory
+     * @param isCategory the new checks if is category
      */
     public void setIsCategory(Character isCategory) {
         this.isCategory = isCategory;
     }
 
     /**
+     * Gets the address list.
      *
-     * @return
+     * @return the address list
      */
     @XmlTransient
     public List<Address> getAddressList() {
@@ -233,16 +284,18 @@ public class Typelibrary implements Serializable {
     }
 
     /**
+     * Sets the address list.
      *
-     * @param addressList
+     * @param addressList the new address list
      */
     public void setAddressList(List<Address> addressList) {
         this.addressList = addressList;
     }
 
     /**
+     * Gets the manual list.
      *
-     * @return
+     * @return the manual list
      */
     @XmlTransient
     public List<Manual> getManualList() {
@@ -250,16 +303,18 @@ public class Typelibrary implements Serializable {
     }
 
     /**
+     * Sets the manual list.
      *
-     * @param manualList
+     * @param manualList the new manual list
      */
     public void setManualList(List<Manual> manualList) {
         this.manualList = manualList;
     }
 
     /**
+     * Gets the url list.
      *
-     * @return
+     * @return the url list
      */
     @XmlTransient
     public List<Url> getUrlList() {
@@ -267,16 +322,18 @@ public class Typelibrary implements Serializable {
     }
 
     /**
+     * Sets the url list.
      *
-     * @param urlList
+     * @param urlList the new url list
      */
     public void setUrlList(List<Url> urlList) {
         this.urlList = urlList;
     }
 
     /**
+     * Gets the phone list.
      *
-     * @return
+     * @return the phone list
      */
     @XmlTransient
     public List<Phone> getPhoneList() {
@@ -284,16 +341,18 @@ public class Typelibrary implements Serializable {
     }
 
     /**
+     * Sets the phone list.
      *
-     * @param phoneList
+     * @param phoneList the new phone list
      */
     public void setPhoneList(List<Phone> phoneList) {
         this.phoneList = phoneList;
     }
 
     /**
+     * Gets the companytype list.
      *
-     * @return
+     * @return the companytype list
      */
     @XmlTransient
     public List<Companytype> getCompanytypeList() {
@@ -301,16 +360,18 @@ public class Typelibrary implements Serializable {
     }
 
     /**
+     * Sets the companytype list.
      *
-     * @param companytypeList
+     * @param companytypeList the new companytype list
      */
     public void setCompanytypeList(List<Companytype> companytypeList) {
         this.companytypeList = companytypeList;
     }
 
     /**
+     * Gets the itemclassfields list.
      *
-     * @return
+     * @return the itemclassfields list
      */
     @XmlTransient
     public List<Itemclassfields> getItemclassfieldsList() {
@@ -318,16 +379,18 @@ public class Typelibrary implements Serializable {
     }
 
     /**
+     * Sets the itemclassfields list.
      *
-     * @param itemclassfieldsList
+     * @param itemclassfieldsList the new itemclassfields list
      */
     public void setItemclassfieldsList(List<Itemclassfields> itemclassfieldsList) {
         this.itemclassfieldsList = itemclassfieldsList;
     }
 
     /**
+     * Gets the companyrelationship list.
      *
-     * @return
+     * @return the companyrelationship list
      */
     @XmlTransient
     public List<Companyrelationship> getCompanyrelationshipList() {
@@ -335,13 +398,19 @@ public class Typelibrary implements Serializable {
     }
 
     /**
+     * Sets the companyrelationship list.
      *
-     * @param companyrelationshipList
+     * @param companyrelationshipList the new companyrelationship list
      */
     public void setCompanyrelationshipList(List<Companyrelationship> companyrelationshipList) {
         this.companyrelationshipList = companyrelationshipList;
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -349,6 +418,12 @@ public class Typelibrary implements Serializable {
         return hash;
     }
 
+    /**
+     * Equals.
+     *
+     * @param object the object
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -362,6 +437,11 @@ public class Typelibrary implements Serializable {
         return true;
     }
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     @Override
     public String toString() {
         return "domain.Typelibrary[ typeLibraryID=" + typeLibraryID + " ]";

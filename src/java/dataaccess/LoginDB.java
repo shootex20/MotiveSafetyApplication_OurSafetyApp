@@ -13,8 +13,8 @@ public class LoginDB {
 
     /**
      *
-     * @return
-     * @throws Exception
+     * @return Logins list
+     * @throws Exception throws an exception
      */
     public List<Logins> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -30,7 +30,7 @@ public class LoginDB {
 
     /**
      * 
-     * @param user 
+     * @param user takes in user
      */
     public void delete(Logins user) {
        EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -50,9 +50,9 @@ public class LoginDB {
 
     /**
      * 
-     * @param user
-     * @return
-     * @throws Exception 
+     * @param user takes in user
+     * @return int for logins
+     * @throws Exception throws an exception
      */
     public int insert(Logins user) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -74,8 +74,8 @@ public class LoginDB {
 
     /**
      * 
-     * @param userID
-     * @return 
+     * @param userID takes in user id
+     * @return Logins returns logins object
      */
     public Logins get(Integer userID) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -91,8 +91,8 @@ public class LoginDB {
 
     /**
      * 
-     * @param user
-     * @throws Exception 
+     * @param user takes in user id
+     * @throws Exception throws an excpetion
      */
     public void update(Logins user) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

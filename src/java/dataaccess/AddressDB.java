@@ -22,9 +22,9 @@ public class AddressDB {
     
     /**
      *
-     * @param address_ID
-     * @return
-     * @throws Exception
+     * @param address_ID takes in addressID
+     * @return Address --returns a address
+     * @throws Exception throws an exception.
      */
     public Address get(int address_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -39,9 +39,9 @@ public class AddressDB {
     
     /**
      *
-     * @param add
-     * @return
-     * @throws Exception
+     * @param add takes in address
+     * @return Address --returns a address
+     * @throws Exception exception
      */
     public Address insert(Address add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -61,8 +61,8 @@ public class AddressDB {
 
     /**
      *
-     * @param address
-     * @throws Exception
+     * @param address takes in addressID
+     * @throws Exception throws an exception
      */
     public void update(Address address) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -81,8 +81,8 @@ public class AddressDB {
 
     /**
      *
-     * @param add
-     * @throws Exception
+     * @param add takes in addressID
+     * @throws Exception throws an exception
      */
     public void delete(Address add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();  

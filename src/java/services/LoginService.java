@@ -8,25 +8,29 @@ import domain.Logins;
 import java.util.Date;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
 /**
- * The service class to interact with the database for the Login user accounts 
+ * The service class to interact with the database for the Login user accounts .
  *
  * @author Dan Quach
  */
 public class LoginService {
 
+    /** The login DB. */
     private LoginDB loginDB;
+    
+    /** The company DB. */
     private CompanyDB companyDB;
 
     /**
-     * No argument constructor
+     * No argument constructor.
      */
     public LoginService() {
         loginDB = new LoginDB();
     }
 
     /**
-     * Gets a user's account by the userID
+     * Gets a user's account by the userID.
      *
      * @param userID an integer that represents the unique id of an account
      * @return a Logins object representing a user account
@@ -37,7 +41,7 @@ public class LoginService {
     }
 
     /**
-     * Gets every record of logins in the database
+     * Gets every record of logins in the database.
      *
      * @return a list of all Logins accounts
      * @throws Exception if an error occurs when fetching data
@@ -47,7 +51,7 @@ public class LoginService {
     }
 
     /**
-     * Inserts a new Login account into the database
+     * Inserts a new Login account into the database.
      *
      * @param dateAdded the day the account was created
      * @param username the new username
@@ -64,7 +68,7 @@ public class LoginService {
     }
 
     /**
-     * Deletes a Login account
+     * Deletes a Login account.
      *
      * @param userID the user's ID to identify the account
      * @param username the string username to remove
@@ -78,7 +82,7 @@ public class LoginService {
     }
 
     /**
-     * Gets a Company object by the categoryID
+     * Gets a Company object by the categoryID.
      *
      * @param categoryID the category of object
      * @return the retrieved Company object
@@ -90,7 +94,7 @@ public class LoginService {
     }
 
     /**
-     * Updates a password in the database
+     * Updates a password in the database.
      *
      * @param userName the account to edit
      * @param tempPassword the new string password to set as

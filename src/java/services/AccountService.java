@@ -5,18 +5,22 @@ import domain.Logins;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+// TODO: Auto-generated Javadoc
 /**
- * The service class that interacts with the database for the login process
+ * The service class that interacts with the database for the login process.
  *
  * @author Dan Quach
  */
 public class AccountService {
 
+    /** The user DB. */
     UserDB userDB = new UserDB();
+    
+    /** The ps. */
     PasswordStorage ps = new PasswordStorage();
 
     /**
-     * Validates some inputs then compares the stored and input credentials
+     * Validates some inputs then compares the stored and input credentials.
      *
      * @param username the username input by the user
      * @param password the password input by the user

@@ -25,7 +25,9 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class Company.
  *
  * @author Chels
  */
@@ -47,71 +49,110 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Company.findByIndustry", query = "SELECT c FROM Company c WHERE c.industry = :industry")})
 public class Company implements Serializable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
+    
+    /** The company ID. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "company_ID")
     private Integer companyID;
+    
+    /** The date added. */
     @Column(name = "dateAdded")
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
+    
+    /** The date removed. */
     @Column(name = "dateRemoved")
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
+    
+    /** The user added. */
     @Column(name = "userAdded")
     private Integer userAdded;
+    
+    /** The user removed. */
     @Column(name = "userRemoved")
     private Integer userRemoved;
+    
+    /** The shortname. */
     @Column(name = "shortname")
     private String shortname;
+    
+    /** The name. */
     @Column(name = "name")
     private String name;
+    
+    /** The description. */
     @Column(name = "description")
     private String description;
+    
+    /** The salt hash. */
     @Column(name = "saltHash")
     private String saltHash;
+    
+    /** The account. */
     @Column(name = "account")
     private String account;
+    
+    /** The industry. */
     @Column(name = "industry")
     private String industry;
+    
+    /** The item list. */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Item> itemList;
+    
+    /** The companyperson list. */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Companyperson> companypersonList;
+    
+    /** The url list. */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Url> urlList;
+    
+    /** The companypositions list. */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Companypositions> companypositionsList;
+    
+    /** The companytype list. */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Companytype> companytypeList;
+    
+    /** The logins list. */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Logins> loginsList;
+    
+    /** The companyrelationship list. */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval=true, mappedBy = "companyID", fetch = FetchType.EAGER)
     private List<Companyrelationship> companyrelationshipList;
 
     /**
-     *
+     * Instantiates a new company.
      */
     public Company() {
     }
 
     /**
+     * Instantiates a new company.
      *
-     * @param companyID
+     * @param companyID the company ID
      */
     public Company(Integer companyID) {
         this.companyID = companyID;
     }
 
     /**
+     * Instantiates a new company.
      *
-     * @param dateAdded
-     * @param name
-     * @param shortname
-     * @param description
-     * @param account
-     * @param industry
+     * @param dateAdded the date added
+     * @param name the name
+     * @param shortname the shortname
+     * @param description the description
+     * @param account the account
+     * @param industry the industry
      */
     public Company(Date dateAdded, String name, String shortname, String description, String account, String industry) {
         this.dateAdded = dateAdded;
@@ -124,184 +165,207 @@ public class Company implements Serializable {
     }
 
     /**
+     * Gets the company ID.
      *
-     * @return
+     * @return the company ID
      */
     public Integer getCompanyID() {
         return companyID;
     }
 
     /**
+     * Sets the company ID.
      *
-     * @param companyID
+     * @param companyID the new company ID
      */
     public void setCompanyID(Integer companyID) {
         this.companyID = companyID;
     }
 
     /**
+     * Gets the date added.
      *
-     * @return
+     * @return the date added
      */
     public Date getDateAdded() {
         return dateAdded;
     }
 
     /**
+     * Sets the date added.
      *
-     * @param dateAdded
+     * @param dateAdded the new date added
      */
     public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 
     /**
+     * Gets the date removed.
      *
-     * @return
+     * @return the date removed
      */
     public Date getDateRemoved() {
         return dateRemoved;
     }
 
     /**
+     * Sets the date removed.
      *
-     * @param dateRemoved
+     * @param dateRemoved the new date removed
      */
     public void setDateRemoved(Date dateRemoved) {
         this.dateRemoved = dateRemoved;
     }
 
     /**
+     * Gets the user added.
      *
-     * @return
+     * @return the user added
      */
     public Integer getUserAdded() {
         return userAdded;
     }
 
     /**
+     * Sets the user added.
      *
-     * @param userAdded
+     * @param userAdded the new user added
      */
     public void setUserAdded(Integer userAdded) {
         this.userAdded = userAdded;
     }
 
     /**
+     * Gets the user removed.
      *
-     * @return
+     * @return the user removed
      */
     public Integer getUserRemoved() {
         return userRemoved;
     }
 
     /**
+     * Sets the user removed.
      *
-     * @param userRemoved
+     * @param userRemoved the new user removed
      */
     public void setUserRemoved(Integer userRemoved) {
         this.userRemoved = userRemoved;
     }
 
     /**
+     * Gets the shortname.
      *
-     * @return
+     * @return the shortname
      */
     public String getShortname() {
         return shortname;
     }
 
     /**
+     * Sets the shortname.
      *
-     * @param shortname
+     * @param shortname the new shortname
      */
     public void setShortname(String shortname) {
         this.shortname = shortname;
     }
 
     /**
+     * Gets the name.
      *
-     * @return
+     * @return the name
      */
     public String getName() {
         return name;
     }
 
     /**
+     * Sets the name.
      *
-     * @param name
+     * @param name the new name
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
+     * Gets the description.
      *
-     * @return
+     * @return the description
      */
     public String getDescription() {
         return description;
     }
 
     /**
+     * Sets the description.
      *
-     * @param description
+     * @param description the new description
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
+     * Gets the salt hash.
      *
-     * @return
+     * @return the salt hash
      */
     public String getSaltHash() {
         return saltHash;
     }
 
     /**
+     * Sets the salt hash.
      *
-     * @param saltHash
+     * @param saltHash the new salt hash
      */
     public void setSaltHash(String saltHash) {
         this.saltHash = saltHash;
     }
 
     /**
+     * Gets the account.
      *
-     * @return
+     * @return the account
      */
     public String getAccount() {
         return account;
     }
 
     /**
+     * Sets the account.
      *
-     * @param account
+     * @param account the new account
      */
     public void setAccount(String account) {
         this.account = account;
     }
 
     /**
+     * Gets the industry.
      *
-     * @return
+     * @return the industry
      */
     public String getIndustry() {
         return industry;
     }
 
     /**
+     * Sets the industry.
      *
-     * @param industry
+     * @param industry the new industry
      */
     public void setIndustry(String industry) {
         this.industry = industry;
     }
 
     /**
+     * Gets the item list.
      *
-     * @return
+     * @return the item list
      */
     @XmlTransient
     public List<Item> getItemList() {
@@ -309,16 +373,18 @@ public class Company implements Serializable {
     }
 
     /**
+     * Sets the item list.
      *
-     * @param itemList
+     * @param itemList the new item list
      */
     public void setItemList(List<Item> itemList) {
         this.itemList = itemList;
     }
 
     /**
+     * Gets the companyperson list.
      *
-     * @return
+     * @return the companyperson list
      */
     @XmlTransient
     public List<Companyperson> getCompanypersonList() {
@@ -326,16 +392,18 @@ public class Company implements Serializable {
     }
 
     /**
+     * Sets the companyperson list.
      *
-     * @param companypersonList
+     * @param companypersonList the new companyperson list
      */
     public void setCompanypersonList(List<Companyperson> companypersonList) {
         this.companypersonList = companypersonList;
     }
 
     /**
+     * Gets the url list.
      *
-     * @return
+     * @return the url list
      */
     @XmlTransient
     public List<Url> getUrlList() {
@@ -343,16 +411,18 @@ public class Company implements Serializable {
     }
 
     /**
+     * Sets the url list.
      *
-     * @param urlList
+     * @param urlList the new url list
      */
     public void setUrlList(List<Url> urlList) {
         this.urlList = urlList;
     }
 
     /**
+     * Gets the companypositions list.
      *
-     * @return
+     * @return the companypositions list
      */
     @XmlTransient
     public List<Companypositions> getCompanypositionsList() {
@@ -360,16 +430,18 @@ public class Company implements Serializable {
     }
 
     /**
+     * Sets the companypositions list.
      *
-     * @param companypositionsList
+     * @param companypositionsList the new companypositions list
      */
     public void setCompanypositionsList(List<Companypositions> companypositionsList) {
         this.companypositionsList = companypositionsList;
     }
 
     /**
+     * Gets the companytype list.
      *
-     * @return
+     * @return the companytype list
      */
     @XmlTransient
     public List<Companytype> getCompanytypeList() {
@@ -377,16 +449,18 @@ public class Company implements Serializable {
     }
 
     /**
+     * Sets the companytype list.
      *
-     * @param companytypeList
+     * @param companytypeList the new companytype list
      */
     public void setCompanytypeList(List<Companytype> companytypeList) {
         this.companytypeList = companytypeList;
     }
 
     /**
+     * Gets the logins list.
      *
-     * @return
+     * @return the logins list
      */
     @XmlTransient
     public List<Logins> getLoginsList() {
@@ -394,16 +468,18 @@ public class Company implements Serializable {
     }
 
     /**
+     * Sets the logins list.
      *
-     * @param loginsList
+     * @param loginsList the new logins list
      */
     public void setLoginsList(List<Logins> loginsList) {
         this.loginsList = loginsList;
     }
 
     /**
+     * Gets the companyrelationship list.
      *
-     * @return
+     * @return the companyrelationship list
      */
     @XmlTransient
     public List<Companyrelationship> getCompanyrelationshipList() {
@@ -411,13 +487,19 @@ public class Company implements Serializable {
     }
 
     /**
+     * Sets the companyrelationship list.
      *
-     * @param companyrelationshipList
+     * @param companyrelationshipList the new companyrelationship list
      */
     public void setCompanyrelationshipList(List<Companyrelationship> companyrelationshipList) {
         this.companyrelationshipList = companyrelationshipList;
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -425,6 +507,12 @@ public class Company implements Serializable {
         return hash;
     }
 
+    /**
+     * Equals.
+     *
+     * @param object the object
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -438,6 +526,11 @@ public class Company implements Serializable {
         return true;
     }
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     @Override
     public String toString() {
         return "domain.Company[ companyID=" + companyID + " ]";

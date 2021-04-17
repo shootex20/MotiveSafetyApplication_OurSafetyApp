@@ -27,7 +27,9 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class Companyperson.
  *
  * @author Chels
  */
@@ -44,62 +46,91 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Companyperson.findByEmail", query = "SELECT c FROM Companyperson c WHERE c.email = :email")})
 public class Companyperson implements Serializable {
 
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
+    
+    /** The company person ID. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "companyPerson_ID", insertable = false)
     private Integer companyPersonID;
+    
+    /** The date added. */
     @Column(name = "dateAdded")
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
+    
+    /** The date removed. */
     @Column(name = "dateRemoved", insertable = false)
     @Temporal(TemporalType.DATE)
     private Date dateRemoved;
+    
+    /** The user added. */
     @Column(name = "userAdded")
     private Integer userAdded;
+    
+    /** The user removed. */
     @Column(name = "userRemoved", insertable = false)
     private Integer userRemoved;
+    
+    /** The email. */
     @Column(name = "email")
     private String email;
+    
+    /** The is employee active. */
     @Basic(optional = false)
     @Column(name = "isEmployeeActive")
     private boolean isEmployeeActive;
+    
+    /** The companynotes list. */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
     private List<Companynotes> companynotesList;
+    
+    /** The company ID. */
     @JoinColumn(name = "company_ID", referencedColumnName = "company_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Company companyID;
+    
+    /** The person ID. */
     @JoinColumn(name = "person_ID", referencedColumnName = "person_ID")
     @ManyToOne(fetch = FetchType.EAGER)
     private Person personID;
+    
+    /** The companypersonaddress list. */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
     private List<Companypersonaddress> companypersonaddressList;
+    
+    /** The companypositions list. */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
     private List<Companypositions> companypositionsList;
+    
+    /** The companypersonphone list. */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "companyPersonID", fetch = FetchType.EAGER)
     private List<Companypersonphone> companypersonphoneList;
 
     /**
-     *
+     * Instantiates a new companyperson.
      */
     public Companyperson() {
     }
 
     /**
+     * Instantiates a new companyperson.
      *
-     * @param companyPersonID
+     * @param companyPersonID the company person ID
      */
     public Companyperson(Integer companyPersonID) {
         this.companyPersonID = companyPersonID;
     }
 
     /**
+     * Instantiates a new companyperson.
      *
-     * @param email
-     * @param isEmployeeActive
-     * @param companyID
-     * @param personID
+     * @param email the email
+     * @param isEmployeeActive the is employee active
+     * @param companyID the company ID
+     * @param personID the person ID
      */
     public Companyperson(String email, boolean isEmployeeActive, Company companyID, Person personID) {
         this.dateAdded = dateAdded;
@@ -110,13 +141,14 @@ public class Companyperson implements Serializable {
     }
 
     /**
+     * Instantiates a new companyperson.
      *
-     * @param dateAdded
-     * @param userAdded
-     * @param email
-     * @param isEmployeeActive
-     * @param companyID
-     * @param personID
+     * @param dateAdded the date added
+     * @param userAdded the user added
+     * @param email the email
+     * @param isEmployeeActive the is employee active
+     * @param companyID the company ID
+     * @param personID the person ID
      */
     public Companyperson(Date dateAdded, Integer userAdded, String email, boolean isEmployeeActive, Company companyID, Person personID) {
         this.dateAdded = dateAdded;
@@ -128,120 +160,135 @@ public class Companyperson implements Serializable {
     }
 
     /**
+     * Gets the company person ID.
      *
-     * @return
+     * @return the company person ID
      */
     public Integer getCompanyPersonID() {
         return companyPersonID;
     }
 
     /**
+     * Sets the company person ID.
      *
-     * @param companyPersonID
+     * @param companyPersonID the new company person ID
      */
     public void setCompanyPersonID(Integer companyPersonID) {
         this.companyPersonID = companyPersonID;
     }
 
     /**
+     * Gets the date added.
      *
-     * @return
+     * @return the date added
      */
     public Date getDateAdded() {
         return dateAdded;
     }
 
     /**
+     * Sets the date added.
      *
-     * @param dateAdded
+     * @param dateAdded the new date added
      */
     public void setDateAdded(Date dateAdded) {
         this.dateAdded = dateAdded;
     }
 
     /**
+     * Gets the date removed.
      *
-     * @return
+     * @return the date removed
      */
     public Date getDateRemoved() {
         return dateRemoved;
     }
 
     /**
+     * Sets the date removed.
      *
-     * @param dateRemoved
+     * @param dateRemoved the new date removed
      */
     public void setDateRemoved(Date dateRemoved) {
         this.dateRemoved = dateRemoved;
     }
 
     /**
+     * Gets the user added.
      *
-     * @return
+     * @return the user added
      */
     public Integer getUserAdded() {
         return userAdded;
     }
 
     /**
+     * Sets the user added.
      *
-     * @param userAdded
+     * @param userAdded the new user added
      */
     public void setUserAdded(Integer userAdded) {
         this.userAdded = userAdded;
     }
 
     /**
+     * Gets the user removed.
      *
-     * @return
+     * @return the user removed
      */
     public Integer getUserRemoved() {
         return userRemoved;
     }
 
     /**
+     * Sets the user removed.
      *
-     * @param userRemoved
+     * @param userRemoved the new user removed
      */
     public void setUserRemoved(Integer userRemoved) {
         this.userRemoved = userRemoved;
     }
 
     /**
+     * Gets the email.
      *
-     * @return
+     * @return the email
      */
     public String getEmail() {
         return email;
     }
 
     /**
+     * Sets the email.
      *
-     * @param email
+     * @param email the new email
      */
     public void setEmail(String email) {
         this.email = email;
     }
 
     /**
+     * Gets the checks if is employee active.
      *
-     * @return
+     * @return the checks if is employee active
      */
     public boolean getIsEmployeeActive() {
         return isEmployeeActive;
     }
 
     /**
+     * Sets the checks if is employee active.
      *
-     * @param isEmployeeActive
+     * @param isEmployeeActive the new checks if is employee active
      */
     public void setIsEmployeeActive(boolean isEmployeeActive) {
         this.isEmployeeActive = isEmployeeActive;
     }
 
     /**
+     * Gets the companynotes list.
      *
-     * @return
+     * @return the companynotes list
      */
     @XmlTransient
     public List<Companynotes> getCompanynotesList() {
@@ -249,48 +296,54 @@ public class Companyperson implements Serializable {
     }
 
     /**
+     * Sets the companynotes list.
      *
-     * @param companynotesList
+     * @param companynotesList the new companynotes list
      */
     public void setCompanynotesList(List<Companynotes> companynotesList) {
         this.companynotesList = companynotesList;
     }
 
     /**
+     * Gets the company ID.
      *
-     * @return
+     * @return the company ID
      */
     public Company getCompanyID() {
         return companyID;
     }
 
     /**
+     * Sets the company ID.
      *
-     * @param companyID
+     * @param companyID the new company ID
      */
     public void setCompanyID(Company companyID) {
         this.companyID = companyID;
     }
 
     /**
+     * Gets the person ID.
      *
-     * @return
+     * @return the person ID
      */
     public Person getPersonID() {
         return personID;
     }
 
     /**
+     * Sets the person ID.
      *
-     * @param personID
+     * @param personID the new person ID
      */
     public void setPersonID(Person personID) {
         this.personID = personID;
     }
 
     /**
+     * Gets the companypersonaddress list.
      *
-     * @return
+     * @return the companypersonaddress list
      */
     @XmlTransient
     public List<Companypersonaddress> getCompanypersonaddressList() {
@@ -298,16 +351,18 @@ public class Companyperson implements Serializable {
     }
 
     /**
+     * Sets the companypersonaddress list.
      *
-     * @param companypersonaddressList
+     * @param companypersonaddressList the new companypersonaddress list
      */
     public void setCompanypersonaddressList(List<Companypersonaddress> companypersonaddressList) {
         this.companypersonaddressList = companypersonaddressList;
     }
 
     /**
+     * Gets the companypositions list.
      *
-     * @return
+     * @return the companypositions list
      */
     @XmlTransient
     public List<Companypositions> getCompanypositionsList() {
@@ -315,16 +370,18 @@ public class Companyperson implements Serializable {
     }
 
     /**
+     * Sets the companypositions list.
      *
-     * @param companypositionsList
+     * @param companypositionsList the new companypositions list
      */
     public void setCompanypositionsList(List<Companypositions> companypositionsList) {
         this.companypositionsList = companypositionsList;
     }
 
     /**
+     * Gets the companypersonphone list.
      *
-     * @return
+     * @return the companypersonphone list
      */
     @XmlTransient
     public List<Companypersonphone> getCompanypersonphoneList() {
@@ -332,13 +389,19 @@ public class Companyperson implements Serializable {
     }
 
     /**
+     * Sets the companypersonphone list.
      *
-     * @param companypersonphoneList
+     * @param companypersonphoneList the new companypersonphone list
      */
     public void setCompanypersonphoneList(List<Companypersonphone> companypersonphoneList) {
         this.companypersonphoneList = companypersonphoneList;
     }
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
     public int hashCode() {
         int hash = 0;
@@ -346,6 +409,12 @@ public class Companyperson implements Serializable {
         return hash;
     }
 
+    /**
+     * Equals.
+     *
+     * @param object the object
+     * @return true, if successful
+     */
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
@@ -359,6 +428,11 @@ public class Companyperson implements Serializable {
         return true;
     }
 
+    /**
+     * To string.
+     *
+     * @return the string
+     */
     @Override
     public String toString() {
         return "domain.Companyperson[ companyPersonID=" + companyPersonID + " ]";

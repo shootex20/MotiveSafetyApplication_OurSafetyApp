@@ -17,15 +17,15 @@ import javax.persistence.Query;
 
 /**
  *
- * @author 813017
+ * @author Chelsey Coughlin
  */
 public class ItemClassDB {
 
     /**
      *
-     * @param id
-     * @return
-     * @throws Exception
+     * @param id takes in id id
+     * @return Itemclass return item class
+     * @throws Exception throws an exception
      */
     public Itemclass get(int id) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -40,8 +40,8 @@ public class ItemClassDB {
     
     /**
      *
-     * @return
-     * @throws Exception
+     * @return Itemclass return item class list
+     * @throws Exception throws an exception
      */
     public List<Itemclass> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

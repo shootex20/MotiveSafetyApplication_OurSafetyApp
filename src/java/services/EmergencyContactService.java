@@ -11,20 +11,23 @@ import domain.Person;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class EmergencyContactService.
  *
- * @author Chels
+ * @author Chelsey Coughlin
  */
 public class EmergencyContactService {
     
     /**
+     * Update.
      *
-     * @param personID
-     * @param firstName
-     * @param lastName
-     * @param phoneNum
-     * @param relation
-     * @throws Exception
+     * @param personID the person ID
+     * @param firstName the first name
+     * @param lastName the last name
+     * @param phoneNum the phone num
+     * @param relation the relation
+     * @throws Exception the exception
      */
     public void update(Person personID, String firstName, String lastName, String phoneNum, String relation) throws Exception {
         EmergencyContactDB compPerDB = new EmergencyContactDB();
@@ -37,14 +40,15 @@ public class EmergencyContactService {
     }
         
     /**
+     * Insert.
      *
-     * @param userAdded
-     * @param emergencyContactFirstName
-     * @param emergencyContactLastName
-     * @param emergencyContactNumber
-     * @param emergencyContactRelationship
-     * @return
-     * @throws Exception
+     * @param userAdded the user added
+     * @param emergencyContactFirstName the emergency contact first name
+     * @param emergencyContactLastName the emergency contact last name
+     * @param emergencyContactNumber the emergency contact number
+     * @param emergencyContactRelationship the emergency contact relationship
+     * @return the emergencycontact
+     * @throws Exception the exception
      */
     public Emergencycontact insert(Integer userAdded, String emergencyContactFirstName, String emergencyContactLastName, 
             String emergencyContactNumber, String emergencyContactRelationship) throws Exception {

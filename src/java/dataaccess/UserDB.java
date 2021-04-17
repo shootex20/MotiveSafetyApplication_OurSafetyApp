@@ -13,8 +13,8 @@ public class UserDB {
 
     /**
      * 
-     * @param username
-     * @return 
+     * @param username takes in username
+     * @return Logins returns a login
      */
     public Logins getUser(String username) {
 
@@ -28,8 +28,8 @@ public class UserDB {
 
     /**
      * 
-     * @param companyID
-     * @return 
+     * @param companyID takes in company id
+     * @return Logins returns a login
      */
     public Logins get(int companyID) {
 

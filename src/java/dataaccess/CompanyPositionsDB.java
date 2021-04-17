@@ -27,7 +27,7 @@ public class CompanyPositionsDB {
      *
      * @param companyID The unique username.
      * @return A Company object if found, null otherwise.
-     * @throws Exception
+     * @throws Exception throws an exception
     
      */
     
@@ -46,9 +46,9 @@ public class CompanyPositionsDB {
     
     /**
      *
-     * @param posID
-     * @return
-     * @throws Exception
+     * @param posID takes in position id
+     * @return Companypositions return company position
+     * @throws Exception throws an exception
      */
     public Companypositions getID(int posID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -63,9 +63,9 @@ public class CompanyPositionsDB {
     
     /**
      *
-     * @param compPos
-     * @return
-     * @throws Exception
+     * @param compPos takes in position id
+     * @return Companypositions return company position
+     * @throws Exception throws an exception
      */
     public Companypositions get(int compPos) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -80,8 +80,8 @@ public class CompanyPositionsDB {
     
     /**
      *
-     * @return
-     * @throws Exception
+     * @return Companypositions return company position list
+     * @throws Exception throws an exception
      */
     public List<Companypositions> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -98,8 +98,8 @@ public class CompanyPositionsDB {
      
     /**
      *
-     * @param pos
-     * @throws Exception
+     * @param pos takes in company positions
+     * @throws Exception throws an exception
      */
     public void update(Companypositions pos) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -118,9 +118,9 @@ public class CompanyPositionsDB {
      
     /**
      *
-     * @param add
-     * @return
-     * @throws Exception
+     * @param add takes in address
+     * @return Companypositions returns company positions 
+     * @throws Exception throws an exception
      */
     public Companypositions insert(Companypositions add) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

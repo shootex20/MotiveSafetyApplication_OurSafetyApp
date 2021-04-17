@@ -25,22 +25,23 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+// TODO: Auto-generated Javadoc
 /**
- * The JavaMail class used to send emails
+ * The JavaMail class used to send emails.
  *
  * @author Dan Quach & Wenhao Liu
  */
 public class EmailService {
 
     /**
-     * No argument constructor
+     * No argument constructor.
      */
     public EmailService() {
 
     }
 
     /**
-     * Sends an email with using an HTML template
+     * Sends an email with using an HTML template.
      *
      * @param to recipient email address
      * @param subject email subject
@@ -73,6 +74,7 @@ public class EmailService {
     }
 
     /**
+     * Send mail.
      *
      * @param to recipient email address
      * @param subject email subject
@@ -118,12 +120,13 @@ public class EmailService {
     }
 
     /**
+     * Send mail with attachments.
      *
      * @param to recipient email address
      * @param subject email subject
      * @param body text body of email
      * @param filePath the path to retrieve attachments
-     * @param bodyIsHTML
+     * @param bodyIsHTML the body is HTML
      * @throws MessagingException if an error occurs when sending
      * @throws NamingException if an error occurs with names of email addresses
      */

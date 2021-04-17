@@ -15,18 +15,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class PhoneService.
  *
- * @author Chels
+ * @author Chelsey Coughlin
  */
 public class PhoneService {
     
     /**
+     * Update.
      *
-     * @param phoneID
-     * @param phoneNumber
-     * @param phoneExt
-     * @throws Exception
+     * @param phoneID the phone ID
+     * @param phoneNumber the phone number
+     * @param phoneExt the phone ext
+     * @throws Exception the exception
      */
     public void update(int phoneID,  String phoneNumber, String phoneExt) throws Exception {
         PhoneDB addDB = new PhoneDB();
@@ -48,12 +51,13 @@ public class PhoneService {
     }
         
     /**
+     * Insert.
      *
-     * @param userAdded
-     * @param phoneNumber
-     * @param extension
-     * @return
-     * @throws Exception
+     * @param userAdded the user added
+     * @param phoneNumber the phone number
+     * @param extension the extension
+     * @return the phone
+     * @throws Exception the exception
      */
     public Phone insert(Integer userAdded, String phoneNumber, String extension) throws Exception {
         PhoneDB addDB = new PhoneDB();

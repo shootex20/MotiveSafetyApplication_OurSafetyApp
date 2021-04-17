@@ -23,9 +23,9 @@ public class ItemDB {
     
     /**
      *
-     * @param companyID
-     * @return
-     * @throws Exception
+     * @param companyID takes in company person id
+     * @return Item returns an item
+     * @throws Exception throws an exception
      */
     public List<Item> getAll(Company companyID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -39,9 +39,9 @@ public class ItemDB {
    
     /**
      *
-     * @param item_ID
-     * @return
-     * @throws Exception
+     * @param item_ID takes in item id
+     * @return Item returns an item
+     * @throws Exception throws an exception
      */
     public Item get(int item_ID) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -56,8 +56,8 @@ public class ItemDB {
     
     /**
      *
-     * @param item
-     * @throws Exception
+     * @param item takes in item
+     * @throws Exception throws an exception
      */
     public void insert(Item item) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -79,8 +79,8 @@ public class ItemDB {
 
     /**
      *
-     * @param item
-     * @throws Exception
+     * @param item takes in item
+     * @throws Exception throws an exception
      */
     public void update(Item item) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
@@ -99,8 +99,8 @@ public class ItemDB {
 
     /**
      *
-     * @param item
-     * @throws Exception
+     * @param item takes in item
+     * @throws Exception throws an exception
      */
     public void delete(Item item) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
