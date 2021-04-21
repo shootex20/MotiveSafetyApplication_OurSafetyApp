@@ -184,7 +184,6 @@
                     <th>User Id</th>
                     <th>Date Added</th>
                     <th>Username</th>
-                    <th>Password</th>
                     <th>Company Name</th>
                     <th>Is Active?</th>
                     <th>Is Admin</th>
@@ -195,7 +194,6 @@
                         <td>${user.userId}</td>
                         <td><fmt:formatDate value="${user.dateAdded}" pattern="dd/MM/YYYY"/></td>
                         <td>${user.username}</td>
-                        <td>${user.password}</td>
                         <td>${user.companyID.name}</td>
                         <td>${user.isActive}</td>
                         <td>${user.isAdmin}</td>
